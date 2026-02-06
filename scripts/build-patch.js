@@ -32,21 +32,24 @@ if (!patchDir) {
 }
 
 const absPatchDir = path.resolve(process.cwd(), patchDir);
+const absPatchDirNorm = absPatchDir.replace(/\\/g, '/');
 if (!fs.existsSync(absPatchDir) || !fs.statSync(absPatchDir).isDirectory()) {
   console.error('Error: patchDir must be an existing directory:', patchDir);
   process.exit(1);
 }
 
-/** Recursively list all files under dir; returns paths relative to dir (forward slashes). */
+/** Recursively list all files under dir; returns paths relative to dir (forward slashes). Only includes files strictly inside patch dir. */
 function listFiles(dir, baseDir = dir) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
   const files = [];
   for (const e of entries) {
     const full = path.join(dir, e.name);
     const rel = path.relative(baseDir, full).replace(/\\/g, '/');
+    // Guard against path traversal
+    if (rel.startsWith('..') || path.isAbsolute(rel)) continue;
     if (e.isDirectory()) {
       files.push(...listFiles(full, baseDir));
-    } else {
+    } else if (e.isFile()) {
       files.push(rel);
     }
   }

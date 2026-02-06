@@ -32,6 +32,18 @@ jobs:
           echo "zip_path=dist-patch/patch-${VERSION}.zip" >> $GITHUB_OUTPUT
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
+      - name: Verify zip contains only patch-content
+        run: |
+          ZIP="dist-patch/patch-${GITHUB_REF#refs/tags/v}.zip"
+          # Fail if zip contains repo folders that must not be installed
+          if unzip -l "$ZIP" | grep -qE '(\.github/|/scripts/|node_modules/|package\.json)'; then
+            echo "ERROR: Zip contains repo files - should only have manifest.json and patch-content"
+            unzip -l "$ZIP" | head -40
+            exit 1
+          fi
+          echo "Zip contents (first 40 entries):"
+          unzip -l "$ZIP" | head -40
+
       - name: Upload to release
         uses: softprops/action-gh-release@v2
         with:
