@@ -1,20 +1,10 @@
 /**
- * Builds a patch zip and manifest.json for the BStar launcher.
+ * Builds a patch zip for the BStar launcher.
+ * Contains ONLY: manifest.json + contents of patch-content/ at zip root.
+ * No patch-content folder wrapper, no repo files.
  *
  * Usage:
  *   node scripts/build-patch.js <patchDir> [version] [--prefix=Data]
- *
- * - patchDir: folder whose contents will be installed into Data (e.g. ./patch-content)
- * - version: optional tag for the zip name (e.g. 1.0.0) → output patch-1.0.0.zip
- * - --prefix: game-relative path for manifest "files" (default Data)
- *
- * The zip will contain:
- *   manifest.json at root (with "files" array: prefix + each relative path)
- *   + all files from patchDir (paths relative to patchDir)
- *
- * Example:
- *   node scripts/build-patch.js ./patch-content 1.0.0
- *   → creates dist-patch/patch-1.0.0.zip ready to upload to a GitHub release
  */
 
 const fs = require('fs');
@@ -32,20 +22,18 @@ if (!patchDir) {
 }
 
 const absPatchDir = path.resolve(process.cwd(), patchDir);
-const absPatchDirNorm = absPatchDir.replace(/\\/g, '/');
 if (!fs.existsSync(absPatchDir) || !fs.statSync(absPatchDir).isDirectory()) {
   console.error('Error: patchDir must be an existing directory:', patchDir);
   process.exit(1);
 }
 
-/** Recursively list all files under dir; returns paths relative to dir (forward slashes). Only includes files strictly inside patch dir. */
+/** List files under dir (relative paths) for manifest. */
 function listFiles(dir, baseDir = dir) {
   const entries = fs.readdirSync(dir, { withFileTypes: true });
   const files = [];
   for (const e of entries) {
     const full = path.join(dir, e.name);
     const rel = path.relative(baseDir, full).replace(/\\/g, '/');
-    // Guard against path traversal
     if (rel.startsWith('..') || path.isAbsolute(rel)) continue;
     if (e.isDirectory()) {
       files.push(...listFiles(full, baseDir));
@@ -58,8 +46,8 @@ function listFiles(dir, baseDir = dir) {
 
 const relativeFiles = listFiles(absPatchDir);
 const manifestFiles = relativeFiles.map((r) => `${prefix}/${r}`);
-
 const manifest = { files: manifestFiles };
+
 const outDir = path.join(process.cwd(), 'dist-patch');
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
 
@@ -71,8 +59,7 @@ const archive = archiver('zip', { zlib: { level: 9 } });
 
 output.on('close', () => {
   console.log('Created:', zipPath);
-  console.log('Manifest files:', manifestFiles.length);
-  console.log('Upload this file as a GitHub release asset.');
+  console.log('Files in zip:', manifestFiles.length);
 });
 
 archive.on('error', (err) => {
@@ -82,13 +69,10 @@ archive.on('error', (err) => {
 
 archive.pipe(output);
 
-// Add manifest.json at root
+// 1. Add manifest.json at zip root
 archive.append(JSON.stringify(manifest, null, 2), { name: 'manifest.json' });
 
-// Add each file from patchDir with path relative to patchDir (so zip root has those paths)
-for (const rel of relativeFiles) {
-  const full = path.join(absPatchDir, rel);
-  archive.file(full, { name: rel });
-}
+// 2. Add ONLY patch-content contents at zip root (false = no parent folder)
+archive.directory(absPatchDir, false);
 
 archive.finalize();
