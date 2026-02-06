@@ -2,11 +2,11 @@
  * Builds a patch zip and manifest.json for the BStar launcher.
  *
  * Usage:
- *   node scripts/build-patch.js <patchDir> [version] [--prefix=Data/BStarPatch]
+ *   node scripts/build-patch.js <patchDir> [version] [--prefix=Data]
  *
- * - patchDir: folder whose contents will be installed under Data/BStarPatch (e.g. ./patch-content)
+ * - patchDir: folder whose contents will be installed into Data (e.g. ./patch-content)
  * - version: optional tag for the zip name (e.g. 1.0.0) → output patch-1.0.0.zip
- * - --prefix: game-relative path for manifest "files" (default Data/BStarPatch)
+ * - --prefix: game-relative path for manifest "files" (default Data)
  *
  * The zip will contain:
  *   manifest.json at root (with "files" array: prefix + each relative path)
@@ -24,10 +24,10 @@ const archiver = require('archiver');
 const patchDir = process.argv[2];
 const version = process.argv[3] && !process.argv[3].startsWith('--') ? process.argv[3] : null;
 const prefixArg = process.argv.find((a) => a.startsWith('--prefix='));
-const prefix = prefixArg ? prefixArg.slice('--prefix='.length) : 'Data/BStarPatch';
+const prefix = prefixArg ? prefixArg.slice('--prefix='.length) : 'Data';
 
 if (!patchDir) {
-  console.error('Usage: node scripts/build-patch.js <patchDir> [version] [--prefix=Data/BStarPatch]');
+  console.error('Usage: node scripts/build-patch.js <patchDir> [version] [--prefix=Data]');
   process.exit(1);
 }
 

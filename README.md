@@ -1,9 +1,9 @@
-# BStar SkyMP Patches
+# BStarRP SkyMP Data
 
-Public repository for **BStar Launcher** patch content (mods + SkyrimPlatform data). The launcher fetches the latest release and installs the zip into the game’s `Data/BStarPatch` folder.
+Public repository for **BStarRP SkyMP Launcher** patch content (mods + SkyrimPlatform data). The launcher fetches the latest release and installs the zip directly into the game’s `Data` folder.
 
 - **Repo must stay public** so the launcher can read releases without authentication.
-- Set in the launcher’s `.env`: `PATCH_GITHUB_REPO=YOUR_USERNAME/bstar_skymp_patches`
+- In **BStarRP_SkyMP_Launcher** set in `.env`: `PATCH_GITHUB_REPO=YourOrg/BStarRP_SkyMP_Data`
 
 ## Releasing a patch
 
@@ -26,6 +26,6 @@ node scripts/build-patch.js patch-content 1.0.0
 The zip contains:
 
 - **`manifest.json`** at root with a `files` array (paths relative to game root).
-- All files from `patch-content/` (merged into `Data/BStarPatch` by the launcher).
+- All files from `patch-content/` (merged into `Data` by the launcher).
 
 The build script generates the manifest automatically.
