@@ -1,5 +1,6 @@
-# Automatically create a new release with incremented version when patch-content/ changes.
-# The Build patch workflow will then run and attach the zip to this release.
+# Create a release with version from Conventional Commits when patch-content/ changes.
+# fix: → PATCH, feat: → MINOR, BREAKING CHANGE / ! → MAJOR (https://www.conventionalcommits.org/)
+# The Build patch workflow then attaches the zip to this release.
 
 name: Auto release on patch change
 
@@ -20,13 +21,43 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get latest version and increment
+      - name: Determine version bump from commits
+        id: bump
+        run: |
+          set -e
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          LOG=$(git log "$LATEST_TAG..HEAD" --format="%s%n%b" -- patch-content/ || true)
+          BUMP=patch
+          # BREAKING CHANGE in body, or type! in subject (e.g. feat!:) → major
+          if echo "$LOG" | grep -qi 'BREAKING CHANGE'; then
+            BUMP=major
+          elif echo "$LOG" | grep -qE '^[a-z]+!.*:'; then
+            BUMP=major
+          # feat: or feat(scope): → minor
+          elif echo "$LOG" | grep -qE '^feat(\([^)]*\))?:'; then
+            BUMP=minor
+          # fix: or fix(scope): → patch
+          elif echo "$LOG" | grep -qE '^fix(\([^)]*\))?:'; then
+            BUMP=patch
+          fi
+          echo "bump=$BUMP" >> $GITHUB_OUTPUT
+          echo "Bump type: $BUMP"
+
+      - name: Get latest version and compute new version
         id: version
         run: |
           LATEST=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
           VERSION=${LATEST#v}
-          # Increment patch (e.g. 1.0.0 -> 1.0.1)
-          NEW_VERSION=$(echo "$VERSION" | awk -F. '{$3 = $3 + 1; print $1"."$2"."$3}')
+          MAJOR=$(echo "$VERSION" | cut -d. -f1)
+          MINOR=$(echo "$VERSION" | cut -d. -f2)
+          PATCH=$(echo "$VERSION" | cut -d. -f3)
+          [[ -z "$PATCH" ]] && PATCH=0
+          case "${{ steps.bump.outputs.bump }}" in
+            major) MAJOR=$((MAJOR + 1)); MINOR=0; PATCH=0 ;;
+            minor) MINOR=$((MINOR + 1)); PATCH=0 ;;
+            patch) PATCH=$((PATCH + 1)) ;;
+          esac
+          NEW_VERSION="$MAJOR.$MINOR.$PATCH"
           echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
           echo "tag=v$NEW_VERSION" >> $GITHUB_OUTPUT
           echo "New version: $NEW_VERSION"

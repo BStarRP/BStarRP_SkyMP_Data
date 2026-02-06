@@ -8,7 +8,11 @@ Public repository for **BStarRP SkyMP Launcher** patch content (mods + SkyrimPla
 ## Releasing a patch
 
 **Option A – Automatic (recommended):**  
-Push changes to `patch-content/` on `main`. The **Auto release on patch change** workflow creates a new release with an incremented version (e.g. `v1.0.0` → `v1.0.1`), then **Build patch** attaches the zip.
+Push changes to `patch-content/` on `main` using [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) in your commit messages. The **Auto release on patch change** workflow sets the version from your commits, then **Build patch** attaches the zip.
+
+- `fix: description` → PATCH (e.g. 1.0.0 → 1.0.1)
+- `feat: description` → MINOR (e.g. 1.0.0 → 1.1.0)
+- `BREAKING CHANGE:` in body or `type!: description` → MAJOR (e.g. 1.0.0 → 2.0.0)
 
 **Option B – Manual:**  
 1. Put your content in **`patch-content/`** (mods, Platform output, etc.).
