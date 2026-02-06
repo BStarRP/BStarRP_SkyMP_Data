@@ -1,0 +1,11 @@
+{
+  "discord-auth-url" : "http://localhost:3000",
+  "gameData" : 
+  {
+    "profileId" : 1
+  },
+  "master" : "",
+  "server-ip" : "15.204.44.112",
+  "server-master-key" : null,
+  "server-port" : 7777
+}
