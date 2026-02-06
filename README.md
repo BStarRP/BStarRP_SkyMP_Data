@@ -1,6 +1,6 @@
 # BStarRP SkyMP Data
 
-Public repository for **BStarRP SkyMP Launcher** patch content (mods + SkyrimPlatform data). The launcher fetches the latest release and installs the zip directly into the game’s `Data` folder.
+Public repository for **BStarRP SkyMP Launcher** patch content (mods + SkyrimPlatform data). The launcher fetches the **`patch-*.zip` release asset** (which contains only patch-content + manifest) and installs it into the game's `Data` folder.
 
 - **Repo must stay public** so the launcher can read releases without authentication.
 - In **BStarRP_SkyMP_Launcher** set in `.env`: `PATCH_GITHUB_REPO=YourOrg/BStarRP_SkyMP_Data`
@@ -32,14 +32,9 @@ node scripts/build-patch.js patch-content 1.0.0
 
 ## Launcher requirements
 
-The launcher needs **`manifest.json`** at the repo root (inside the archive’s top-level folder). It must include a `files` array of paths relative to the game root (e.g. `Data/SomeFile.bsa`).
+The launcher **must use the `patch-*.zip` release asset**, not the GitHub source archive. The source archive contains the full repo (scripts, .github, README, etc.) and must not be installed into the game directory.
 
-- **Auto release:** The workflow generates `manifest.json` and commits it before creating the tag, so the GitHub archive (e.g. `.../archive/refs/tags/v1.0.0.zip`) works without a separate .zip asset.
-- **Manual release:** Run `node scripts/generate-manifest.js` and commit `manifest.json` before creating the release tag.
+The `patch-*.zip` contains only:
 
-## Zip format (Build patch workflow)
-
-The uploaded `patch-*.zip` contains:
-
-- **`manifest.json`** at root with a `files` array (paths relative to game root).
-- All files from `patch-content/` (merged into `Data` by the launcher).
+- **`manifest.json`** at root with a `files` array (paths relative to game root, e.g. `Data/SomeFile.bsa`)
+- Files from `patch-content/` (mapped into `Data/` by the launcher)
