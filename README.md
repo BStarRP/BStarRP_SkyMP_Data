@@ -30,11 +30,16 @@ node scripts/build-patch.js patch-content 1.0.0
 # → dist-patch/patch-1.0.0.zip
 ```
 
-## Zip format
+## Launcher requirements
 
-The zip contains:
+The launcher needs **`manifest.json`** at the repo root (inside the archive’s top-level folder). It must include a `files` array of paths relative to the game root (e.g. `Data/SomeFile.bsa`).
+
+- **Auto release:** The workflow generates `manifest.json` and commits it before creating the tag, so the GitHub archive (e.g. `.../archive/refs/tags/v1.0.0.zip`) works without a separate .zip asset.
+- **Manual release:** Run `node scripts/generate-manifest.js` and commit `manifest.json` before creating the release tag.
+
+## Zip format (Build patch workflow)
+
+The uploaded `patch-*.zip` contains:
 
 - **`manifest.json`** at root with a `files` array (paths relative to game root).
 - All files from `patch-content/` (merged into `Data` by the launcher).
-
-The build script generates the manifest automatically.
