@@ -62,11 +62,40 @@ jobs:
           echo "tag=v$NEW_VERSION" >> $GITHUB_OUTPUT
           echo "New version: $NEW_VERSION"
 
+      - name: Generate patch notes from commits
+        id: notes
+        run: |
+          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          VERSION="${{ steps.version.outputs.version }}"
+          NOTES="# Patch $VERSION"$'\n\n'
+          FEATURES=""
+          FIXES=""
+          BREAKING=""
+          while IFS= read -r subject; do
+            [[ -z "$subject" ]] && continue
+            desc=$(echo "$subject" | sed -E 's/^[a-z]+(\([^)]*\))?!?:\s*//')
+            if echo "$subject" | grep -qiE '^[a-z]+!.*:' || echo "$subject" | grep -qi 'BREAKING'; then
+              BREAKING="$BREAKING- $desc"$'\n'
+            elif echo "$subject" | grep -qE '^feat(\([^)]*\))?:'; then
+              FEATURES="$FEATURES- $desc"$'\n'
+            elif echo "$subject" | grep -qE '^fix(\([^)]*\))?:'; then
+              FIXES="$FIXES- $desc"$'\n'
+            else
+              FIXES="${FIXES}- $subject"$'\n'
+            fi
+          done < <(git log "$LATEST_TAG..HEAD" --format="%s" --reverse -- patch-content/)
+          [[ -n "$BREAKING" ]] && NOTES="${NOTES}### Breaking Changes"$'\n'"$BREAKING"$'\n'
+          [[ -n "$FEATURES" ]] && NOTES="${NOTES}### Features"$'\n'"$FEATURES"$'\n'
+          [[ -n "$FIXES" ]] && NOTES="${NOTES}### Fixes"$'\n'"$FIXES"
+          echo "${NOTES}" > release-notes.md
+          echo "Generated patch notes:"
+          cat release-notes.md
+
       - name: Create release
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release create ${{ steps.version.outputs.tag }} \
             --title "Patch ${{ steps.version.outputs.version }}" \
-            --generate-notes \
+            --notes-file release-notes.md \
             --latest
