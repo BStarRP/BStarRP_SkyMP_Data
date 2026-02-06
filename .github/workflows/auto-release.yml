@@ -1,6 +1,6 @@
 # Create a release with version from Conventional Commits when patch-content/ changes.
 # fix: → PATCH, feat: → MINOR, BREAKING CHANGE / ! → MAJOR (https://www.conventionalcommits.org/)
-# The Build patch workflow attaches patch-*.zip (only patch-content + manifest) to the release.
+# Builds patch-*.zip (only patch-content + manifest) and attaches it to the release.
 # The launcher MUST use the patch-*.zip asset, NOT the source archive (which contains the full repo).
 
 name: Auto release on patch change
@@ -21,6 +21,12 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
 
       - name: Determine version bump from commits
         id: bump
@@ -92,11 +98,18 @@ jobs:
           echo "Generated patch notes:"
           cat release-notes.md
 
-      - name: Create release
+      - name: Build patch zip
+        run: |
+          npm ci
+          node scripts/build-patch.js patch-content ${{ steps.version.outputs.version }}
+          echo "Built dist-patch/patch-${{ steps.version.outputs.version }}.zip"
+
+      - name: Create release with patch zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           gh release create ${{ steps.version.outputs.tag }} \
             --title "Patch ${{ steps.version.outputs.version }}" \
             --notes-file release-notes.md \
-            --latest
+            --latest \
+            dist-patch/patch-${{ steps.version.outputs.version }}.zip
