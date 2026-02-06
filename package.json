@@ -1,0 +1,12 @@
+{
+  "name": "bstar-skymp-patches",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Patch content for BStar Launcher (SkyMP mods + Platform data)",
+  "scripts": {
+    "build-patch": "node scripts/build-patch.js"
+  },
+  "devDependencies": {
+    "archiver": "^7.0.1"
+  }
+}

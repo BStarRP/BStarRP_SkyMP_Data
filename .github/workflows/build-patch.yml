@@ -1,0 +1,41 @@
+# Build patch zip and attach it to the release when you publish a new release.
+# Put your patch content (mods, SkyrimPlatform output) in the patch-content/ folder,
+# then create a Release with a tag (e.g. v1.0.0). This workflow builds the zip and uploads it.
+
+name: Build patch
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build-patch:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build patch zip
+        id: build
+        run: |
+          VERSION="${GITHUB_REF#refs/tags/v}"
+          node scripts/build-patch.js patch-content "$VERSION"
+          echo "zip_path=dist-patch/patch-${VERSION}.zip" >> $GITHUB_OUTPUT
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Upload to release
+        uses: softprops/action-gh-release@v2
+        with:
+          release_id: ${{ github.event.release.id }}
+          files: dist-patch/patch-*.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
