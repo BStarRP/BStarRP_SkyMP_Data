@@ -7,11 +7,16 @@ Public repository for **BStarRP SkyMP Launcher** patch content (mods + SkyrimPla
 
 ## Releasing a patch
 
+**Option A – Automatic (recommended):**  
+Push changes to `patch-content/` on `main`. The **Auto release on patch change** workflow creates a new release with an incremented version (e.g. `v1.0.0` → `v1.0.1`), then **Build patch** attaches the zip.
+
+**Option B – Manual:**  
 1. Put your content in **`patch-content/`** (mods, Platform output, etc.).
 2. Commit and push.
 3. On GitHub: **Releases → Create a new release** with a tag (e.g. `v1.0.0`), then publish.
 4. The **Build patch** workflow runs and attaches `patch-1.0.0.zip` to the release.
-5. Launcher users get it via **Check for updates**.
+
+Launcher users get updates via **Check for updates**.
 
 ## Local build
 

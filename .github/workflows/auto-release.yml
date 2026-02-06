@@ -1,0 +1,41 @@
+# Automatically create a new release with incremented version when patch-content/ changes.
+# The Build patch workflow will then run and attach the zip to this release.
+
+name: Auto release on patch change
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'patch-content/**'
+
+jobs:
+  auto-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get latest version and increment
+        id: version
+        run: |
+          LATEST=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          VERSION=${LATEST#v}
+          # Increment patch (e.g. 1.0.0 -> 1.0.1)
+          NEW_VERSION=$(echo "$VERSION" | awk -F. '{$3 = $3 + 1; print $1"."$2"."$3}')
+          echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "tag=v$NEW_VERSION" >> $GITHUB_OUTPUT
+          echo "New version: $NEW_VERSION"
+
+      - name: Create release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create ${{ steps.version.outputs.tag }} \
+            --title "Patch ${{ steps.version.outputs.version }}" \
+            --generate-notes \
+            --latest
