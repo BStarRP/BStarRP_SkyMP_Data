@@ -1,11 +1,11 @@
 {
-  "discord-auth-url" : "http://localhost:3000",
+  "discord-auth-url" : "https://api.bstarrp.com",
   "gameData" : 
   {
     "profileId" : 1
   },
   "master" : "",
-  "server-ip" : "15.204.44.112",
+  "server-ip" : "147.135.104.138",
   "server-master-key" : null,
   "server-port" : 7777
 }
