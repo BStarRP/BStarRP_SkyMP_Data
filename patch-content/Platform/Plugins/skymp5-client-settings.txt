@@ -1,5 +1,4 @@
 {
-  "discord-auth-url" : "https://api.bstarrp.com",
   "master" : "",
   "server-ip" : "147.135.104.138",
   "server-master-key" : null,
