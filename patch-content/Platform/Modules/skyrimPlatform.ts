@@ -56,6 +56,9 @@ export declare function loadGame(pos: number[], angle: number[], worldOrCell: nu
 
 export declare function worldPointToScreenPoint(...args: number[][]): number[][]
 
+/** Returns [posX, posY, posZ, yaw] - camera position and horizontal facing (radians) */
+export declare function getCameraPositionAndYaw(): [number, number, number, number]
+
 export type PacketType = 'message' | 'disconnect' | 'connectionAccepted' | 'connectionFailed' | 'connectionDenied'
 
 // Available only if multiplayer is installed on user's machine
