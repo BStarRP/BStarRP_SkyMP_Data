@@ -105,6 +105,11 @@ jobs:
           node scripts/build-patch.js patch-content ${{ steps.version.outputs.version }}
           echo "Built dist-patch/patch-${{ steps.version.outputs.version }}.zip"
 
+      - name: Prepare per-file assets for incremental download
+        run: |
+          node scripts/prepare-patch-assets.js patch-content --prefix=Data
+          echo "Prepared $(ls dist-patch/assets | wc -l) assets"
+
       - name: Create release with patch zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -114,3 +119,26 @@ jobs:
             --notes-file release-notes.md \
             --latest \
             dist-patch/patch-${{ steps.version.outputs.version }}.zip
+
+      - name: Upload per-file assets and manifest.json
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: |
+          TAG="${{ steps.version.outputs.tag }}"
+          VERSION="${{ steps.version.outputs.version }}"
+          REPO="${{ github.repository }}"
+          export BASE="https://github.com/${REPO}/releases/download/${TAG}"
+          export ZIP_URL="${BASE}/patch-${VERSION}.zip"
+          # Add url (and zipUrl) to manifest for patcher incremental mode
+          node -e "
+            const fs = require('fs');
+            const m = JSON.parse(fs.readFileSync('dist-patch/manifest.json', 'utf8'));
+            m.files = m.files.map(f => ({
+              ...f,
+              url: (process.env.BASE + '/' + f.path.replace(/\\//g, '_'))
+            }));
+            m.zipUrl = process.env.ZIP_URL;
+            fs.writeFileSync('dist-patch/manifest.json', JSON.stringify(m, null, 2), 'utf8');
+          "
+          gh release upload ${{ steps.version.outputs.tag }} dist-patch/assets/* dist-patch/manifest.json --clobber

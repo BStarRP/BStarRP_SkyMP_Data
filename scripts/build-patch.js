@@ -9,6 +9,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const archiver = require('archiver');
 
 const patchDir = process.argv[2];
@@ -44,12 +45,38 @@ function listFiles(dir, baseDir = dir) {
   return files;
 }
 
+/** Compute SHA-256 hash of a file (hex string). */
+function sha256File(filePath) {
+  const buf = fs.readFileSync(filePath);
+  return crypto.createHash('sha256').update(buf).digest('hex');
+}
+
 const relativeFiles = listFiles(absPatchDir);
 const manifestFiles = relativeFiles.map((r) => `${prefix}/${r}`);
+
+// Full manifest with path, size, hash (url added by release workflow)
+const fullManifestEntries = relativeFiles.map((r) => {
+  const fullPath = path.join(absPatchDir, r);
+  const stat = fs.statSync(fullPath);
+  const hash = sha256File(fullPath);
+  return { path: `${prefix}/${r}`, size: stat.size, hash };
+});
+const fullManifest = version
+  ? { version, files: fullManifestEntries }
+  : { files: fullManifestEntries };
+
+// Simple manifest for zip (backward compat: launchers that don't use incremental)
 const manifest = { files: manifestFiles };
 
 const outDir = path.join(process.cwd(), 'dist-patch');
 if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+
+// Write full manifest (path, size, hash) for release workflow to add urls and upload
+fs.writeFileSync(
+  path.join(outDir, 'manifest.json'),
+  JSON.stringify(fullManifest, null, 2),
+  'utf8'
+);
 
 const zipName = version ? `patch-${version}.zip` : 'patch.zip';
 const zipPath = path.join(outDir, zipName);
