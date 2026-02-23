@@ -143,15 +143,16 @@ jobs:
           REPO="${{ github.repository }}"
           export BASE="https://github.com/${REPO}/releases/download/${TAG}"
           export ZIP_URL="${BASE}/patch-${VERSION}.zip"
-          # Add url (and zipUrl) to manifest; asset name = same sanitize as prepare-patch-assets (/, space, dots in path → _)
+          # Add url (and zipUrl) to manifest; asset name = same sanitize as prepare-patch-assets (collapse _+ to _)
           node -e "
             const fs = require('fs');
             const m = JSON.parse(fs.readFileSync('dist-patch/manifest.json', 'utf8'));
             const toAssetName = (p) => {
-              const s = p.replace(/\\//g, '_').replace(/\\s+/g, '_');
+              let s = p.replace(/\\//g, '_').replace(/\\s+/g, '_');
               const i = s.lastIndexOf('.');
-              if (i <= 0) return s;
-              return s.slice(0, i).replace(/\\./g, '_') + s.slice(i);
+              if (i <= 0) return s.replace(/_+/g, '_');
+              const base = s.slice(0, i).replace(/\\./g, '_') + s.slice(i);
+              return base.replace(/_+/g, '_');
             };
             m.files = m.files.map(f => ({ ...f, url: process.env.BASE + '/' + toAssetName(f.path) }));
             m.zipUrl = process.env.ZIP_URL;
@@ -159,11 +160,12 @@ jobs:
           "
           # Upload manifest first so patcher can discover incremental mode
           gh release upload "$TAG" dist-patch/manifest.json --clobber
-          # Upload ALL per-file assets one at a time to avoid HTTP 400 Bad Content-Length (gh multipart batch bug)
+          # Upload ALL per-file assets in batches of 100
           files=()
           while IFS= read -r -d '' f; do files+=("$f"); done < <(find dist-patch/assets -type f -print0)
-          for f in "${files[@]}"; do
-            gh release upload "$TAG" "$f" --clobber
+          for ((i=0; i<${#files[@]}; i+=100)); do
+            batch=("${files[@]:i:100}")
+            gh release upload "$TAG" "${batch[@]}" --clobber
           done
           # Verify: manifest file count must match assets (every manifest entry gets one asset)
           manifest_count=$(node -e "const m=require('./dist-patch/manifest.json'); const d='Data/'; console.log(m.files.filter(f=>(typeof f==='string'?f:f.path).startsWith(d)).length)")

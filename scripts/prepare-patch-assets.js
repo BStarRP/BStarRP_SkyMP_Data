@@ -29,14 +29,14 @@ if (!fs.existsSync(manifestPath)) {
   process.exit(1);
 }
 
-/** Sanitize manifest path to GitHub asset name: / and spaces → _, dots (except extension) → _. */
+/** Sanitize manifest path to GitHub asset name: / and spaces → _, dots (except ext) → _, collapse _+ to _. */
 function toAssetName(pathEntry) {
-  const s = pathEntry.replace(/\//g, '_').replace(/\s+/g, '_');
+  let s = pathEntry.replace(/\//g, '_').replace(/\s+/g, '_');
   const lastDot = s.lastIndexOf('.');
-  if (lastDot <= 0) return s;
+  if (lastDot <= 0) return s.replace(/_+/g, '_');
   const base = s.slice(0, lastDot).replace(/\./g, '_');
   const ext = s.slice(lastDot);
-  return base + ext;
+  return (base + ext).replace(/_+/g, '_');
 }
 
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
