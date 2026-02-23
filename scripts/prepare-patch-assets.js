@@ -1,7 +1,8 @@
 /**
  * Prepares per-file assets for release upload.
  * Reads manifest.json (path, size, hash), copies each file from patch-content
- * into dist-patch/assets with asset names path.replace(/\//g, '_') for gh release upload.
+ * into dist-patch/assets with asset names: path with / and whitespace replaced by _
+ * (avoids HTTP 400 Bad Content-Length from GitHub when asset names contain spaces).
  *
  * Usage:
  *   node scripts/prepare-patch-assets.js <patchDir> [--prefix=Data]
@@ -37,7 +38,7 @@ for (const entry of files) {
   if (!pathEntry.startsWith(prefix + '/')) continue;
   const relative = pathEntry.slice(prefix.length + 1).replace(/\//g, path.sep);
   const src = path.join(absPatchDir, relative);
-  const assetName = pathEntry.replace(/\//g, '_');
+  const assetName = pathEntry.replace(/\//g, '_').replace(/\s+/g, '_');
   const dest = path.join(assetsDir, assetName);
   if (!fs.existsSync(src)) {
     console.error('Error: missing file', src);
