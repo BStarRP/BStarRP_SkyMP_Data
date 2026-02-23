@@ -143,7 +143,7 @@ jobs:
           REPO="${{ github.repository }}"
           export BASE="https://github.com/${REPO}/releases/download/${TAG}"
           export ZIP_URL="${BASE}/patch-${VERSION}.zip"
-          # Add url (and zipUrl) to manifest; asset name = SHA-256(path)[0:16]+ext (same as prepare-patch-assets)
+          # Add url (and zipUrl) to manifest; only set url for size>0 (0-byte files skip upload → GitHub 400)
           node -e "
             const crypto = require('crypto');
             const fs = require('fs');
@@ -151,10 +151,12 @@ jobs:
             const toAssetName = (p) => {
               const h = crypto.createHash('sha256').update(p, 'utf8').digest('hex').slice(0, 16);
               const i = p.lastIndexOf('.');
-              const ext = i > 0 ? p.slice(i) : '';
-              return h + ext;
+              return h + (i > 0 ? p.slice(i) : '');
             };
-            m.files = m.files.map(f => ({ ...f, url: process.env.BASE + '/' + toAssetName(f.path) }));
+            m.files = m.files.map(f => ({
+              ...f,
+              url: (f.size > 0) ? (process.env.BASE + '/' + toAssetName(f.path)) : undefined
+            }));
             m.zipUrl = process.env.ZIP_URL;
             fs.writeFileSync('dist-patch/manifest.json', JSON.stringify(m, null, 2), 'utf8');
           "
@@ -167,10 +169,10 @@ jobs:
             batch=("${files[@]:i:100}")
             gh release upload "$TAG" "${batch[@]}" --clobber
           done
-          # Verify: manifest file count must match assets (every manifest entry gets one asset)
-          manifest_count=$(node -e "const m=require('./dist-patch/manifest.json'); const d='Data/'; console.log(m.files.filter(f=>(typeof f==='string'?f:f.path).startsWith(d)).length)")
+          # Verify: uploaded asset count = manifest entries with Data/ and size>0 (0-byte files have no asset)
+          manifest_count=$(node -e "const m=require('./dist-patch/manifest.json'); const d='Data/'; console.log(m.files.filter(f=>(typeof f==='string'?f:f.path).startsWith(d) && (typeof f==='object'?f.size:1)>0).length)")
           if [ "${#files[@]}" -ne "$manifest_count" ]; then
-            echo "ERROR: manifest has $manifest_count Data/ files but prepared ${#files[@]} assets"
+            echo "ERROR: manifest has $manifest_count Data/ non-zero files but prepared ${#files[@]} assets"
             exit 1
           fi
           echo "Uploaded manifest.json and ${#files[@]} per-file assets for incremental download"

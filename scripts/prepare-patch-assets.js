@@ -42,17 +42,21 @@ const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 const files = manifest.files || [];
 if (!fs.existsSync(assetsDir)) fs.mkdirSync(assetsDir, { recursive: true });
 
+let copied = 0;
 for (const entry of files) {
   const pathEntry = typeof entry === 'string' ? entry : entry.path;
   if (!pathEntry.startsWith(prefix + '/')) continue;
   const relative = pathEntry.slice(prefix.length + 1).replace(/\//g, path.sep);
   const src = path.join(absPatchDir, relative);
-  const assetName = toAssetName(pathEntry);
-  const dest = path.join(assetsDir, assetName);
   if (!fs.existsSync(src)) {
     console.error('Error: missing file', src);
     process.exit(1);
   }
+  const size = typeof entry === 'object' && entry.size != null ? entry.size : fs.statSync(src).size;
+  if (size === 0) continue; // skip 0-byte files (GitHub upload API returns 400 Bad Content-Length)
+  const assetName = toAssetName(pathEntry);
+  const dest = path.join(assetsDir, assetName);
   fs.copyFileSync(src, dest);
+  copied++;
 }
-console.log('Prepared', files.length, 'assets in dist-patch/assets');
+console.log('Prepared', copied, 'assets in dist-patch/assets (0-byte files skipped)');
