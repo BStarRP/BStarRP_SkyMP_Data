@@ -1,8 +1,8 @@
 /**
  * Prepares per-file assets for release upload.
  * Reads manifest.json (path, size, hash), copies each file from patch-content
- * into dist-patch/assets with asset names: path with / and whitespace replaced by _
- * (avoids HTTP 400 Bad Content-Length from GitHub when asset names contain spaces).
+ * into dist-patch/assets with asset names sanitized for GitHub uploads:
+ * / and whitespace → _, dots in path (not extension) → _, to avoid HTTP 400 Bad Content-Length.
  *
  * Usage:
  *   node scripts/prepare-patch-assets.js <patchDir> [--prefix=Data]
@@ -29,6 +29,16 @@ if (!fs.existsSync(manifestPath)) {
   process.exit(1);
 }
 
+/** Sanitize manifest path to GitHub asset name: / and spaces → _, dots (except extension) → _. */
+function toAssetName(pathEntry) {
+  const s = pathEntry.replace(/\//g, '_').replace(/\s+/g, '_');
+  const lastDot = s.lastIndexOf('.');
+  if (lastDot <= 0) return s;
+  const base = s.slice(0, lastDot).replace(/\./g, '_');
+  const ext = s.slice(lastDot);
+  return base + ext;
+}
+
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 const files = manifest.files || [];
 if (!fs.existsSync(assetsDir)) fs.mkdirSync(assetsDir, { recursive: true });
@@ -38,7 +48,7 @@ for (const entry of files) {
   if (!pathEntry.startsWith(prefix + '/')) continue;
   const relative = pathEntry.slice(prefix.length + 1).replace(/\//g, path.sep);
   const src = path.join(absPatchDir, relative);
-  const assetName = pathEntry.replace(/\//g, '_').replace(/\s+/g, '_');
+  const assetName = toAssetName(pathEntry);
   const dest = path.join(assetsDir, assetName);
   if (!fs.existsSync(src)) {
     console.error('Error: missing file', src);
