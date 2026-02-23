@@ -1,10 +1,14 @@
 # Create a release with version from Conventional Commits when patch-content/ changes.
 # fix: → PATCH, feat: → MINOR, BREAKING CHANGE / ! → MAJOR (https://www.conventionalcommits.org/)
-# Builds patch-*.zip (only patch-content + manifest) and attaches it to the release.
-# The launcher MUST use the patch-*.zip asset, NOT the source archive (which contains the full repo).
+#
+# Release assets (for BStarRP SkyMP Launcher incremental updates, see docs/PATCH_MANIFEST.md):
+#   - patch-<version>.zip (full archive; fallback and first-time install)
+#   - manifest.json (separate asset; version, files with path/size/hash/url, zipUrl)
+#   - One asset per patch file (asset name = path with / → _) for incremental download
+# The launcher uses manifest.json and per-file URLs to download only missing/changed files.
 #
 # Manual run (Actions → "Auto release on patch change" → Run workflow): updates the *latest*
-# release with manifest.json + per-file assets for the new patcher (no version bump).
+# release with manifest.json + per-file assets (no version bump).
 
 name: Auto release on patch change
 
@@ -143,15 +147,31 @@ jobs:
           REPO="${{ github.repository }}"
           export BASE="https://github.com/${REPO}/releases/download/${TAG}"
           export ZIP_URL="${BASE}/patch-${VERSION}.zip"
-          # Add url (and zipUrl) to manifest for patcher incremental mode
+          # Add url (and zipUrl) to manifest for launcher incremental mode (see docs/PATCH_MANIFEST.md)
           node -e "
             const fs = require('fs');
             const m = JSON.parse(fs.readFileSync('dist-patch/manifest.json', 'utf8'));
+            const base = process.env.BASE;
+            const zipUrl = process.env.ZIP_URL;
             m.files = m.files.map(f => ({
               ...f,
-              url: (process.env.BASE + '/' + f.path.replace(/\\//g, '_'))
+              url: base + '/' + f.path.replace(/\\//g, '_')
             }));
-            m.zipUrl = process.env.ZIP_URL;
+            m.zipUrl = zipUrl;
+            const missing = m.files.filter(f => !f.url || f.url.length === 0);
+            if (missing.length) {
+              console.error('ERROR: manifest has', missing.length, 'files without url (incremental requires url for every file)');
+              process.exit(1);
+            }
             fs.writeFileSync('dist-patch/manifest.json', JSON.stringify(m, null, 2), 'utf8');
           "
-          gh release upload ${{ steps.version.outputs.tag }} dist-patch/assets/* dist-patch/manifest.json --clobber
+          # Upload manifest first so patcher can discover incremental mode
+          gh release upload "$TAG" dist-patch/manifest.json --clobber
+          # Upload per-file assets in batches of 100 to avoid ARG_MAX with many files
+          files=()
+          while IFS= read -r -d '' f; do files+=("$f"); done < <(find dist-patch/assets -type f -print0)
+          for ((i=0; i<${#files[@]}; i+=100)); do
+            batch=("${files[@]:i:100}")
+            gh release upload "$TAG" "${batch[@]}" --clobber
+          done
+          echo "Uploaded manifest.json and ${#files[@]} per-file assets for incremental download"
