@@ -1,13 +1,14 @@
 /**
  * Prepares per-file assets for release upload.
  * Reads manifest.json (path, size, hash), copies each file from patch-content
- * into dist-patch/assets with asset names sanitized for GitHub uploads:
- * / and whitespace → _, dots in path (not extension) → _, to avoid HTTP 400 Bad Content-Length.
+ * into dist-patch/assets. Asset names = first 16 hex chars of SHA-256(path) + extension,
+ * to avoid HTTP 400 Bad Content-Length from GitHub with path-derived names.
  *
  * Usage:
  *   node scripts/prepare-patch-assets.js <patchDir> [--prefix=Data]
  */
 
+const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
@@ -29,14 +30,12 @@ if (!fs.existsSync(manifestPath)) {
   process.exit(1);
 }
 
-/** Sanitize manifest path to GitHub asset name: / and spaces → _, dots (except ext) → _, collapse _+ to _. */
+/** Deterministic safe asset name: SHA-256(path) first 16 hex chars + extension (avoids GitHub 400). */
 function toAssetName(pathEntry) {
-  let s = pathEntry.replace(/\//g, '_').replace(/\s+/g, '_');
-  const lastDot = s.lastIndexOf('.');
-  if (lastDot <= 0) return s.replace(/_+/g, '_');
-  const base = s.slice(0, lastDot).replace(/\./g, '_');
-  const ext = s.slice(lastDot);
-  return (base + ext).replace(/_+/g, '_');
+  const h = crypto.createHash('sha256').update(pathEntry, 'utf8').digest('hex').slice(0, 16);
+  const lastDot = pathEntry.lastIndexOf('.');
+  const ext = lastDot > 0 ? pathEntry.slice(lastDot) : '';
+  return h + ext;
 }
 
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));

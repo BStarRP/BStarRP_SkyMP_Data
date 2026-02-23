@@ -143,16 +143,16 @@ jobs:
           REPO="${{ github.repository }}"
           export BASE="https://github.com/${REPO}/releases/download/${TAG}"
           export ZIP_URL="${BASE}/patch-${VERSION}.zip"
-          # Add url (and zipUrl) to manifest; asset name = same sanitize as prepare-patch-assets (collapse _+ to _)
+          # Add url (and zipUrl) to manifest; asset name = SHA-256(path)[0:16]+ext (same as prepare-patch-assets)
           node -e "
+            const crypto = require('crypto');
             const fs = require('fs');
             const m = JSON.parse(fs.readFileSync('dist-patch/manifest.json', 'utf8'));
             const toAssetName = (p) => {
-              let s = p.replace(/\\//g, '_').replace(/\\s+/g, '_');
-              const i = s.lastIndexOf('.');
-              if (i <= 0) return s.replace(/_+/g, '_');
-              const base = s.slice(0, i).replace(/\\./g, '_') + s.slice(i);
-              return base.replace(/_+/g, '_');
+              const h = crypto.createHash('sha256').update(p, 'utf8').digest('hex').slice(0, 16);
+              const i = p.lastIndexOf('.');
+              const ext = i > 0 ? p.slice(i) : '';
+              return h + ext;
             };
             m.files = m.files.map(f => ({ ...f, url: process.env.BASE + '/' + toAssetName(f.path) }));
             m.zipUrl = process.env.ZIP_URL;
