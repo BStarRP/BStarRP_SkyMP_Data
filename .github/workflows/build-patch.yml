@@ -1,5 +1,5 @@
 # Build patch zip and attach it to the release when you publish a new release.
-# Put your patch content (mods, SkyrimPlatform output) in the patch-content/ folder,
+# Put your patch content (mods, SkyrimPlatform output) in the Data/ folder,
 # then create a Release with a tag (e.g. v1.0.0). This workflow builds the zip and uploads it.
 
 name: Build patch
@@ -30,16 +30,16 @@ jobs:
         id: build
         run: |
           VERSION="${GITHUB_REF#refs/tags/v}"
-          node scripts/build-patch.js patch-content "$VERSION"
+          node scripts/build-patch.js Data "$VERSION"
           echo "zip_path=dist-patch/patch-${VERSION}.zip" >> $GITHUB_OUTPUT
           echo "version=$VERSION" >> $GITHUB_OUTPUT
 
-      - name: Verify zip contains only patch-content
+      - name: Verify zip contains only Data
         run: |
           ZIP="dist-patch/patch-${GITHUB_REF#refs/tags/v}.zip"
           # Fail if zip contains repo folders that must not be installed
           if unzip -l "$ZIP" | grep -qE '(\.github/|/scripts/|node_modules/|package\.json)'; then
-            echo "ERROR: Zip contains repo files - should only have manifest.json and patch-content"
+            echo "ERROR: Zip contains repo files - should only have manifest.json and Data contents"
             unzip -l "$ZIP" | head -40
             exit 1
           fi

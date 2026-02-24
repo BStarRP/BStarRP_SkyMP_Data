@@ -2,13 +2,13 @@
  * Generates manifest.json at repo root for the launcher.
  * The launcher can use the GitHub archive (no .zip asset needed) when manifest.json exists.
  *
- * Usage: node scripts/generate-manifest.js [patchDir] [--prefix=Data]
+ * Usage: node scripts/generate-manifest.js [Data] [--prefix=Data]
  */
 
 const fs = require('fs');
 const path = require('path');
 
-const patchDir = process.argv[2] || 'patch-content';
+const patchDir = process.argv[2] || 'Data';
 const prefixArg = process.argv.find((a) => a.startsWith('--prefix='));
 const prefix = prefixArg ? prefixArg.slice('--prefix='.length) : 'Data';
 

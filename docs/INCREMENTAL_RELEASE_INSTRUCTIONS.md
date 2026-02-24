@@ -75,20 +75,20 @@ https://github.com/BStarRP/BStarRP_SkyMP_Data/releases/download/v0.10.0/manifest
 
 If the launcher shows **"Download failed: 404"** for a file (e.g. `Data/Interface/CombatAlertOverlayMenu.swf`), that file is listed in the release `manifest.json` with a `url`, but the corresponding asset was **not** uploaded to the release.
 
-**Common cause:** The file was removed from `patch-content/` (or never added) but the release manifest still lists it—e.g. the manifest was built when the file existed, or the root `manifest.json` is stale.
+**Common cause:** The file was removed from `Data/` (or never added) but the release manifest still lists it—e.g. the manifest was built when the file existed, or the root `manifest.json` is stale.
 
 **Fix:**
 
 1. **Restore the file in the repo**  
-   The file must exist under `patch-content/` so the workflow can include it in the manifest and upload it as an asset. For example, for `Data/Interface/CombatAlertOverlayMenu.swf` you need `patch-content/Interface/CombatAlertOverlayMenu.swf`.  
-   If the file is in an existing patch zip (e.g. `patch-0.10.0.zip`), extract it and add it to `patch-content/Interface/`.
+   The file must exist under `Data/` so the workflow can include it in the manifest and upload it as an asset. For example, for `Data/Interface/CombatAlertOverlayMenu.swf` you need `Data/Interface/CombatAlertOverlayMenu.swf`.  
+   If the file is in an existing patch zip (e.g. `patch-0.10.0.zip`), extract it and add it to `Data/Interface/`.
 
 2. **Update the release assets**  
    - Commit the restored file and push, **or**  
-   - Run the **"Auto release on patch change"** workflow manually (Actions → workflow_dispatch). That rebuilds from current `patch-content/`, uploads the full manifest and all per-file assets (including the restored file), and fixes the 404.
+   - Run the **"Auto release on patch change"** workflow manually (Actions → workflow_dispatch). That rebuilds from current `Data/`, uploads the full manifest and all per-file assets (including the restored file), and fixes the 404.
 
 3. **Keep the root manifest in sync (optional)**  
-   If you use the root `manifest.json`, regenerate it from current `patch-content/`:  
+   If you use the root `manifest.json`, regenerate it from current `Data/`:  
    `node scripts/generate-manifest.js`
 
-**Rule:** Every file listed in the release manifest must exist as a release asset; the workflow only uploads files that exist in `patch-content/`.
+**Rule:** Every file listed in the release manifest must exist as a release asset; the workflow only uploads files that exist in `Data/`.

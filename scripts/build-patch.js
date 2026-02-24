@@ -1,10 +1,10 @@
 /**
  * Builds a patch zip for the BStar launcher.
- * Contains ONLY: manifest.json + contents of patch-content/ at zip root.
- * No patch-content folder wrapper, no repo files.
+ * Contains ONLY: manifest.json + contents of Data/ (or <patchDir>) at zip root.
+ * No folder wrapper in zip, no repo files.
  *
  * Usage:
- *   node scripts/build-patch.js <patchDir> [version] [--prefix=Data]
+ *   node scripts/build-patch.js Data [version] [--prefix=Data]
  */
 
 const fs = require('fs');
@@ -99,7 +99,7 @@ archive.pipe(output);
 // 1. Add manifest.json at zip root
 archive.append(JSON.stringify(manifest, null, 2), { name: 'manifest.json' });
 
-// 2. Add ONLY patch-content contents at zip root (false = no parent folder)
+// 2. Add ONLY patch dir contents at zip root (false = no parent folder)
 archive.directory(absPatchDir, false);
 
 archive.finalize();

@@ -1,11 +1,11 @@
 /**
  * Prepares per-file assets for release upload.
- * Reads manifest.json (path, size, hash), copies each file from patch-content
+ * Reads manifest.json (path, size, hash), copies each file from Data (or <patchDir>)
  * into dist-patch/assets. Asset names = first 16 hex chars of SHA-256(path) + extension,
  * to avoid HTTP 400 Bad Content-Length from GitHub with path-derived names.
  *
  * Usage:
- *   node scripts/prepare-patch-assets.js <patchDir> [--prefix=Data]
+ *   node scripts/prepare-patch-assets.js Data [--prefix=Data]
  */
 
 const crypto = require('crypto');
