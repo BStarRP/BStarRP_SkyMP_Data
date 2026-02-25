@@ -144,15 +144,11 @@ jobs:
           export BASE="https://github.com/${REPO}/releases/download/${TAG}"
           export ZIP_URL="${BASE}/patch-${VERSION}.zip"
           # Add url (and zipUrl) to manifest; only set url for size>0 (0-byte files skip upload → GitHub 400)
+          # Asset name = path with slashes → underscores (e.g. Data/Platform/plugins/X.dll → Data_Platform_plugins_X.dll)
           node -e "
-            const crypto = require('crypto');
             const fs = require('fs');
             const m = JSON.parse(fs.readFileSync('dist-patch/manifest.json', 'utf8'));
-            const toAssetName = (p) => {
-              const h = crypto.createHash('sha256').update(p, 'utf8').digest('hex').slice(0, 16);
-              const i = p.lastIndexOf('.');
-              return h + (i > 0 ? p.slice(i) : '');
-            };
+            const toAssetName = (p) => p.replace(/\//g, '_');
             m.files = m.files.map(f => ({
               ...f,
               url: (f.size > 0) ? (process.env.BASE + '/' + toAssetName(f.path)) : undefined

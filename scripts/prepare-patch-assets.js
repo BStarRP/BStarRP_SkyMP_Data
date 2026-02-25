@@ -1,14 +1,14 @@
 /**
  * Prepares per-file assets for release upload.
  * Reads manifest.json (path, size, hash), copies each file from Data (or <patchDir>)
- * into dist-patch/assets. Asset names = first 16 hex chars of SHA-256(path) + extension,
- * to avoid HTTP 400 Bad Content-Length from GitHub with path-derived names.
+ * into dist-patch/assets. Asset names = path with slashes replaced by underscores
+ * (e.g. Data/Platform/plugins/MpClientPlugin.dll → Data_Platform_plugins_MpClientPlugin.dll),
+ * matching the filenames in the manifest URLs for incremental downloads.
  *
  * Usage:
  *   node scripts/prepare-patch-assets.js Data [--prefix=Data]
  */
 
-const crypto = require('crypto');
 const fs = require('fs');
 const path = require('path');
 
@@ -30,12 +30,9 @@ if (!fs.existsSync(manifestPath)) {
   process.exit(1);
 }
 
-/** Deterministic safe asset name: SHA-256(path) first 16 hex chars + extension (avoids GitHub 400). */
+/** Asset name = path with slashes replaced by underscores (matches manifest URL filenames). */
 function toAssetName(pathEntry) {
-  const h = crypto.createHash('sha256').update(pathEntry, 'utf8').digest('hex').slice(0, 16);
-  const lastDot = pathEntry.lastIndexOf('.');
-  const ext = lastDot > 0 ? pathEntry.slice(lastDot) : '';
-  return h + ext;
+  return pathEntry.replace(/\//g, '_');
 }
 
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
