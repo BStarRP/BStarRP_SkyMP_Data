@@ -30,6 +30,24 @@ if (!fs.existsSync(manifestPath)) {
   process.exit(1);
 }
 
+function loadLargeConfig() {
+  const configPath = path.join(process.cwd(), 'scripts', 'patch-upload-config.json');
+  if (!fs.existsSync(configPath)) return { largeExtensions: [], largeFileSizeThresholdBytes: null };
+  const cfg = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+  return {
+    largeExtensions: Array.isArray(cfg.largeExtensions) ? cfg.largeExtensions : [],
+    largeFileSizeThresholdBytes: cfg.largeFileSizeThresholdBytes ?? null
+  };
+}
+
+function isLarge(relativePath, size) {
+  const { largeExtensions, largeFileSizeThresholdBytes } = loadLargeConfig();
+  const ext = path.extname(relativePath).toLowerCase();
+  if (largeExtensions.includes(ext)) return true;
+  if (largeFileSizeThresholdBytes != null && size >= largeFileSizeThresholdBytes) return true;
+  return false;
+}
+
 /** Asset name = path with slashes replaced by underscores (matches manifest URL filenames). */
 function toAssetName(pathEntry) {
   return pathEntry.replace(/\//g, '_');
@@ -51,9 +69,10 @@ for (const entry of files) {
   }
   const size = typeof entry === 'object' && entry.size != null ? entry.size : fs.statSync(src).size;
   if (size === 0) continue; // skip 0-byte files (GitHub upload API returns 400 Bad Content-Length)
+  if (isLarge(relative, size)) continue; // large files go to R2, not GitHub
   const assetName = toAssetName(pathEntry);
   const dest = path.join(assetsDir, assetName);
   fs.copyFileSync(src, dest);
   copied++;
 }
-console.log('Prepared', copied, 'assets in dist-patch/assets (0-byte files skipped)');
+console.log('Prepared', copied, 'assets in dist-patch/assets (0-byte and large files skipped)');

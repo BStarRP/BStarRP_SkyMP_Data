@@ -89,6 +89,6 @@ If the launcher shows **"Download failed: 404"** for a file (e.g. `Data/Interfac
 
 3. **Keep the root manifest in sync (optional)**  
    If you use the root `manifest.json`, regenerate it from current `Data/`:  
-   `node scripts/generate-manifest.js`
+   `npm run generate-manifest` or `node scripts/generate-manifest.js`
 
 **Rule:** Every file listed in the release manifest must exist as a release asset; the workflow only uploads files that exist in `Data/`.
