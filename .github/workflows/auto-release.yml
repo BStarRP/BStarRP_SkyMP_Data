@@ -100,12 +100,12 @@ jobs:
             elif echo "$subject" | grep -qE '^fix(\([^)]*\))?:'; then
               FIXES="$FIXES- $desc"$'\n'
             else
-              FIXES="${FIXES}- $subject"$'\n'
+              FIXES="${FIXES}- $desc"$'\n'
             fi
           done < <(git log "$LATEST_TAG..HEAD" --format="%s" --reverse -- Data/)
-          [[ -n "$BREAKING" ]] && NOTES="${NOTES}### Breaking Changes"$'\n'"$BREAKING"$'\n'
-          [[ -n "$FEATURES" ]] && NOTES="${NOTES}### Features"$'\n'"$FEATURES"$'\n'
-          [[ -n "$FIXES" ]] && NOTES="${NOTES}### Fixes"$'\n'"$FIXES"
+          [[ -n "$BREAKING" ]] && NOTES="${NOTES}## Breaking Changes"$'\n'$'\n'"$BREAKING"$'\n'
+          [[ -n "$FEATURES" ]] && NOTES="${NOTES}## Features"$'\n'$'\n'"$FEATURES"$'\n'
+          [[ -n "$FIXES" ]] && NOTES="${NOTES}## Fixes"$'\n'$'\n'"$FIXES"
           echo "${NOTES}" > release-notes.md
           echo "Generated patch notes:"
           cat release-notes.md
