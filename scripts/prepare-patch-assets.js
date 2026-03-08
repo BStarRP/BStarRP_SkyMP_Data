@@ -48,9 +48,13 @@ function isLarge(relativePath, size) {
   return false;
 }
 
-/** Asset name = path with slashes replaced by underscores (matches manifest URL filenames). */
+/** Asset name = path with slashes replaced by underscores, sanitized for filesystem and URLs. */
 function toAssetName(pathEntry) {
-  return pathEntry.replace(/\//g, '_');
+  return pathEntry
+    .replace(/\//g, '_')
+    .replace(/[^a-zA-Z0-9_.-]/g, '_')
+    .replace(/_+/g, '_')
+    .replace(/^_|_$/g, '');
 }
 
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));

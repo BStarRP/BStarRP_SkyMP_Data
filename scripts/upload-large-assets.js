@@ -57,7 +57,11 @@ function isLarge(relativePath, size) {
 }
 
 function toAssetName(pathEntry) {
-  return pathEntry.replace(/\//g, '_');
+  return pathEntry
+    .replace(/\//g, '_')
+    .replace(/[^a-zA-Z0-9_.-]/g, '_')
+    .replace(/_+/g, '_')
+    .replace(/^_|_$/g, '');
 }
 
 const endpoint = `https://${ACCOUNT_ID}.r2.cloudflarestorage.com`;

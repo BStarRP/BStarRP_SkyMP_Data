@@ -163,7 +163,7 @@ jobs:
             const largeExt = Array.isArray(cfg.largeExtensions) ? cfg.largeExtensions : [];
             const sizeThreshold = cfg.largeFileSizeThresholdBytes ?? null;
             const isLarge = (p, size) => largeExt.includes(path.extname(p).toLowerCase()) || (sizeThreshold != null && size >= sizeThreshold);
-            const toAssetName = (p) => p.replace(/\//g, '_');
+            const toAssetName = (p) => p.replace(/\//g, '_').replace(/[^a-zA-Z0-9_.-]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
             const r2Base = process.env.PATCH_ASSETS_PUBLIC_URL ? (process.env.PATCH_ASSETS_PUBLIC_URL + '/patches/' + process.env.VERSION) : null;
             m.files = m.files.map(f => {
               const size = (typeof f === 'object' && f.size != null) ? f.size : 0;
