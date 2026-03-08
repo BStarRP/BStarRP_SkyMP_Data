@@ -177,12 +177,18 @@ jobs:
           # Upload manifest first so patcher can discover incremental mode
           gh release upload "$TAG" dist-patch/manifest.json --clobber
           # Upload only non-large per-file assets to GitHub (large ones are on R2)
+          # Use small batches + delay to avoid GitHub secondary rate limit (HTTP 403)
           files=()
           while IFS= read -r -d '' f; do files+=("$f"); done < <(find dist-patch/assets -type f -print0 2>/dev/null || true)
           if [ "${#files[@]}" -gt 0 ]; then
-            for ((i=0; i<${#files[@]}; i+=100)); do
-              batch=("${files[@]:i:100}")
+            BATCH_SIZE=15
+            for ((i=0; i<${#files[@]}; i+=BATCH_SIZE)); do
+              batch=("${files[@]:i:BATCH_SIZE}")
               gh release upload "$TAG" "${batch[@]}" --clobber
+              if [ $((i + BATCH_SIZE)) -lt ${#files[@]} ]; then
+                echo "Uploaded batch $((i/BATCH_SIZE + 1)); waiting 5s to avoid rate limit..."
+                sleep 5
+              fi
             done
           fi
           # Verify: GitHub asset count = manifest entries that are Data/, size>0, and NOT large
