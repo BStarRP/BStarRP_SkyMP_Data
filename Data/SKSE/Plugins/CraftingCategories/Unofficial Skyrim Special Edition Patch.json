@@ -1,0 +1,9 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Exit-9B/CraftingCategories/main/docs/CraftingCategories.schema.json",
+  "categories": {
+    "$Steel": {
+      "section": "$WEAPONS & ARMOR",
+      "keywords": [ "WeapMaterialDraugr", "WeapMaterialDraugrHoned" ]
+    }
+  }
+}

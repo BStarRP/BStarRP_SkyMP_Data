@@ -1,0 +1,44 @@
+[PriorityMod]
+enabled = true
+
+## Priorities
+# No Change     = -1
+# Idle          = 0
+# Below Normal  = 1
+# Normal        = 2
+# Above Normal  = 3
+# High          = 4
+# Realtime      = 5     (Run as Administrator is required) (Not Recommended)
+# Check Microsoft official document for the details:
+# https://docs.microsoft.com/en-us/windows/win32/api/processthreadsapi/nf-processthreadsapi-setpriorityclass#parameters
+# It's recommended to keep this at 4
+priority = 4
+
+## Affinity
+# Process Affinity (0 = no change)
+# Check Microsoft official document for the details:
+# https://docs.microsoft.com/en-us/windows/win32/procthread/processor-groups
+
+# To set the value. You may need CPU Affinity Mask Calculator:
+# https://bitsum.com/tools/cpu-affinity-calculator/
+# Read Edenfall's comment for more information:
+# https://www.nexusmods.com/skyrimspecialedition/mods/50129/?tab=posts
+affinity = 0
+
+## Dynamic Priority
+# For people who have bAlwaysActive=true
+# Priority and affinity will be set to the value below when lost focus.
+# Regain focus or not responding will be set back to [PriorityMod] section.
+[DynamicPriority]
+enabled = false
+idle_priority = 1
+idle_affinity = 0
+
+## ENBHost Priority
+# Only for 32bit games with ENB.
+# Related code won't be included at Compile-Time in Fallrim Priority 64bit.
+# So you don't need to disable it when you playing 64bit games like Skyrim SE/AE or Fallout 4.
+[EnbHost]
+enabled = true
+priority = 4
+affinity = 0

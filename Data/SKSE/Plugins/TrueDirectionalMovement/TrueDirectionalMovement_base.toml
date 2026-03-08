@@ -1,0 +1,48 @@
+# The first BoneName is the default target point which will always be selected when first selecting the target, the order of the rest doesn't matter
+# Also no, they aren't typos, that's how these bones are named.
+
+[[TargetPoints]]
+BodyPartDataFormID = 0x13492 # DragonBodyPartData
+Plugin = "Skyrim.esm"
+BoneNames = ["NPC Head", "NPC LHand", "NPC RHand", "NPC LLegFoot", "NPC RLegFoot", "NPC Tail4"]
+
+[[TargetPoints]]
+BodyPartDataFormID = 0x1BC4A # DLC2DragonBodyPartData
+Plugin = "Dragonborn.esm"
+BoneNames = ["NPC Head", "NPC LHand", "NPC RHand", "NPC LLegFoot", "NPC RLegFoot", "NPC Tail4"]
+
+[[TargetPoints]]
+BodyPartDataFormID = 0x517AB # GiantBodyPartData
+Plugin = "Skyrim.esm"
+BoneNames = ["NPC Spine1 [Spn1]", "NPC L Calf [RClf]", "NPC R Calf [RClf]"]
+
+[[TargetPoints]]
+BodyPartDataFormID = 0x5B2E9 # AtronachFrostBodyPartData
+Plugin = "Skyrim.esm"
+BoneNames = ["NPC Spine2 [Spn2]", "NPC L Calf [LClf]", "NPC R Calf [LClf]"]
+
+[[TargetPoints]]
+BodyPartDataFormID = 0x800EC # DwarvenSteamCenturionBodyPartData
+Plugin = "Skyrim.esm"
+BoneNames = ["NPC Spine2 [Spn2]", "NPC L Calf [LClf]", "NPC R Calf [RClf]"]
+
+[[TargetPoints]]
+BodyPartDataFormID = 0x1E2A3 # DLC2MountedRieklingBodyPartData
+Plugin = "Dragonborn.esm"
+BoneNames = ["Boar_Reikling_Chest", "Boar_Chest01"]
+
+[[TargetPoints]]
+BodyPartDataFormID = 0x28537 # BenthicLurkerBodyPartData
+Plugin = "Dragonborn.esm"
+BoneNames = ["NPC Spine1 [Spn1]", "NPC L Calf [RClf]", "NPC R Calf [RClf]"]
+
+# the default one is kinda low, so overriding
+[[TargetPoints]]
+BodyPartDataFormID = 0x1DCBC # DLC2HMDaedraPartData
+Plugin = "Dragonborn.esm"
+BoneNames = ["MagicEffectsNode"]
+
+#[[TargetPoints]]
+#BodyPartDataFormID = 0x1D # DefaultBodyPartData
+#Plugin = "Skyrim.esm"
+#BoneNames = ["NPC Spine2 [Spn2]", "NPC Head [Head]", "NPC L Forearm [LLar]", "NPC R Forearm [RLar]", "NPC L Calf [LClf]", "NPC R Calf [RClf]"]

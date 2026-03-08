@@ -1,0 +1,11 @@
+		<hkobject name="#0448" class="hkbBlenderGeneratorChild" signature="0xe2b384b0">
+			<hkparam name="variableBindingSet">null</hkparam>
+			<hkparam name="generator">#0449</hkparam>
+<!-- MOD_CODE ~tdmh~ OPEN -->
+			<hkparam name="boneWeights">#tdmh$117</hkparam>
+<!-- ORIGINAL -->
+			<hkparam name="boneWeights">null</hkparam>
+<!-- CLOSE -->
+			<hkparam name="weight">1.000000</hkparam>
+			<hkparam name="worldFromModelWeight">1.000000</hkparam>
+		</hkobject>
