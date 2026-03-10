@@ -1,0 +1,7 @@
+		<hkobject name="#tdmh$100" class="hkbModifierGenerator" signature="0x1f81fae6">
+			<hkparam name="variableBindingSet">null</hkparam>
+			<hkparam name="userData">1</hkparam>
+			<hkparam name="name">Aiming_LB_Right_2_Fwd_ModGen</hkparam>
+			<hkparam name="modifier">#tdmh$47</hkparam>
+			<hkparam name="generator">#tdmh$101</hkparam>
+		</hkobject>

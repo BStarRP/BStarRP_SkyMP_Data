@@ -1,0 +1,40 @@
+		<hkobject name="#tdmh$125" class="hkbExpressionDataArray" signature="0x4b9ee1a2">
+			<hkparam name="expressionsData" numelements="6">
+				<hkobject>
+					<hkparam name="expression">AimRemap = (((TDM_HorseAimTurn_Angle - -3.14159) * (1 - 0)) / (3.14159 - -3.14159)) + 0</hkparam>
+					<hkparam name="assignmentVariableIndex">-1</hkparam>
+					<hkparam name="assignmentEventIndex">-1</hkparam>
+					<hkparam name="eventMode">EVENT_MODE_SEND_ONCE</hkparam>
+				</hkobject>
+				<hkobject>
+					<hkparam name="expression">TDM_Remap = (((TDM_HorseAimTurn_Angle - -3.14159) * (1 - 0)) / (3.14159 - -3.14159)) + 0</hkparam>
+					<hkparam name="assignmentVariableIndex">-1</hkparam>
+					<hkparam name="assignmentEventIndex">-1</hkparam>
+					<hkparam name="eventMode">EVENT_MODE_SEND_ONCE</hkparam>
+				</hkobject>
+				<hkobject>
+					<hkparam name="expression">Fwd_Remap = (((AimRemap - 0.25) * (1 - 0)) / (0.75 - 0.25)) + 0</hkparam>
+					<hkparam name="assignmentVariableIndex">-1</hkparam>
+					<hkparam name="assignmentEventIndex">-1</hkparam>
+					<hkparam name="eventMode">EVENT_MODE_SEND_ONCE</hkparam>
+				</hkobject>
+				<hkobject>
+					<hkparam name="expression">Lft_Remap = (((AimRemap - 0) * (1 - 0)) / (0.5 - 0)) + 0</hkparam>
+					<hkparam name="assignmentVariableIndex">-1</hkparam>
+					<hkparam name="assignmentEventIndex">-1</hkparam>
+					<hkparam name="eventMode">EVENT_MODE_SEND_ONCE</hkparam>
+				</hkobject>
+				<hkobject>
+					<hkparam name="expression">Rgt_Remap = (((AimRemap - 0.5) * (1 - 0)) / (1 - 0.5)) + 0</hkparam>
+					<hkparam name="assignmentVariableIndex">-1</hkparam>
+					<hkparam name="assignmentEventIndex">-1</hkparam>
+					<hkparam name="eventMode">EVENT_MODE_SEND_ONCE</hkparam>
+				</hkobject>
+				<hkobject>
+					<hkparam name="expression">Bwd_Remap = (((TDM_HorseAimTurn_Angle_Absolute - 1.5) * (1 - 0)) / (4.5 - 1.5)) + 0</hkparam>
+					<hkparam name="assignmentVariableIndex">-1</hkparam>
+					<hkparam name="assignmentEventIndex">-1</hkparam>
+					<hkparam name="eventMode">EVENT_MODE_SEND_ONCE</hkparam>
+				</hkobject>
+			</hkparam>
+		</hkobject>

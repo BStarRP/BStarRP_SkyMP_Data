@@ -1,0 +1,7 @@
+		<hkobject name="#tdmh$31" class="hkbEvaluateExpressionModifier" signature="0xf900f6be">
+			<hkparam name="variableBindingSet">null</hkparam>
+			<hkparam name="userData">2</hkparam>
+			<hkparam name="name">Right_Aiming_EEM</hkparam>
+			<hkparam name="enable">true</hkparam>
+			<hkparam name="expressions">#tdmh$32</hkparam>
+		</hkobject>
