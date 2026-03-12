@@ -22,6 +22,7 @@ const {
   ListObjectsV2Command,
   DeleteObjectsCommand
 } = require('@aws-sdk/client-s3');
+const { NodeHttpHandler } = require('@smithy/node-http-handler');
 
 const patchDir = process.argv[2];
 const prefixArg = process.argv.find((a) => a.startsWith('--prefix='));
@@ -98,7 +99,12 @@ const s3 = new S3Client({
   credentials: {
     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY
-  }
+  },
+  maxAttempts: Math.max(1, parseInt(process.env.R2_MAX_ATTEMPTS || '6', 10) || 6),
+  requestHandler: new NodeHttpHandler({
+    connectionTimeout: parseInt(process.env.R2_CONNECTION_TIMEOUT_MS || '60000', 10) || 60000,
+    requestTimeout: parseInt(process.env.R2_REQUEST_TIMEOUT_MS || '120000', 10) || 120000
+  })
 });
 
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));

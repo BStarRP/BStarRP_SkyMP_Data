@@ -211,7 +211,21 @@ jobs:
           if [ -f prev-manifest.json ]; then
             PREV_ARGS="--previous-manifest=prev-manifest.json --previous-version=${{ steps.version.outputs.previous_version }}"
           fi
-          node scripts/upload-large-assets.js Data --prefix=Data $PREV_ARGS
+          MAX_ATTEMPTS=3
+          attempt=1
+          while true; do
+            if node scripts/upload-large-assets.js Data --prefix=Data $PREV_ARGS; then
+              echo "R2 upload succeeded on attempt $attempt"
+              break
+            fi
+            if [ "$attempt" -ge "$MAX_ATTEMPTS" ]; then
+              echo "R2 upload failed after $MAX_ATTEMPTS attempts"
+              exit 1
+            fi
+            echo "R2 upload attempt $attempt failed (ETIMEDOUT/ENETUNREACH possible). Retrying in 30s..."
+            sleep 30
+            attempt=$((attempt + 1))
+          done
 
       - name: Create release
         if: github.event_name != 'workflow_dispatch' || (github.event_name == 'workflow_dispatch' && inputs.create_release_version != '')
