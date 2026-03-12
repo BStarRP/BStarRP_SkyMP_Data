@@ -2,8 +2,9 @@
 # fix: → PATCH, feat: → MINOR, BREAKING CHANGE / ! → MAJOR (https://www.conventionalcommits.org/)
 # Builds manifest.json + per-file assets (small on GitHub, large on R2). No zip; launcher uses incremental download only.
 #
-# Manual run (Actions → "Auto release on patch change" → Run workflow): updates the *latest*
-# release with manifest.json + per-file assets for the new patcher (no version bump).
+# Manual run (Actions → "Auto release on patch change" → Run workflow):
+# - No version override: updates the *latest* release with manifest + assets (no version bump).
+# - With "Create release version" set (e.g. 0.22.0): creates that release and sets it as latest (use when version went backwards).
 
 name: Auto release on patch change
 
@@ -15,6 +16,11 @@ on:
       - 'scripts/off-github-assets.json'
       - 'patch-notes.md'
   workflow_dispatch:
+    inputs:
+      create_release_version:
+        description: 'Create new release at this version and set as latest (e.g. 0.22.0). Leave empty to just update current latest.'
+        required: false
+        type: string
 
 jobs:
   auto-release:
@@ -65,9 +71,16 @@ jobs:
           echo "previous_tag=$LATEST" >> $GITHUB_OUTPUT
           echo "previous_version=$VERSION" >> $GITHUB_OUTPUT
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
-            echo "Manual run: using existing version $VERSION (tag $LATEST)"
-            echo "version=$VERSION" >> $GITHUB_OUTPUT
-            echo "tag=$LATEST" >> $GITHUB_OUTPUT
+            OVERRIDE="${{ inputs.create_release_version }}"
+            if [ -n "$OVERRIDE" ]; then
+              echo "Manual run with version override: creating release $OVERRIDE (tag v$OVERRIDE), previous was $LATEST"
+              echo "version=$OVERRIDE" >> $GITHUB_OUTPUT
+              echo "tag=v$OVERRIDE" >> $GITHUB_OUTPUT
+            else
+              echo "Manual run: using existing version $VERSION (tag $LATEST)"
+              echo "version=$VERSION" >> $GITHUB_OUTPUT
+              echo "tag=$LATEST" >> $GITHUB_OUTPUT
+            fi
           else
             MAJOR=$(echo "$VERSION" | cut -d. -f1)
             MINOR=$(echo "$VERSION" | cut -d. -f2)
@@ -201,7 +214,7 @@ jobs:
           node scripts/upload-large-assets.js Data --prefix=Data $PREV_ARGS
 
       - name: Create release
-        if: github.event_name != 'workflow_dispatch'
+        if: github.event_name != 'workflow_dispatch' || (github.event_name == 'workflow_dispatch' && inputs.create_release_version != '')
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
