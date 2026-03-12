@@ -120,8 +120,17 @@ jobs:
                 }
               }
             }
-            if (fs.existsSync('release-notes.md')) {
-              m.patchNotes = fs.readFileSync('release-notes.md', 'utf8').trim();
+            // Patch notes for manifest: prefer patch-notes.md, else release-notes.md
+            const patchNotesPath = 'patch-notes.md';
+            const releaseNotesPath = 'release-notes.md';
+            if (fs.existsSync(patchNotesPath)) {
+              const content = fs.readFileSync(patchNotesPath, 'utf8').trim();
+              if (content) {
+                m.patchNotes = content;
+                console.log('Merged patch notes from patch-notes.md into manifest');
+              }
+            } else if (fs.existsSync(releaseNotesPath)) {
+              m.patchNotes = fs.readFileSync(releaseNotesPath, 'utf8').trim();
             }
             fs.writeFileSync('dist-patch/manifest.json', JSON.stringify(m, null, 2), 'utf8');
             console.log('Merged off-GitHub assets and patch notes into manifest');

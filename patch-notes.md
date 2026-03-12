@@ -2,12 +2,9 @@
 
 **Summary**
 
-Cleaned the install and re-added core content and mods.
+Updated Skyrim Platform settings and improved workflow for patch notes.
 
 ## Changes
 
-- Cleaned the install and refreshed base files
-- Re-added SkyUI
-- Re-added Skyrim Souls
-- Re-added Whiterun Valley
-- Re-added base files and core assets
+- Updated Skyrim Platform settings
+- Improved workflow for patch notes
