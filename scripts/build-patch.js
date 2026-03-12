@@ -50,27 +50,48 @@ function sha256File(filePath) {
   return crypto.createHash('sha256').update(buf).digest('hex');
 }
 
+/** Run up to `limit` async tasks at a time. */
+async function runWithLimit(tasks, limit = 8) {
+  const results = [];
+  let index = 0;
+  async function worker() {
+    while (index < tasks.length) {
+      const i = index++;
+      results[i] = await tasks[i]();
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(limit, tasks.length) }, () => worker()));
+  return results;
+}
+
 const relativeFiles = listFiles(absPatchDir);
 
-// Full manifest with path, size, hash (url added by release workflow)
-const fullManifestEntries = relativeFiles.map((r) => {
-  const fullPath = path.join(absPatchDir, r);
-  const stat = fs.statSync(fullPath);
-  const hash = sha256File(fullPath);
-  return { path: `${prefix}/${r}`, size: stat.size, hash };
+// Full manifest: path, size, hash. Hash in parallel (concurrency 8) to speed up.
+(async () => {
+  const fullManifestEntries = await runWithLimit(
+    relativeFiles.map((r) => async () => {
+      const fullPath = path.join(absPatchDir, r);
+      const stat = fs.statSync(fullPath);
+      const hash = sha256File(fullPath);
+      return { path: `${prefix}/${r}`, size: stat.size, hash };
+    }),
+    8
+  );
+  const fullManifest = version
+    ? { version, files: fullManifestEntries }
+    : { files: fullManifestEntries };
+
+  const outDir = path.join(process.cwd(), 'dist-patch');
+  if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
+
+  fs.writeFileSync(
+    path.join(outDir, 'manifest.json'),
+    JSON.stringify(fullManifest, null, 2),
+    'utf8'
+  );
+
+  console.log('Created dist-patch/manifest.json with', fullManifestEntries.length, 'files');
+})().catch((err) => {
+  console.error(err);
+  process.exit(1);
 });
-const fullManifest = version
-  ? { version, files: fullManifestEntries }
-  : { files: fullManifestEntries };
-
-const outDir = path.join(process.cwd(), 'dist-patch');
-if (!fs.existsSync(outDir)) fs.mkdirSync(outDir, { recursive: true });
-
-// Write manifest for release workflow to add urls and upload
-fs.writeFileSync(
-  path.join(outDir, 'manifest.json'),
-  JSON.stringify(fullManifest, null, 2),
-  'utf8'
-);
-
-console.log('Created dist-patch/manifest.json with', fullManifestEntries.length, 'files');

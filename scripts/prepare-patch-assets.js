@@ -11,6 +11,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const fsp = fs.promises;
 
 const patchDir = process.argv[2];
 const prefixArg = process.argv.find((a) => a.startsWith('--prefix='));
@@ -57,11 +58,25 @@ function toAssetName(pathEntry) {
     .replace(/^_|_$/g, '');
 }
 
+/** Run up to `limit` async tasks at a time. */
+async function runWithLimit(tasks, limit = 20) {
+  const results = [];
+  let index = 0;
+  async function worker() {
+    while (index < tasks.length) {
+      const i = index++;
+      results[i] = await tasks[i]();
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(limit, tasks.length) }, () => worker()));
+  return results;
+}
+
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 const files = manifest.files || [];
 if (!fs.existsSync(assetsDir)) fs.mkdirSync(assetsDir, { recursive: true });
 
-let copied = 0;
+const toCopy = [];
 for (const entry of files) {
   const pathEntry = typeof entry === 'string' ? entry : entry.path;
   if (!pathEntry.startsWith(prefix + '/')) continue;
@@ -72,11 +87,15 @@ for (const entry of files) {
     process.exit(1);
   }
   const size = typeof entry === 'object' && entry.size != null ? entry.size : fs.statSync(src).size;
-  if (size === 0) continue; // skip 0-byte files (GitHub upload API returns 400 Bad Content-Length)
-  if (isLarge(relative, size)) continue; // large files go to R2, not GitHub
-  const assetName = toAssetName(pathEntry);
-  const dest = path.join(assetsDir, assetName);
-  fs.copyFileSync(src, dest);
-  copied++;
+  if (size === 0) continue;
+  if (isLarge(relative, size)) continue;
+  toCopy.push({ src, dest: path.join(assetsDir, toAssetName(pathEntry)) });
 }
-console.log('Prepared', copied, 'assets in dist-patch/assets (0-byte and large files skipped)');
+
+(async () => {
+  await runWithLimit(toCopy.map(({ src, dest }) => () => fsp.copyFile(src, dest)), 20);
+  console.log('Prepared', toCopy.length, 'assets in dist-patch/assets (0-byte and large files skipped)');
+})().catch((err) => {
+  console.error(err);
+  process.exit(1);
+});

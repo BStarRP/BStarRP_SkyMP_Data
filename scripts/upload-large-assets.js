@@ -18,6 +18,7 @@ const {
   S3Client,
   PutObjectCommand,
   CopyObjectCommand,
+  HeadObjectCommand,
   ListObjectsV2Command,
   DeleteObjectsCommand
 } = require('@aws-sdk/client-s3');
@@ -115,12 +116,26 @@ const largeFiles = (manifest.files || []).filter((entry) => {
   return isLarge(relative, size);
 });
 
+/** Run async tasks with a concurrency limit. */
+async function runWithLimit(tasks, limit = 10) {
+  const results = [];
+  let index = 0;
+  async function worker() {
+    while (index < tasks.length) {
+      const i = index++;
+      results[i] = await tasks[i]();
+    }
+  }
+  await Promise.all(Array.from({ length: Math.min(limit, tasks.length) }, () => worker()));
+  return results;
+}
+
 async function run() {
   let copied = 0;
   let uploaded = 0;
   const newVersion = PREVIOUS_VERSION && PREVIOUS_VERSION !== VERSION;
 
-  for (const entry of largeFiles) {
+  const tasks = largeFiles.map((entry) => async () => {
     const pathEntry = typeof entry === 'string' ? entry : entry.path;
     const hash = typeof entry === 'object' && entry.hash != null ? entry.hash : null;
     const relative = pathEntry.slice(prefix.length + 1).replace(/\//g, path.sep);
@@ -131,16 +146,37 @@ async function run() {
     const canCopyFromPrevious = newVersion && prevMap && prevMap.get(pathEntry) === hash;
 
     if (canCopyFromPrevious) {
-      const copySource = `${BUCKET}/patches/${PREVIOUS_VERSION}/${assetName}`;
+      const copySourceKey = `patches/${PREVIOUS_VERSION}/${assetName}`;
+      try {
+        await s3.send(new HeadObjectCommand({ Bucket: BUCKET, Key: copySourceKey }));
+      } catch (headErr) {
+        if (headErr.name === 'NotFound' || headErr.name === 'NoSuchKey' || headErr.Code === 'NoSuchKey') {
+          if (fs.existsSync(src)) {
+            const body = fs.readFileSync(src);
+            await s3.send(
+              new PutObjectCommand({
+                Bucket: BUCKET,
+                Key: destKey,
+                Body: body
+              })
+            );
+            console.log('Uploaded', destKey, '(previous key missing in R2, re-uploaded from local)');
+            return 'uploaded';
+          }
+          console.warn('Skipped (unchanged but key missing in R2 and not in repo):', pathEntry);
+          return 'skipped';
+        }
+        throw headErr;
+      }
       await s3.send(
         new CopyObjectCommand({
           Bucket: BUCKET,
           Key: destKey,
-          CopySource: copySource
+          CopySource: `${BUCKET}/${copySourceKey}`
         })
       );
-      copied++;
       console.log('Copied', destKey, '(unchanged from previous)');
+      return 'copied';
     } else if (fs.existsSync(src)) {
       const body = fs.readFileSync(src);
       await s3.send(
@@ -150,12 +186,18 @@ async function run() {
           Body: body
         })
       );
-      uploaded++;
       console.log('Uploaded', destKey);
+      return 'uploaded';
     } else {
       console.warn('Skipped (off-GitHub, not in repo and not in previous manifest with same hash):', pathEntry);
+      return 'skipped';
     }
-  }
+  });
+
+  const concurrency = Math.max(1, parseInt(process.env.R2_CONCURRENCY || '15', 10) || 15);
+  const outcomes = await runWithLimit(tasks, concurrency);
+  copied = outcomes.filter((o) => o === 'copied').length;
+  uploaded = outcomes.filter((o) => o === 'uploaded').length;
 
   console.log('R2: copied', copied, ', uploaded', uploaded, 'large assets');
 
