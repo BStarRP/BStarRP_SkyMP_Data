@@ -2,8 +2,8 @@
 
 **Summary**
 
-Updated Skyrim Platform settings, improved workflow for patch notes, and added the NativeEditorIDFix SKSE plugin.
+Single mod update for testing: Wonders of Weather.
 
 ## Changes
 
-- Added NativeEditorIDFix plugin for SKSE
+- Added Wonders of Weather mod
