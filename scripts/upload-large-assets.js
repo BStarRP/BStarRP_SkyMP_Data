@@ -162,12 +162,11 @@ async function run() {
       } catch (headErr) {
         if (headErr.name === 'NotFound' || headErr.name === 'NoSuchKey' || headErr.Code === 'NoSuchKey') {
           if (fs.existsSync(src)) {
-            const body = fs.readFileSync(src);
             await s3.send(
               new PutObjectCommand({
                 Bucket: BUCKET,
                 Key: destKey,
-                Body: body
+                Body: fs.createReadStream(src)
               })
             );
             console.log('Uploaded', destKey, '(previous key missing in R2, re-uploaded from local)');
@@ -188,12 +187,11 @@ async function run() {
       console.log('Copied', destKey, '(unchanged from previous)');
       return 'copied';
     } else if (fs.existsSync(src)) {
-      const body = fs.readFileSync(src);
       await s3.send(
         new PutObjectCommand({
           Bucket: BUCKET,
           Key: destKey,
-          Body: body
+          Body: fs.createReadStream(src)
         })
       );
       console.log('Uploaded', destKey);
@@ -204,7 +202,7 @@ async function run() {
     }
   });
 
-  const concurrency = Math.max(1, parseInt(process.env.R2_CONCURRENCY || '15', 10) || 15);
+  const concurrency = Math.max(1, parseInt(process.env.R2_CONCURRENCY || '4', 10) || 4);
   const outcomes = await runWithLimit(tasks, concurrency);
   copied = outcomes.filter((o) => o === 'copied').length;
   uploaded = outcomes.filter((o) => o === 'uploaded').length;
