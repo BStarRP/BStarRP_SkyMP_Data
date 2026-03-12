@@ -89,7 +89,7 @@ jobs:
         run: |
           LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
           VERSION="${{ steps.version.outputs.version }}"
-          NOTES="# Patch $VERSION"$'\n\n'
+          NOTES=""
           FEATURES=""
           FIXES=""
           BREAKING=""
