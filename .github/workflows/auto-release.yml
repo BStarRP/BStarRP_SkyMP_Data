@@ -91,9 +91,41 @@ jobs:
             cp patch-notes.md release-notes.md
             echo "Using patch-notes.md for release and manifest notes"
           else
-            echo "" > release-notes.md
-            echo "No patch-notes.md found; using empty release notes"
+            echo "No patch-notes.md; generating notes from commit messages"
+            LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+            NOTES=""
+            FEATURES=""
+            FIXES=""
+            BREAKING=""
+            while IFS= read -r subject; do
+              [[ -z "$subject" ]] && continue
+              desc=$(echo "$subject" | sed -E 's/^[a-z]+(\([^)]*\))?!?:\s*//')
+              if echo "$subject" | grep -qiE '^[a-z]+!.*:' || echo "$subject" | grep -qi 'BREAKING'; then
+                BREAKING="$BREAKING- $desc"$'\n'
+              elif echo "$subject" | grep -qE '^feat(\([^)]*\))?:'; then
+                FEATURES="$FEATURES- $desc"$'\n'
+              elif echo "$subject" | grep -qE '^fix(\([^)]*\))?:'; then
+                FIXES="$FIXES- $desc"$'\n'
+              else
+                FIXES="${FIXES}- $desc"$'\n'
+              fi
+            done < <(git log "$LATEST_TAG..HEAD" --format="%s" --reverse -- Data/ 2>/dev/null || true)
+            [[ -n "$BREAKING" ]] && NOTES="${NOTES}## Breaking Changes"$'\n'$'\n'"$BREAKING"$'\n'
+            [[ -n "$FEATURES" ]] && NOTES="${NOTES}## Features"$'\n'$'\n'"$FEATURES"$'\n'
+            [[ -n "$FIXES" ]] && NOTES="${NOTES}## Fixes"$'\n'$'\n'"$FIXES"
+            echo -n "$NOTES" > release-notes.md
           fi
+          # Strip leading "Patch X.Y.Z" or "# Patch X.Y.Z" so release description doesn't duplicate the title
+          node -e "
+            const fs = require('fs');
+            const path = 'release-notes.md';
+            let s = fs.readFileSync(path, 'utf8');
+            const stripped = s.replace(/^#?\s*Patch\s+[\d.]+\s*\n?/i, '').trimStart();
+            if (stripped !== s) {
+              fs.writeFileSync(path, stripped, 'utf8');
+              console.log('Removed duplicate Patch version line from release notes');
+            }
+          "
           cat release-notes.md
 
       - name: Build patch manifest
@@ -121,16 +153,19 @@ jobs:
               }
             }
             // Patch notes for manifest: prefer patch-notes.md, else release-notes.md
+            // Strip leading \"Patch X.Y.Z\" so launcher doesn't show version twice (it shows version separately)
+            const stripDuplicateVersion = (s) => s.replace(/^#?\s*Patch\s+[\d.]+\s*\n?/i, '').trimStart();
             const patchNotesPath = 'patch-notes.md';
             const releaseNotesPath = 'release-notes.md';
             if (fs.existsSync(patchNotesPath)) {
-              const content = fs.readFileSync(patchNotesPath, 'utf8').trim();
+              let content = fs.readFileSync(patchNotesPath, 'utf8').trim();
               if (content) {
-                m.patchNotes = content;
+                m.patchNotes = stripDuplicateVersion(content);
                 console.log('Merged patch notes from patch-notes.md into manifest');
               }
             } else if (fs.existsSync(releaseNotesPath)) {
-              m.patchNotes = fs.readFileSync(releaseNotesPath, 'utf8').trim();
+              let content = fs.readFileSync(releaseNotesPath, 'utf8').trim();
+              if (content) m.patchNotes = stripDuplicateVersion(content);
             }
             fs.writeFileSync('dist-patch/manifest.json', JSON.stringify(m, null, 2), 'utf8');
             console.log('Merged off-GitHub assets and patch notes into manifest');
