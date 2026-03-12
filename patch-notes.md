@@ -2,9 +2,8 @@
 
 **Summary**
 
-Updated Skyrim Platform settings and improved workflow for patch notes.
+Updated Skyrim Platform settings, improved workflow for patch notes, and added the NativeEditorIDFix SKSE plugin.
 
 ## Changes
 
-- Updated Skyrim Platform settings
-- Improved workflow for patch notes
+- Added NativeEditorIDFix plugin for SKSE
