@@ -113,6 +113,10 @@ const prevManifest = PREVIOUS_MANIFEST_PATH && fs.existsSync(PREVIOUS_MANIFEST_P
   : null;
 const prevMap = prevManifest ? manifestPathHashMap(prevManifest) : null;
 
+if (!prevManifest) {
+  console.log('No previous manifest; uploading all large assets (no copy-from-previous).');
+}
+
 const largeFiles = (manifest.files || []).filter((entry) => {
   const pathEntry = typeof entry === 'string' ? entry : entry.path;
   if (!pathEntry.startsWith(prefix + '/')) return false;

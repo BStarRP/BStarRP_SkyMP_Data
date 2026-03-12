@@ -195,9 +195,12 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release download "${{ steps.version.outputs.previous_tag }}" --pattern "manifest.json" --dir . --clobber
-          mv manifest.json prev-manifest.json
-          echo "Fetched previous manifest for ${{ steps.version.outputs.previous_tag }}"
+          if gh release download "${{ steps.version.outputs.previous_tag }}" --pattern "manifest.json" --dir . --clobber 2>/dev/null; then
+            mv manifest.json prev-manifest.json
+            echo "Fetched previous manifest for ${{ steps.version.outputs.previous_tag }}"
+          else
+            echo "Previous release or manifest not found (e.g. that patch never ran); will upload all large assets to R2 (no copy-from-previous)"
+          fi
 
       - name: Upload large assets to R2
         env:
