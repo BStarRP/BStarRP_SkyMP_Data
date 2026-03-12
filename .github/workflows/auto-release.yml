@@ -13,6 +13,7 @@ on:
     paths:
       - 'Data/**'
       - 'scripts/off-github-assets.json'
+      - 'patch-notes.md'
   workflow_dispatch:
 
 jobs:
@@ -22,15 +23,15 @@ jobs:
       contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
         with:
           fetch-depth: 0
           lfs: true
 
       - name: Setup Node
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v5
         with:
-          node-version: '20'
+          node-version: '22'
           cache: 'npm'
 
       - name: Determine version bump from commits
@@ -83,34 +84,16 @@ jobs:
             echo "New version: $NEW_VERSION"
           fi
 
-      - name: Generate patch notes from commits
+      - name: Prepare patch notes from patch-notes.md
         id: notes
-        if: github.event_name != 'workflow_dispatch'
         run: |
-          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
-          VERSION="${{ steps.version.outputs.version }}"
-          NOTES=""
-          FEATURES=""
-          FIXES=""
-          BREAKING=""
-          while IFS= read -r subject; do
-            [[ -z "$subject" ]] && continue
-            desc=$(echo "$subject" | sed -E 's/^[a-z]+(\([^)]*\))?!?:\s*//')
-            if echo "$subject" | grep -qiE '^[a-z]+!.*:' || echo "$subject" | grep -qi 'BREAKING'; then
-              BREAKING="$BREAKING- $desc"$'\n'
-            elif echo "$subject" | grep -qE '^feat(\([^)]*\))?:'; then
-              FEATURES="$FEATURES- $desc"$'\n'
-            elif echo "$subject" | grep -qE '^fix(\([^)]*\))?:'; then
-              FIXES="$FIXES- $desc"$'\n'
-            else
-              FIXES="${FIXES}- $desc"$'\n'
-            fi
-          done < <(git log "$LATEST_TAG..HEAD" --format="%s" --reverse -- Data/)
-          [[ -n "$BREAKING" ]] && NOTES="${NOTES}## Breaking Changes"$'\n'$'\n'"$BREAKING"$'\n'
-          [[ -n "$FEATURES" ]] && NOTES="${NOTES}## Features"$'\n'$'\n'"$FEATURES"$'\n'
-          [[ -n "$FIXES" ]] && NOTES="${NOTES}## Fixes"$'\n'$'\n'"$FIXES"
-          echo "${NOTES}" > release-notes.md
-          echo "Generated patch notes:"
+          if [ -f patch-notes.md ]; then
+            cp patch-notes.md release-notes.md
+            echo "Using patch-notes.md for release and manifest notes"
+          else
+            echo "" > release-notes.md
+            echo "No patch-notes.md found; using empty release notes"
+          fi
           cat release-notes.md
 
       - name: Build patch manifest
