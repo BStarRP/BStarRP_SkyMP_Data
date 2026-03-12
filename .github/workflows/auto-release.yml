@@ -12,6 +12,7 @@ on:
     branches: [main]
     paths:
       - 'Data/**'
+      - 'scripts/off-github-assets.json'
   workflow_dispatch:
 
 jobs:
@@ -60,6 +61,8 @@ jobs:
         run: |
           LATEST=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
           VERSION=${LATEST#v}
+          echo "previous_tag=$LATEST" >> $GITHUB_OUTPUT
+          echo "previous_version=$VERSION" >> $GITHUB_OUTPUT
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             echo "Manual run: using existing version $VERSION (tag $LATEST)"
             echo "version=$VERSION" >> $GITHUB_OUTPUT
@@ -116,10 +119,44 @@ jobs:
           node scripts/build-patch.js Data ${{ steps.version.outputs.version }}
           echo "Built dist-patch/manifest.json"
 
+      - name: Merge off-GitHub assets and patch notes into manifest
+        run: |
+          node -e "
+            const fs = require('fs');
+            const m = JSON.parse(fs.readFileSync('dist-patch/manifest.json', 'utf8'));
+            const paths = new Set((m.files || []).map(f => (typeof f === 'string' ? f : f.path)));
+            const offPath = 'scripts/off-github-assets.json';
+            if (fs.existsSync(offPath)) {
+              const off = JSON.parse(fs.readFileSync(offPath, 'utf8'));
+              const list = Array.isArray(off) ? off : (off.assets || off.files || []);
+              for (const e of list) {
+                const pathEntry = e.path || e;
+                if (!paths.has(pathEntry)) {
+                  m.files.push({ path: pathEntry, size: e.size, hash: e.hash });
+                  paths.add(pathEntry);
+                }
+              }
+            }
+            if (fs.existsSync('release-notes.md')) {
+              m.patchNotes = fs.readFileSync('release-notes.md', 'utf8').trim();
+            }
+            fs.writeFileSync('dist-patch/manifest.json', JSON.stringify(m, null, 2), 'utf8');
+            console.log('Merged off-GitHub assets and patch notes into manifest');
+          "
+
       - name: Prepare per-file assets for incremental download
         run: |
           node scripts/prepare-patch-assets.js Data --prefix=Data
           echo "Prepared $(ls dist-patch/assets 2>/dev/null | wc -l) assets for GitHub"
+
+      - name: Fetch previous release manifest
+        if: steps.version.outputs.version != steps.version.outputs.previous_version && steps.version.outputs.previous_tag != 'v0.0.0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release download "${{ steps.version.outputs.previous_tag }}" --pattern "manifest.json" --dir . --clobber
+          mv manifest.json prev-manifest.json
+          echo "Fetched previous manifest for ${{ steps.version.outputs.previous_tag }}"
 
       - name: Upload large assets to R2
         env:
@@ -129,7 +166,11 @@ jobs:
           PATCH_ASSETS_ACCOUNT_ID: ${{ secrets.PATCH_ASSETS_ACCOUNT_ID }}
           VERSION: ${{ steps.version.outputs.version }}
         run: |
-          node scripts/upload-large-assets.js Data --prefix=Data
+          PREV_ARGS=""
+          if [ -f prev-manifest.json ]; then
+            PREV_ARGS="--previous-manifest=prev-manifest.json --previous-version=${{ steps.version.outputs.previous_version }}"
+          fi
+          node scripts/upload-large-assets.js Data --prefix=Data $PREV_ARGS
 
       - name: Create release
         if: github.event_name != 'workflow_dispatch'
