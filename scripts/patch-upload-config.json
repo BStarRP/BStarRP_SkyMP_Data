@@ -1,4 +1,3 @@
 {
-  "largeExtensions": [".bsa", ".esp"],
   "largeFileSizeThresholdBytes": 104857600
 }

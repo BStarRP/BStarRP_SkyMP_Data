@@ -21,6 +21,11 @@ on:
         description: 'Create new release at this version and set as latest (e.g. 0.22.0). Leave empty to just update current latest.'
         required: false
         type: string
+      force_upload_all_small_assets:
+        description: 'Re-upload ALL assets (GitHub + R2); no copy-from-previous. Use once to repair pointer/wrong files.'
+        required: false
+        type: boolean
+        default: false
 
 jobs:
   auto-release:
@@ -254,6 +259,7 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           PATCH_ASSETS_PUBLIC_URL: ${{ secrets.PATCH_ASSETS_PUBLIC_URL }}
           PREV_TAG: ${{ steps.version.outputs.previous_tag }}
+          FORCE_UPLOAD_ALL_SMALL_ASSETS: ${{ github.event.inputs.force_upload_all_small_assets == 'true' && '1' || '' }}
         run: |
           TAG="${{ steps.version.outputs.tag }}"
           VERSION="${{ steps.version.outputs.version }}"
@@ -262,6 +268,7 @@ jobs:
           export VERSION
           export PREV_TAG
           export GITHUB_REPOSITORY="${{ github.repository }}"
+          [ -n "$FORCE_UPLOAD_ALL_SMALL_ASSETS" ] && echo "Force re-upload all small assets (fix pointer-on-previous)"
           node scripts/set-manifest-urls.js
           echo "Set manifest URLs; assets to upload: $(wc -l < dist-patch/github-assets-to-upload.txt 2>/dev/null || echo 0)"
 
@@ -274,13 +281,20 @@ jobs:
           node scripts/prepare-patch-assets.js Data --prefix=Data
           echo "Prepared $(ls dist-patch/assets 2>/dev/null | wc -l) assets for GitHub"
 
-      - name: Upload large assets to R2
+      - name: Pull all LFS for R2 (when force re-upload all)
+        if: github.event.inputs.force_upload_all_small_assets == 'true'
+        run: |
+          echo "Force re-upload: pulling all LFS so R2 assets (LFS + oversized) are present."
+          git lfs pull
+
+      - name: Upload R2 assets (LFS + oversized)
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           PATCH_ASSETS_BUCKET: ${{ secrets.PATCH_ASSETS_BUCKET }}
           PATCH_ASSETS_ACCOUNT_ID: ${{ secrets.PATCH_ASSETS_ACCOUNT_ID }}
           VERSION: ${{ steps.version.outputs.version }}
+          FORCE_UPLOAD_ALL_SMALL_ASSETS: ${{ github.event.inputs.force_upload_all_small_assets == 'true' && '1' || '' }}
         run: |
           PREV_ARGS=""
           if [ -f prev-manifest.json ]; then
@@ -289,7 +303,7 @@ jobs:
           MAX_ATTEMPTS=3
           attempt=1
           while true; do
-            if node scripts/upload-large-assets.js Data --prefix=Data $PREV_ARGS; then
+            if node scripts/upload-lfs-assets.js Data --prefix=Data $PREV_ARGS; then
               echo "R2 upload succeeded on attempt $attempt"
               break
             fi
@@ -297,7 +311,7 @@ jobs:
               echo "R2 upload failed after $MAX_ATTEMPTS attempts"
               exit 1
             fi
-            echo "R2 upload attempt $attempt failed (ETIMEDOUT/ENETUNREACH possible). Retrying in 30s..."
+            echo "R2 assets upload attempt $attempt failed (ETIMEDOUT/ENETUNREACH possible). Retrying in 30s..."
             sleep 30
             attempt=$((attempt + 1))
           done
@@ -363,4 +377,4 @@ jobs:
           else
             echo "No assets to upload (unchanged point to previous release — copying)."
           fi
-          echo "Uploaded manifest.json and ${#files[@]} per-file assets to GitHub (large assets on R2)"
+          echo "Uploaded manifest.json and ${#files[@]} per-file assets to GitHub (R2 assets: LFS + oversized)"

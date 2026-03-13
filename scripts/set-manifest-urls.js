@@ -1,6 +1,6 @@
 /**
  * Sets manifest URLs and writes github-assets-to-upload.txt.
- * - Large files → R2 URL.
+ * - R2 assets (LFS-tracked + files ≥ largeFileSizeThresholdBytes) → R2 URL.
  * - Non-large: if same path+hash in previous manifest, point to previous release URL
  *   only if that URL returns 200 and Content-Length matches expected size; otherwise
  *   point to current release and add to upload list (handles deleted release or wrong file).
@@ -8,10 +8,14 @@
  *
  * Usage: run from repo root; expects dist-patch/manifest.json, optional prev-manifest.json.
  * Env: BASE, PREV_TAG, PATCH_ASSETS_PUBLIC_URL, VERSION, GITHUB_REPOSITORY
+ * Optional: FORCE_UPLOAD_ALL_SMALL_ASSETS=1 — upload every non-R2 file to current release (do not point to previous).
+ *            Same env is used by upload-lfs-assets.js to skip R2 copy-from-previous (re-upload all R2 assets from Data/).
  */
 
 const fs = require('fs');
 const path = require('path');
+
+const FORCE_UPLOAD_ALL = /^1|true|yes$/i.test(String(process.env.FORCE_UPLOAD_ALL_SMALL_ASSETS || ''));
 
 const manifestPath = path.join(process.cwd(), 'dist-patch', 'manifest.json');
 const prevManifestPath = path.join(process.cwd(), 'prev-manifest.json');
@@ -23,20 +27,32 @@ const prevBase = PREV_TAG && GITHUB_REPOSITORY
   ? `https://github.com/${GITHUB_REPOSITORY}/releases/download/${PREV_TAG}`
   : null;
 
-function loadLargeConfig() {
-  const cfgPath = path.join(process.cwd(), 'scripts', 'patch-upload-config.json');
-  if (!fs.existsSync(cfgPath)) return { largeExtensions: [], largeFileSizeThresholdBytes: null };
-  const cfg = JSON.parse(fs.readFileSync(cfgPath, 'utf8'));
-  return {
-    largeExtensions: Array.isArray(cfg.largeExtensions) ? cfg.largeExtensions : [],
-    largeFileSizeThresholdBytes: cfg.largeFileSizeThresholdBytes ?? null
-  };
+/** Extensions that use LFS (from .gitattributes). All LFS files are served from R2. */
+function getLfsExtensions() {
+  const attrPath = path.join(process.cwd(), '.gitattributes');
+  if (!fs.existsSync(attrPath)) return [];
+  const lines = fs.readFileSync(attrPath, 'utf8').split(/\r?\n/);
+  const exts = new Set();
+  for (const line of lines) {
+    if (!line.includes('filter=lfs')) continue;
+    const pattern = line.split(/\s+/)[0];
+    if (pattern && pattern.startsWith('*.')) exts.add(('.' + pattern.slice(2)).toLowerCase());
+  }
+  return [...exts];
 }
 
-function isLarge(relativePath, size) {
-  const { largeExtensions, largeFileSizeThresholdBytes } = loadLargeConfig();
+function loadLargeConfig() {
+  const cfgPath = path.join(process.cwd(), 'scripts', 'patch-upload-config.json');
+  if (!fs.existsSync(cfgPath)) return { largeFileSizeThresholdBytes: null };
+  const cfg = JSON.parse(fs.readFileSync(cfgPath, 'utf8'));
+  return { largeFileSizeThresholdBytes: cfg.largeFileSizeThresholdBytes ?? null };
+}
+
+/** True if file should be served from R2 (LFS-tracked per .gitattributes or size >= threshold, e.g. 100MB). */
+function goesToR2(relativePath, size) {
   const ext = path.extname(relativePath).toLowerCase();
-  if (largeExtensions.includes(ext)) return true;
+  if (getLfsExtensions().includes(ext)) return true;
+  const { largeFileSizeThresholdBytes } = loadLargeConfig();
   if (largeFileSizeThresholdBytes != null && size >= largeFileSizeThresholdBytes) return true;
   return false;
 }
@@ -92,7 +108,7 @@ async function main() {
     const prevManifestUrl = prevBase + '/manifest.json';
     const { ok } = await headSize(prevManifestUrl);
     if (!ok) {
-      console.log('Previous release not reachable (' + prevManifestUrl + '); will upload all non-large assets to current release.');
+      console.log('Previous release not reachable (' + prevManifestUrl + '); will upload all non-R2 assets to current release.');
       prevMap = null;
     }
   }
@@ -109,10 +125,10 @@ async function main() {
     if (size === 0) {
       return typeof f === 'string' ? { path: f, url: undefined } : { ...f, url: undefined };
     }
-    if (r2Base && isLarge(pathEntry, size)) {
+    if (r2Base && goesToR2(pathEntry, size)) {
       return typeof f === 'string' ? { path: f, url: r2Base + '/' + assetName } : { ...f, url: r2Base + '/' + assetName };
     }
-    if (prevMap && prevMap.get(pathEntry) === hash) {
+    if (!FORCE_UPLOAD_ALL && prevMap && prevMap.get(pathEntry) === hash) {
       candidatesForPrev.push({ pathEntry, size, assetName, index });
       return { ...(typeof f === 'string' ? { path: f } : f), url: prevBase + '/' + assetName };
     }

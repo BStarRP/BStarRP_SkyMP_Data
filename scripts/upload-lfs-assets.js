@@ -1,5 +1,6 @@
 /**
- * Uploads large patch assets to Cloudflare R2.
+ * Uploads R2 patch assets to Cloudflare R2: all LFS-tracked files (per .gitattributes)
+ * plus any file >= largeFileSizeThresholdBytes (e.g. 100MB) from patch-upload-config.json.
  * - If previous manifest + previous version are provided: copies unchanged files (same path+hash)
  *   from patches/<prevVersion>/ to patches/<version>/; uploads only new/changed from Data/.
  *   Deletes patch folders older than the 5 most recent (keeps last 5 patch versions).
@@ -7,13 +8,16 @@
  *   (must be uploaded once via manual script or prior run).
  *
  * Usage:
- *   node scripts/upload-large-assets.js Data [--prefix=Data] [--previous-manifest=path] [--previous-version=0.18.30]
+ *   node scripts/upload-lfs-assets.js Data [--prefix=Data] [--previous-manifest=path] [--previous-version=0.18.30]
  *
  * Env: VERSION, PATCH_ASSETS_BUCKET, PATCH_ASSETS_ACCOUNT_ID, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
+ * Optional: FORCE_UPLOAD_ALL_SMALL_ASSETS=1 — upload all R2 assets from Data/ (do not copy from previous on R2).
  */
 
 const fs = require('fs');
 const path = require('path');
+
+const FORCE_UPLOAD_ALL = /^1|true|yes$/i.test(String(process.env.FORCE_UPLOAD_ALL_SMALL_ASSETS || ''));
 const {
   S3Client,
   PutObjectCommand,
@@ -43,7 +47,7 @@ if (!VERSION || !BUCKET || !ACCOUNT_ID) {
 }
 
 if (!patchDir) {
-  console.error('Usage: node scripts/upload-large-assets.js <patchDir> [--prefix=Data] [--previous-manifest=path] [--previous-version=X.Y.Z]');
+  console.error('Usage: node scripts/upload-lfs-assets.js <patchDir> [--prefix=Data] [--previous-manifest=path] [--previous-version=X.Y.Z]');
   process.exit(1);
 }
 
@@ -55,20 +59,32 @@ if (!fs.existsSync(manifestPath)) {
   process.exit(1);
 }
 
-function loadLargeConfig() {
-  const configPath = path.join(process.cwd(), 'scripts', 'patch-upload-config.json');
-  if (!fs.existsSync(configPath)) return { largeExtensions: [], largeFileSizeThresholdBytes: null };
-  const cfg = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-  return {
-    largeExtensions: Array.isArray(cfg.largeExtensions) ? cfg.largeExtensions : [],
-    largeFileSizeThresholdBytes: cfg.largeFileSizeThresholdBytes ?? null
-  };
+/** Extensions that use LFS (from .gitattributes). All LFS files are uploaded to R2. */
+function getLfsExtensions() {
+  const attrPath = path.join(process.cwd(), '.gitattributes');
+  if (!fs.existsSync(attrPath)) return [];
+  const lines = fs.readFileSync(attrPath, 'utf8').split(/\r?\n/);
+  const exts = new Set();
+  for (const line of lines) {
+    if (!line.includes('filter=lfs')) continue;
+    const pattern = line.split(/\s+/)[0];
+    if (pattern && pattern.startsWith('*.')) exts.add(('.' + pattern.slice(2)).toLowerCase());
+  }
+  return [...exts];
 }
 
-function isLarge(relativePath, size) {
-  const { largeExtensions, largeFileSizeThresholdBytes } = loadLargeConfig();
+function loadR2Config() {
+  const configPath = path.join(process.cwd(), 'scripts', 'patch-upload-config.json');
+  if (!fs.existsSync(configPath)) return { largeFileSizeThresholdBytes: null };
+  const cfg = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+  return { largeFileSizeThresholdBytes: cfg.largeFileSizeThresholdBytes ?? null };
+}
+
+/** True if file should be uploaded to R2: LFS-tracked (per .gitattributes) or size >= threshold (e.g. 100MB). */
+function goesToR2(relativePath, size) {
   const ext = path.extname(relativePath).toLowerCase();
-  if (largeExtensions.includes(ext)) return true;
+  if (getLfsExtensions().includes(ext)) return true;
+  const { largeFileSizeThresholdBytes } = loadR2Config();
   if (largeFileSizeThresholdBytes != null && size >= largeFileSizeThresholdBytes) return true;
   return false;
 }
@@ -114,16 +130,16 @@ const prevManifest = PREVIOUS_MANIFEST_PATH && fs.existsSync(PREVIOUS_MANIFEST_P
 const prevMap = prevManifest ? manifestPathHashMap(prevManifest) : null;
 
 if (!prevManifest) {
-  console.log('No previous manifest; uploading all large assets (no copy-from-previous).');
+  console.log('No previous manifest; uploading all R2 assets (no copy-from-previous).');
 }
 
-const largeFiles = (manifest.files || []).filter((entry) => {
+const r2Files = (manifest.files || []).filter((entry) => {
   const pathEntry = typeof entry === 'string' ? entry : entry.path;
   if (!pathEntry.startsWith(prefix + '/')) return false;
   const size = typeof entry === 'object' && entry.size != null ? entry.size : 0;
   if (size === 0) return false;
   const relative = pathEntry.slice(prefix.length + 1);
-  return isLarge(relative, size);
+  return goesToR2(relative, size);
 });
 
 /** Parse "X.Y.Z" or "X.Y" to [major, minor, patch] for comparison. */
@@ -163,7 +179,7 @@ async function run() {
   let uploaded = 0;
   const newVersion = PREVIOUS_VERSION && PREVIOUS_VERSION !== VERSION;
 
-  const tasks = largeFiles.map((entry) => async () => {
+  const tasks = r2Files.map((entry) => async () => {
     const pathEntry = typeof entry === 'string' ? entry : entry.path;
     const hash = typeof entry === 'object' && entry.hash != null ? entry.hash : null;
     const relative = pathEntry.slice(prefix.length + 1).replace(/\//g, path.sep);
@@ -171,7 +187,7 @@ async function run() {
     const assetName = toAssetName(pathEntry);
     const destKey = `patches/${VERSION}/${assetName}`;
 
-    const canCopyFromPrevious = newVersion && prevMap && prevMap.get(pathEntry) === hash;
+    const canCopyFromPrevious = !FORCE_UPLOAD_ALL && newVersion && prevMap && prevMap.get(pathEntry) === hash;
 
     if (canCopyFromPrevious) {
       const copySourceKey = `patches/${PREVIOUS_VERSION}/${assetName}`;
@@ -225,7 +241,7 @@ async function run() {
   copied = outcomes.filter((o) => o === 'copied').length;
   uploaded = outcomes.filter((o) => o === 'uploaded').length;
 
-  console.log('R2: copied', copied, ', uploaded', uploaded, 'large assets');
+  console.log('R2: copied', copied, ', uploaded', uploaded, 'assets (LFS + oversized)');
 
   // List all patch version prefixes (patches/X.Y.Z/) and delete any older than the 5 most recent
   let prefixToken = undefined;

@@ -37,20 +37,32 @@ if (!fs.existsSync(manifestPath)) {
   process.exit(1);
 }
 
-function loadLargeConfig() {
-  const configPath = path.join(process.cwd(), 'scripts', 'patch-upload-config.json');
-  if (!fs.existsSync(configPath)) return { largeExtensions: [], largeFileSizeThresholdBytes: null };
-  const cfg = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-  return {
-    largeExtensions: Array.isArray(cfg.largeExtensions) ? cfg.largeExtensions : [],
-    largeFileSizeThresholdBytes: cfg.largeFileSizeThresholdBytes ?? null
-  };
+/** Extensions that use LFS (from .gitattributes). All LFS files go to R2, not copied for GitHub. */
+function getLfsExtensions() {
+  const attrPath = path.join(process.cwd(), '.gitattributes');
+  if (!fs.existsSync(attrPath)) return [];
+  const lines = fs.readFileSync(attrPath, 'utf8').split(/\r?\n/);
+  const exts = new Set();
+  for (const line of lines) {
+    if (!line.includes('filter=lfs')) continue;
+    const pattern = line.split(/\s+/)[0];
+    if (pattern && pattern.startsWith('*.')) exts.add(('.' + pattern.slice(2)).toLowerCase());
+  }
+  return [...exts];
 }
 
-function isLarge(relativePath, size) {
-  const { largeExtensions, largeFileSizeThresholdBytes } = loadLargeConfig();
+function loadLargeConfig() {
+  const configPath = path.join(process.cwd(), 'scripts', 'patch-upload-config.json');
+  if (!fs.existsSync(configPath)) return { largeFileSizeThresholdBytes: null };
+  const cfg = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+  return { largeFileSizeThresholdBytes: cfg.largeFileSizeThresholdBytes ?? null };
+}
+
+/** True if file is served from R2 (LFS-tracked or size >= threshold); skip copying for GitHub. */
+function goesToR2(relativePath, size) {
   const ext = path.extname(relativePath).toLowerCase();
-  if (largeExtensions.includes(ext)) return true;
+  if (getLfsExtensions().includes(ext)) return true;
+  const { largeFileSizeThresholdBytes } = loadLargeConfig();
   if (largeFileSizeThresholdBytes != null && size >= largeFileSizeThresholdBytes) return true;
   return false;
 }
@@ -166,7 +178,7 @@ if (fs.existsSync(uploadListPath)) {
     }
     const size = typeof entry === 'object' && entry.size != null ? entry.size : fs.statSync(src).size;
     if (size === 0) continue;
-    if (isLarge(relative, size)) continue;
+    if (goesToR2(relative, size)) continue;
     toCopy.push({ src, dest: path.join(assetsDir, toAssetName(pathEntry)), expectedSize: size });
   }
 }
@@ -181,7 +193,7 @@ if (fs.existsSync(uploadListPath)) {
       process.exit(1);
     }
   }
-  console.log('Prepared', toCopy.length, 'assets in dist-patch/assets (0-byte and large files skipped)');
+  console.log('Prepared', toCopy.length, 'assets in dist-patch/assets (0-byte and R2 files skipped)');
 })().catch((err) => {
   console.error(err);
   process.exit(1);
