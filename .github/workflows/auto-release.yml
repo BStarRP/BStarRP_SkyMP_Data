@@ -47,21 +47,21 @@ jobs:
           set -e
           LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
           LOG=$(git log "$LATEST_TAG..HEAD" --format="%s%n%b" || true)
-          BUMP=patch
-          # chore: → no bump (rebuild current version only)
-          if echo "$LOG" | grep -qE '^chore(\([^)]*\))?:'; then
-            BUMP=none
+          # Use highest-scope change in range: one feat/fix/breaking triggers a bump; only pure chore = none
+          BUMP=none
+          # fix: or fix(scope): → at least patch
+          if echo "$LOG" | grep -qE '^fix(\([^)]*\))?:'; then
+            BUMP=patch
+          fi
+          # feat: or feat(scope): → at least minor
+          if echo "$LOG" | grep -qE '^feat(\([^)]*\))?:'; then
+            BUMP=minor
+          fi
           # BREAKING CHANGE in body, or type! in subject (e.g. feat!:) → major
-          elif echo "$LOG" | grep -qi 'BREAKING CHANGE'; then
+          if echo "$LOG" | grep -qi 'BREAKING CHANGE'; then
             BUMP=major
           elif echo "$LOG" | grep -qE '^[a-z]+!.*:'; then
             BUMP=major
-          # feat: or feat(scope): → minor
-          elif echo "$LOG" | grep -qE '^feat(\([^)]*\))?:'; then
-            BUMP=minor
-          # fix: or fix(scope): → patch
-          elif echo "$LOG" | grep -qE '^fix(\([^)]*\))?:'; then
-            BUMP=patch
           fi
           echo "bump=$BUMP" >> $GITHUB_OUTPUT
           echo "Bump type: $BUMP"
@@ -299,12 +299,12 @@ jobs:
                   echo "Batch upload failed after 3 attempts"
                   exit 1
                 fi
-                echo "Rate limit? Retrying in 10s (attempt $attempt/3)..."
-                sleep 10
+                echo "Rate limit? Retrying in 60s (attempt $attempt/3)..."
+                sleep 60
               done
               if [ $((i + BATCH_SIZE)) -lt ${#files[@]} ]; then
-                echo "Uploaded batch $((i/BATCH_SIZE + 1)); waiting 2s..."
-                sleep 2
+                echo "Uploaded batch $((i/BATCH_SIZE + 1)); waiting 5s..."
+                sleep 5
               fi
             done
           else
