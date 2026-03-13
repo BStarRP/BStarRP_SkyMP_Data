@@ -125,7 +125,7 @@ function buildUploadListCopies() {
         needLfsPull.push(pathEntry);
         continue;
       }
-      list.push({ src, dest: path.join(assetsDir, assetName) });
+      list.push({ src, dest: path.join(assetsDir, assetName), expectedSize });
       break;
     }
   }
@@ -167,12 +167,20 @@ if (fs.existsSync(uploadListPath)) {
     const size = typeof entry === 'object' && entry.size != null ? entry.size : fs.statSync(src).size;
     if (size === 0) continue;
     if (isLarge(relative, size)) continue;
-    toCopy.push({ src, dest: path.join(assetsDir, toAssetName(pathEntry)) });
+    toCopy.push({ src, dest: path.join(assetsDir, toAssetName(pathEntry)), expectedSize: size });
   }
 }
 
 (async () => {
   await runWithLimit(toCopy.map(({ src, dest }) => () => fsp.copyFile(src, dest)), 20);
+  for (const { dest, expectedSize } of toCopy) {
+    if (expectedSize == null) continue;
+    const actualSize = fs.statSync(dest).size;
+    if (actualSize !== expectedSize) {
+      console.error('Error: after copy,', dest, 'has wrong size (', actualSize, 'vs expected', expectedSize, '). Corrupted or partial copy.');
+      process.exit(1);
+    }
+  }
   console.log('Prepared', toCopy.length, 'assets in dist-patch/assets (0-byte and large files skipped)');
 })().catch((err) => {
   console.error(err);
