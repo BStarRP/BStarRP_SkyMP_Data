@@ -70,25 +70,15 @@ if (toPull.length === 0) {
 }
 
 console.log('Pulling LFS for', toPull.length, 'asset(s) in upload list that are still pointers');
-const BATCH = 50;
-for (let i = 0; i < toPull.length; i += BATCH) {
-  const batch = toPull.slice(i, i + BATCH);
-  const args = batch.flatMap((p) => ['--include', p]);
-  try {
-    execFileSync('git', ['lfs', 'pull', ...args], { stdio: 'inherit', maxBuffer: 10 * 1024 * 1024 });
-  } catch (e) {
-    console.error('git lfs pull failed for batch:', e.message);
-    process.exit(1);
-  }
-}
-// Some Git LFS versions (e.g. 3.6.1) only fetch on "pull --include" and do not smudge the working tree.
-// Explicit checkout replaces pointer files with real content. Run per-file so every path is applied.
+// Per-file: pull (fetch to .git/lfs) then restore from index to trigger smudge and write real content.
+// "git lfs checkout" can leave pointers in place on some versions; "git checkout -- path" re-applies the smudge filter.
 for (const p of toPull) {
   try {
-    execFileSync('git', ['lfs', 'checkout', p], { stdio: 'pipe', maxBuffer: 10 * 1024 * 1024 });
+    execFileSync('git', ['lfs', 'pull', '--include', p], { stdio: 'pipe', maxBuffer: 50 * 1024 * 1024 });
+    execFileSync('git', ['checkout', 'HEAD', '--', p], { stdio: 'pipe', maxBuffer: 10 * 1024 * 1024 });
   } catch (e) {
-    console.error('git lfs checkout failed for', p, ':', e.message);
+    console.error('git lfs pull / checkout failed for', p, ':', e.message);
     process.exit(1);
   }
 }
-console.log('Ran git lfs checkout for', toPull.length, 'path(s)');
+console.log('Pulled and checked out', toPull.length, 'path(s)');
