@@ -2,8 +2,8 @@
 
 **Summary**
 
-More testing and fixing of the repository, updated crash logger to the right version.
+Incorporated RaceMenu mod for additional features and sliders for testing, if goes well we will work on syncing the additional options.
 
 ## Changes
 
-- Updated Crash Logger
+- Added RaceMenu
