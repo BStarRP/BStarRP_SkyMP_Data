@@ -2,9 +2,8 @@
 
 **Summary**
 
-Full sync support for extened features from RaceMenu.
+Sync not working in previous build, re-adjusted
 
 ## Changes
 
-- Added extended sync support for Face options
-- Added full sync path for Morph Nodes
+- Fixed syncing added debug

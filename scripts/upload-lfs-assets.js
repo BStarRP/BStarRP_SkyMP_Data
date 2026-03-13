@@ -218,7 +218,17 @@ async function run() {
           CopySource: `${BUCKET}/${copySourceKey}`
         })
       );
-      console.log('Copied', destKey, '(unchanged from previous)');
+      const expectedSize = typeof entry === 'object' && entry.size != null ? entry.size : 0;
+      if (expectedSize > 0) {
+        const head = await s3.send(new HeadObjectCommand({ Bucket: BUCKET, Key: destKey }));
+        const copiedSize = head.ContentLength ?? 0;
+        if (copiedSize !== expectedSize) {
+          throw new Error(
+            pathEntry + ': after R2 copy, size is ' + copiedSize + ' (expected ' + expectedSize + '). Previous version may have bad data. Run workflow with "Force re-upload ALL assets" to fix.'
+          );
+        }
+      }
+      console.log('Copied', destKey, '(unchanged from previous, size verified)');
       return 'copied';
     } else if (fs.existsSync(src)) {
       const expectedSize = typeof entry === 'object' && entry.size != null ? entry.size : 0;
