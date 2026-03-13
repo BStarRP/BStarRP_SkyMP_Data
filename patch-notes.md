@@ -2,8 +2,8 @@
 
 **Summary**
 
-Incorporated RaceMenu mod for additional features and sliders for testing, if goes well we will work on syncing the additional options.
+Racial Body Morphs to test with RaceMenu
 
 ## Changes
 
-- Added RaceMenu
+- Added Racial Body Morphs
