@@ -29,6 +29,8 @@ jobs:
       contents: write
     steps:
       - name: Checkout
+        env:
+          GIT_LFS_SKIP_SMUDGE: 1
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
@@ -151,10 +153,60 @@ jobs:
           "
           cat release-notes.md
 
+      - name: Fetch previous release manifest
+        if: steps.version.outputs.previous_tag != '' && steps.version.outputs.previous_tag != 'v0.0.0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          if gh release download "${{ steps.version.outputs.previous_tag }}" --pattern "manifest.json" --dir . --clobber 2>/dev/null; then
+            mv manifest.json prev-manifest.json
+            echo "Fetched previous manifest for ${{ steps.version.outputs.previous_tag }}"
+          else
+            echo "Previous release or manifest not found; will do full LFS pull and upload all assets"
+          fi
+
+      - name: Pull LFS for changed files only
+        run: |
+          if [ ! -f prev-manifest.json ]; then
+            echo "No previous manifest; pulling all LFS objects for current ref"
+            git lfs pull
+          else
+            PREV="${{ steps.version.outputs.previous_tag }}"
+            echo "Pulling LFS only for files changed since $PREV"
+            mapfile -t CHANGED < <(git diff --name-only "$PREV" HEAD -- Data/ 2>/dev/null || true)
+            if [ ${#CHANGED[@]} -eq 0 ]; then
+              echo "No files changed in Data/; no LFS pull needed"
+            else
+              COUNT=0
+              ARGS=()
+              for p in "${CHANGED[@]}"; do
+                [ -f "$p" ] || continue
+                ARGS+=(--include "$p")
+                COUNT=$((COUNT + 1))
+                if [ $((COUNT % 50)) -eq 0 ]; then
+                  git lfs pull "${ARGS[@]}" 2>/dev/null || true
+                  ARGS=()
+                fi
+              done
+              if [ ${#ARGS[@]} -gt 0 ]; then
+                git lfs pull "${ARGS[@]}" 2>/dev/null || true
+              fi
+              echo "Pulled LFS for $COUNT changed path(s)"
+            fi
+          fi
+
       - name: Build patch manifest
         run: |
           npm ci
-          node scripts/build-patch.js Data ${{ steps.version.outputs.version }}
+          PREV_ARG=""
+          if [ -f prev-manifest.json ]; then
+            PREV_ARG="--previous-manifest=prev-manifest.json"
+            if [ -n "${{ steps.version.outputs.previous_tag }}" ]; then
+              echo "${{ steps.version.outputs.previous_tag }}" > prev-tag.txt
+              PREV_ARG="$PREV_ARG --previous-tag=prev-tag.txt"
+            fi
+          fi
+          node scripts/build-patch.js Data ${{ steps.version.outputs.version }} --prefix=Data $PREV_ARG
           echo "Built dist-patch/manifest.json"
 
       - name: Merge off-GitHub assets and patch notes into manifest
@@ -194,22 +246,26 @@ jobs:
             console.log('Merged off-GitHub assets and patch notes into manifest');
           "
 
+      - name: Set manifest URLs and upload list
+        env:
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          PATCH_ASSETS_PUBLIC_URL: ${{ secrets.PATCH_ASSETS_PUBLIC_URL }}
+          PREV_TAG: ${{ steps.version.outputs.previous_tag }}
+        run: |
+          TAG="${{ steps.version.outputs.tag }}"
+          VERSION="${{ steps.version.outputs.version }}"
+          export BASE="https://github.com/${{ github.repository }}/releases/download/${TAG}"
+          export PATCH_ASSETS_PUBLIC_URL="${{ secrets.PATCH_ASSETS_PUBLIC_URL }}"
+          export VERSION
+          export PREV_TAG
+          export GITHUB_REPOSITORY="${{ github.repository }}"
+          node scripts/set-manifest-urls.js
+          echo "Set manifest URLs; assets to upload: $(wc -l < dist-patch/github-assets-to-upload.txt 2>/dev/null || echo 0)"
+
       - name: Prepare per-file assets for incremental download
         run: |
           node scripts/prepare-patch-assets.js Data --prefix=Data
           echo "Prepared $(ls dist-patch/assets 2>/dev/null | wc -l) assets for GitHub"
-
-      - name: Fetch previous release manifest
-        if: steps.version.outputs.version != steps.version.outputs.previous_version && steps.version.outputs.previous_tag != 'v0.0.0'
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          if gh release download "${{ steps.version.outputs.previous_tag }}" --pattern "manifest.json" --dir . --clobber 2>/dev/null; then
-            mv manifest.json prev-manifest.json
-            echo "Fetched previous manifest for ${{ steps.version.outputs.previous_tag }}"
-          else
-            echo "Previous release or manifest not found (e.g. that patch never ran); will upload all large assets to R2 (no copy-from-previous)"
-          fi
 
       - name: Upload large assets to R2
         env:
@@ -262,19 +318,9 @@ jobs:
       - name: Upload per-file assets and manifest.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GITHUB_REPOSITORY: ${{ github.repository }}
-          PATCH_ASSETS_PUBLIC_URL: ${{ secrets.PATCH_ASSETS_PUBLIC_URL }}
-          PREV_TAG: ${{ steps.version.outputs.previous_tag }}
         run: |
           TAG="${{ steps.version.outputs.tag }}"
-          VERSION="${{ steps.version.outputs.version }}"
-          REPO="${{ github.repository }}"
-          export BASE="https://github.com/${REPO}/releases/download/${TAG}"
-          export PATCH_ASSETS_PUBLIC_URL="${{ secrets.PATCH_ASSETS_PUBLIC_URL }}"
-          export VERSION
-          export PREV_TAG
-          # Set manifest URLs and github-assets-to-upload.txt. Points unchanged files to previous release only if that URL returns 200 and Content-Length matches; otherwise uploads fresh copy (handles deleted release or wrong file).
-          node scripts/set-manifest-urls.js
+          # Manifest URLs and github-assets-to-upload.txt already set in earlier step
           # Upload manifest first so patcher can discover incremental mode
           gh release upload "$TAG" dist-patch/manifest.json --clobber
           # Upload only assets listed in github-assets-to-upload.txt (empty list = 0 uploads, all point to previous)

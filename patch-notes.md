@@ -2,7 +2,9 @@
 
 **Summary**
 
-Renamed Racial Body Morphs mod file because its not supported by SkyrimPlatform to have spaces.
+Full sync support for extened features from RaceMenu.
+
 ## Changes
 
-- Updated Racial Body Morph mod
+- Added extended sync support for Face options
+- Added full sync path for Morph Nodes

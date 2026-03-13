@@ -5,6 +5,10 @@
  * (e.g. Data/Platform/plugins/MpClientPlugin.dll → Data_Platform_plugins_MpClientPlugin.dll),
  * matching the filenames in the manifest URLs for incremental downloads.
  *
+ * When dist-patch/github-assets-to-upload.txt exists (after set-manifest-urls), only copies
+ * those assets (new/changed); unchanged files are not needed on disk since they point to
+ * the previous release. This allows sparse LFS checkout to only have changed files present.
+ *
  * Usage:
  *   node scripts/prepare-patch-assets.js Data [--prefix=Data]
  */
@@ -25,6 +29,7 @@ if (!patchDir) {
 const absPatchDir = path.resolve(process.cwd(), patchDir);
 const manifestPath = path.join(process.cwd(), 'dist-patch', 'manifest.json');
 const assetsDir = path.join(process.cwd(), 'dist-patch', 'assets');
+const uploadListPath = path.join(process.cwd(), 'dist-patch', 'github-assets-to-upload.txt');
 
 if (!fs.existsSync(manifestPath)) {
   console.error('Error: dist-patch/manifest.json not found. Run build-patch.js first.');
@@ -76,20 +81,47 @@ const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 const files = manifest.files || [];
 if (!fs.existsSync(assetsDir)) fs.mkdirSync(assetsDir, { recursive: true });
 
-const toCopy = [];
+const pathToAssetName = new Map();
 for (const entry of files) {
   const pathEntry = typeof entry === 'string' ? entry : entry.path;
-  if (!pathEntry.startsWith(prefix + '/')) continue;
-  const relative = pathEntry.slice(prefix.length + 1).replace(/\//g, path.sep);
-  const src = path.join(absPatchDir, relative);
-  if (!fs.existsSync(src)) {
-    console.error('Error: missing file', src);
-    process.exit(1);
+  if (pathEntry) pathToAssetName.set(pathEntry, toAssetName(pathEntry));
+}
+
+let toCopy = [];
+if (fs.existsSync(uploadListPath)) {
+  const uploadList = fs.readFileSync(uploadListPath, 'utf8').split(/\r?\n/).map((s) => s.trim()).filter(Boolean);
+  for (const assetName of uploadList) {
+    for (const [pathEntry, name] of pathToAssetName) {
+      if (name !== assetName) continue;
+      if (!pathEntry.startsWith(prefix + '/')) continue;
+      const relative = pathEntry.slice(prefix.length + 1).replace(/\//g, path.sep);
+      const src = path.join(absPatchDir, relative);
+      if (!fs.existsSync(src)) {
+        console.error('Error: missing file (upload list)', src);
+        process.exit(1);
+      }
+      toCopy.push({ src, dest: path.join(assetsDir, assetName) });
+      break;
+    }
   }
-  const size = typeof entry === 'object' && entry.size != null ? entry.size : fs.statSync(src).size;
-  if (size === 0) continue;
-  if (isLarge(relative, size)) continue;
-  toCopy.push({ src, dest: path.join(assetsDir, toAssetName(pathEntry)) });
+  if (uploadList.length > 0) {
+    console.log('Preparing only', toCopy.length, 'assets from upload list (sparse mode)');
+  }
+} else {
+  for (const entry of files) {
+    const pathEntry = typeof entry === 'string' ? entry : entry.path;
+    if (!pathEntry.startsWith(prefix + '/')) continue;
+    const relative = pathEntry.slice(prefix.length + 1).replace(/\//g, path.sep);
+    const src = path.join(absPatchDir, relative);
+    if (!fs.existsSync(src)) {
+      console.error('Error: missing file', src);
+      process.exit(1);
+    }
+    const size = typeof entry === 'object' && entry.size != null ? entry.size : fs.statSync(src).size;
+    if (size === 0) continue;
+    if (isLarge(relative, size)) continue;
+    toCopy.push({ src, dest: path.join(assetsDir, toAssetName(pathEntry)) });
+  }
 }
 
 (async () => {
