@@ -29,12 +29,15 @@ jobs:
       contents: write
     steps:
       - name: Checkout
-        env:
-          GIT_LFS_SKIP_SMUDGE: 1
         uses: actions/checkout@v5
         with:
           fetch-depth: 0
-          lfs: true
+          lfs: false
+        # lfs: false = no "git lfs fetch" at checkout, so no LFS bandwidth here.
+        # We pull only changed files in "Pull LFS for changed files only" below.
+
+      - name: Setup Git LFS (no fetch yet)
+        run: git lfs install --local
 
       - name: Setup Node
         uses: actions/setup-node@v5
@@ -261,6 +264,10 @@ jobs:
           export GITHUB_REPOSITORY="${{ github.repository }}"
           node scripts/set-manifest-urls.js
           echo "Set manifest URLs; assets to upload: $(wc -l < dist-patch/github-assets-to-upload.txt 2>/dev/null || echo 0)"
+
+      - name: Pull LFS for assets to upload (if still pointers)
+        run: node scripts/pull-lfs-for-upload-list.js
+        # When previous release had different/missing assets, upload list is large; we only pull those LFS files here (no full fetch at checkout).
 
       - name: Prepare per-file assets for incremental download
         run: |

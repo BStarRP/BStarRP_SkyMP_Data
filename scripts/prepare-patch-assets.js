@@ -62,6 +62,18 @@ function toAssetName(pathEntry) {
     .replace(/_+/g, '_')
     .replace(/^_|_$/g, '');
 }
+const LFS_POINTER_HEADER = 'version https://git-lfs.github.com/spec/v1';
+function isLfsPointer(filePath) {
+  try {
+    const buf = Buffer.allocUnsafe(256);
+    const fd = fs.openSync(filePath, 'r');
+    const n = fs.readSync(fd, buf, 0, 256, 0);
+    fs.closeSync(fd);
+    return buf.slice(0, n).toString('utf8').includes(LFS_POINTER_HEADER);
+  } catch (_) {
+    return false;
+  }
+}
 
 /** Run up to `limit` async tasks at a time. */
 async function runWithLimit(tasks, limit = 20) {
@@ -82,9 +94,13 @@ const files = manifest.files || [];
 if (!fs.existsSync(assetsDir)) fs.mkdirSync(assetsDir, { recursive: true });
 
 const pathToAssetName = new Map();
+const pathToEntry = new Map();
 for (const entry of files) {
   const pathEntry = typeof entry === 'string' ? entry : entry.path;
-  if (pathEntry) pathToAssetName.set(pathEntry, toAssetName(pathEntry));
+  if (pathEntry) {
+    pathToAssetName.set(pathEntry, toAssetName(pathEntry));
+    pathToEntry.set(pathEntry, entry);
+  }
 }
 
 let toCopy = [];
@@ -98,6 +114,17 @@ if (fs.existsSync(uploadListPath)) {
       const src = path.join(absPatchDir, relative);
       if (!fs.existsSync(src)) {
         console.error('Error: missing file (upload list)', src);
+        process.exit(1);
+      }
+      const entry = pathToEntry.get(pathEntry);
+      const expectedSize = typeof entry === 'object' && entry.size != null ? entry.size : fs.statSync(src).size;
+      const actualSize = fs.statSync(src).size;
+      if (actualSize !== expectedSize) {
+        console.error('Error:', pathEntry, 'has wrong size (', actualSize, 'vs expected', expectedSize, '). Likely still an LFS pointer. Run pull-lfs-for-upload-list or fix sparse LFS pull.');
+        process.exit(1);
+      }
+      if (isLfsPointer(src)) {
+        console.error('Error:', pathEntry, 'is still an LFS pointer (size', actualSize, '). Pull LFS for this file before preparing assets.');
         process.exit(1);
       }
       toCopy.push({ src, dest: path.join(assetsDir, assetName) });
