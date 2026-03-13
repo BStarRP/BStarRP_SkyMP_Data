@@ -2,7 +2,7 @@
  * Uploads large patch assets to Cloudflare R2.
  * - If previous manifest + previous version are provided: copies unchanged files (same path+hash)
  *   from patches/<prevVersion>/ to patches/<version>/; uploads only new/changed from Data/.
- *   Then deletes the previous version prefix to save space.
+ *   Deletes patch folders older than the 5 most recent (keeps last 5 patch versions).
  * - Off-GitHub assets (in manifest but not in Data/): copied from previous if same hash, else skipped
  *   (must be uploaded once via manual script or prior run).
  *
@@ -126,6 +126,24 @@ const largeFiles = (manifest.files || []).filter((entry) => {
   return isLarge(relative, size);
 });
 
+/** Parse "X.Y.Z" or "X.Y" to [major, minor, patch] for comparison. */
+function parseVersion(v) {
+  const parts = String(v).split('.').map((n) => parseInt(n, 10) || 0);
+  return [parts[0] ?? 0, parts[1] ?? 0, parts[2] ?? 0];
+}
+
+/** Compare two version strings; returns positive if a > b, negative if a < b, 0 if equal. */
+function compareVersions(a, b) {
+  const va = parseVersion(a);
+  const vb = parseVersion(b);
+  for (let i = 0; i < 3; i++) {
+    if (va[i] !== vb[i]) return va[i] - vb[i];
+  }
+  return 0;
+}
+
+const KEEP_PATCH_VERSIONS = 5;
+
 /** Run async tasks with a concurrency limit. */
 async function runWithLimit(tasks, limit = 10) {
   const results = [];
@@ -209,30 +227,60 @@ async function run() {
 
   console.log('R2: copied', copied, ', uploaded', uploaded, 'large assets');
 
-  if (newVersion && PREVIOUS_VERSION) {
-    let continuationToken = undefined;
-    let deletedCount = 0;
-    do {
-      const list = await s3.send(
-        new ListObjectsV2Command({
-          Bucket: BUCKET,
-          Prefix: `patches/${PREVIOUS_VERSION}/`,
-          ContinuationToken: continuationToken
-        })
-      );
-      const keys = (list.Contents || []).map((o) => ({ Key: o.Key }));
-      if (keys.length > 0) {
-        await s3.send(
-          new DeleteObjectsCommand({
+  // List all patch version prefixes (patches/X.Y.Z/) and delete any older than the 5 most recent
+  let prefixToken = undefined;
+  const versionPrefixes = [];
+  do {
+    const list = await s3.send(
+      new ListObjectsV2Command({
+        Bucket: BUCKET,
+        Prefix: 'patches/',
+        Delimiter: '/',
+        ContinuationToken: prefixToken
+      })
+    );
+    const prefixes = list.CommonPrefixes || [];
+    for (const p of prefixes) {
+      const prefix = p.Prefix || '';
+      const match = prefix.match(/^patches\/([^/]+)\/$/);
+      if (match) versionPrefixes.push(match[1]);
+    }
+    prefixToken = list.IsTruncated ? list.NextContinuationToken : undefined;
+  } while (prefixToken);
+
+  versionPrefixes.sort((a, b) => -compareVersions(a, b)); // newest first
+  const toDelete = versionPrefixes.slice(KEEP_PATCH_VERSIONS);
+  if (toDelete.length === 0) {
+    console.log('R2: no patch folders older than the last ' + KEEP_PATCH_VERSIONS + '; nothing to delete');
+  } else {
+    let totalDeleted = 0;
+    for (const ver of toDelete) {
+      let continuationToken = undefined;
+      let deletedCount = 0;
+      do {
+        const list = await s3.send(
+          new ListObjectsV2Command({
             Bucket: BUCKET,
-            Delete: { Objects: keys }
+            Prefix: `patches/${ver}/`,
+            ContinuationToken: continuationToken
           })
         );
-        deletedCount += keys.length;
-      }
-      continuationToken = list.IsTruncated ? list.NextContinuationToken : undefined;
-    } while (continuationToken);
-    console.log('Deleted previous patch folder patches/' + PREVIOUS_VERSION + '/ (' + deletedCount + ' objects)');
+        const keys = (list.Contents || []).map((o) => ({ Key: o.Key }));
+        if (keys.length > 0) {
+          await s3.send(
+            new DeleteObjectsCommand({
+              Bucket: BUCKET,
+              Delete: { Objects: keys }
+            })
+          );
+          deletedCount += keys.length;
+        }
+        continuationToken = list.IsTruncated ? list.NextContinuationToken : undefined;
+      } while (continuationToken);
+      totalDeleted += deletedCount;
+      console.log('Deleted patches/' + ver + '/ (' + deletedCount + ' objects)');
+    }
+    console.log('R2: deleted ' + totalDeleted + ' objects from ' + toDelete.length + ' old patch folder(s) (kept last ' + KEEP_PATCH_VERSIONS + ' versions)');
   }
 }
 
