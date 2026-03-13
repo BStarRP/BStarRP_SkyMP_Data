@@ -4,7 +4,7 @@
 #
 # Manual run (Actions → "Auto release on patch change" → Run workflow):
 # - No version override: updates the *latest* release with manifest + assets (no version bump).
-# - With "Create release version" set (e.g. 0.22.0): creates that release and sets it as latest (use when version went backwards).
+# - With "Create release version" set (e.g. 0.22.0): creates that release (or updates existing) and sets it as latest. Use to fix out-of-wack versions or re-upload after failed runs.
 
 name: Auto release on patch change
 
@@ -239,20 +239,25 @@ jobs:
             attempt=$((attempt + 1))
           done
 
-      - name: Create release
+      - name: Create or update release
         if: (github.event_name != 'workflow_dispatch' || (github.event_name == 'workflow_dispatch' && inputs.create_release_version != '')) && steps.version.outputs.version != steps.version.outputs.previous_version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           TAG="${{ steps.version.outputs.tag }}"
           VERSION="${{ steps.version.outputs.version }}"
-          echo "Creating release: $TAG (Patch $VERSION) at commit ${{ github.sha }}"
-          gh release create "$TAG" \
-            --target "${{ github.sha }}" \
-            --title "Patch $VERSION" \
-            --notes-file release-notes.md \
-            --latest
-          echo "Created release $TAG"
+          if gh release view "$TAG" &>/dev/null; then
+            echo "Release $TAG already exists; marking as latest and updating notes (use this to fix out-of-wack versions or re-upload assets)"
+            gh release edit "$TAG" --latest --notes-file release-notes.md --target "${{ github.sha }}"
+          else
+            echo "Creating release: $TAG (Patch $VERSION) at commit ${{ github.sha }}"
+            gh release create "$TAG" \
+              --target "${{ github.sha }}" \
+              --title "Patch $VERSION" \
+              --notes-file release-notes.md \
+              --latest
+          fi
+          echo "Release $TAG is latest"
 
       - name: Upload per-file assets and manifest.json
         env:
@@ -268,52 +273,13 @@ jobs:
           export PATCH_ASSETS_PUBLIC_URL="${{ secrets.PATCH_ASSETS_PUBLIC_URL }}"
           export VERSION
           export PREV_TAG
-          # Set manifest URLs: large → R2; unchanged (same path+hash in prev) → previous release; new/changed → this release. Write list of asset names to upload to this release.
-          node -e "
-            const fs = require('fs');
-            const path = require('path');
-            const m = JSON.parse(fs.readFileSync('dist-patch/manifest.json', 'utf8'));
-            const cfgPath = 'scripts/patch-upload-config.json';
-            const cfg = fs.existsSync(cfgPath) ? JSON.parse(fs.readFileSync(cfgPath, 'utf8')) : { largeExtensions: [], largeFileSizeThresholdBytes: null };
-            const largeExt = Array.isArray(cfg.largeExtensions) ? cfg.largeExtensions : [];
-            const sizeThreshold = cfg.largeFileSizeThresholdBytes ?? null;
-            const isLarge = (p, size) => largeExt.includes(path.extname(p).toLowerCase()) || (sizeThreshold != null && size >= sizeThreshold);
-            const toAssetName = (p) => p.replace(/\//g, '_').replace(/[^a-zA-Z0-9_.-]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
-            const r2Base = process.env.PATCH_ASSETS_PUBLIC_URL ? (process.env.PATCH_ASSETS_PUBLIC_URL + '/patches/' + process.env.VERSION) : null;
-            const prevBase = process.env.PREV_TAG ? ('https://github.com/' + process.env.GITHUB_REPOSITORY + '/releases/download/' + process.env.PREV_TAG) : null;
-            let prevMap = null;
-            if (prevBase && fs.existsSync('prev-manifest.json')) {
-              const prev = JSON.parse(fs.readFileSync('prev-manifest.json', 'utf8'));
-              prevMap = new Map();
-              for (const e of (prev.files || [])) {
-                const p = typeof e === 'string' ? e : e.path;
-                const h = typeof e === 'object' && e.hash != null ? e.hash : null;
-                if (p && h) prevMap.set(p, h);
-              }
-            }
-            const toUpload = [];
-            m.files = m.files.map(f => {
-              const size = (typeof f === 'object' && f.size != null) ? f.size : 0;
-              const pathEntry = typeof f === 'string' ? f : f.path;
-              const hash = typeof f === 'object' && f.hash != null ? f.hash : null;
-              const assetName = toAssetName(pathEntry);
-              let url;
-              if (size === 0) url = undefined;
-              else if (r2Base && isLarge(pathEntry, size)) url = r2Base + '/' + assetName;
-              else if (prevMap && prevMap.get(pathEntry) === hash) url = prevBase + '/' + assetName;
-              else { url = process.env.BASE + '/' + assetName; toUpload.push(assetName); }
-              return typeof f === 'string' ? { path: f, url } : { ...f, url };
-            });
-            if (m.hasOwnProperty('zipUrl')) delete m.zipUrl;
-            fs.writeFileSync('dist-patch/manifest.json', JSON.stringify(m, null, 2), 'utf8');
-            fs.writeFileSync('dist-patch/github-assets-to-upload.txt', toUpload.join('\n') + (toUpload.length ? '\n' : ''), 'utf8');
-            console.log('GitHub: will upload ' + toUpload.length + ' new/changed assets (unchanged point to previous release)');
-          "
+          # Set manifest URLs and github-assets-to-upload.txt. Points unchanged files to previous release only if that URL returns 200 and Content-Length matches; otherwise uploads fresh copy (handles deleted release or wrong file).
+          node scripts/set-manifest-urls.js
           # Upload manifest first so patcher can discover incremental mode
           gh release upload "$TAG" dist-patch/manifest.json --clobber
-          # Upload only new/changed non-large assets to this release (unchanged files stay on previous release)
+          # Upload only assets listed in github-assets-to-upload.txt (empty list = 0 uploads, all point to previous)
           files=()
-          if [ -f dist-patch/github-assets-to-upload.txt ] && [ -s dist-patch/github-assets-to-upload.txt ]; then
+          if [ -f dist-patch/github-assets-to-upload.txt ]; then
             while IFS= read -r name; do
               [ -n "$name" ] && [ -f "dist-patch/assets/$name" ] && files+=("dist-patch/assets/$name")
             done < dist-patch/github-assets-to-upload.txt
@@ -341,5 +307,7 @@ jobs:
                 sleep 2
               fi
             done
+          else
+            echo "No assets to upload (unchanged point to previous release — copying)."
           fi
           echo "Uploaded manifest.json and ${#files[@]} per-file assets to GitHub (large assets on R2)"
