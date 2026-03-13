@@ -2,8 +2,8 @@
 
 **Summary**
 
-Revert the .esl Load test, re-implement horse riding test.
+More testing and fixing of the repository, updated crash logger to the right version.
 
 ## Changes
 
-- Reverted client code, rebuilt
+- Updated Crash Logger
