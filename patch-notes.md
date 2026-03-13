@@ -2,8 +2,7 @@
 
 **Summary**
 
-Racial Body Morphs to test with RaceMenu
-
+Renamed Racial Body Morphs mod file because its not supported by SkyrimPlatform to have spaces.
 ## Changes
 
-- Added Racial Body Morphs
+- Updated Racial Body Morph mod
