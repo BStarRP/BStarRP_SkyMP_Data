@@ -2,8 +2,8 @@
 
 **Summary**
 
-This release adds extensive crash logging for debuging and fixing.
+Revert the .esl Load test, re-implement horse riding test.
 
 ## Changes
 
-- Added Crash Logger
+- Reverted client code, rebuilt
