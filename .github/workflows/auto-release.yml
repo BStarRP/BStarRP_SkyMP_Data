@@ -203,6 +203,13 @@ jobs:
             fi
           fi
 
+      - name: Pull all LFS and smudge Data/ (when force re-upload all)
+        if: github.event.inputs.force_upload_all_small_assets == 'true'
+        run: |
+          echo "Force re-upload: pulling all LFS and smudging so manifest + R2 see real file sizes."
+          git lfs pull
+          git checkout HEAD -- Data/
+
       - name: Build patch manifest
         run: |
           npm ci
@@ -280,14 +287,6 @@ jobs:
         run: |
           node scripts/prepare-patch-assets.js Data --prefix=Data
           echo "Prepared $(ls dist-patch/assets 2>/dev/null | wc -l) assets for GitHub"
-
-      - name: Pull all LFS for R2 (when force re-upload all)
-        if: github.event.inputs.force_upload_all_small_assets == 'true'
-        run: |
-          echo "Force re-upload: pulling all LFS so R2 assets (LFS + oversized) are present."
-          git lfs pull
-          echo "Smudging working tree so Data/ has real files (not pointers) before R2 upload."
-          git checkout HEAD -- Data/
 
       - name: Upload R2 assets (LFS + oversized)
         env:
