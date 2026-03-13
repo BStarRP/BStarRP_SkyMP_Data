@@ -46,10 +46,13 @@ jobs:
         run: |
           set -e
           LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
-          LOG=$(git log "$LATEST_TAG..HEAD" --format="%s%n%b" -- Data/ || true)
+          LOG=$(git log "$LATEST_TAG..HEAD" --format="%s%n%b" || true)
           BUMP=patch
+          # chore: → no bump (rebuild current version only)
+          if echo "$LOG" | grep -qE '^chore(\([^)]*\))?:'; then
+            BUMP=none
           # BREAKING CHANGE in body, or type! in subject (e.g. feat!:) → major
-          if echo "$LOG" | grep -qi 'BREAKING CHANGE'; then
+          elif echo "$LOG" | grep -qi 'BREAKING CHANGE'; then
             BUMP=major
           elif echo "$LOG" | grep -qE '^[a-z]+!.*:'; then
             BUMP=major
@@ -82,20 +85,26 @@ jobs:
               echo "tag=$LATEST" >> $GITHUB_OUTPUT
             fi
           else
-            MAJOR=$(echo "$VERSION" | cut -d. -f1)
-            MINOR=$(echo "$VERSION" | cut -d. -f2)
-            PATCH=$(echo "$VERSION" | cut -d. -f3)
-            [[ -z "$PATCH" ]] && PATCH=0
-            case "${{ steps.bump.outputs.bump }}" in
-              major) MAJOR=$((MAJOR + 1)); MINOR=0; PATCH=0 ;;
-              minor) MINOR=$((MINOR + 1)); PATCH=0 ;;
-              patch) PATCH=$((PATCH + 1)) ;;
-              *) PATCH=$((PATCH + 1)) ;;
-            esac
-            NEW_VERSION="$MAJOR.$MINOR.$PATCH"
-            echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
-            echo "tag=v$NEW_VERSION" >> $GITHUB_OUTPUT
-            echo "New version: $NEW_VERSION (tag v$NEW_VERSION)"
+            if [ "${{ steps.bump.outputs.bump }}" = "none" ]; then
+              echo "Chore: no version bump, rebuilding current release $VERSION (tag $LATEST)"
+              echo "version=$VERSION" >> $GITHUB_OUTPUT
+              echo "tag=$LATEST" >> $GITHUB_OUTPUT
+            else
+              MAJOR=$(echo "$VERSION" | cut -d. -f1)
+              MINOR=$(echo "$VERSION" | cut -d. -f2)
+              PATCH=$(echo "$VERSION" | cut -d. -f3)
+              [[ -z "$PATCH" ]] && PATCH=0
+              case "${{ steps.bump.outputs.bump }}" in
+                major) MAJOR=$((MAJOR + 1)); MINOR=0; PATCH=0 ;;
+                minor) MINOR=$((MINOR + 1)); PATCH=0 ;;
+                patch) PATCH=$((PATCH + 1)) ;;
+                *) PATCH=$((PATCH + 1)) ;;
+              esac
+              NEW_VERSION="$MAJOR.$MINOR.$PATCH"
+              echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
+              echo "tag=v$NEW_VERSION" >> $GITHUB_OUTPUT
+              echo "New version: $NEW_VERSION (tag v$NEW_VERSION)"
+            fi
           fi
 
       - name: Prepare patch notes from patch-notes.md
@@ -231,7 +240,7 @@ jobs:
           done
 
       - name: Create release
-        if: github.event_name != 'workflow_dispatch' || (github.event_name == 'workflow_dispatch' && inputs.create_release_version != '')
+        if: (github.event_name != 'workflow_dispatch' || (github.event_name == 'workflow_dispatch' && inputs.create_release_version != '')) && steps.version.outputs.version != steps.version.outputs.previous_version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -250,6 +259,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           PATCH_ASSETS_PUBLIC_URL: ${{ secrets.PATCH_ASSETS_PUBLIC_URL }}
+          PREV_TAG: ${{ steps.version.outputs.previous_tag }}
         run: |
           TAG="${{ steps.version.outputs.tag }}"
           VERSION="${{ steps.version.outputs.version }}"
@@ -257,7 +267,8 @@ jobs:
           export BASE="https://github.com/${REPO}/releases/download/${TAG}"
           export PATCH_ASSETS_PUBLIC_URL="${{ secrets.PATCH_ASSETS_PUBLIC_URL }}"
           export VERSION
-          # Add url to manifest: large files → R2, others → GitHub. 0-byte files get no url. No zipUrl.
+          export PREV_TAG
+          # Set manifest URLs: large → R2; unchanged (same path+hash in prev) → previous release; new/changed → this release. Write list of asset names to upload to this release.
           node -e "
             const fs = require('fs');
             const path = require('path');
@@ -269,46 +280,66 @@ jobs:
             const isLarge = (p, size) => largeExt.includes(path.extname(p).toLowerCase()) || (sizeThreshold != null && size >= sizeThreshold);
             const toAssetName = (p) => p.replace(/\//g, '_').replace(/[^a-zA-Z0-9_.-]/g, '_').replace(/_+/g, '_').replace(/^_|_$/g, '');
             const r2Base = process.env.PATCH_ASSETS_PUBLIC_URL ? (process.env.PATCH_ASSETS_PUBLIC_URL + '/patches/' + process.env.VERSION) : null;
+            const prevBase = process.env.PREV_TAG ? ('https://github.com/' + process.env.GITHUB_REPOSITORY + '/releases/download/' + process.env.PREV_TAG) : null;
+            let prevMap = null;
+            if (prevBase && fs.existsSync('prev-manifest.json')) {
+              const prev = JSON.parse(fs.readFileSync('prev-manifest.json', 'utf8'));
+              prevMap = new Map();
+              for (const e of (prev.files || [])) {
+                const p = typeof e === 'string' ? e : e.path;
+                const h = typeof e === 'object' && e.hash != null ? e.hash : null;
+                if (p && h) prevMap.set(p, h);
+              }
+            }
+            const toUpload = [];
             m.files = m.files.map(f => {
               const size = (typeof f === 'object' && f.size != null) ? f.size : 0;
               const pathEntry = typeof f === 'string' ? f : f.path;
-              const url = size === 0 ? undefined : (r2Base && isLarge(pathEntry, size) ? r2Base + '/' + toAssetName(pathEntry) : process.env.BASE + '/' + toAssetName(pathEntry));
+              const hash = typeof f === 'object' && f.hash != null ? f.hash : null;
+              const assetName = toAssetName(pathEntry);
+              let url;
+              if (size === 0) url = undefined;
+              else if (r2Base && isLarge(pathEntry, size)) url = r2Base + '/' + assetName;
+              else if (prevMap && prevMap.get(pathEntry) === hash) url = prevBase + '/' + assetName;
+              else { url = process.env.BASE + '/' + assetName; toUpload.push(assetName); }
               return typeof f === 'string' ? { path: f, url } : { ...f, url };
             });
             if (m.hasOwnProperty('zipUrl')) delete m.zipUrl;
             fs.writeFileSync('dist-patch/manifest.json', JSON.stringify(m, null, 2), 'utf8');
+            fs.writeFileSync('dist-patch/github-assets-to-upload.txt', toUpload.join('\n') + (toUpload.length ? '\n' : ''), 'utf8');
+            console.log('GitHub: will upload ' + toUpload.length + ' new/changed assets (unchanged point to previous release)');
           "
           # Upload manifest first so patcher can discover incremental mode
           gh release upload "$TAG" dist-patch/manifest.json --clobber
-          # Upload only non-large per-file assets to GitHub (large ones are on R2)
-          # Use small batches + delay to avoid GitHub secondary rate limit (HTTP 403)
+          # Upload only new/changed non-large assets to this release (unchanged files stay on previous release)
           files=()
-          while IFS= read -r -d '' f; do files+=("$f"); done < <(find dist-patch/assets -type f -print0 2>/dev/null || true)
+          if [ -f dist-patch/github-assets-to-upload.txt ] && [ -s dist-patch/github-assets-to-upload.txt ]; then
+            while IFS= read -r name; do
+              [ -n "$name" ] && [ -f "dist-patch/assets/$name" ] && files+=("dist-patch/assets/$name")
+            done < dist-patch/github-assets-to-upload.txt
+          else
+            while IFS= read -r -d '' f; do files+=("$f"); done < <(find dist-patch/assets -type f -print0 2>/dev/null || true)
+          fi
           if [ "${#files[@]}" -gt 0 ]; then
-            BATCH_SIZE=15
+            echo "Uploading ${#files[@]} assets to GitHub..."
+            BATCH_SIZE=50
             for ((i=0; i<${#files[@]}; i+=BATCH_SIZE)); do
               batch=("${files[@]:i:BATCH_SIZE}")
-              gh release upload "$TAG" "${batch[@]}" --clobber
+              for attempt in 1 2 3; do
+                if gh release upload "$TAG" "${batch[@]}" --clobber; then
+                  break
+                fi
+                if [ "$attempt" -eq 3 ]; then
+                  echo "Batch upload failed after 3 attempts"
+                  exit 1
+                fi
+                echo "Rate limit? Retrying in 10s (attempt $attempt/3)..."
+                sleep 10
+              done
               if [ $((i + BATCH_SIZE)) -lt ${#files[@]} ]; then
-                echo "Uploaded batch $((i/BATCH_SIZE + 1)); waiting 5s to avoid rate limit..."
-                sleep 5
+                echo "Uploaded batch $((i/BATCH_SIZE + 1)); waiting 2s..."
+                sleep 2
               fi
             done
-          fi
-          # Verify: GitHub asset count = manifest entries that are Data/, size>0, and NOT large
-          expected=$(node -e "
-            const fs = require('fs');
-            const path = require('path');
-            const m = require('./dist-patch/manifest.json');
-            const cfg = fs.existsSync('scripts/patch-upload-config.json') ? JSON.parse(fs.readFileSync('scripts/patch-upload-config.json','utf8')) : { largeExtensions: [], largeFileSizeThresholdBytes: null };
-            const largeExt = Array.isArray(cfg.largeExtensions) ? cfg.largeExtensions : [];
-            const sizeThreshold = cfg.largeFileSizeThresholdBytes ?? null;
-            const isLarge = (p, size) => largeExt.includes(path.extname(p).toLowerCase()) || (sizeThreshold != null && size >= sizeThreshold);
-            const d = 'Data/';
-            console.log(m.files.filter(f => { const p = typeof f === 'string' ? f : f.path; const s = typeof f === 'object' && f.size != null ? f.size : 1; return p.startsWith(d) && s > 0 && !isLarge(p, s); }).length);
-          ")
-          if [ "${#files[@]}" -ne "$expected" ]; then
-            echo "ERROR: expected $expected non-large Data/ assets for GitHub but prepared ${#files[@]}"
-            exit 1
           fi
           echo "Uploaded manifest.json and ${#files[@]} per-file assets to GitHub (large assets on R2)"
