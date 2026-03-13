@@ -16,6 +16,7 @@
 const fs = require('fs');
 const path = require('path');
 const fsp = fs.promises;
+const { execSync } = require('child_process');
 
 const patchDir = process.argv[2];
 const prefixArg = process.argv.find((a) => a.startsWith('--prefix='));
@@ -103,8 +104,9 @@ for (const entry of files) {
   }
 }
 
-let toCopy = [];
-if (fs.existsSync(uploadListPath)) {
+function buildUploadListCopies() {
+  const list = [];
+  const needLfsPull = [];
   const uploadList = fs.readFileSync(uploadListPath, 'utf8').split(/\r?\n/).map((s) => s.trim()).filter(Boolean);
   for (const assetName of uploadList) {
     for (const [pathEntry, name] of pathToAssetName) {
@@ -119,18 +121,36 @@ if (fs.existsSync(uploadListPath)) {
       const entry = pathToEntry.get(pathEntry);
       const expectedSize = typeof entry === 'object' && entry.size != null ? entry.size : fs.statSync(src).size;
       const actualSize = fs.statSync(src).size;
-      if (actualSize !== expectedSize) {
-        console.error('Error:', pathEntry, 'has wrong size (', actualSize, 'vs expected', expectedSize, '). Likely still an LFS pointer. Run pull-lfs-for-upload-list or fix sparse LFS pull.');
-        process.exit(1);
+      if (actualSize !== expectedSize || isLfsPointer(src)) {
+        needLfsPull.push(pathEntry);
+        continue;
       }
-      if (isLfsPointer(src)) {
-        console.error('Error:', pathEntry, 'is still an LFS pointer (size', actualSize, '). Pull LFS for this file before preparing assets.');
-        process.exit(1);
-      }
-      toCopy.push({ src, dest: path.join(assetsDir, assetName) });
+      list.push({ src, dest: path.join(assetsDir, assetName) });
       break;
     }
   }
+  return { toCopy: list, needLfsPull };
+}
+
+let toCopy = [];
+if (fs.existsSync(uploadListPath)) {
+  let result = buildUploadListCopies();
+  if (result.needLfsPull.length > 0) {
+    console.log(result.needLfsPull.length, 'file(s) still LFS pointers; running pull-lfs-for-upload-list.js...');
+    try {
+      execSync('node scripts/pull-lfs-for-upload-list.js', { stdio: 'inherit', cwd: process.cwd() });
+    } catch (e) {
+      console.error('pull-lfs-for-upload-list failed:', e.message);
+      process.exit(1);
+    }
+    result = buildUploadListCopies();
+    if (result.needLfsPull.length > 0) {
+      console.error('Error: after LFS pull, still pointer or wrong size:', result.needLfsPull.slice(0, 5).join(', '), result.needLfsPull.length > 5 ? '...' : '');
+      process.exit(1);
+    }
+  }
+  toCopy = result.toCopy;
+  const uploadList = fs.readFileSync(uploadListPath, 'utf8').split(/\r?\n/).map((s) => s.trim()).filter(Boolean);
   if (uploadList.length > 0) {
     console.log('Preparing only', toCopy.length, 'assets from upload list (sparse mode)');
   }

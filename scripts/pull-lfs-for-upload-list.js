@@ -82,13 +82,12 @@ for (let i = 0; i < toPull.length; i += BATCH) {
   }
 }
 // Some Git LFS versions (e.g. 3.6.1) only fetch on "pull --include" and do not smudge the working tree.
-// Explicit checkout replaces pointer files with real content.
-for (let i = 0; i < toPull.length; i += BATCH) {
-  const batch = toPull.slice(i, i + BATCH);
+// Explicit checkout replaces pointer files with real content. Run per-file so every path is applied.
+for (const p of toPull) {
   try {
-    execFileSync('git', ['lfs', 'checkout', ...batch], { stdio: 'inherit', maxBuffer: 10 * 1024 * 1024 });
+    execFileSync('git', ['lfs', 'checkout', p], { stdio: 'pipe', maxBuffer: 10 * 1024 * 1024 });
   } catch (e) {
-    console.error('git lfs checkout failed for batch:', e.message);
+    console.error('git lfs checkout failed for', p, ':', e.message);
     process.exit(1);
   }
 }
