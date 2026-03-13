@@ -221,6 +221,15 @@ async function run() {
       console.log('Copied', destKey, '(unchanged from previous)');
       return 'copied';
     } else if (fs.existsSync(src)) {
+      const expectedSize = typeof entry === 'object' && entry.size != null ? entry.size : 0;
+      if (expectedSize > 0) {
+        const actualSize = fs.statSync(src).size;
+        if (actualSize !== expectedSize) {
+          throw new Error(
+            pathEntry + ': wrong size (' + actualSize + ' vs expected ' + expectedSize + '). Still an LFS pointer? Ensure "Pull all LFS for R2" runs and working tree is smudged (e.g. git checkout HEAD -- Data/).'
+          );
+        }
+      }
       await s3.send(
         new PutObjectCommand({
           Bucket: BUCKET,

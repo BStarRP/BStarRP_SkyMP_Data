@@ -286,6 +286,8 @@ jobs:
         run: |
           echo "Force re-upload: pulling all LFS so R2 assets (LFS + oversized) are present."
           git lfs pull
+          echo "Smudging working tree so Data/ has real files (not pointers) before R2 upload."
+          git checkout HEAD -- Data/
 
       - name: Upload R2 assets (LFS + oversized)
         env:
