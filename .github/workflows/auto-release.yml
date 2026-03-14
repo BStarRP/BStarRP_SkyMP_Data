@@ -338,6 +338,26 @@ jobs:
           node scripts/prepare-patch-assets.js Data --prefix=Data
           echo "Prepared $(ls dist-patch/assets 2>/dev/null | wc -l) assets for GitHub"
 
+      - name: Pull LFS for R2 upload paths only (no pull for copy-from-previous)
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          PREV_ARGS=""
+          if [ -f prev-manifest.json ]; then
+            PREV_ARGS="--previous-manifest=prev-manifest.json --previous-version=${{ steps.version.outputs.previous_version }}"
+          fi
+          mapfile -t R2_UPLOAD_PATHS < <(node scripts/list-r2-upload-paths.js $PREV_ARGS 2>/dev/null || true)
+          if [ ${#R2_UPLOAD_PATHS[@]} -eq 0 ]; then
+            echo "No R2 paths to upload from local (all will be copied from previous)"
+          else
+            echo "Pulling LFS for ${#R2_UPLOAD_PATHS[@]} path(s) that will be uploaded to R2 (not copied):"
+            for p in "${R2_UPLOAD_PATHS[@]}"; do
+              [ -z "$p" ] && continue
+              echo "  $p"
+              git lfs pull --include "$p"
+            done
+          fi
+
       - name: Upload R2 assets (LFS + oversized)
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
