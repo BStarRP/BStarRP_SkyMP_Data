@@ -117,14 +117,12 @@ if (prevManifestPath && fs.existsSync(prevManifestPath)) {
     relativeFiles.map((r) => async () => {
       const pathEntry = `${prefix}/${r}`;
       const fullPath = path.join(absPatchDir, r);
+      // Unchanged files: always reuse previous manifest. We only pull LFS for changed files,
+      // so unchanged LFS files are still pointers on disk; we must not read their size/hash.
       if (prevMap && changedPathEntries && !changedPathEntries.has(pathEntry)) {
         const prevEntry = prevMap.get(pathEntry);
-        if (prevEntry && prevEntry.hash != null && fs.existsSync(fullPath)) {
-          const currentSize = fs.statSync(fullPath).size;
-          if (currentSize === prevEntry.size) {
-            return { path: pathEntry, size: prevEntry.size, hash: prevEntry.hash };
-          }
-          // Size mismatch (e.g. was pointer before, now smudged): use real file
+        if (prevEntry && prevEntry.hash != null) {
+          return { path: pathEntry, size: prevEntry.size, hash: prevEntry.hash };
         }
       }
       const stat = fs.statSync(fullPath);

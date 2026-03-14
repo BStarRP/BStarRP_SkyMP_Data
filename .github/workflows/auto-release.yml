@@ -21,6 +21,10 @@ on:
         description: 'Create new release at this version and set as latest (e.g. 0.22.0). Leave empty to just update current latest.'
         required: false
         type: string
+      use_previous_version_for_assets:
+        description: 'Use this version as "previous" for manifest/R2 copy (e.g. 0.24.5). Use to fix a bad release by re-running and copying from a good one — no full re-upload.'
+        required: false
+        type: string
       force_upload_all_small_assets:
         description: 'Re-upload ALL assets (GitHub + R2); no copy-from-previous. Use once to repair pointer/wrong files.'
         required: false
@@ -81,14 +85,25 @@ jobs:
         run: |
           LATEST=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
           VERSION=${LATEST#v}
-          echo "previous_tag=$LATEST" >> $GITHUB_OUTPUT
-          echo "previous_version=$VERSION" >> $GITHUB_OUTPUT
+          PREV_FOR_ASSETS="${{ github.event.inputs.use_previous_version_for_assets }}"
+          if [ -n "$PREV_FOR_ASSETS" ]; then
+            # Rebuild/fix: use specified version as previous for manifest fetch and R2 copy (e.g. 0.24.5)
+            PREV_TAG="v${PREV_FOR_ASSETS#v}"
+            PREV_VER="${PREV_FOR_ASSETS#v}"
+            echo "previous_tag=$PREV_TAG" >> $GITHUB_OUTPUT
+            echo "previous_version=$PREV_VER" >> $GITHUB_OUTPUT
+            echo "Using $PREV_TAG as previous for assets (rebuild/fix mode)"
+          else
+            PREV_TAG="$LATEST"
+            echo "previous_tag=$LATEST" >> $GITHUB_OUTPUT
+            echo "previous_version=$VERSION" >> $GITHUB_OUTPUT
+          fi
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             OVERRIDE="${{ inputs.create_release_version }}"
             if [ -n "$OVERRIDE" ]; then
-              echo "Manual run with version override: creating release $OVERRIDE (tag v$OVERRIDE), previous was $LATEST"
+              echo "Manual run with version override: creating release $OVERRIDE (tag v${OVERRIDE#v}), previous for assets: $PREV_TAG"
               echo "version=$OVERRIDE" >> $GITHUB_OUTPUT
-              echo "tag=v$OVERRIDE" >> $GITHUB_OUTPUT
+              echo "tag=v${OVERRIDE#v}" >> $GITHUB_OUTPUT
             else
               echo "Manual run: using existing version $VERSION (tag $LATEST)"
               echo "version=$VERSION" >> $GITHUB_OUTPUT
@@ -206,9 +221,22 @@ jobs:
       - name: Pull all LFS and smudge Data/ (when force re-upload all)
         if: github.event.inputs.force_upload_all_small_assets == 'true'
         run: |
-          echo "Force re-upload: pulling all LFS and smudging so manifest + R2 see real file sizes."
+          echo "Force re-upload: pulling all LFS so manifest + R2 see real file sizes."
           git lfs pull
-          git checkout HEAD -- Data/
+          # Do NOT run "git checkout HEAD -- Data/" here: the tree stores LFS pointer blobs,
+          # so checkout would overwrite the real files we just pulled with pointer files.
+          # Verify at least one LFS file is real (not a pointer) so we fail fast
+          MIN_BYTES=1000
+          for f in Data/SKSE/Plugins/*.dll; do
+            [ -f "$f" ] || continue
+            sz=$(stat -c%s "$f" 2>/dev/null || stat -f%z "$f" 2>/dev/null)
+            if [ -n "$sz" ] && [ "$sz" -gt "$MIN_BYTES" ]; then
+              echo "OK: $f size $sz (real content)"
+              exit 0
+            fi
+          done
+          echo "ERROR: LFS pull may have left pointer files (no DLL in Data/SKSE/Plugins > $MIN_BYTES bytes)"
+          exit 1
 
       - name: Build patch manifest
         run: |
