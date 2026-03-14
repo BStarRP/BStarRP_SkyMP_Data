@@ -97,6 +97,20 @@ function toAssetName(pathEntry) {
     .replace(/^_|_$/g, '');
 }
 
+const LFS_POINTER_HEADER = 'version https://git-lfs.github.com/spec/v1';
+function isLfsPointer(filePath) {
+  try {
+    const buf = Buffer.allocUnsafe(256);
+    const fd = fs.openSync(filePath, 'r');
+    const n = fs.readSync(fd, buf, 0, 256, 0);
+    fs.closeSync(fd);
+    const head = buf.slice(0, n).toString('utf8');
+    return head.includes(LFS_POINTER_HEADER) && head.includes('oid sha256:');
+  } catch (_) {
+    return false;
+  }
+}
+
 /** Build map path -> hash from manifest. */
 function manifestPathHashMap(manifest) {
   const map = new Map();
@@ -239,6 +253,11 @@ async function run() {
             pathEntry + ': wrong size (' + actualSize + ' vs expected ' + expectedSize + '). Still an LFS pointer? Ensure "Pull all LFS for R2" runs and working tree is smudged (e.g. git checkout HEAD -- Data/).'
           );
         }
+      }
+      if (isLfsPointer(src)) {
+        throw new Error(
+          pathEntry + ': file is still an LFS pointer; cannot upload to R2. Run the workflow step that pulls LFS for R2-upload paths, or use "Force re-upload ALL assets".'
+        );
       }
       await s3.send(
         new PutObjectCommand({
