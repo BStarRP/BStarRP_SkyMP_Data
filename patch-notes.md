@@ -2,15 +2,12 @@
 
 **Summary**
 
-Rebuild from previous update with a few important added features.
+Small visual, meshes, and performance improvements.
 
 ## Changes
 
-- Added main screen background picture.
-- Added 1st Person Race Height Camera Fix
-- Updated to allow server side script loading
-- Enabled interior, exterior, and Critter Spawns.
-
-## Fixes
-
-- Fixed Skyrim Souls RE not unpausing menus properly.
+- Added High Poly Hair
+- Added Total Character Makeoever
+- Added Skyrim Priority
+- Added Auto Physics Reset
+- Removed First Person Camera Fix (not working)
