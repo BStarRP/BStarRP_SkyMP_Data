@@ -16,6 +16,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 
 const FORCE_UPLOAD_ALL = /^1|true|yes$/i.test(String(process.env.FORCE_UPLOAD_ALL_SMALL_ASSETS || ''));
 const {
@@ -95,6 +96,11 @@ function toAssetName(pathEntry) {
     .replace(/[^a-zA-Z0-9_.-]/g, '_')
     .replace(/_+/g, '_')
     .replace(/^_|_$/g, '');
+}
+
+function sha256File(filePath) {
+  const buf = fs.readFileSync(filePath);
+  return crypto.createHash('sha256').update(buf).digest('hex');
 }
 
 const LFS_POINTER_HEADER = 'version https://git-lfs.github.com/spec/v1';
@@ -245,19 +251,24 @@ async function run() {
       console.log('Copied', destKey, '(unchanged from previous, size verified)');
       return 'copied';
     } else if (fs.existsSync(src)) {
-      const expectedSize = typeof entry === 'object' && entry.size != null ? entry.size : 0;
-      if (expectedSize > 0) {
-        const actualSize = fs.statSync(src).size;
-        if (actualSize !== expectedSize) {
-          throw new Error(
-            pathEntry + ': wrong size (' + actualSize + ' vs expected ' + expectedSize + '). Still an LFS pointer? Ensure "Pull all LFS for R2" runs and working tree is smudged (e.g. git checkout HEAD -- Data/).'
-          );
-        }
-      }
+      const actualSize = fs.statSync(src).size;
+      let expectedSize = typeof entry === 'object' && entry.size != null ? entry.size : 0;
       if (isLfsPointer(src)) {
         throw new Error(
           pathEntry + ': file is still an LFS pointer; cannot upload to R2. Run the workflow step that pulls LFS for R2-upload paths, or use "Force re-upload ALL assets".'
         );
+      }
+      // Manifest may have been built when file was still a pointer (e.g. R2 pull runs after manifest build). Fix manifest from actual file and upload.
+      if (expectedSize > 0 && actualSize !== expectedSize) {
+        if (actualSize < 256) {
+          throw new Error(
+            pathEntry + ': wrong size (' + actualSize + ' vs expected ' + expectedSize + '). File may still be a pointer.'
+          );
+        }
+        const correctHash = sha256File(src);
+        entry.size = actualSize;
+        entry.hash = correctHash;
+        console.log('Fixed manifest size/hash from file:', pathEntry, '(' + expectedSize + ' -> ' + actualSize + ')');
       }
       await s3.send(
         new PutObjectCommand({
@@ -280,6 +291,9 @@ async function run() {
   uploaded = outcomes.filter((o) => o === 'uploaded').length;
 
   console.log('R2: copied', copied, ', uploaded', uploaded, 'assets (LFS + oversized)');
+
+  // Persist manifest in case we fixed any size/hash (file was real on disk after R2 pull but manifest had pointer size)
+  fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2), 'utf8');
 
   // List all patch version prefixes (patches/X.Y.Z/) and delete any older than the 5 most recent
   let prefixToken = undefined;
