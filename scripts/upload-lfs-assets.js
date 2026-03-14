@@ -76,9 +76,12 @@ function getLfsExtensions() {
 
 function loadR2Config() {
   const configPath = path.join(process.cwd(), 'scripts', 'patch-upload-config.json');
-  if (!fs.existsSync(configPath)) return { largeFileSizeThresholdBytes: null };
+  if (!fs.existsSync(configPath)) return { largeFileSizeThresholdBytes: null, allAssetsToR2: false };
   const cfg = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-  return { largeFileSizeThresholdBytes: cfg.largeFileSizeThresholdBytes ?? null };
+  return {
+    largeFileSizeThresholdBytes: cfg.largeFileSizeThresholdBytes ?? null,
+    allAssetsToR2: !!cfg.allAssetsToR2
+  };
 }
 
 /** True if file should be uploaded to R2: LFS-tracked (per .gitattributes) or size >= threshold (e.g. 100MB). */
@@ -153,13 +156,23 @@ if (!prevManifest) {
   console.log('No previous manifest; uploading all R2 assets (no copy-from-previous).');
 }
 
+const r2Base = process.env.PATCH_ASSETS_PUBLIC_URL && VERSION
+  ? (process.env.PATCH_ASSETS_PUBLIC_URL + '/patches/' + VERSION)
+  : null;
+
+const { allAssetsToR2 } = loadR2Config();
+
 const r2Files = (manifest.files || []).filter((entry) => {
   const pathEntry = typeof entry === 'string' ? entry : entry.path;
   if (!pathEntry.startsWith(prefix + '/')) return false;
   const size = typeof entry === 'object' && entry.size != null ? entry.size : 0;
   if (size === 0) return false;
   const relative = pathEntry.slice(prefix.length + 1);
-  return goesToR2(relative, size);
+  if (allAssetsToR2) return true;
+  if (goesToR2(relative, size)) return true;
+  // Include overflow assets (routed to R2 due to GitHub 1000-asset limit)
+  if (r2Base && typeof entry === 'object' && entry.url && entry.url.startsWith(r2Base)) return true;
+  return false;
 });
 
 /** Parse "X.Y.Z" or "X.Y" to [major, minor, patch] for comparison. */

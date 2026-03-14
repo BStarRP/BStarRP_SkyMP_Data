@@ -1,3 +1,5 @@
 {
-  "largeFileSizeThresholdBytes": 104857600
+  "largeFileSizeThresholdBytes": 104857600,
+  "maxGitHubAssetsPerRelease": 1000,
+  "allAssetsToR2": true
 }

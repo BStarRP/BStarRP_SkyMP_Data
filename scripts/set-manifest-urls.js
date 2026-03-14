@@ -41,18 +41,22 @@ function getLfsExtensions() {
   return [...exts];
 }
 
-function loadLargeConfig() {
+function loadConfig() {
   const cfgPath = path.join(process.cwd(), 'scripts', 'patch-upload-config.json');
-  if (!fs.existsSync(cfgPath)) return { largeFileSizeThresholdBytes: null };
+  if (!fs.existsSync(cfgPath)) return { largeFileSizeThresholdBytes: null, maxGitHubAssetsPerRelease: 1000, allAssetsToR2: false };
   const cfg = JSON.parse(fs.readFileSync(cfgPath, 'utf8'));
-  return { largeFileSizeThresholdBytes: cfg.largeFileSizeThresholdBytes ?? null };
+  return {
+    largeFileSizeThresholdBytes: cfg.largeFileSizeThresholdBytes ?? null,
+    maxGitHubAssetsPerRelease: cfg.maxGitHubAssetsPerRelease ?? 1000,
+    allAssetsToR2: !!cfg.allAssetsToR2
+  };
 }
 
 /** True if file should be served from R2 (LFS-tracked per .gitattributes or size >= threshold, e.g. 100MB). */
 function goesToR2(relativePath, size) {
   const ext = path.extname(relativePath).toLowerCase();
   if (getLfsExtensions().includes(ext)) return true;
-  const { largeFileSizeThresholdBytes } = loadLargeConfig();
+  const { largeFileSizeThresholdBytes } = loadConfig();
   if (largeFileSizeThresholdBytes != null && size >= largeFileSizeThresholdBytes) return true;
   return false;
 }
@@ -114,6 +118,7 @@ async function main() {
   }
 
   const toUpload = [];
+  const { allAssetsToR2, maxGitHubAssetsPerRelease } = loadConfig();
   const candidatesForPrev = []; // { pathEntry, size, assetName, index }
 
   m.files = m.files.map((f, index) => {
@@ -125,7 +130,8 @@ async function main() {
     if (size === 0) {
       return typeof f === 'string' ? { path: f, url: undefined } : { ...f, url: undefined };
     }
-    if (r2Base && goesToR2(pathEntry, size)) {
+    // All patch assets on R2: only manifest.json stays on GitHub (no per-file assets)
+    if (r2Base && (allAssetsToR2 || goesToR2(pathEntry, size))) {
       return typeof f === 'string' ? { path: f, url: r2Base + '/' + assetName } : { ...f, url: r2Base + '/' + assetName };
     }
     if (!FORCE_UPLOAD_ALL && prevMap && prevMap.get(pathEntry) === hash) {
@@ -136,7 +142,7 @@ async function main() {
     return typeof f === 'string' ? { path: f, url: BASE + '/' + assetName } : { ...f, url: BASE + '/' + assetName };
   });
 
-  if (candidatesForPrev.length > 0 && prevBase) {
+  if (!allAssetsToR2 && candidatesForPrev.length > 0 && prevBase) {
     const CONCURRENCY = 5;
     const tasks = candidatesForPrev.map((c) => async () => {
       const url = prevBase + '/' + c.assetName;
@@ -159,6 +165,24 @@ async function main() {
     if (fixed > 0) {
       console.log('Previous release: ' + fixed + ' asset(s) missing or wrong size; will upload fresh copy to current release.');
     }
+  }
+
+  // GitHub allows at most 1000 assets per release; route overflow to R2 (only when not allAssetsToR2)
+  if (!allAssetsToR2 && toUpload.length > maxGitHubAssetsPerRelease && r2Base) {
+    const overflow = toUpload.slice(maxGitHubAssetsPerRelease);
+    toUpload.length = maxGitHubAssetsPerRelease;
+    for (const entry of m.files || []) {
+      const pathEntry = typeof entry === 'string' ? entry : entry.path;
+      const assetName = toAssetName(pathEntry);
+      if (overflow.includes(assetName) && entry.url && entry.url.startsWith(BASE)) {
+        entry.url = r2Base + '/' + assetName;
+      }
+    }
+    console.log('GitHub limit: routing ' + overflow.length + ' overflow asset(s) to R2 (max ' + maxGitHubAssetsPerRelease + ' per release)');
+  }
+
+  if (allAssetsToR2) {
+    console.log('All patch assets on R2; GitHub release will have manifest.json only.');
   }
 
   if (m.hasOwnProperty('zipUrl')) delete m.zipUrl;

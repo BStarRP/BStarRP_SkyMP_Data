@@ -38,9 +38,12 @@ function getLfsExtensions() {
 
 function loadR2Config() {
   const configPath = path.join(process.cwd(), 'scripts', 'patch-upload-config.json');
-  if (!fs.existsSync(configPath)) return { largeFileSizeThresholdBytes: null };
+  if (!fs.existsSync(configPath)) return { largeFileSizeThresholdBytes: null, allAssetsToR2: false };
   const cfg = JSON.parse(fs.readFileSync(configPath, 'utf8'));
-  return { largeFileSizeThresholdBytes: cfg.largeFileSizeThresholdBytes ?? null };
+  return {
+    largeFileSizeThresholdBytes: cfg.largeFileSizeThresholdBytes ?? null,
+    allAssetsToR2: !!cfg.allAssetsToR2
+  };
 }
 
 function goesToR2(relativePath, size) {
@@ -62,12 +65,15 @@ if (PREVIOUS_MANIFEST_PATH && fs.existsSync(PREVIOUS_MANIFEST_PATH) && PREVIOUS_
   }
 }
 
+const { allAssetsToR2 } = loadR2Config();
+
 const r2Files = (manifest.files || []).filter((entry) => {
   const pathEntry = typeof entry === 'string' ? entry : entry.path;
   if (!pathEntry.startsWith(prefix + '/')) return false;
   const size = typeof entry === 'object' && entry.size != null ? entry.size : 0;
   if (size === 0) return false;
   const relative = pathEntry.slice(prefix.length + 1);
+  if (allAssetsToR2) return true;
   return goesToR2(relative, size);
 });
 
