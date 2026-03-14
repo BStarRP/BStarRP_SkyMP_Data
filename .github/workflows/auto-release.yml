@@ -188,33 +188,36 @@ jobs:
             echo "Previous release or manifest not found; will do full LFS pull and upload all assets"
           fi
 
-      - name: Pull LFS for changed files only
+      - name: Pull LFS for changed and new files
         run: |
           if [ ! -f prev-manifest.json ]; then
             echo "No previous manifest; pulling all LFS objects for current ref"
             git lfs pull
           else
             PREV="${{ steps.version.outputs.previous_tag }}"
-            echo "Pulling LFS only for files changed since $PREV"
+            echo "Pulling LFS for files changed since $PREV and for new files (not in previous manifest)"
             mapfile -t CHANGED < <(git diff --name-only "$PREV" HEAD -- Data/ 2>/dev/null || true)
-            if [ ${#CHANGED[@]} -eq 0 ]; then
-              echo "No files changed in Data/; no LFS pull needed"
+            mapfile -t NEW < <(node scripts/list-new-lfs-paths.js prev-manifest.json 2>/dev/null || true)
+            ALL=("${CHANGED[@]}" "${NEW[@]}")
+            ALL=($(printf '%s\n' "${ALL[@]}" | sort -u))
+            if [ ${#ALL[@]} -eq 0 ]; then
+              echo "No changed or new files in Data/; no LFS pull needed"
             else
               COUNT=0
               ARGS=()
-              for p in "${CHANGED[@]}"; do
+              for p in "${ALL[@]}"; do
                 [ -f "$p" ] || continue
                 ARGS+=(--include "$p")
                 COUNT=$((COUNT + 1))
                 if [ $((COUNT % 50)) -eq 0 ]; then
-                  git lfs pull "${ARGS[@]}" 2>/dev/null || true
+                  git lfs pull "${ARGS[@]}"
                   ARGS=()
                 fi
               done
               if [ ${#ARGS[@]} -gt 0 ]; then
-                git lfs pull "${ARGS[@]}" 2>/dev/null || true
+                git lfs pull "${ARGS[@]}"
               fi
-              echo "Pulled LFS for $COUNT changed path(s)"
+              echo "Pulled LFS for $COUNT path(s) (changed + new)"
             fi
           fi
 
