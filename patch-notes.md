@@ -2,8 +2,15 @@
 
 **Summary**
 
-Sync not working in previous build, re-adjusted
+Rebuild from previous update with a few important added features.
 
 ## Changes
 
-- Fixed syncing added debug
+- Added main screen background picture.
+- Added 1st Person Race Height Camera Fix
+- Updated to allow server side script loading
+- Enabled interior, exterior, and Critter Spawns.
+
+## Fixes
+
+- Fixed Skyrim Souls RE not unpausing menus properly.
