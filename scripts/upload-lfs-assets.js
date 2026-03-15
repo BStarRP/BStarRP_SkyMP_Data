@@ -3,7 +3,7 @@
  * plus any file >= largeFileSizeThresholdBytes (e.g. 100MB) from patch-upload-config.json.
  * - If previous manifest + previous version are provided: copies unchanged files (same path+hash)
  *   from patches/<prevVersion>/ to patches/<version>/; uploads only new/changed from Data/.
- *   Deletes patch folders older than the 5 most recent (keeps last 5 patch versions).
+ *   Deletes patch folders older than the 3 most recent (keeps last 3 patch versions).
  * - Off-GitHub assets (in manifest but not in Data/): copied from previous if same hash, else skipped
  *   (must be uploaded once via manual script or prior run).
  *
@@ -191,10 +191,10 @@ function compareVersions(a, b) {
   return 0;
 }
 
-const KEEP_PATCH_VERSIONS = 5;
+const KEEP_PATCH_VERSIONS = 3;
 
 /** Run async tasks with a concurrency limit. */
-async function runWithLimit(tasks, limit = 10) {
+  async function runWithLimit(tasks, limit = 16) {
   const results = [];
   let index = 0;
   async function worker() {
@@ -298,7 +298,7 @@ async function run() {
     }
   });
 
-  const concurrency = Math.max(1, parseInt(process.env.R2_CONCURRENCY || '4', 10) || 4);
+  const concurrency = Math.max(1, parseInt(process.env.R2_CONCURRENCY || '12', 10) || 12);
   const outcomes = await runWithLimit(tasks, concurrency);
   copied = outcomes.filter((o) => o === 'copied').length;
   uploaded = outcomes.filter((o) => o === 'uploaded').length;
@@ -308,7 +308,7 @@ async function run() {
   // Persist manifest in case we fixed any size/hash (file was real on disk after R2 pull but manifest had pointer size)
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2), 'utf8');
 
-  // List all patch version prefixes (patches/X.Y.Z/) and delete any older than the 5 most recent
+  // List all patch version prefixes (patches/X.Y.Z/) and delete any older than the 3 most recent
   let prefixToken = undefined;
   const versionPrefixes = [];
   do {
@@ -332,7 +332,7 @@ async function run() {
   versionPrefixes.sort((a, b) => -compareVersions(a, b)); // newest first
   const toDelete = versionPrefixes.slice(KEEP_PATCH_VERSIONS);
   if (toDelete.length === 0) {
-    console.log('R2: no patch folders older than the last ' + KEEP_PATCH_VERSIONS + '; nothing to delete');
+    console.log('R2: no patch folders older than the last ' + KEEP_PATCH_VERSIONS + ' version(s); nothing to delete');
   } else {
     let totalDeleted = 0;
     for (const ver of toDelete) {
@@ -361,7 +361,7 @@ async function run() {
       totalDeleted += deletedCount;
       console.log('Deleted patches/' + ver + '/ (' + deletedCount + ' objects)');
     }
-    console.log('R2: deleted ' + totalDeleted + ' objects from ' + toDelete.length + ' old patch folder(s) (kept last ' + KEEP_PATCH_VERSIONS + ' versions)');
+    console.log('R2: deleted ' + totalDeleted + ' objects from ' + toDelete.length + ' old patch folder(s) (kept last ' + KEEP_PATCH_VERSIONS + ' version(s))');
   }
 }
 

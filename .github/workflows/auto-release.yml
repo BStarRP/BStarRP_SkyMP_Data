@@ -367,6 +367,7 @@ jobs:
           PATCH_ASSETS_PUBLIC_URL: ${{ secrets.PATCH_ASSETS_PUBLIC_URL }}
           VERSION: ${{ steps.version.outputs.version }}
           FORCE_UPLOAD_ALL_SMALL_ASSETS: ${{ github.event.inputs.force_upload_all_small_assets == 'true' && '1' || '' }}
+          R2_CONCURRENCY: 12
         run: |
           PREV_ARGS=""
           if [ -f prev-manifest.json ]; then
