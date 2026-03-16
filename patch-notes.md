@@ -1,7 +1,11 @@
 # Patch notes
 
 **Summary**
-Test build to see how new syncing code reacts with other players!
+Major test with horse riding working with new entity control system.
 
 ## Changes
-- Reworked how NPC control and syncing works.
+- Updated horseriding syncing.
+
+## Fixes
+- Fixed syncing of hosted npc's animations in combat.
+- Fixed issue with eratic movement when mounted near someone.
