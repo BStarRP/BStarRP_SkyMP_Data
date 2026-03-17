@@ -4,4 +4,5 @@
 More testing for Horseriding and syncing.
 
 ## Changes
-- Updated horseriding syncing.
+- Updated spawn process
+- Updated horse syncing
