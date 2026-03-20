@@ -1,13 +1,12 @@
 # Patch notes
 
 **Summary**
-Major rework of syncing and hosting. Fluid animations and combat should be expected now.
+Skill system revamp in this run, with skill degradation and tempering.
 
 ## Changes
-- Added CREA & LVLC support
-- Improved notification theme (more skyrim)
-- Improved host sync and queing
-- Test horse sync code
-- Several network improvements
-- Several animation improvements
-- Enabled Bandits!!!
+- Added tempering
+- Added weapon specialization skills
+- Reworked skill cap to use memory points
+- Improved damage formulas
+- Incorporate skill impact on damage formulas
+- Fixed issues with respawning
