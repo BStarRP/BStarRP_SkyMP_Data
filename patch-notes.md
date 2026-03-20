@@ -1,8 +1,13 @@
 # Patch notes
 
 **Summary**
-More testing for Horseriding and syncing.
+Major rework of syncing and hosting. Fluid animations and combat should be expected now.
 
 ## Changes
-- Updated spawn process
-- Updated horse syncing
+- Added CREA & LVLC support
+- Improved notification theme (more skyrim)
+- Improved host sync and queing
+- Test horse sync code
+- Several network improvements
+- Several animation improvements
+- Enabled Bandits!!!
