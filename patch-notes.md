@@ -1,15 +1,10 @@
 # Patch notes
 
 **Summary**
-Major refactors and improvements, Prepping to work on economy and testing.
+We cant forget fishing! Test for fishing skill.
 
 ## Additions
-- Added Dynamic Seasonal Weather System
-- Added Synchornized World Time with Server
-- Added New Mods for Apocrathy, Brewing, and Cooking
+- Added Fish Anywhere Mod
 
-## Updates
-- Updated Skill Menu QOL/Improvements
-- Updated Damage Formulas & Tied in Combat Skills
-- Updated Combat Skills and Many Others
-- Updated Several Skills and Tied in XP Conditions
+## Removals
+- A few un-working DLL's and Patch's
