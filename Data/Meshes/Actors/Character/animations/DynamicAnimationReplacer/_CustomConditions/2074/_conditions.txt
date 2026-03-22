@@ -1,0 +1,2 @@
+;Butter
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x000BCEC4)

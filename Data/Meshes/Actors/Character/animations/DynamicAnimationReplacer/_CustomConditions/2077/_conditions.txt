@@ -1,0 +1,2 @@
+;ClamChowder
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x00354712)

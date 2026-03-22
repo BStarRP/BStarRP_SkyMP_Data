@@ -1,0 +1,69 @@
+Creates new nodes with CME->MOV->Node layout on any matching skeleton, right after the 3D is loaded. New nodes can have any number of skeleton entries, each with unique transforms. If "match" is left empty, it attempts to create the node on any skeleton (not recommended). First matching skeleton entry wins. Skeletons can be matched by ID or signature. To add your nodes, make a new .json file in this folder and define as below. New nodes are automatically added to gear positioning and node selection lists under displays.
+
+Example:
+
+[
+	{
+		"name": "MyUniqueNodeName",     <- The new node name, must be unique on the skeleton. CME and MOV nodes with this name appended are created below it: CME MyUniqueNodeName -> MOV MyUniqueNodeName > MyUniqueNodeName
+		"desc": "My node",              <- This identifier will be shown in the UI
+		"parent": "NPC Spine2 [Spn2]",  <- Where to attach the new node
+		"skeleton":                     <- Skeleton entries go here
+		[
+			{
+				"match":                <- Match by skeleton signature, find it in skeleton explorer
+				{
+					"sigs": 
+					[ 
+						1234567890,
+						...
+					]
+				},
+				"xfrm_node":            <- Transform for the attachment node
+				{
+					"pos": [ -4, 0.4, 12 ],          <- Position
+					"rot": [ 1.123, -1.321, 2.121 ], <- Rotation in radians (clamped to -PI, PI)
+					"scale": 0.96                    <- Scale
+				},
+				"xfrm_mov":             <- Transform for the MOV node
+				{
+					"pos": [ 1, -1, -2 ],
+					"rot": [ 0.1, -0.1, 0.2 ],
+					"scale": 1.0
+				}
+			},
+			{
+				"match":                <- Match by skeleton ID
+				{
+					"ids": 
+					[ 
+						123456,
+						...
+					]
+				},
+				"xfrm_node":
+				{
+					"read_from": "SomeExistingNodeName"         <- copy transform from this node, set to identity if not found
+				},
+				"xfrm_mov": 
+				{					
+					"pos": [ 2, -2, -3 ],
+					"rot": [ 0.2, -0.2, 0.1 ],
+					"scale": 1.0,
+					"sync":                                     <- actively synchronize transforms from other nodes
+					[
+						{
+							"name": "FirstExistingNodeName",
+							"flags": 1                          <- bitfield, bit 1 = invert
+						},
+						{
+							"name": "SecondExistingNodeName",
+							"flags": 0
+						}
+					]
+				}
+			},
+			...
+		]
+	},
+	...
+]

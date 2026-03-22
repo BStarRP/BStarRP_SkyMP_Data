@@ -1,0 +1,2 @@
+;Gourd
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x000EF8EE)

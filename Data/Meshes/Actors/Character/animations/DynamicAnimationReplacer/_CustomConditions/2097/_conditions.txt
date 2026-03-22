@@ -1,0 +1,2 @@
+;AltoWine02
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x0035470B)

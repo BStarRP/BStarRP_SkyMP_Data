@@ -1,0 +1,33 @@
+This is an conversion system for conforming vanilla sheaths to the XP32 layout.
+
+Adds MOV/CME nodes and attaches the weapon node to MOV on any matching skeleton, right after the 3D is loaded. This makes it possible to control sheaths on misc skeletons in gear positioning (vanilla or draugr for example). If "match" is left empty, it attempts to convert any loaded 3D (this is generally not recommended).
+
+Example:
+
+[
+	{
+		"desc": "foo",  <- Not used in-game
+		"match":        <- Match by skeleton signature, find it in skeleton explorer
+		{
+			"sigs": 
+			[ 
+				1234567890, 
+				...
+			]
+		}
+	},
+	{
+		"desc": "bar",
+		"match":        <- Match by skeleton ID
+		{
+			"ids": 
+			[ 
+				123456, 
+				...
+			]
+		}
+	},
+	...
+]
+
+See Default.json for reference.

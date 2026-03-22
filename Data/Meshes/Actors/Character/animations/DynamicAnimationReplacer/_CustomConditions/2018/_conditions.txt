@@ -1,0 +1,2 @@
+;SalmonSteak(HF)
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x00070F88)

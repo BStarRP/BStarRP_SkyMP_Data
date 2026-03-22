@@ -1,0 +1,217 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Exit-9B/InventoryInjector/main/docs/InventoryInjector.schema.json",
+  "rules": [
+  	{
+	  "match": {
+        "formType": "Potion",
+        "keywords": [ "MAG_FoodTypeMeat" ]
+	  },
+      "assign": {
+		"subTypeDisplay": "Food",
+        "iconSource": "magus/gourmet/icons.swf",
+        "iconLabel": "gourmet_meat"
+	  }
+    },
+  	{
+	  "match": {
+        "formType": "Potion",
+        "keywords": [ "MAG_FoodTypeFish" ]
+	  },
+      "assign": {
+		"subTypeDisplay": "Food",
+        "iconSource": "magus/gourmet/icons.swf",
+        "iconLabel": "gourmet_fish"
+	  }
+    },
+  	{
+	  "match": {
+        "formType": "Potion",
+        "keywords": [ "MAG_FoodTypeCrab" ]
+	  },
+      "assign": {
+		"subTypeDisplay": "Food",
+        "iconSource": "magus/gourmet/icons.swf",
+        "iconLabel": "gourmet_shellfish"
+	  }
+    },
+  	{
+	  "match": {
+        "formType": "Potion",
+        "keywords": [ "MAG_FoodTypeStewHot" ]
+	  },
+      "assign": {
+		"subTypeDisplay": "Food",
+        "iconSource": "magus/gourmet/icons.swf",
+        "iconLabel": "gourmet_stew",
+		"iconColor": "#eba046"
+	  }
+    },
+	  	{
+	  "match": {
+        "formType": "Potion",
+        "keywords": [ "MAG_FoodTypeChowderHot" ]
+	  },
+      "assign": {
+		"subTypeDisplay": "Food",
+        "iconSource": "magus/gourmet/icons.swf",
+        "iconLabel": "gourmet_stew",
+		"iconColor": "#eba046"
+	  }
+    },
+  	{
+	  "match": {
+        "formType": "Potion",
+        "keywords": [ "MAG_FoodTypePieHot" ]
+	  },
+      "assign": {
+		"subTypeDisplay": "Food",
+        "iconSource": "magus/gourmet/icons.swf",
+        "iconLabel": "gourmet_pie",
+		"iconColor": "#eba046"
+	  }
+    },
+	{
+	  "match": {
+        "formType": "Potion",
+        "keywords": [ "MAG_FoodTypeStew" ]
+	  },
+      "assign": {
+		"subTypeDisplay": "Food",
+        "iconSource": "magus/gourmet/icons.swf",
+        "iconLabel": "gourmet_stew"
+	  }
+    },
+	{
+	  "match": {
+        "formType": "Potion",
+        "keywords": [ "MAG_FoodTypeChowder" ]
+	  },
+      "assign": {
+		"subTypeDisplay": "Food",
+        "iconSource": "magus/gourmet/icons.swf",
+        "iconLabel": "gourmet_stew"
+	  }
+    },
+	{
+	  "match": {
+        "formType": "Potion",
+        "keywords": [ "MAG_FoodTypeSoup" ]
+	  },
+      "assign": {
+		"subTypeDisplay": "Food",
+        "iconSource": "magus/gourmet/icons.swf",
+        "iconLabel": "gourmet_soup"
+	  }
+    },
+	{
+	  "match": {
+        "formType": "Potion",
+        "keywords": [ "MAG_FoodTypePie" ]
+	  },
+      "assign": {
+		"subTypeDisplay": "Food",
+        "iconSource": "magus/gourmet/icons.swf",
+        "iconLabel": "gourmet_pie"
+	  }
+    },
+	{
+	  "match": {
+        "formType": "Potion",
+        "keywords": [ "MAG_FoodTypeVegetable" ]
+	  },
+      "assign": {
+		"subTypeDisplay": "Food",
+        "iconSource": "magus/gourmet/icons.swf",
+        "iconLabel": "gourmet_vegetable"
+	  }
+    },
+  	{
+	  "match": {
+        "formType": "Potion",
+        "keywords": [ "MAG_FoodTypeBread" ]
+	  },
+      "assign": {
+		"subTypeDisplay": "Food",
+        "iconSource": "magus/gourmet/icons.swf",
+        "iconLabel": "gourmet_bread"
+	  }
+    },
+	{
+	  "match": {
+        "formType": "Potion",
+        "keywords": [ "MAG_FoodTypeFruit" ]
+	  },
+      "assign": {
+		"subTypeDisplay": "Food",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "default_food"
+	  }
+    },
+  	{
+	  "match": {
+        "formType": "Potion",
+        "keywords": [ "MAG_FoodTypeCheese" ]
+	  },
+      "assign": {
+		"subTypeDisplay": "Food",
+        "iconSource": "magus/gourmet/icons.swf",
+        "iconLabel": "gourmet_cheese"
+	  }
+    },
+  	{
+	  "match": {
+        "formType": "Potion",
+        "keywords": [ "MAG_FoodTypeDessert" ]
+	  },
+      "assign": {
+		"subTypeDisplay": "Food",
+        "iconSource": "magus/gourmet/icons.swf",
+        "iconLabel": "gourmet_Sweet"
+	  }
+    },
+	{
+	"match": {
+        "formType": "Potion",
+        "keywords": [ "MAG_FoodTypePoisoned" ]
+	  },
+      "assign": {
+		"subTypeDisplay": "Poisoned Food",
+        "iconSource": "magus/gourmet/icons.swf",
+        "iconLabel": "gourmet_foodpoison"
+	  }
+    },
+    {
+      "match": {
+        "formType": "Potion",
+        "keywords": [ "MAG_FoodTypeAle" ]
+      },
+      "assign": {
+		"subTypeDisplay": "Drink",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "food_beer"
+      }
+	},
+	{
+	  "match": {
+        "formType": "Potion",
+        "keywords": [ "MAG_FoodTypeWine" ]
+	  },
+      "assign": {
+		"subTypeDisplay": "Drink",
+        "iconSource": "skyui/icons_item_psychosteve.swf",
+        "iconLabel": "food_wine"
+	  }
+    },
+	{
+	  "match": {
+        "formType": "Potion",
+        "keywords": [ "MAG_FoodTypeDrugs" ]
+	  },
+      "assign": {
+		"subTypeDisplay": "Drug",
+        "iconSource": "magus/gourmet/icons.swf",
+        "iconLabel": "gourmet_drugs"
+	  }
+    }
+	]
+}

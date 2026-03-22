@@ -1,0 +1,2 @@
+;aa_EAAS
+HasMagicEffectWithKeyword ("TaberuAnimation.esp" | 0x0019BB69)

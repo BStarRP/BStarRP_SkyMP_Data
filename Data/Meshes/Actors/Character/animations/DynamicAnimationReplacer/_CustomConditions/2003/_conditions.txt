@@ -1,0 +1,2 @@
+;CookedBoarMeat
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x00085396)

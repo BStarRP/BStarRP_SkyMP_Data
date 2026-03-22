@@ -1,0 +1,2 @@
+;GreenApple
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x00359816)

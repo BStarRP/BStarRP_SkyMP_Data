@@ -1,0 +1,2 @@
+;Matze
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x000A39B3)

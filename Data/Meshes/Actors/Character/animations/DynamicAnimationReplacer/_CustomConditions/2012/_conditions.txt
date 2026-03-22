@@ -1,0 +1,2 @@
+;JazbayCrostata
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x0035981B)

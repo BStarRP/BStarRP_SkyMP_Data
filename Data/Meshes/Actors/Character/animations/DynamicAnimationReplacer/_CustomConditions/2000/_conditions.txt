@@ -1,0 +1,2 @@
+;AshHopperLeg
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x00122317)

@@ -1,0 +1,2 @@
+;MammothSteak
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x0000598F)

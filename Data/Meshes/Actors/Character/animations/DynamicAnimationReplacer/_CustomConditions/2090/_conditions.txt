@@ -1,0 +1,2 @@
+;Venison
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x0017D55D)

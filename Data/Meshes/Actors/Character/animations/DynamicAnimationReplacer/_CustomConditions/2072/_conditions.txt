@@ -1,0 +1,2 @@
+;AppleCabbageStew
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x000059A4)

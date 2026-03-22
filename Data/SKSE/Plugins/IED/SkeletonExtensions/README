@@ -1,0 +1,28 @@
+Skeleton extensions allow dynamically creating new gear nodes or converting sheaths to XP32 spec (CME->MOV->Node layout). It can be used to adapt skeletons to work with IED or SDS without actually having the meshes installed or to make new nodes for your presets.
+
+The plugin uses skeleton IDs and signatures to uniquely identify skeleton meshes. To find a skeleton ID, open the mesh in nifskope and look for 'SkeletonID' NiIntegerExtraData. IDs aren't really globally unique, you'll usually want to use signatures - these are FNV-1a hashes generated from various data found on the skeleton (see https://github.com/SlavicPotato/ied-dev/blob/master/ImmersiveEquipmentDisplays/IED/SkeletonID.cpp). To find a skeleton signature, you need to be in-game and have an actor with the skeleton in question loaded, then navigate to Tools->Diagnostics->Skeleton explorer, select the actor and click on the signature text to copy it to clipboard.
+
+Common skeleton signatures:
+
+	XPMSSE (v4.80, other versions may have different signatures):
+
+		11462500511823126705 - male
+		2191670159909408727  - female
+		
+		11827777347581811248 - beast male
+		6419035761879502692  - beast female
+		
+		6034431282899458572  - first person
+		
+	Vanilla:
+
+		271026958073932624   - male
+		10927971447177431054 - female
+		
+		4625650181268377090  - beast male
+		17428621824148309550 - beast female
+
+		17148319377188110236 - first person
+
+		15346942427428969277 - draugr male (same for XPMSSE)
+		3622237453656507635  - draugr female (same for XPMSSE)

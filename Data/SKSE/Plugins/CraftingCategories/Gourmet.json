@@ -1,0 +1,93 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Exit-9B/CraftingCategories/main/docs/CraftingCategories.schema.json",
+   "sections": {
+     "Meat": {
+      "priority": 1,
+      "keywords": [ "MAG_FoodTypeMeat" ],
+      "icon": {
+        "source": "magus/gourmet/icons.swf",
+        "label": "gourmet_meat"
+      }
+    },     
+	"Fish": {
+      "priority": 2,
+      "keywords": [ "MAG_FoodTypeFish" ],
+      "icon": {
+        "source": "magus/gourmet/icons.swf",
+        "label": "gourmet_fish"
+      }
+    },
+	"Shellfish": {
+      "priority": 3,
+      "keywords": [ "MAG_FoodTypeCrab", "MAG_FoodTypeChowder" ],
+      "icon": {
+        "source": "magus/gourmet/icons.swf",
+        "label": "gourmet_shellfish"
+      }
+    },
+	"Stew": {
+      "priority": 4,
+      "keywords": [ "MAG_FoodTypeStew" ],
+      "icon": {
+        "source": "magus/gourmet/icons.swf",
+        "label": "gourmet_stew"
+      }
+    },
+	"Soup": {
+      "priority": 5,
+      "keywords": [ "MAG_FoodTypeSoup" ],
+      "icon": {
+        "source": "magus/gourmet/icons.swf",
+        "label": "gourmet_soup"
+      }
+    },
+	"Fondue": {
+      "priority": 6,
+      "keywords": [ "MAG_FoodTypeCheese" ],
+      "icon": {
+       "source": "magus/gourmet/icons.swf",
+        "label": "gourmet_cheese"
+      }
+    },
+	"Poisoned Food": {
+      "priority": 7,
+      "keywords": [ "MAG_FoodTypePoisoned" ],
+      "icon": {
+       "source": "magus/gourmet/icons.swf",
+        "label": "gourmet_foodpoison"
+      }
+    },
+	"Meat Pies": {
+      "priority": 1,
+      "keywords": [ "MAG_FoodTypePie" ],
+      "icon": {
+        "source": "magus/gourmet/icons.swf",
+        "label": "gourmet_pie"
+      }
+    },
+	"Vegetables": {
+      "priority": 2,
+      "keywords": [ "MAG_FoodTypeVegetable" ],
+      "icon": {
+        "source": "magus/gourmet/icons.swf",
+        "label": "gourmet_vegetable"
+      }
+    },
+	"Bread": {
+      "priority": 3,
+      "keywords": [ "MAG_FoodTypeBread" ],
+      "icon": {
+       "source": "magus/gourmet/icons.swf",
+        "label": "gourmet_bread"
+      }
+    },
+	"Dessert": {
+      "priority": 4,
+      "keywords": [ "MAG_FoodTypeDessert" ],
+      "icon": {
+       "source": "magus/gourmet/icons.swf",
+        "label": "gourmet_sweet"
+      }
+    }
+}
+}

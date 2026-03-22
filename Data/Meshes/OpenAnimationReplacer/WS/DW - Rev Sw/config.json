@@ -1,0 +1,106 @@
+{
+    "name": "Dual Wield - Reverse/On Ankle and Sword",
+    "priority": 22000034,
+    "conditions": [
+        {
+            "condition": "OR",
+            "requiredVersion": "1.0.0.0",
+            "Conditions": [
+                {
+                    "condition": "AND",
+                    "requiredVersion": "1.0.0.0",
+                    "Conditions": [
+                        {
+                            "condition": "IED_GearNodeEquippedPlacementHint",
+                            "requiredPlugin": "OpenAnimationReplacer-IEDConditionExtensions",
+                            "requiredVersion": "1.0.0.0",
+                            "Left hand": false,
+                            "Comparison": "==",
+                            "Weapon placement ID": {
+                                "value": 8.0
+                            }
+                        },
+                        {
+                            "condition": "OR",
+                            "requiredVersion": "1.0.0.0",
+                            "Conditions": [
+                                {
+                                    "condition": "IsEquippedType",
+                                    "requiredVersion": "1.0.0.0",
+                                    "Type": {
+                                        "value": 3.0
+                                    },
+                                    "Left hand": false
+                                },
+                                {
+                                    "condition": "IsEquippedType",
+                                    "requiredVersion": "1.0.0.0",
+                                    "Type": {
+                                        "value": 4.0
+                                    },
+                                    "Left hand": false
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "condition": "AND",
+                    "requiredVersion": "1.0.0.0",
+                    "Conditions": [
+                        {
+                            "condition": "IED_GearNodeEquippedPlacementHint",
+                            "requiredPlugin": "OpenAnimationReplacer-IEDConditionExtensions",
+                            "requiredVersion": "1.0.0.0",
+                            "Left hand": false,
+                            "Comparison": "==",
+                            "Weapon placement ID": {
+                                "value": 4.0
+                            }
+                        },
+                        {
+                            "condition": "IsEquippedType",
+                            "requiredVersion": "1.0.0.0",
+                            "Type": {
+                                "value": 2.0
+                            },
+                            "Left hand": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "condition": "OR",
+            "requiredVersion": "1.0.0.0",
+            "Conditions": [
+                {
+                    "condition": "IsEquippedType",
+                    "requiredVersion": "1.0.0.0",
+                    "Type": {
+                        "value": 1.0
+                    },
+                    "Left hand": true
+                },
+                {
+                    "condition": "IsEquippedType",
+                    "requiredVersion": "1.0.0.0",
+                    "Type": {
+                        "value": 2.0
+                    },
+                    "Left hand": true
+                }
+            ]
+        },
+        {
+            "condition": "IED_GearNodeEquippedPlacementHint",
+            "requiredPlugin": "OpenAnimationReplacer-IEDConditionExtensions",
+            "requiredVersion": "1.0.0.0",
+            "Left hand": true,
+            "Comparison": "<=",
+            "Weapon placement ID": {
+                "value": 1.0
+            }
+        }
+    ]
+}

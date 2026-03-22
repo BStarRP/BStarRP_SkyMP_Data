@@ -1,0 +1,2 @@
+;MammothCheeseBowl
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x000B2CBF)

@@ -1,0 +1,107 @@
+{
+    "name": "Right Hand/Two Handed - On Hip With Shield",
+    "priority": 22000005,
+    "conditions": [
+        {
+            "condition": "IsEquippedType",
+            "requiredVersion": "1.0.0.0",
+            "Type": {
+                "value": 11.0
+            },
+            "Left hand": true
+        },
+        {
+            "condition": "IED_GearNodePlacementHint",
+            "requiredPlugin": "OpenAnimationReplacer-IEDConditionExtensions",
+            "requiredVersion": "1.0.0.0",
+            "Gear node ID": {
+                "value": 15.0
+            },
+            "Comparison": "<=",
+            "Weapon placement ID": {
+                "value": 1.0
+            }
+        },
+        {
+            "condition": "SDS_IsShieldOnBackEnabled",
+            "requiredPlugin": "OpenAnimationReplacer-IEDConditionExtensions",
+            "requiredVersion": "1.0.0.0"
+        },
+        {
+            "condition": "OR",
+            "requiredVersion": "1.0.0.0",
+            "Conditions": [
+                {
+                    "condition": "AND",
+                    "requiredVersion": "1.0.0.0",
+                    "Conditions": [
+                        {
+                            "condition": "OR",
+                            "requiredVersion": "1.0.0.0",
+                            "Conditions": [
+                                {
+                                    "condition": "IsEquippedType",
+                                    "requiredVersion": "1.0.0.0",
+                                    "Type": {
+                                        "value": 1.0
+                                    },
+                                    "Left hand": false
+                                },
+                                {
+                                    "condition": "IsEquippedType",
+                                    "requiredVersion": "1.0.0.0",
+                                    "Type": {
+                                        "value": 2.0
+                                    },
+                                    "Left hand": false
+                                },
+                                {
+                                    "condition": "IsEquippedType",
+                                    "requiredVersion": "1.0.0.0",
+                                    "Type": {
+                                        "value": 3.0
+                                    },
+                                    "Left hand": false
+                                },
+                                {
+                                    "condition": "IsEquippedType",
+                                    "requiredVersion": "1.0.0.0",
+                                    "Type": {
+                                        "value": 4.0
+                                    },
+                                    "Left hand": false
+                                }
+                            ]
+                        },
+                        {
+                            "condition": "IED_GearNodeEquippedPlacementHint",
+                            "requiredPlugin": "OpenAnimationReplacer-IEDConditionExtensions",
+                            "requiredVersion": "1.0.0.0",
+                            "Left hand": false,
+                            "Comparison": "<=",
+                            "Weapon placement ID": {
+                                "value": 1.0
+                            }
+                        }
+                    ]
+                },
+                {
+                    "condition": "AND",
+                    "requiredVersion": "1.0.0.0",
+                    "Conditions": [
+                        {
+                            "condition": "IED_GearNodeEquippedPlacementHint",
+                            "requiredPlugin": "OpenAnimationReplacer-IEDConditionExtensions",
+                            "requiredVersion": "1.0.0.0",
+                            "Left hand": false,
+                            "Comparison": "==",
+                            "Weapon placement ID": {
+                                "value": 5.0
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

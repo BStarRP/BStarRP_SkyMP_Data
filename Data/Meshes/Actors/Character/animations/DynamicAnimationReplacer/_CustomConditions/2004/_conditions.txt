@@ -1,0 +1,2 @@
+;BoarMeat
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x0014AB2C)

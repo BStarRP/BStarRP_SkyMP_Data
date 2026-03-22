@@ -1,0 +1,152 @@
+{
+	"version": 2,
+	"default_font":
+	{
+		"glyphs":
+		{
+			"glyph_ranges":
+			[
+			]
+		},
+		"size": 13
+	},
+	"data":
+	{
+		"Tahoma":
+		{
+			"file": "Tahoma.ttf",
+			"win_font": true,
+			"size": 17,
+			"glyphs":
+			{
+				"glyph_ranges": 
+				[
+				],
+				"glyph_presets":
+				[
+				],
+				"extra_glyphs": ""
+			}
+		},
+		"Tahoma Bold":
+		{
+			"file": "tahomabd.ttf",
+			"win_font": true,
+			"size": 17
+		},
+		"Verdana":
+		{
+			"file": "Verdana.ttf",
+			"win_font": true,
+			"size": 17
+		},
+		"Verdana Bold":
+		{
+			"file": "Verdanab.ttf",
+			"win_font": true,
+			"size": 17
+		},
+		"Courier New":
+		{
+			"file": "cour.ttf",
+			"win_font": true,
+			"size": 16
+		},
+		"Courier New Bold":
+		{
+			"file": "courbd.ttf",
+			"win_font": true,
+			"size": 16
+		},
+		"Segoe UI":
+		{
+			"file": "segoeui.ttf",
+			"win_font": true,
+			"size": 18
+		},
+		"MS Gothic":
+		{
+			"file": "msgothic.ttc",
+			"win_font": true,
+			"size": 16
+		},
+		"YaHei UI":
+		{
+			"file": "msyh.ttc",
+			"win_font": true,
+			"size": 17
+		},
+		"Yu Gothic UI":
+		{
+			"file": "YuGothM.ttc",
+			"win_font": true,
+			"size": 17
+		},	
+		"Yu Gothic UI Bold":
+		{
+			"file": "YuGothB.ttc",
+			"win_font": true,
+			"size": 17
+		},		
+		"Consolas":
+		{
+			"file": "consola.ttf",
+			"win_font": true,
+			"size": 16
+		},
+		"Consolas Bold":
+		{
+			"file": "consolab.ttf",
+			"win_font": true,
+			"size": 16
+		},
+		"Arial":
+		{
+			"file": "arial.ttf",
+			"win_font": true,
+			"size": 16
+		},
+		"Arial Bold":
+		{
+			"file": "arialbd.ttf",
+			"win_font": true,
+			"size": 16
+		},
+		"Lucida Console Regular":
+		{
+			"file": "lucon.ttf",
+			"win_font": true,
+			"size": 16
+		},
+		"Malgun Gothic":
+		{
+			"file": "malgun.ttf",
+			"win_font": true,
+			"size": 18
+		},
+		"Source Code Pro Bold":
+		{
+			"file": "SourceCodePro-Bold.ttf",
+			"win_font": true,
+			"size": 18
+		},
+		"Source Code Pro Medium":
+		{
+			"file": "SourceCodePro-Medium.ttf",
+			"win_font": true,
+			"size": 18
+		},
+		"Source Code Pro Regular":
+		{
+			"file": "SourceCodePro-Regular.ttf",
+			"win_font": true,
+			"size": 18
+		},
+		"Cascadia Mono":
+		{
+			"file": "CascadiaMono.ttf",
+			"win_font": true,
+			"size": 16
+		}
+	}
+}

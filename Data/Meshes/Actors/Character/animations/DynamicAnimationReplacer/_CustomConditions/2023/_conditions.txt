@@ -1,0 +1,2 @@
+;SurilieBrothersWine
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x000059AA)

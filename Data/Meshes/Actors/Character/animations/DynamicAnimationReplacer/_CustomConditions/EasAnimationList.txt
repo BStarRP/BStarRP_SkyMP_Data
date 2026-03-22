@@ -1,0 +1,115 @@
+2000 - AshHopperLeg
+2001 - AshHopperMeat
+2002 - AshYam
+2003 - CookedBoarMeat
+2004 - BoarMeat
+2005 - Flin
+       EmberbrandWine
+2006 - Matze
+2007 - Shein
+2008 - Sujamma
+       Sadri'sSujamma
+2009 - SoulHusk
+2010 - BraidedBread
+2011 - SnowberryCrostata
+2012 - JazbayCrostata
+2013 - JuniperBerryCrostata
+2014 - AppleDumpling
+       ChickenDumpling
+       LavenderDumpling
+2015 - GarlicBread
+2016 - JugOfMilk
+2017 - SackOfFlour
+2018 - SalmonSteak(HF)
+2019 - SalmonMeat
+2020 - SteamedMudcrabLegs
+2021 - MudcrabLegs
+2022 - ArgonianBloodWine
+2023 - SurilieBrothersWine
+2024 - RedApple
+2025 - GreenApple
+2026 - BakedPotatoes
+2027 - BoiledCremeTreat
+2028 - Bread
+2029 - PotatoBread
+2030 - BreadHalf
+2031 - Cabbage
+2032 - Carrot
+2033 - CharredSkeeverMeat
+2034 - ClamMeat
+2035 - CookedBeef
+       SpicedBeef
+2036 - DogMeat
+2037 - HonningbrewMead
+2038 - Ale
+       ArgonianAle
+       AshfireMead
+       Dragon'sBreathMead
+       MeadWithJuniperBerry
+       NordMead
+2039 - BlackBriarMead
+2040 - BlackBriarReserve
+2041 - EidarCheeseWedge
+2042 - GoatCheeseWedge
+2043 - EidarCheeseWheel
+2044 - SlicedEidarCheese
+2045 - GoatCheeseWheel
+2046 - SlicedGoatCheese
+2047 - Gourd
+2048 - GrilledChickenBreast
+2049 - PheasantBreast
+2050 - PheasantRoast
+2051 - ChickenBreast
+2052 - GrilledLeeks
+2053 - HoneyNutTreat
+2054 - HorkerLoaf
+2055 - HorkerMeat
+2056 - HorseHaunch
+2057 - HorseMeat
+2058 - Leek
+2059 - LegOfGoatRoast
+2060 - LegOfGoat
+2061 - LongTaffyTreat
+2062 - MammothCheeseBowl
+2063 - MammothSteak
+2064 - MammothSnout
+2065 - ApplePie
+       HomecookedMeal
+2066 - Potato
+2067 - RabbitHaunch
+2068 - RawRabbitLeg
+2069 - RawBeef
+2070 - SalmonSteak
+2071 - SearedSlaughterfish
+2072 - AppleCabbageStew
+2073 - BeefStew
+2074 - Butter
+2075 - CabbagePotatoSoup
+2076 - CabbageSoup
+2077 - ClamChowder
+2078 - ElsweyrFondue
+2079 - HorkerAndAshYamStew
+2080 - HorkerStew
+2081 - PotatoSoup
+2082 - TomatoSoup
+2083 - VegetableSoup
+2084 - VenisonStew
+2085 - SweetRoll
+2086 - Tomato
+2087 - Honey
+2088 - VelvetLeChance
+       White-GoldTower
+       CliffRacer
+2089 - VenisonChop
+2090 - Venison
+2091 - Waterskin
+2092 - FirebrandWine
+2093 - Wine01
+       CyrodilicBrandy
+2094 - SpicedWine
+2095 - Wine02
+2096 - AltoWine01
+       ColovianBrandy
+       Jessica'sWine
+       StrosM'KaiRum
+2097 - AltoWine02

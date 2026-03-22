@@ -1,0 +1,2 @@
+;HorkerMeat
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x000FEBFF)

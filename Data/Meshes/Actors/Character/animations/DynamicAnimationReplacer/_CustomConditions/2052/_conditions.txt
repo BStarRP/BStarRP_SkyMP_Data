@@ -1,0 +1,2 @@
+;GrilledLeeks
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x0000599F)

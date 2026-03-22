@@ -1,0 +1,2 @@
+;Waterskin
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x00330FFD)

@@ -1,0 +1,7 @@
+;Ale
+;ArgonianAle
+;AshfireMead
+;Dragon'sBreathMead
+;MeadWithJuniperBerry
+;NordMead
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x000059A5)

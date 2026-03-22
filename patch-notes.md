@@ -1,12 +1,15 @@
 # Patch notes
 
 **Summary**
-Skill system revamp in this run, with skill degradation and tempering.
+Major refactors and improvements, Prepping to work on economy and testing.
 
-## Changes
-- Added tempering
-- Added weapon specialization skills
-- Reworked skill cap to use memory points
-- Improved damage formulas
-- Incorporate skill impact on damage formulas
-- Fixed issues with respawning
+## Additions
+- Added Dynamic Seasonal Weather System
+- Added Synchornized World Time with Server
+- Added New Mods for Apocrathy, Brewing, and Cooking
+
+## Updates
+- Updated Skill Menu QOL/Improvements
+- Updated Damage Formulas & Tied in Combat Skills
+- Updated Combat Skills and Many Others
+- Updated Several Skills and Tied in XP Conditions

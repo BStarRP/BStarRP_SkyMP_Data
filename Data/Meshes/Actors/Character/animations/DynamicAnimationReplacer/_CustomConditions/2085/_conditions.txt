@@ -1,0 +1,2 @@
+;SweetRoll
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x00005998)

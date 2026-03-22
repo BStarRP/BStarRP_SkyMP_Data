@@ -1,0 +1,16 @@
+{
+    "name": "Two Handed - On Hip",
+    "priority": 22000001,
+    "conditions": [
+        {
+            "condition": "IED_GearNodeEquippedPlacementHint",
+            "requiredPlugin": "OpenAnimationReplacer-IEDConditionExtensions",
+            "requiredVersion": "1.0.0.0",
+            "Left hand": false,
+            "Comparison": "==",
+            "Weapon placement ID": {
+                "value": 5.0
+            }
+        }
+    ]
+}

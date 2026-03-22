@@ -3279,6 +3279,7 @@ export declare class TESModPlatform extends PapyrusObject {
   static setNpcSkinColor(npc: ActorBase | null, skinColor: number): void
   static setWeaponDrawnMode(actor: Actor | null, mode: number): void
   static updateEquipment(actor: Actor | null, item: Form | null, leftHand: boolean): void
+  static putRiderOnMount(rider: Actor | null, mount: Actor | null): boolean
 }
 
 // Based on TalkingActivator.pex

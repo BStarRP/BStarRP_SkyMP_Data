@@ -1,0 +1,2 @@
+;SackOfFlour
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x00127420)

@@ -1,0 +1,2 @@
+;MammothSnout
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x0015EF46)
