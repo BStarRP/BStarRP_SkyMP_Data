@@ -1,10 +1,8 @@
 # Patch notes
 
 **Summary**
-We cant forget fishing! Test for fishing skill.
+Core framework improvement and locks!
 
-## Additions
-- Added Fish Anywhere Mod
-
-## Removals
-- A few un-working DLL's and Patch's
+## Changes
+- Added a lock system (testing)
+- Added support for .ESL file loading on client & server
