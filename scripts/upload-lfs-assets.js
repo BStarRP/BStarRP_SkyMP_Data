@@ -107,14 +107,21 @@ function sha256File(filePath) {
 }
 
 const LFS_POINTER_HEADER = 'version https://git-lfs.github.com/spec/v1';
+/** Scan enough bytes that odd line endings / extension lines still match; real pointers stay tiny. */
+const LFS_POINTER_SCAN_BYTES = 8192;
+
 function isLfsPointer(filePath) {
   try {
-    const buf = Buffer.allocUnsafe(256);
+    const st = fs.statSync(filePath);
+    if (st.size === 0) return false;
+    const n = Math.min(st.size, LFS_POINTER_SCAN_BYTES);
+    const buf = Buffer.allocUnsafe(n);
     const fd = fs.openSync(filePath, 'r');
-    const n = fs.readSync(fd, buf, 0, 256, 0);
+    fs.readSync(fd, buf, 0, n, 0);
     fs.closeSync(fd);
-    const head = buf.slice(0, n).toString('utf8');
-    return head.includes(LFS_POINTER_HEADER) && head.includes('oid sha256:');
+    let s = buf.toString('utf8');
+    if (s.charCodeAt(0) === 0xfeff) s = s.slice(1);
+    return s.includes(LFS_POINTER_HEADER) && s.includes('oid sha256:');
   } catch (_) {
     return false;
   }
@@ -272,12 +279,8 @@ async function run() {
         );
       }
       // Manifest may have been built when file was still a pointer (e.g. R2 pull runs after manifest build). Fix manifest from actual file and upload.
+      // Small real assets (e.g. tiny .esp) can be <256 bytes; isLfsPointer above already rejects true pointers.
       if (expectedSize > 0 && actualSize !== expectedSize) {
-        if (actualSize < 256) {
-          throw new Error(
-            pathEntry + ': wrong size (' + actualSize + ' vs expected ' + expectedSize + '). File may still be a pointer.'
-          );
-        }
         const correctHash = sha256File(src);
         entry.size = actualSize;
         entry.hash = correctHash;
