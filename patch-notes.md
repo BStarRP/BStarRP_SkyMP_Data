@@ -1,7 +1,7 @@
 # Patch notes
 
 **Summary**
-Framework Improvements
+Small Cleanup
 
 ## Changes
-- Added Spaces in Filenames for Mods Support
+- Removed / Organized Mods
