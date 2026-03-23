@@ -28,6 +28,7 @@
  * Optional: R2_VERIFY_PUT_HEAD=0 — skip HeadObject after each PutObject (halves R2 calls; use verify-r2-vs-manifest.js / repair if needed).
  * Optional: R2_PUT_DEADLINE_MS, R2_HEAD_DEADLINE_MS, R2_LIST_DEADLINE_MS — hard abort per operation (0 = auto from size).
  * Optional: R2_MAX_SOCKETS — https agent maxSockets (default 128) to reduce connection pile-up with high concurrency.
+ * Optional: R2_ENABLE_OLD_PATCH_CLEANUP=1 — run post-upload patches/* list+delete sweep (default off for faster releases).
  */
 
 const fs = require('fs');
@@ -44,6 +45,7 @@ const LOG_EACH_COPIED = !/^0|false|no$/i.test(String(process.env.R2_LOG_EACH_COP
 /** Post-Put Head doubles R2 calls; under load Head can stall — disable in CI if you audit with verify-r2-vs-manifest.js. */
 const VERIFY_PUT_HEAD = !/^0|false|no$/i.test(String(process.env.R2_VERIFY_PUT_HEAD ?? '1'));
 const R2_VERBOSE_UPLOAD = /^1|true|yes$/i.test(String(process.env.R2_VERBOSE_R2_UPLOAD || ''));
+const ENABLE_OLD_PATCH_CLEANUP = /^1|true|yes$/i.test(String(process.env.R2_ENABLE_OLD_PATCH_CLEANUP || ''));
 const {
   S3Client,
   PutObjectCommand,
@@ -430,12 +432,13 @@ async function uploadFromLocal(pathEntry, src, destKey, entry, logSuffix) {
   const uploadSize = fs.statSync(src).size;
   const useBuffer = R2_PUT_BUFFER_MAX_BYTES > 0 && uploadSize <= R2_PUT_BUFFER_MAX_BYTES;
   const body = useBuffer ? fs.readFileSync(src) : fs.createReadStream(src);
+  console.log(
+    '[R2] Uploading:',
+    pathEntry,
+    '(' + uploadSize + ' bytes' + (useBuffer ? ', buffered' : ', stream') + ')'
+  );
   if (R2_VERBOSE_UPLOAD) {
-    console.log(
-      '[R2] PutObject:',
-      pathEntry,
-      '(' + uploadSize + ' bytes' + (useBuffer ? ', buffered' : ', stream') + ')'
-    );
+    console.log('[R2] PutObject:', pathEntry);
   }
   await s3Send(
     new PutObjectCommand({
@@ -597,6 +600,10 @@ async function run() {
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2), 'utf8');
 
   if (targetedRepair) {
+    return;
+  }
+  if (!ENABLE_OLD_PATCH_CLEANUP) {
+    console.log('R2: skipping old patch cleanup by default (set R2_ENABLE_OLD_PATCH_CLEANUP=1 to enable)');
     return;
   }
 

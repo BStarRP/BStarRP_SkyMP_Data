@@ -89,7 +89,7 @@ jobs:
           R2_MAX_SOCKETS: '128'
           R2_CONNECTION_TIMEOUT_MS: 120000
           R2_REQUEST_TIMEOUT_MS: 180000
-          R2_MAX_ATTEMPTS: 8
+          R2_MAX_ATTEMPTS: 4
         run: |
           set -e
           MAX_ATTEMPTS=3
@@ -132,7 +132,7 @@ jobs:
           R2_MAX_SOCKETS: '128'
           R2_CONNECTION_TIMEOUT_MS: 120000
           R2_REQUEST_TIMEOUT_MS: 180000
-          R2_MAX_ATTEMPTS: 8
+          R2_MAX_ATTEMPTS: 4
         run: |
           MAX_ATTEMPTS=3
           attempt=1

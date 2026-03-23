@@ -375,7 +375,7 @@ jobs:
           R2_LOG_EACH_COPIED_ASSET: '0'
           R2_CONNECTION_TIMEOUT_MS: 120000
           R2_REQUEST_TIMEOUT_MS: 180000
-          R2_MAX_ATTEMPTS: 8
+          R2_MAX_ATTEMPTS: 4
         run: |
           PREV_ARGS=""
           if [ -f prev-manifest.json ]; then

@@ -1,13 +1,11 @@
 # Patch notes
 
 **Summary**
-Thematic Overhaul and Important Gameplay Fixes.
+More updates for visual overhauls.
 
 ## Changes
-- Fixed opening containers
-- Fixed looting corpses
-- Fixed durability labels not saving
-- Added Weather Overhauls
-- Added Storms
-- Added Darker Nights
-- Tuned Shaders
+- Added smoking candles and torches
+- Improved lighting on campfires
+- Test on Quality vs Performance with Shaders
+- Small fixes for durability
+- Fixed an issue where npc's spawn briefly infront of you
