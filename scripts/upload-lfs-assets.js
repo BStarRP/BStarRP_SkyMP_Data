@@ -14,6 +14,8 @@
  *   node scripts/upload-lfs-assets.js Data [--prefix=Data] [--previous-manifest=path] [--previous-version=0.18.30] [--only-r2-paths=file.txt]
  *
  * Env: VERSION, PATCH_ASSETS_BUCKET, PATCH_ASSETS_ACCOUNT_ID, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
+ * Optional: PATCH_ASSETS_CACHE_CONTROL — R2 Cache-Control (default public, max-age=0, must-revalidate) so CDNs
+ *   and browsers do not keep a stale short error body for the same URL after you repair an object.
  * Optional: FORCE_UPLOAD_ALL_SMALL_ASSETS=1 — upload all R2 assets from Data/ (do not copy from previous on R2).
  * Optional: --only-r2-paths=file.txt — one manifest path per line (e.g. Data/foo/bar.esp). Re-uploads only those
  *   from disk (never R2 copy-from-previous). Skips deleting old patches/* folders. Use after verify-r2-vs-manifest.js.
@@ -48,6 +50,9 @@ const PREVIOUS_VERSION = prevVersionArg ? prevVersionArg.slice('--previous-versi
 const VERSION = process.env.VERSION;
 const BUCKET = process.env.PATCH_ASSETS_BUCKET;
 const ACCOUNT_ID = process.env.PATCH_ASSETS_ACCOUNT_ID;
+/** Avoid long-lived caches of wrong/error responses at the public CDN for the same object URL. */
+const PATCH_ASSETS_CACHE_CONTROL =
+  process.env.PATCH_ASSETS_CACHE_CONTROL || 'public, max-age=0, must-revalidate';
 
 if (!VERSION || !BUCKET || !ACCOUNT_ID) {
   console.error('Error: set env VERSION, PATCH_ASSETS_BUCKET, PATCH_ASSETS_ACCOUNT_ID');
@@ -319,7 +324,9 @@ async function uploadFromLocal(pathEntry, src, destKey, entry, logSuffix) {
     new PutObjectCommand({
       Bucket: BUCKET,
       Key: destKey,
-      Body: fs.createReadStream(src)
+      Body: fs.createReadStream(src),
+      CacheControl: PATCH_ASSETS_CACHE_CONTROL,
+      ContentType: 'application/octet-stream'
     })
   );
   await verifyR2UploadedSize(destKey, uploadSize, pathEntry);
@@ -395,7 +402,9 @@ async function run() {
         new CopyObjectCommand({
           Bucket: BUCKET,
           Key: destKey,
-          CopySource: `${BUCKET}/${copySourceKey}`
+          CopySource: `${BUCKET}/${copySourceKey}`,
+          CacheControl: PATCH_ASSETS_CACHE_CONTROL,
+          ContentType: 'application/octet-stream'
         })
       );
       const expectedSize = typeof entry === 'object' && entry.size != null ? entry.size : 0;

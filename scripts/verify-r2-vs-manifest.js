@@ -181,6 +181,13 @@ async function runWithLimit(tasks, limit) {
       unique.length +
       ' need repair (HEAD only, no egress for file bodies)'
   );
+  if (unique.length > 0 && process.env.PATCH_ASSETS_PUBLIC_URL) {
+    console.log(
+      'Tip: If the launcher still sees a tiny body (e.g. 68 B) after repair, purge CDN cache for',
+      process.env.PATCH_ASSETS_PUBLIC_URL,
+      'or wait for TTL — old error responses are sometimes cached.'
+    );
+  }
 })().catch((err) => {
   console.error(err);
   process.exit(1);
