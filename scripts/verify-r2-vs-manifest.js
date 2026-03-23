@@ -8,6 +8,8 @@
  *
  * Env: VERSION, PATCH_ASSETS_BUCKET, PATCH_ASSETS_ACCOUNT_ID, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
  * Optional: PATCH_ASSETS_PUBLIC_URL, R2_CONCURRENCY
+ * Optional: R2_VERIFY_PUBLIC_HEAD=1 — after S3 HEAD succeeds, also HEAD the manifest `url` (or built URL).
+ *   Catches CDN/cache serving wrong Content-Length while R2 API is correct (launcher fails on a new file each time).
  *
  * Keep filter logic in sync with scripts/upload-lfs-assets.js (r2Files).
  */
@@ -132,7 +134,49 @@ async function runWithLimit(tasks, limit) {
   return results;
 }
 
+function publicUrlForEntry(entry, assetName) {
+  if (typeof entry === 'object' && entry.url && /^https?:\/\//i.test(String(entry.url))) {
+    return String(entry.url);
+  }
+  if (r2Base) {
+    return r2Base + '/' + assetName;
+  }
+  return null;
+}
+
+const VERIFY_PUBLIC_HEAD = /^1|true|yes$/i.test(String(process.env.R2_VERIFY_PUBLIC_HEAD || ''));
+
+/** Same edge the launcher hits; compares Content-Length to manifest when present. */
+async function headPublicUrl(url, expectedSize) {
+  const ac = new AbortController();
+  const ms = Math.max(5000, parseInt(process.env.R2_PUBLIC_HEAD_TIMEOUT_MS || '90000', 10) || 90000);
+  const to = setTimeout(() => ac.abort(), ms);
+  try {
+    const res = await fetch(url, { method: 'HEAD', redirect: 'follow', signal: ac.signal });
+    clearTimeout(to);
+    if (!res.ok) {
+      return { match: false, detail: 'HTTP ' + res.status };
+    }
+    const cl = res.headers.get('content-length');
+    if (cl == null || cl === '') {
+      return { match: true, detail: 'no Content-Length (skipped compare)' };
+    }
+    const len = parseInt(cl, 10);
+    if (len !== expectedSize) {
+      return { match: false, detail: 'Content-Length ' + len + ' != manifest ' + expectedSize };
+    }
+    return { match: true, detail: 'ok' };
+  } catch (e) {
+    clearTimeout(to);
+    return { match: false, detail: String(e.message || e) };
+  }
+}
+
 (async () => {
+  if (VERIFY_PUBLIC_HEAD && !r2Base && !process.env.PATCH_ASSETS_PUBLIC_URL) {
+    console.warn('R2_VERIFY_PUBLIC_HEAD is set but PATCH_ASSETS_PUBLIC_URL is missing; public check may be limited');
+  }
+
   const concurrency = Math.max(1, parseInt(process.env.R2_CONCURRENCY || '16', 10) || 16);
   const repair = [];
 
@@ -148,10 +192,9 @@ async function runWithLimit(tasks, limit) {
       const head = await s3.send(new HeadObjectCommand({ Bucket: BUCKET, Key: key }));
       const got = head.ContentLength ?? 0;
       if (got !== expectedSize) {
-        console.warn(pathEntry + ': R2 size ' + got + ' != manifest ' + expectedSize + ' (key ' + key + ')');
+        console.warn(pathEntry + ': R2 S3 API size ' + got + ' != manifest ' + expectedSize + ' (key ' + key + ')');
         return { pathEntry, ok: false, reason: 'size-mismatch' };
       }
-      return { pathEntry, ok: true, reason: 'ok' };
     } catch (e) {
       if (e.name === 'NotFound' || e.name === 'NoSuchKey' || e.Code === 'NoSuchKey') {
         console.warn(pathEntry + ': missing in R2 (' + key + ')');
@@ -159,6 +202,21 @@ async function runWithLimit(tasks, limit) {
       }
       throw e;
     }
+
+    if (VERIFY_PUBLIC_HEAD) {
+      const pubUrl = publicUrlForEntry(entry, assetName);
+      if (pubUrl) {
+        const pub = await headPublicUrl(pubUrl, expectedSize);
+        if (!pub.match) {
+          console.warn(
+            pathEntry + ': S3 OK but public URL differs from manifest — ' + pub.detail + '\n  ' + pubUrl
+          );
+          return { pathEntry, ok: false, reason: 'public-mismatch' };
+        }
+      }
+    }
+
+    return { pathEntry, ok: true, reason: 'ok' };
   });
 
   const results = await runWithLimit(tasks, concurrency);
@@ -179,13 +237,14 @@ async function runWithLimit(tasks, limit) {
       r2Files.length +
       ' object(s) checked, ' +
       unique.length +
-      ' need repair (HEAD only, no egress for file bodies)'
+      ' need repair' +
+      (VERIFY_PUBLIC_HEAD ? ' (S3 HEAD + public URL HEAD)' : ' (S3 API HEAD only)')
   );
   if (unique.length > 0 && process.env.PATCH_ASSETS_PUBLIC_URL) {
     console.log(
-      'Tip: If the launcher still sees a tiny body (e.g. 68 B) after repair, purge CDN cache for',
-      process.env.PATCH_ASSETS_PUBLIC_URL,
-      'or wait for TTL — old error responses are sometimes cached.'
+      'Tip: Purge CDN cache for',
+      process.env.PATCH_ASSETS_PUBLIC_URL + '/patches/' + VERSION + '/',
+      'if the launcher still fails after re-upload — stale edge responses often look like a different file each run.'
     );
   }
 })().catch((err) => {
