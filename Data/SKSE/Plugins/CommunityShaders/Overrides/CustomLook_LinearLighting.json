@@ -1,17 +1,18 @@
 {
-	"colorGamma": 1.65,
-	"vanillaDiffuseColorMult": 1.65,
-	"ambientMult": 0.42,
-	"pointLightMult": 1.15,
-	"directionalLightMult": 1.05,
-	"skyGamma": 1.75,
-	"waterGamma": 1.75,
-	"vlGamma": 1.75,
-	"fogGamma": 1.9,
+	"colorGamma": 1.6,
+	"ambientGamma": 1.82,
+	"vanillaDiffuseColorMult": 1.52,
+	"ambientMult": 0.28,
+	"pointLightMult": 1.14,
+	"directionalLightMult": 0.9,
+	"skyGamma": 1.52,
+	"waterGamma": 1.72,
+	"vlGamma": 1.62,
+	"fogGamma": 1.72,
 	"_metadata": {
 		"modName": "Custom look (repo preset)",
-		"version": "1.0.0",
-		"description": "Slightly richer color, lower ambient for darker scenes; bump point lights so torches read. Tune in-game or edit this file.",
+		"version": "1.2.0",
+		"description": "Global: dark exteriors, mild warm bias. Interiors: SceneSettings/InteriorOnly/WarmInt* (candlelit look: lower ambient, warmer gamma, stronger VL/points, less SSGI/IBL fill). Storms: Weathers/*.json.",
 		"enabled": true
 	}
 }

@@ -1,0 +1,9 @@
+{
+	"EnableIBL": 1,
+	"_metadata": {
+		"modName": "Custom look (repo preset)",
+		"version": "1.0.0",
+		"description": "Enable SH-based ambient from cubemaps (pair with Dynamic Cubemaps for env IBL). Tune scales in CS menu if too bright indoors.",
+		"enabled": true
+	}
+}

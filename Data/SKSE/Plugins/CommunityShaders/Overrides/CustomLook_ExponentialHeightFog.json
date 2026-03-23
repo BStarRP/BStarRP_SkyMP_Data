@@ -1,0 +1,9 @@
+{
+	"enabled": 1,
+	"_metadata": {
+		"modName": "Custom look (repo preset)",
+		"version": "1.0.0",
+		"description": "Enable exponential height fog; storm Weathers/*.json adjust tint and inscattering.",
+		"enabled": true
+	}
+}

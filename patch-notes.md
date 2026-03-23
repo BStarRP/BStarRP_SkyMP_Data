@@ -1,8 +1,7 @@
 # Patch notes
 
 **Summary**
-Community Shaders First Run
+Community Shaders 2nd Pass
 
 ## Changes
-- Added Community Shaders
-- Fixed File Info Checks With Name Spaces
+- Updated Community Shader Tone Tuning

@@ -1,0 +1,35 @@
+{
+	"featureSettings": {
+		"ExponentialHeightFog": {
+			"__enabled": true,
+			"Fog Density": 0.048,
+			"Directional Inscattering Multiplier": 3.1,
+			"Directional Inscattering Exponent": 4.2,
+			"Inscattering Cubemap Tint": [0.5, 0.62, 0.98, 1.32]
+		},
+		"ImageBasedLighting": {
+			"__enabled": true,
+			"SkyIBLScale": 1.05,
+			"SkyIBLSaturation": 1.18,
+			"EnvIBLScale": 0.9,
+			"EnvIBLSaturation": 0.85,
+			"DALCAmount": 0.52,
+			"FogAmount": 0.38
+		},
+		"Skylighting": {
+			"__enabled": true,
+			"MinDiffuseVisibility": 0.052,
+			"MinSpecularVisibility": 0.07
+		},
+		"LinearLighting": {
+			"__enabled": true,
+			"colorGamma": 1.5,
+			"ambientGamma": 1.78,
+			"ambientMult": 0.36,
+			"directionalLightMult": 1.08,
+			"vlGamma": 1.95,
+			"fogGamma": 1.74,
+			"skyGamma": 1.6
+		}
+	}
+}

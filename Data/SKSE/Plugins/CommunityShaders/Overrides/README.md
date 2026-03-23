@@ -10,6 +10,18 @@ Override files should be placed in:
 Data\SKSE\Plugins\CommunityShaders\Overrides\
 ```
 
+**Per-weather presets** (optional) go next to that folder, one JSON per weather **Editor ID**:
+
+```
+Data\SKSE\Plugins\CommunityShaders\Weathers\
+```
+
+Each file is named `{EditorID}.json` (for example `SkyrimStormRain.json`) and uses a `featureSettings` object. Features must expose weather variables (for example **LinearLighting**, **Skylighting**, **ExponentialHeightFog**, **ImageBasedLighting**). Enable a block with `"__enabled": true`. Use the in-game **Weather Editor** to confirm Editor IDs and to tune values.
+
+### Interior-only tuning (`SceneSettings/InteriorOnly/`)
+
+Shipped overwrite JSON files apply **only while you are in an interior cell**. Each file sets **one** feature field (Community Shaders merges them at load). Filenames end with `_{FeatureShortName}.json` (for example `WarmInt01_LinearLighting.json`). The repo includes a **WarmInt\*** set aimed at warm, localized lights and **dark corners** (lower ambient, stronger point lights and VL, reduced GI strength and IBL sky fill). Adjust or remove individual files to taste.
+
 ## File Naming Convention
 
 Override files must follow these naming patterns:
@@ -96,7 +108,8 @@ To create feature-specific overrides, you need to use the correct feature short 
 -   `GrassCollision` - Grass Collision
 -   `GrassLighting` - Grass Lighting
 -   `HairSpecular` - Hair Specular
--   `IBL` - Image-Based Lighting
+-   `ImageBasedLighting` - Image-Based Lighting (override filename: `ModName_ImageBasedLighting.json`)
+-   `ExponentialHeightFog` - Exponential Height Fog
 -   `LightLimitFix` - Light Limit Fix
 -   `LODBlending` - LOD Blending
 -   `InteriorSun` - Interior Sun
