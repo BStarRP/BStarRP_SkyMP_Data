@@ -11,6 +11,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const toAssetName = require('./to-asset-name');
 const { execFileSync } = require('child_process');
 
 const manifestPath = path.join(process.cwd(), 'dist-patch', 'manifest.json');
@@ -18,14 +19,6 @@ const uploadListPath = path.join(process.cwd(), 'dist-patch', 'github-assets-to-
 
 const LFS_POINTER_HEADER = 'version https://git-lfs.github.com/spec/v1';
 const prefix = 'Data';
-
-function toAssetName(pathEntry) {
-  return pathEntry
-    .replace(/\//g, '_')
-    .replace(/[^a-zA-Z0-9_.-]/g, '_')
-    .replace(/_+/g, '_')
-    .replace(/^_|_$/g, '');
-}
 
 function isLfsPointer(filePath) {
   try {

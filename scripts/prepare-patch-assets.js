@@ -15,6 +15,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const toAssetName = require('./to-asset-name');
 const fsp = fs.promises;
 const { execSync } = require('child_process');
 
@@ -67,14 +68,6 @@ function goesToR2(relativePath, size) {
   return false;
 }
 
-/** Asset name = path with slashes replaced by underscores, sanitized for filesystem and URLs. */
-function toAssetName(pathEntry) {
-  return pathEntry
-    .replace(/\//g, '_')
-    .replace(/[^a-zA-Z0-9_.-]/g, '_')
-    .replace(/_+/g, '_')
-    .replace(/^_|_$/g, '');
-}
 const LFS_POINTER_HEADER = 'version https://git-lfs.github.com/spec/v1';
 function isLfsPointer(filePath) {
   try {

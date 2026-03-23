@@ -16,6 +16,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const toAssetName = require('./to-asset-name');
 const {
   S3Client,
   HeadObjectCommand
@@ -76,14 +77,6 @@ function goesToR2(relativePath, size) {
   const { largeFileSizeThresholdBytes } = loadR2Config();
   if (largeFileSizeThresholdBytes != null && size >= largeFileSizeThresholdBytes) return true;
   return false;
-}
-
-function toAssetName(pathEntry) {
-  return pathEntry
-    .replace(/\//g, '_')
-    .replace(/[^a-zA-Z0-9_.-]/g, '_')
-    .replace(/_+/g, '_')
-    .replace(/^_|_$/g, '');
 }
 
 const r2Base =

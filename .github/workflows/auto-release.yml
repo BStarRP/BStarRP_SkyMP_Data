@@ -394,6 +394,15 @@ jobs:
             attempt=$((attempt + 1))
           done
 
+      - name: Purge Cloudflare cache for this patch (optional)
+        continue-on-error: true
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          PATCH_ASSETS_PUBLIC_URL: ${{ secrets.PATCH_ASSETS_PUBLIC_URL }}
+        run: node scripts/purge-cloudflare-patch-cache.js
+
       - name: Create or update release
         if: (github.event_name != 'workflow_dispatch' || (github.event_name == 'workflow_dispatch' && inputs.create_release_version != '')) && steps.version.outputs.version != steps.version.outputs.previous_version
         env:

@@ -152,6 +152,16 @@ jobs:
           gh release upload "${{ steps.rel.outputs.tag }}" dist-patch/manifest.json \
             --repo "${{ github.repository }}" --clobber
 
+      - name: Purge Cloudflare cache for this patch (optional)
+        if: steps.audit.outputs.mismatch_count != '0'
+        continue-on-error: true
+        env:
+          VERSION: ${{ steps.rel.outputs.version }}
+          CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          PATCH_ASSETS_PUBLIC_URL: ${{ secrets.PATCH_ASSETS_PUBLIC_URL }}
+        run: node scripts/purge-cloudflare-patch-cache.js
+
       - name: Summary
         if: always()
         run: |

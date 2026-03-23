@@ -14,6 +14,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const toAssetName = require('./to-asset-name');
 
 const FORCE_UPLOAD_ALL = /^1|true|yes$/i.test(String(process.env.FORCE_UPLOAD_ALL_SMALL_ASSETS || ''));
 
@@ -59,14 +60,6 @@ function goesToR2(relativePath, size) {
   const { largeFileSizeThresholdBytes } = loadConfig();
   if (largeFileSizeThresholdBytes != null && size >= largeFileSizeThresholdBytes) return true;
   return false;
-}
-
-function toAssetName(pathEntry) {
-  return pathEntry
-    .replace(/\//g, '_')
-    .replace(/[^a-zA-Z0-9_.-]/g, '_')
-    .replace(/_+/g, '_')
-    .replace(/^_|_$/g, '');
 }
 
 /** HEAD request; returns { ok, contentLength } (contentLength null if missing or invalid). */
