@@ -1,7 +1,8 @@
 # Patch notes
 
 **Summary**
-Small Cleanup
+Community Shaders First Run
 
 ## Changes
-- Removed / Organized Mods
+- Added Community Shaders
+- Fixed File Info Checks With Name Spaces

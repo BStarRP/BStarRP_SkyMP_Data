@@ -1,0 +1,10 @@
+{
+	"MinDiffuseVisibility": 0.06,
+	"MinSpecularVisibility": 0.08,
+	"_metadata": {
+		"modName": "Custom look (repo preset)",
+		"version": "1.0.0",
+		"description": "Lower skylighting floor so exteriors can go darker; pair with LinearLighting ambient and weather tweaks.",
+		"enabled": true
+	}
+}

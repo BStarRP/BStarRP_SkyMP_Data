@@ -1,0 +1,17 @@
+{
+	"colorGamma": 1.65,
+	"vanillaDiffuseColorMult": 1.65,
+	"ambientMult": 0.42,
+	"pointLightMult": 1.15,
+	"directionalLightMult": 1.05,
+	"skyGamma": 1.75,
+	"waterGamma": 1.75,
+	"vlGamma": 1.75,
+	"fogGamma": 1.9,
+	"_metadata": {
+		"modName": "Custom look (repo preset)",
+		"version": "1.0.0",
+		"description": "Slightly richer color, lower ambient for darker scenes; bump point lights so torches read. Tune in-game or edit this file.",
+		"enabled": true
+	}
+}
