@@ -19,6 +19,9 @@
  * Optional: FORCE_UPLOAD_ALL_SMALL_ASSETS=1 — upload all R2 assets from Data/ (do not copy from previous on R2).
  * Optional: --only-r2-paths=file.txt — one manifest path per line (e.g. Data/foo/bar.esp). Re-uploads only those
  *   from disk (never R2 copy-from-previous). Skips deleting old patches/* folders. Use after verify-r2-vs-manifest.js.
+ * Optional: R2_VERIFY_COPY_DEST=1 — after CopyObject, Head the destination too (slower; default off: source Head
+ *   already matched manifest size, server-side copy preserves length).
+ * Optional: R2_LOG_EACH_COPIED_ASSET=0 — omit per-file "Copied ..." lines (faster CI / smaller logs); summary still prints.
  */
 
 const fs = require('fs');
@@ -28,6 +31,8 @@ const { execFileSync } = require('child_process');
 const toAssetName = require('./to-asset-name');
 
 const FORCE_UPLOAD_ALL = /^1|true|yes$/i.test(String(process.env.FORCE_UPLOAD_ALL_SMALL_ASSETS || ''));
+const VERIFY_COPY_DEST = /^1|true|yes$/i.test(String(process.env.R2_VERIFY_COPY_DEST || ''));
+const LOG_EACH_COPIED = !/^0|false|no$/i.test(String(process.env.R2_LOG_EACH_COPIED_ASSET ?? '1'));
 const {
   S3Client,
   PutObjectCommand,
@@ -377,8 +382,10 @@ async function run() {
 
     if (canCopyFromPrevious) {
       const copySourceKey = `patches/${PREVIOUS_VERSION}/${assetName}`;
+      const expectedSize = typeof entry === 'object' && entry.size != null ? entry.size : 0;
+      let sourceHead;
       try {
-        await s3.send(new HeadObjectCommand({ Bucket: BUCKET, Key: copySourceKey }));
+        sourceHead = await s3.send(new HeadObjectCommand({ Bucket: BUCKET, Key: copySourceKey }));
       } catch (headErr) {
         if (headErr.name === 'NotFound' || headErr.name === 'NoSuchKey' || headErr.Code === 'NoSuchKey') {
           return await uploadFromLocal(
@@ -391,6 +398,18 @@ async function run() {
         }
         throw headErr;
       }
+      const sourceLen = sourceHead.ContentLength ?? 0;
+      if (expectedSize > 0 && sourceLen !== expectedSize) {
+        console.warn(
+          pathEntry +
+            ': previous R2 object size ' +
+            sourceLen +
+            ' != manifest ' +
+            expectedSize +
+            '; replacing from repo'
+        );
+        return await uploadFromLocal(pathEntry, src, destKey, entry, '(replaced mismatched previous R2 object)');
+      }
       await s3.send(
         new CopyObjectCommand({
           Bucket: BUCKET,
@@ -400,14 +419,13 @@ async function run() {
           ContentType: 'application/octet-stream'
         })
       );
-      const expectedSize = typeof entry === 'object' && entry.size != null ? entry.size : 0;
-      if (expectedSize > 0) {
+      if (VERIFY_COPY_DEST && expectedSize > 0) {
         const head = await s3.send(new HeadObjectCommand({ Bucket: BUCKET, Key: destKey }));
         const copiedSize = head.ContentLength ?? 0;
         if (copiedSize !== expectedSize) {
           console.warn(
             pathEntry +
-              ': R2 copy size ' +
+              ': R2 copy dest size ' +
               copiedSize +
               ' != manifest ' +
               expectedSize +
@@ -422,7 +440,9 @@ async function run() {
           );
         }
       }
-      console.log('Copied', destKey, '(unchanged from previous, size verified)');
+      if (LOG_EACH_COPIED) {
+        console.log('Copied', destKey, '(unchanged from previous, size verified)');
+      }
       return 'copied';
     }
     return await uploadFromLocal(pathEntry, src, destKey, entry, '');

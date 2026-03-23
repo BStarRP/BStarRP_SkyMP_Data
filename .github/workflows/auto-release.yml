@@ -370,6 +370,7 @@ jobs:
           VERSION: ${{ steps.version.outputs.version }}
           FORCE_UPLOAD_ALL_SMALL_ASSETS: ${{ github.event.inputs.force_upload_all_small_assets == 'true' && '1' || '' }}
           R2_CONCURRENCY: 8
+          R2_LOG_EACH_COPIED_ASSET: '0'
           R2_CONNECTION_TIMEOUT_MS: 120000
           R2_REQUEST_TIMEOUT_MS: 180000
           R2_MAX_ATTEMPTS: 8
