@@ -27,8 +27,13 @@
  * Optional: R2_PUT_BUFFER_MAX_BYTES — files up to this size use an in-memory buffer for PutObject (default 33554432).
  * Optional: R2_VERIFY_PUT_HEAD=0 — skip HeadObject after each PutObject (halves R2 calls; use verify-r2-vs-manifest.js / repair if needed).
  * Optional: R2_PUT_DEADLINE_MS, R2_HEAD_DEADLINE_MS, R2_LIST_DEADLINE_MS — hard abort per operation (0 = auto from size).
+ * Optional: R2_COPY_DEADLINE_MS — CopyObject abort deadline (default 900000). Under load R2 can queue copies; keep
+ *   R2_REQUEST_TIMEOUT_MS >= this or you will see @smithy/node-http-handler requestTimeout warnings / stalled copies.
  * Optional: R2_MAX_SOCKETS — https agent maxSockets (default 128) to reduce connection pile-up with high concurrency.
  * Optional: R2_ENABLE_OLD_PATCH_CLEANUP=1 — run post-upload patches/* list+delete sweep (default off for faster releases).
+ * Optional: R2_PREFETCH_PREV_PREFIX=0 — disable one-shot ListObjects of patches/<prev>/ (falls back to per-file Head before Copy).
+ * Optional: R2_PREFETCH_FULL_PREFIX_MIN_COPIES (default 1500) — only list the entire previous prefix when at least this
+ *   many assets will CopyObject from it. Below that, use parallel Head per file (fast for small delta releases).
  */
 
 const fs = require('fs');
@@ -264,7 +269,9 @@ const s3 = new S3Client({
     httpAgent: r2HttpAgent,
     httpsAgent: r2HttpsAgent,
     connectionTimeout: parseInt(process.env.R2_CONNECTION_TIMEOUT_MS || '60000', 10) || 60000,
-    requestTimeout: parseInt(process.env.R2_REQUEST_TIMEOUT_MS || '120000', 10) || 120000
+    // Default 10m: must cover CopyObject under contention; 180s causes Smithy warnings and copies can exceed it.
+    requestTimeout: parseInt(process.env.R2_REQUEST_TIMEOUT_MS || '600000', 10) || 600000,
+    throwOnRequestTimeout: false
   })
 });
 
@@ -283,6 +290,47 @@ function deadlineHeadMs() {
 
 function deadlineListMs() {
   return Math.max(60_000, parseInt(process.env.R2_LIST_DEADLINE_MS || String(5 * 60 * 1000), 10) || 5 * 60 * 1000);
+}
+
+function deadlineCopyMs() {
+  return Math.max(120_000, parseInt(process.env.R2_COPY_DEADLINE_MS || String(15 * 60 * 1000), 10) || 15 * 60 * 1000);
+}
+
+/**
+ * Walk patches/<prev>/ once; map full object Key -> Size. Replaces one HeadObject per unchanged file (~10k+ API calls).
+ */
+async function listAllKeysAndSizesUnderPrefix(prefix) {
+  const map = new Map();
+  let continuationToken = undefined;
+  do {
+    const list = await s3Send(
+      new ListObjectsV2Command({
+        Bucket: BUCKET,
+        Prefix: prefix,
+        ContinuationToken: continuationToken,
+        MaxKeys: 1000
+      }),
+      prefix,
+      'ListObjects(prefetch-prev)',
+      deadlineListMs()
+    );
+    for (const o of list.Contents || []) {
+      if (o.Key) map.set(o.Key, Number(o.Size) || 0);
+    }
+    continuationToken = list.IsTruncated ? list.NextContinuationToken : undefined;
+  } while (continuationToken);
+  return map;
+}
+
+/** After retries, fall back to PutObject from disk so one slow Copy does not fail the whole release. */
+function shouldFallbackCopyToUpload(err) {
+  const m = String((err && err.message) || err || '');
+  const n = err && err.name;
+  return (
+    /CopyObject exceeded \d+ms/.test(m) ||
+    n === 'TimeoutError' ||
+    /timeout|ETIMEDOUT|ECONNRESET|socket hang up|EPIPE|ENETUNREACH/i.test(m)
+  );
 }
 
 /**
@@ -497,6 +545,58 @@ async function run() {
   let uploaded = 0;
   const newVersion = PREVIOUS_VERSION && PREVIOUS_VERSION !== VERSION;
 
+  let prevPrefixSizeMap = null;
+  const prefetchPrev =
+    !FORCE_UPLOAD_ALL &&
+    !targetedRepair &&
+    newVersion &&
+    prevMap &&
+    PREVIOUS_VERSION &&
+    !/^0|false|no$/i.test(String(process.env.R2_PREFETCH_PREV_PREFIX ?? '1'));
+
+  let copyFromPrevCount = 0;
+  if (prefetchPrev) {
+    for (const entry of r2Files) {
+      const pathEntry = typeof entry === 'string' ? entry : entry.path;
+      const hash = typeof entry === 'object' && entry.hash != null ? entry.hash : null;
+      if (prevMap.get(pathEntry) === hash) copyFromPrevCount++;
+    }
+  }
+
+  const minBulkPrefetch = Math.max(
+    0,
+    parseInt(process.env.R2_PREFETCH_FULL_PREFIX_MIN_COPIES || '1500', 10) || 1500
+  );
+  const useBulkPrefixPrefetch =
+    prefetchPrev && copyFromPrevCount >= minBulkPrefetch;
+
+  if (useBulkPrefixPrefetch) {
+    const prevP = `patches/${PREVIOUS_VERSION}/`;
+    console.log(
+      'R2: bulk listing previous prefix',
+      prevP,
+      '(' + copyFromPrevCount + ' copy ops ≥ threshold ' + minBulkPrefetch + ')'
+    );
+    const t0 = Date.now();
+    prevPrefixSizeMap = await listAllKeysAndSizesUnderPrefix(prevP);
+    console.log(
+      'R2: prefetched',
+      prevPrefixSizeMap.size,
+      'keys in',
+      (Date.now() - t0) / 1000,
+      's'
+    );
+    if (prevPrefixSizeMap.size === 0) {
+      console.warn('R2: prefetch returned 0 keys; copy-from-previous may fall back to uploads for missing objects');
+    }
+  } else if (prefetchPrev && copyFromPrevCount > 0) {
+    console.log(
+      'R2: per-file Head for',
+      copyFromPrevCount,
+      'copy ops (below bulk threshold ' + minBulkPrefetch + '; avoids listing entire previous patch prefix)'
+    );
+  }
+
   const tasks = r2Files.map((entry) => async () => {
     const pathEntry = typeof entry === 'string' ? entry : entry.path;
     const hash = typeof entry === 'object' && entry.hash != null ? entry.hash : null;
@@ -511,16 +611,9 @@ async function run() {
     if (canCopyFromPrevious) {
       const copySourceKey = `patches/${PREVIOUS_VERSION}/${assetName}`;
       const expectedSize = typeof entry === 'object' && entry.size != null ? entry.size : 0;
-      let sourceHead;
-      try {
-        sourceHead = await s3Send(
-          new HeadObjectCommand({ Bucket: BUCKET, Key: copySourceKey }),
-          pathEntry,
-          'HeadObject(copy source)',
-          deadlineHeadMs()
-        );
-      } catch (headErr) {
-        if (headErr.name === 'NotFound' || headErr.name === 'NoSuchKey' || headErr.Code === 'NoSuchKey') {
+      let sourceLen;
+      if (prevPrefixSizeMap != null) {
+        if (!prevPrefixSizeMap.has(copySourceKey)) {
           return await uploadFromLocal(
             pathEntry,
             src,
@@ -529,9 +622,30 @@ async function run() {
             '(previous R2 key missing; uploaded from repo)'
           );
         }
-        throw headErr;
+        sourceLen = prevPrefixSizeMap.get(copySourceKey) ?? 0;
+      } else {
+        let sourceHead;
+        try {
+          sourceHead = await s3Send(
+            new HeadObjectCommand({ Bucket: BUCKET, Key: copySourceKey }),
+            pathEntry,
+            'HeadObject(copy source)',
+            deadlineHeadMs()
+          );
+        } catch (headErr) {
+          if (headErr.name === 'NotFound' || headErr.name === 'NoSuchKey' || headErr.Code === 'NoSuchKey') {
+            return await uploadFromLocal(
+              pathEntry,
+              src,
+              destKey,
+              entry,
+              '(previous R2 key missing; uploaded from repo)'
+            );
+          }
+          throw headErr;
+        }
+        sourceLen = sourceHead.ContentLength ?? 0;
       }
-      const sourceLen = sourceHead.ContentLength ?? 0;
       if (expectedSize > 0 && sourceLen !== expectedSize) {
         console.warn(
           pathEntry +
@@ -543,18 +657,34 @@ async function run() {
         );
         return await uploadFromLocal(pathEntry, src, destKey, entry, '(replaced mismatched previous R2 object)');
       }
-      await s3Send(
-        new CopyObjectCommand({
-          Bucket: BUCKET,
-          Key: destKey,
-          CopySource: `${BUCKET}/${copySourceKey}`,
-          CacheControl: PATCH_ASSETS_CACHE_CONTROL,
-          ContentType: 'application/octet-stream'
-        }),
-        pathEntry,
-        'CopyObject',
-        deadlineListMs()
-      );
+      try {
+        await s3Send(
+          new CopyObjectCommand({
+            Bucket: BUCKET,
+            Key: destKey,
+            CopySource: `${BUCKET}/${copySourceKey}`,
+            CacheControl: PATCH_ASSETS_CACHE_CONTROL,
+            ContentType: 'application/octet-stream'
+          }),
+          pathEntry,
+          'CopyObject',
+          deadlineCopyMs()
+        );
+      } catch (copyErr) {
+        if (shouldFallbackCopyToUpload(copyErr)) {
+          console.warn(
+            pathEntry + ': CopyObject failed (' + ((copyErr && copyErr.message) || copyErr) + '); uploading from repo'
+          );
+          return await uploadFromLocal(
+            pathEntry,
+            src,
+            destKey,
+            entry,
+            '(CopyObject slow/failed; uploaded from repo)'
+          );
+        }
+        throw copyErr;
+      }
       if (VERIFY_COPY_DEST && expectedSize > 0) {
         const head = await s3Send(
           new HeadObjectCommand({ Bucket: BUCKET, Key: destKey }),

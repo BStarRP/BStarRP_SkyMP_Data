@@ -110,7 +110,8 @@ const s3 = new S3Client({
   maxAttempts: Math.max(1, parseInt(process.env.R2_MAX_ATTEMPTS || '6', 10) || 6),
   requestHandler: new NodeHttpHandler({
     connectionTimeout: parseInt(process.env.R2_CONNECTION_TIMEOUT_MS || '60000', 10) || 60000,
-    requestTimeout: parseInt(process.env.R2_REQUEST_TIMEOUT_MS || '120000', 10) || 120000
+    requestTimeout: parseInt(process.env.R2_REQUEST_TIMEOUT_MS || '600000', 10) || 600000,
+    throwOnRequestTimeout: false
   })
 });
 

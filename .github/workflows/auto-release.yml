@@ -369,12 +369,13 @@ jobs:
           PATCH_ASSETS_PUBLIC_URL: ${{ secrets.PATCH_ASSETS_PUBLIC_URL }}
           VERSION: ${{ steps.version.outputs.version }}
           FORCE_UPLOAD_ALL_SMALL_ASSETS: ${{ github.event.inputs.force_upload_all_small_assets == 'true' && '1' || '' }}
-          R2_CONCURRENCY: 6
+          R2_CONCURRENCY: 8
           R2_VERIFY_PUT_HEAD: '0'
           R2_MAX_SOCKETS: '128'
           R2_LOG_EACH_COPIED_ASSET: '0'
           R2_CONNECTION_TIMEOUT_MS: 120000
-          R2_REQUEST_TIMEOUT_MS: 180000
+          R2_REQUEST_TIMEOUT_MS: 600000
+          R2_COPY_DEADLINE_MS: 900000
           R2_MAX_ATTEMPTS: 4
         run: |
           PREV_ARGS=""
