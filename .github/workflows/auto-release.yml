@@ -36,6 +36,8 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      NODE_OPTIONS: --dns-result-order=ipv4first
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -367,7 +369,10 @@ jobs:
           PATCH_ASSETS_PUBLIC_URL: ${{ secrets.PATCH_ASSETS_PUBLIC_URL }}
           VERSION: ${{ steps.version.outputs.version }}
           FORCE_UPLOAD_ALL_SMALL_ASSETS: ${{ github.event.inputs.force_upload_all_small_assets == 'true' && '1' || '' }}
-          R2_CONCURRENCY: 12
+          R2_CONCURRENCY: 8
+          R2_CONNECTION_TIMEOUT_MS: 120000
+          R2_REQUEST_TIMEOUT_MS: 180000
+          R2_MAX_ATTEMPTS: 8
         run: |
           PREV_ARGS=""
           if [ -f prev-manifest.json ]; then

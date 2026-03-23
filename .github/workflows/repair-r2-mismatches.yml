@@ -19,6 +19,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+    env:
+      # R2 uses Cloudflare; runners often fail IPv6 (ENETUNREACH) or time out parallel connects — prefer IPv4.
+      NODE_OPTIONS: --dns-result-order=ipv4first
     steps:
       - name: Resolve release tag
         id: rel
@@ -80,16 +83,33 @@ jobs:
           PATCH_ASSETS_BUCKET: ${{ secrets.PATCH_ASSETS_BUCKET }}
           PATCH_ASSETS_ACCOUNT_ID: ${{ secrets.PATCH_ASSETS_ACCOUNT_ID }}
           PATCH_ASSETS_PUBLIC_URL: ${{ secrets.PATCH_ASSETS_PUBLIC_URL }}
-          R2_CONCURRENCY: 24
+          R2_CONCURRENCY: 8
+          R2_CONNECTION_TIMEOUT_MS: 120000
+          R2_REQUEST_TIMEOUT_MS: 180000
+          R2_MAX_ATTEMPTS: 8
         run: |
-          node scripts/verify-r2-vs-manifest.js --manifest=dist-patch/manifest.json --out=dist-patch/r2-repair-paths.txt
-          if [ -s dist-patch/r2-repair-paths.txt ]; then
-            n=$(wc -l < dist-patch/r2-repair-paths.txt | tr -d ' ')
-          else
-            n=0
-          fi
-          echo "mismatch_count=$n" >> $GITHUB_OUTPUT
-          echo "Paths needing repair: $n"
+          set -e
+          MAX_ATTEMPTS=3
+          attempt=1
+          while [ "$attempt" -le "$MAX_ATTEMPTS" ]; do
+            if node scripts/verify-r2-vs-manifest.js --manifest=dist-patch/manifest.json --out=dist-patch/r2-repair-paths.txt; then
+              if [ -s dist-patch/r2-repair-paths.txt ]; then
+                n=$(wc -l < dist-patch/r2-repair-paths.txt | tr -d ' ')
+              else
+                n=0
+              fi
+              echo "mismatch_count=$n" >> $GITHUB_OUTPUT
+              echo "Paths needing repair: $n"
+              exit 0
+            fi
+            if [ "$attempt" -ge "$MAX_ATTEMPTS" ]; then
+              echo "R2 audit failed after $MAX_ATTEMPTS attempts (ETIMEDOUT/ENETUNREACH to Cloudflare)"
+              exit 1
+            fi
+            echo "R2 audit attempt $attempt failed; retrying in 30s..."
+            sleep 30
+            attempt=$((attempt + 1))
+          done
 
       - name: Pull LFS for repair list
         if: steps.audit.outputs.mismatch_count != '0'
@@ -104,9 +124,24 @@ jobs:
           PATCH_ASSETS_BUCKET: ${{ secrets.PATCH_ASSETS_BUCKET }}
           PATCH_ASSETS_ACCOUNT_ID: ${{ secrets.PATCH_ASSETS_ACCOUNT_ID }}
           PATCH_ASSETS_PUBLIC_URL: ${{ secrets.PATCH_ASSETS_PUBLIC_URL }}
-          R2_CONCURRENCY: 12
+          R2_CONCURRENCY: 8
+          R2_CONNECTION_TIMEOUT_MS: 120000
+          R2_REQUEST_TIMEOUT_MS: 180000
+          R2_MAX_ATTEMPTS: 8
         run: |
-          node scripts/upload-lfs-assets.js Data --prefix=Data --only-r2-paths=dist-patch/r2-repair-paths.txt
+          MAX_ATTEMPTS=3
+          attempt=1
+          while [ "$attempt" -le "$MAX_ATTEMPTS" ]; do
+            if node scripts/upload-lfs-assets.js Data --prefix=Data --only-r2-paths=dist-patch/r2-repair-paths.txt; then
+              exit 0
+            fi
+            if [ "$attempt" -ge "$MAX_ATTEMPTS" ]; then
+              exit 1
+            fi
+            echo "R2 upload attempt $attempt failed; retrying in 30s..."
+            sleep 30
+            attempt=$((attempt + 1))
+          done
 
       - name: Publish manifest if upload adjusted entries
         if: steps.audit.outputs.mismatch_count != '0'
