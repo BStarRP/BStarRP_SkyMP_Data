@@ -25,17 +25,25 @@
  * Optional: GIT_LFS_PULL_TIMEOUT_MS / GIT_CHECKOUT_TIMEOUT_MS — exec timeouts (default 480000 / 120000) so a stuck LFS
  *   pull cannot block the whole upload job forever.
  * Optional: R2_PUT_BUFFER_MAX_BYTES — files up to this size use an in-memory buffer for PutObject (default 33554432).
+ * Optional: R2_VERIFY_PUT_HEAD=0 — skip HeadObject after each PutObject (halves R2 calls; use verify-r2-vs-manifest.js / repair if needed).
+ * Optional: R2_PUT_DEADLINE_MS, R2_HEAD_DEADLINE_MS, R2_LIST_DEADLINE_MS — hard abort per operation (0 = auto from size).
+ * Optional: R2_MAX_SOCKETS — https agent maxSockets (default 128) to reduce connection pile-up with high concurrency.
  */
 
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const http = require('http');
+const https = require('https');
 const { execFileSync } = require('child_process');
 const toAssetName = require('./to-asset-name');
 
 const FORCE_UPLOAD_ALL = /^1|true|yes$/i.test(String(process.env.FORCE_UPLOAD_ALL_SMALL_ASSETS || ''));
 const VERIFY_COPY_DEST = /^1|true|yes$/i.test(String(process.env.R2_VERIFY_COPY_DEST || ''));
 const LOG_EACH_COPIED = !/^0|false|no$/i.test(String(process.env.R2_LOG_EACH_COPIED_ASSET ?? '1'));
+/** Post-Put Head doubles R2 calls; under load Head can stall — disable in CI if you audit with verify-r2-vs-manifest.js. */
+const VERIFY_PUT_HEAD = !/^0|false|no$/i.test(String(process.env.R2_VERIFY_PUT_HEAD ?? '1'));
+const R2_VERBOSE_UPLOAD = /^1|true|yes$/i.test(String(process.env.R2_VERBOSE_R2_UPLOAD || ''));
 const {
   S3Client,
   PutObjectCommand,
@@ -233,6 +241,15 @@ function manifestPathHashMap(manifest) {
 }
 
 const endpoint = `https://${ACCOUNT_ID}.r2.cloudflarestorage.com`;
+
+const R2_MAX_SOCKETS = Math.max(16, parseInt(process.env.R2_MAX_SOCKETS || '128', 10) || 128);
+const agentOpts = { keepAlive: true, keepAliveMsecs: 1000, maxSockets: R2_MAX_SOCKETS };
+if (parseInt(process.versions.node.split('.')[0], 10) >= 18) {
+  agentOpts.scheduling = 'lifo';
+}
+const r2HttpsAgent = new https.Agent(agentOpts);
+const r2HttpAgent = new http.Agent(agentOpts);
+
 const s3 = new S3Client({
   region: 'auto',
   endpoint,
@@ -242,10 +259,56 @@ const s3 = new S3Client({
   },
   maxAttempts: Math.max(1, parseInt(process.env.R2_MAX_ATTEMPTS || '6', 10) || 6),
   requestHandler: new NodeHttpHandler({
+    httpAgent: r2HttpAgent,
+    httpsAgent: r2HttpsAgent,
     connectionTimeout: parseInt(process.env.R2_CONNECTION_TIMEOUT_MS || '60000', 10) || 60000,
     requestTimeout: parseInt(process.env.R2_REQUEST_TIMEOUT_MS || '120000', 10) || 120000
   })
 });
+
+function deadlinePutMs(uploadSizeBytes) {
+  const fixed = parseInt(process.env.R2_PUT_DEADLINE_MS || '0', 10);
+  if (fixed > 0) return fixed;
+  const perMb = parseInt(process.env.R2_PUT_DEADLINE_PER_MB_MS || '90000', 10) || 90000;
+  const cap = parseInt(process.env.R2_PUT_DEADLINE_MAX_MS || String(30 * 60 * 1000), 10) || 30 * 60 * 1000;
+  const mb = Math.max(1, Math.ceil(Number(uploadSizeBytes) / (1024 * 1024)));
+  return Math.min(cap, Math.max(90_000, 45_000 + mb * perMb));
+}
+
+function deadlineHeadMs() {
+  return Math.max(15_000, parseInt(process.env.R2_HEAD_DEADLINE_MS || '120000', 10) || 120000);
+}
+
+function deadlineListMs() {
+  return Math.max(60_000, parseInt(process.env.R2_LIST_DEADLINE_MS || String(5 * 60 * 1000), 10) || 5 * 60 * 1000);
+}
+
+/**
+ * Abort hung S3 calls (R2 sometimes leaves requests without closing — requestTimeout alone may not fire in all cases).
+ */
+async function s3Send(command, contextLabel, phase, deadlineMs) {
+  const ctrl = new AbortController();
+  const timer = setTimeout(() => ctrl.abort(), deadlineMs);
+  try {
+    return await s3.send(command, { abortSignal: ctrl.signal });
+  } catch (e) {
+    const name = e && e.name;
+    const msg = String((e && e.message) || e || '');
+    if (name === 'AbortError' || ctrl.signal.aborted || /aborted|abort/i.test(msg)) {
+      throw new Error(
+        contextLabel +
+          ': ' +
+          phase +
+          ' exceeded ' +
+          deadlineMs +
+          'ms (hard deadline). Try R2_CONCURRENCY=4, R2_VERIFY_PUT_HEAD=0, or check R2/network.'
+      );
+    }
+    throw e;
+  } finally {
+    clearTimeout(timer);
+  }
+}
 
 const R2_PUT_BUFFER_MAX_BYTES = Math.max(
   0,
@@ -255,8 +318,13 @@ const R2_PUT_BUFFER_MAX_BYTES = Math.max(
 /** Fail fast if PutObject did not store the expected byte length (mirrors post-copy HeadObject check). */
 async function verifyR2UploadedSize(destKey, expectedSize, pathEntry) {
   if (expectedSize <= 0) return;
-  console.log('[R2] HeadObject verify:', pathEntry);
-  const head = await s3.send(new HeadObjectCommand({ Bucket: BUCKET, Key: destKey }));
+  if (R2_VERBOSE_UPLOAD) console.log('[R2] HeadObject verify:', pathEntry);
+  const head = await s3Send(
+    new HeadObjectCommand({ Bucket: BUCKET, Key: destKey }),
+    pathEntry,
+    'HeadObject(verify)',
+    deadlineHeadMs()
+  );
   const got = head.ContentLength ?? 0;
   if (got !== expectedSize) {
     throw new Error(
@@ -362,21 +430,29 @@ async function uploadFromLocal(pathEntry, src, destKey, entry, logSuffix) {
   const uploadSize = fs.statSync(src).size;
   const useBuffer = R2_PUT_BUFFER_MAX_BYTES > 0 && uploadSize <= R2_PUT_BUFFER_MAX_BYTES;
   const body = useBuffer ? fs.readFileSync(src) : fs.createReadStream(src);
-  console.log(
-    '[R2] PutObject:',
-    pathEntry,
-    '(' + uploadSize + ' bytes' + (useBuffer ? ', buffered' : ', stream') + ')'
-  );
-  await s3.send(
+  if (R2_VERBOSE_UPLOAD) {
+    console.log(
+      '[R2] PutObject:',
+      pathEntry,
+      '(' + uploadSize + ' bytes' + (useBuffer ? ', buffered' : ', stream') + ')'
+    );
+  }
+  await s3Send(
     new PutObjectCommand({
       Bucket: BUCKET,
       Key: destKey,
       Body: body,
       CacheControl: PATCH_ASSETS_CACHE_CONTROL,
       ContentType: 'application/octet-stream'
-    })
+    }),
+    pathEntry,
+    'PutObject',
+    deadlinePutMs(uploadSize)
   );
-  await verifyR2UploadedSize(destKey, uploadSize, pathEntry);
+  if (R2_VERBOSE_UPLOAD) console.log('[R2] PutObject done:', pathEntry);
+  if (VERIFY_PUT_HEAD) {
+    await verifyR2UploadedSize(destKey, uploadSize, pathEntry);
+  }
   console.log('Uploaded', destKey + (logSuffix ? ' ' + logSuffix : ''));
   return 'uploaded';
 }
@@ -434,7 +510,12 @@ async function run() {
       const expectedSize = typeof entry === 'object' && entry.size != null ? entry.size : 0;
       let sourceHead;
       try {
-        sourceHead = await s3.send(new HeadObjectCommand({ Bucket: BUCKET, Key: copySourceKey }));
+        sourceHead = await s3Send(
+          new HeadObjectCommand({ Bucket: BUCKET, Key: copySourceKey }),
+          pathEntry,
+          'HeadObject(copy source)',
+          deadlineHeadMs()
+        );
       } catch (headErr) {
         if (headErr.name === 'NotFound' || headErr.name === 'NoSuchKey' || headErr.Code === 'NoSuchKey') {
           return await uploadFromLocal(
@@ -459,17 +540,25 @@ async function run() {
         );
         return await uploadFromLocal(pathEntry, src, destKey, entry, '(replaced mismatched previous R2 object)');
       }
-      await s3.send(
+      await s3Send(
         new CopyObjectCommand({
           Bucket: BUCKET,
           Key: destKey,
           CopySource: `${BUCKET}/${copySourceKey}`,
           CacheControl: PATCH_ASSETS_CACHE_CONTROL,
           ContentType: 'application/octet-stream'
-        })
+        }),
+        pathEntry,
+        'CopyObject',
+        deadlineListMs()
       );
       if (VERIFY_COPY_DEST && expectedSize > 0) {
-        const head = await s3.send(new HeadObjectCommand({ Bucket: BUCKET, Key: destKey }));
+        const head = await s3Send(
+          new HeadObjectCommand({ Bucket: BUCKET, Key: destKey }),
+          pathEntry,
+          'HeadObject(copy dest)',
+          deadlineHeadMs()
+        );
         const copiedSize = head.ContentLength ?? 0;
         if (copiedSize !== expectedSize) {
           console.warn(
@@ -512,16 +601,20 @@ async function run() {
   }
 
   // List all patch version prefixes (patches/X.Y.Z/) and delete any older than the 3 most recent
+  console.log('R2: listing patch prefixes for cleanup (separate phase from per-file uploads)...');
   let prefixToken = undefined;
   const versionPrefixes = [];
   do {
-    const list = await s3.send(
+    const list = await s3Send(
       new ListObjectsV2Command({
         Bucket: BUCKET,
         Prefix: 'patches/',
         Delimiter: '/',
         ContinuationToken: prefixToken
-      })
+      }),
+      'ListObjectsV2 patches/',
+      'ListObjects(prefixes)',
+      deadlineListMs()
     );
     const prefixes = list.CommonPrefixes || [];
     for (const p of prefixes) {
@@ -542,20 +635,26 @@ async function run() {
       let continuationToken = undefined;
       let deletedCount = 0;
       do {
-        const list = await s3.send(
+        const list = await s3Send(
           new ListObjectsV2Command({
             Bucket: BUCKET,
             Prefix: `patches/${ver}/`,
             ContinuationToken: continuationToken
-          })
+          }),
+          'ListObjectsV2 patches/' + ver,
+          'ListObjects(delete scan)',
+          deadlineListMs()
         );
         const keys = (list.Contents || []).map((o) => ({ Key: o.Key }));
         if (keys.length > 0) {
-          await s3.send(
+          await s3Send(
             new DeleteObjectsCommand({
               Bucket: BUCKET,
               Delete: { Objects: keys }
-            })
+            }),
+            'DeleteObjects patches/' + ver,
+            'DeleteObjects',
+            deadlineListMs()
           );
           deletedCount += keys.length;
         }
