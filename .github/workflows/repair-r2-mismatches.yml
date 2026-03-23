@@ -1,0 +1,118 @@
+# Scan R2 with S3 HEAD (no full file download), then re-upload only objects whose size
+# differs from manifest.json or are missing. Cheaper than "Force re-upload ALL assets".
+#
+# Actions → Repair R2 manifest mismatches → Run workflow
+# Optional: set release tag (e.g. v0.31.0); leave empty to use the latest GitHub release.
+
+name: Repair R2 manifest mismatches
+
+on:
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: 'Release tag to repair (e.g. v0.31.0). Empty = latest release.'
+        required: false
+        type: string
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Resolve release tag
+        id: rel
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          INPUT_TAG: ${{ inputs.release_tag }}
+        run: |
+          set -e
+          if [ -z "$INPUT_TAG" ]; then
+            TAG=$(gh release view --repo "${{ github.repository }}" --json tagName -q .tagName)
+          else
+            T="${INPUT_TAG#v}"
+            TAG="v${T}"
+          fi
+          echo "tag=$TAG" >> $GITHUB_OUTPUT
+          echo "version=${TAG#v}" >> $GITHUB_OUTPUT
+          echo "Repairing release $TAG (patch version ${TAG#v})"
+
+      - name: Checkout release commit
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          ref: ${{ steps.rel.outputs.tag }}
+          lfs: false
+
+      - name: Setup Git LFS (no fetch)
+        run: git lfs install --local
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: 'npm'
+
+      - name: Download manifest from release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p dist-patch
+          gh release download "${{ steps.rel.outputs.tag }}" --repo "${{ github.repository }}" \
+            --pattern "manifest.json" --dir dist-patch --clobber
+          test -f dist-patch/manifest.json
+
+      - name: npm ci
+        run: npm ci
+
+      - name: Audit R2 vs manifest (HEAD only)
+        id: audit
+        env:
+          VERSION: ${{ steps.rel.outputs.version }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          PATCH_ASSETS_BUCKET: ${{ secrets.PATCH_ASSETS_BUCKET }}
+          PATCH_ASSETS_ACCOUNT_ID: ${{ secrets.PATCH_ASSETS_ACCOUNT_ID }}
+          PATCH_ASSETS_PUBLIC_URL: ${{ secrets.PATCH_ASSETS_PUBLIC_URL }}
+          R2_CONCURRENCY: 24
+        run: |
+          node scripts/verify-r2-vs-manifest.js --manifest=dist-patch/manifest.json --out=dist-patch/r2-repair-paths.txt
+          if [ -s dist-patch/r2-repair-paths.txt ]; then
+            n=$(wc -l < dist-patch/r2-repair-paths.txt | tr -d ' ')
+          else
+            n=0
+          fi
+          echo "mismatch_count=$n" >> $GITHUB_OUTPUT
+          echo "Paths needing repair: $n"
+
+      - name: Pull LFS for repair list
+        if: steps.audit.outputs.mismatch_count != '0'
+        run: node scripts/pull-lfs-for-path-list.js dist-patch/r2-repair-paths.txt
+
+      - name: Re-upload mismatched objects to R2
+        if: steps.audit.outputs.mismatch_count != '0'
+        env:
+          VERSION: ${{ steps.rel.outputs.version }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          PATCH_ASSETS_BUCKET: ${{ secrets.PATCH_ASSETS_BUCKET }}
+          PATCH_ASSETS_ACCOUNT_ID: ${{ secrets.PATCH_ASSETS_ACCOUNT_ID }}
+          PATCH_ASSETS_PUBLIC_URL: ${{ secrets.PATCH_ASSETS_PUBLIC_URL }}
+          R2_CONCURRENCY: 12
+        run: |
+          node scripts/upload-lfs-assets.js Data --prefix=Data --only-r2-paths=dist-patch/r2-repair-paths.txt
+
+      - name: Publish manifest if upload adjusted entries
+        if: steps.audit.outputs.mismatch_count != '0'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release upload "${{ steps.rel.outputs.tag }}" dist-patch/manifest.json \
+            --repo "${{ github.repository }}" --clobber
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "mismatch_count=${{ steps.audit.outputs.mismatch_count }}"
+          if [ "${{ steps.audit.outputs.mismatch_count }}" = "0" ]; then
+            echo "All R2 objects matched manifest sizes; no uploads."
+          fi

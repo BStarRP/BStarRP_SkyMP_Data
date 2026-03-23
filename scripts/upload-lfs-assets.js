@@ -6,17 +6,23 @@
  *   Deletes patch folders older than the 3 most recent (keeps last 3 patch versions).
  * - Off-GitHub assets (in manifest but not in Data/): copied from previous if same hash, else skipped
  *   (must be uploaded once via manual script or prior run).
+ * - When previous R2 object is missing, local file is missing, or local file is still an LFS pointer: runs
+ *   `git checkout HEAD -- <path>` and `git lfs pull --include <path>` as needed, then uploads from disk.
+ * - If R2 copy-from-previous succeeds but object size ≠ manifest, replaces the object from the repo (same as above).
  *
  * Usage:
- *   node scripts/upload-lfs-assets.js Data [--prefix=Data] [--previous-manifest=path] [--previous-version=0.18.30]
+ *   node scripts/upload-lfs-assets.js Data [--prefix=Data] [--previous-manifest=path] [--previous-version=0.18.30] [--only-r2-paths=file.txt]
  *
  * Env: VERSION, PATCH_ASSETS_BUCKET, PATCH_ASSETS_ACCOUNT_ID, AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
  * Optional: FORCE_UPLOAD_ALL_SMALL_ASSETS=1 — upload all R2 assets from Data/ (do not copy from previous on R2).
+ * Optional: --only-r2-paths=file.txt — one manifest path per line (e.g. Data/foo/bar.esp). Re-uploads only those
+ *   from disk (never R2 copy-from-previous). Skips deleting old patches/* folders. Use after verify-r2-vs-manifest.js.
  */
 
 const fs = require('fs');
 const path = require('path');
 const crypto = require('crypto');
+const { execFileSync } = require('child_process');
 
 const FORCE_UPLOAD_ALL = /^1|true|yes$/i.test(String(process.env.FORCE_UPLOAD_ALL_SMALL_ASSETS || ''));
 const {
@@ -33,6 +39,7 @@ const patchDir = process.argv[2];
 const prefixArg = process.argv.find((a) => a.startsWith('--prefix='));
 const prevManifestArg = process.argv.find((a) => a.startsWith('--previous-manifest='));
 const prevVersionArg = process.argv.find((a) => a.startsWith('--previous-version='));
+const onlyR2PathsArg = process.argv.find((a) => a.startsWith('--only-r2-paths='));
 
 const prefix = prefixArg ? prefixArg.slice('--prefix='.length) : 'Data';
 const PREVIOUS_MANIFEST_PATH = prevManifestArg ? prevManifestArg.slice('--previous-manifest='.length) : null;
@@ -127,6 +134,54 @@ function isLfsPointer(filePath) {
   }
 }
 
+function gitPathFromManifestEntry(pathEntry) {
+  return pathEntry.replace(/\\/g, '/');
+}
+
+function isLfsTrackedManifestPath(pathEntry) {
+  return getLfsExtensions().includes(path.extname(pathEntry).toLowerCase());
+}
+
+/**
+ * Ensure working tree has real file content: checkout from git if missing, then LFS pull if still pointer or LFS-tracked without smudge.
+ */
+function materializeFromGit(pathEntry, src) {
+  const rel = gitPathFromManifestEntry(pathEntry);
+  const cwd = process.cwd();
+
+  if (!fs.existsSync(src)) {
+    try {
+      console.log('Restoring missing file from git:', rel);
+      execFileSync('git', ['checkout', 'HEAD', '--', rel], { cwd, stdio: 'inherit' });
+    } catch (e) {
+      console.warn('git checkout failed:', rel, e.message);
+    }
+  }
+
+  if (fs.existsSync(src) && !isLfsPointer(src)) {
+    return;
+  }
+
+  if (isLfsTrackedManifestPath(pathEntry) || (fs.existsSync(src) && isLfsPointer(src))) {
+    try {
+      console.log('git lfs pull --include', rel);
+      execFileSync('git', ['lfs', 'pull', '--include', rel], { cwd, stdio: 'inherit' });
+    } catch (e) {
+      console.warn('git lfs pull failed:', rel, e.message);
+    }
+  }
+}
+
+/** Serialize git checkout / lfs pull — concurrent workers must not run lfs in parallel on one repo. */
+let materializeChain = Promise.resolve();
+function queueMaterialize(pathEntry, src) {
+  const job = materializeChain.then(async () => {
+    materializeFromGit(pathEntry, src);
+  });
+  materializeChain = job.catch(() => {});
+  return job;
+}
+
 /** Build map path -> hash from manifest. */
 function manifestPathHashMap(manifest) {
   const map = new Map();
@@ -153,6 +208,23 @@ const s3 = new S3Client({
   })
 });
 
+/** Fail fast if PutObject did not store the expected byte length (mirrors post-copy HeadObject check). */
+async function verifyR2UploadedSize(destKey, expectedSize, pathEntry) {
+  if (expectedSize <= 0) return;
+  const head = await s3.send(new HeadObjectCommand({ Bucket: BUCKET, Key: destKey }));
+  const got = head.ContentLength ?? 0;
+  if (got !== expectedSize) {
+    throw new Error(
+      pathEntry +
+        ': after R2 upload, object size is ' +
+        got +
+        ' (expected ' +
+        expectedSize +
+        '). Re-run with "Force re-upload ALL assets" or inspect R2.'
+    );
+  }
+}
+
 const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
 const prevManifest = PREVIOUS_MANIFEST_PATH && fs.existsSync(PREVIOUS_MANIFEST_PATH)
   ? JSON.parse(fs.readFileSync(PREVIOUS_MANIFEST_PATH, 'utf8'))
@@ -169,7 +241,26 @@ const r2Base = process.env.PATCH_ASSETS_PUBLIC_URL && VERSION
 
 const { allAssetsToR2 } = loadR2Config();
 
-const r2Files = (manifest.files || []).filter((entry) => {
+let onlyR2PathsSet = null;
+if (onlyR2PathsArg) {
+  const listFile = path.resolve(process.cwd(), onlyR2PathsArg.slice('--only-r2-paths='.length));
+  if (!fs.existsSync(listFile)) {
+    console.error('Error: --only-r2-paths file not found:', listFile);
+    process.exit(1);
+  }
+  const lines = fs
+    .readFileSync(listFile, 'utf8')
+    .split(/\r?\n/)
+    .map((l) => l.trim().replace(/\\/g, '/'))
+    .filter(Boolean);
+  onlyR2PathsSet = new Set(lines);
+  if (onlyR2PathsSet.size === 0) {
+    console.log('R2: --only-r2-paths file is empty; nothing to do');
+    process.exit(0);
+  }
+}
+
+let r2Files = (manifest.files || []).filter((entry) => {
   const pathEntry = typeof entry === 'string' ? entry : entry.path;
   if (!pathEntry.startsWith(prefix + '/')) return false;
   const size = typeof entry === 'object' && entry.size != null ? entry.size : 0;
@@ -181,6 +272,60 @@ const r2Files = (manifest.files || []).filter((entry) => {
   if (r2Base && typeof entry === 'object' && entry.url && entry.url.startsWith(r2Base)) return true;
   return false;
 });
+
+const targetedRepair = onlyR2PathsSet != null;
+
+if (onlyR2PathsSet) {
+  for (const p of onlyR2PathsSet) {
+    const inManifest = (manifest.files || []).some((e) => (typeof e === 'string' ? e : e.path) === p);
+    if (!inManifest) {
+      console.warn('Warning: --only-r2-paths entry not in manifest (ignored):', p);
+    }
+  }
+  r2Files = r2Files.filter((entry) => {
+    const pathEntry = typeof entry === 'string' ? entry : entry.path;
+    return onlyR2PathsSet.has(pathEntry);
+  });
+  if (r2Files.length === 0) {
+    console.log('R2: no R2 manifest entries matched --only-r2-paths; nothing to do');
+    process.exit(0);
+  }
+  console.log('R2: targeted repair for', r2Files.length, 'path(s) (no copy-from-previous, no old-folder cleanup)');
+}
+
+/** Materialize from git if needed, then PutObject + size verify. `entry` is mutated when manifest size/hash is fixed. */
+async function uploadFromLocal(pathEntry, src, destKey, entry, logSuffix) {
+  await queueMaterialize(pathEntry, src);
+  if (!fs.existsSync(src)) {
+    console.warn('Skipped (file not in repo after git restore):', pathEntry);
+    return 'skipped';
+  }
+  if (isLfsPointer(src)) {
+    throw new Error(
+      pathEntry +
+        ': still an LFS pointer after git checkout/lfs pull. Install Git LFS and ensure the object exists for this ref.'
+    );
+  }
+  const actualSize = fs.statSync(src).size;
+  let expectedSize = typeof entry === 'object' && entry.size != null ? entry.size : 0;
+  if (expectedSize > 0 && actualSize !== expectedSize) {
+    const correctHash = sha256File(src);
+    entry.size = actualSize;
+    entry.hash = correctHash;
+    console.log('Fixed manifest size/hash from file:', pathEntry, '(' + expectedSize + ' -> ' + actualSize + ')');
+  }
+  const uploadSize = fs.statSync(src).size;
+  await s3.send(
+    new PutObjectCommand({
+      Bucket: BUCKET,
+      Key: destKey,
+      Body: fs.createReadStream(src)
+    })
+  );
+  await verifyR2UploadedSize(destKey, uploadSize, pathEntry);
+  console.log('Uploaded', destKey + (logSuffix ? ' ' + logSuffix : ''));
+  return 'uploaded';
+}
 
 /** Parse "X.Y.Z" or "X.Y" to [major, minor, patch] for comparison. */
 function parseVersion(v) {
@@ -227,7 +372,8 @@ async function run() {
     const assetName = toAssetName(pathEntry);
     const destKey = `patches/${VERSION}/${assetName}`;
 
-    const canCopyFromPrevious = !FORCE_UPLOAD_ALL && newVersion && prevMap && prevMap.get(pathEntry) === hash;
+    const canCopyFromPrevious =
+      !FORCE_UPLOAD_ALL && !targetedRepair && newVersion && prevMap && prevMap.get(pathEntry) === hash;
 
     if (canCopyFromPrevious) {
       const copySourceKey = `patches/${PREVIOUS_VERSION}/${assetName}`;
@@ -235,19 +381,13 @@ async function run() {
         await s3.send(new HeadObjectCommand({ Bucket: BUCKET, Key: copySourceKey }));
       } catch (headErr) {
         if (headErr.name === 'NotFound' || headErr.name === 'NoSuchKey' || headErr.Code === 'NoSuchKey') {
-          if (fs.existsSync(src)) {
-            await s3.send(
-              new PutObjectCommand({
-                Bucket: BUCKET,
-                Key: destKey,
-                Body: fs.createReadStream(src)
-              })
-            );
-            console.log('Uploaded', destKey, '(previous key missing in R2, re-uploaded from local)');
-            return 'uploaded';
-          }
-          console.warn('Skipped (unchanged but key missing in R2 and not in repo):', pathEntry);
-          return 'skipped';
+          return await uploadFromLocal(
+            pathEntry,
+            src,
+            destKey,
+            entry,
+            '(previous R2 key missing; uploaded from repo)'
+          );
         }
         throw headErr;
       }
@@ -263,42 +403,27 @@ async function run() {
         const head = await s3.send(new HeadObjectCommand({ Bucket: BUCKET, Key: destKey }));
         const copiedSize = head.ContentLength ?? 0;
         if (copiedSize !== expectedSize) {
-          throw new Error(
-            pathEntry + ': after R2 copy, size is ' + copiedSize + ' (expected ' + expectedSize + '). Previous version may have bad data. Run workflow with "Force re-upload ALL assets" to fix.'
+          console.warn(
+            pathEntry +
+              ': R2 copy size ' +
+              copiedSize +
+              ' != manifest ' +
+              expectedSize +
+              '; replacing object from repo'
+          );
+          return await uploadFromLocal(
+            pathEntry,
+            src,
+            destKey,
+            entry,
+            '(replaced bad R2 copy from repo)'
           );
         }
       }
       console.log('Copied', destKey, '(unchanged from previous, size verified)');
       return 'copied';
-    } else if (fs.existsSync(src)) {
-      const actualSize = fs.statSync(src).size;
-      let expectedSize = typeof entry === 'object' && entry.size != null ? entry.size : 0;
-      if (isLfsPointer(src)) {
-        throw new Error(
-          pathEntry + ': file is still an LFS pointer; cannot upload to R2. Run the workflow step that pulls LFS for R2-upload paths, or use "Force re-upload ALL assets".'
-        );
-      }
-      // Manifest may have been built when file was still a pointer (e.g. R2 pull runs after manifest build). Fix manifest from actual file and upload.
-      // Small real assets (e.g. tiny .esp) can be <256 bytes; isLfsPointer above already rejects true pointers.
-      if (expectedSize > 0 && actualSize !== expectedSize) {
-        const correctHash = sha256File(src);
-        entry.size = actualSize;
-        entry.hash = correctHash;
-        console.log('Fixed manifest size/hash from file:', pathEntry, '(' + expectedSize + ' -> ' + actualSize + ')');
-      }
-      await s3.send(
-        new PutObjectCommand({
-          Bucket: BUCKET,
-          Key: destKey,
-          Body: fs.createReadStream(src)
-        })
-      );
-      console.log('Uploaded', destKey);
-      return 'uploaded';
-    } else {
-      console.warn('Skipped (off-GitHub, not in repo and not in previous manifest with same hash):', pathEntry);
-      return 'skipped';
     }
+    return await uploadFromLocal(pathEntry, src, destKey, entry, '');
   });
 
   const concurrency = Math.max(1, parseInt(process.env.R2_CONCURRENCY || '12', 10) || 12);
@@ -310,6 +435,10 @@ async function run() {
 
   // Persist manifest in case we fixed any size/hash (file was real on disk after R2 pull but manifest had pointer size)
   fs.writeFileSync(manifestPath, JSON.stringify(manifest, null, 2), 'utf8');
+
+  if (targetedRepair) {
+    return;
+  }
 
   // List all patch version prefixes (patches/X.Y.Z/) and delete any older than the 3 most recent
   let prefixToken = undefined;

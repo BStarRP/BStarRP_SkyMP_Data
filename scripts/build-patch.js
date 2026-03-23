@@ -89,6 +89,20 @@ function getChangedPathEntries(prevTag, patchDirName) {
   }
 }
 
+/** LFS-tracked extensions (from .gitattributes). Unchanged LFS paths may stay pointers on disk — do not hash. */
+function getLfsExtensions() {
+  const attrPath = path.join(process.cwd(), '.gitattributes');
+  if (!fs.existsSync(attrPath)) return [];
+  const lines = fs.readFileSync(attrPath, 'utf8').split(/\r?\n/);
+  const exts = new Set();
+  for (const line of lines) {
+    if (!line.includes('filter=lfs')) continue;
+    const pattern = line.split(/\s+/)[0];
+    if (pattern && pattern.startsWith('*.')) exts.add(('.' + pattern.slice(2)).toLowerCase());
+  }
+  return [...exts];
+}
+
 const relativeFiles = listFiles(absPatchDir);
 let prevMap = null;
 let changedPathEntries = null;
@@ -117,11 +131,21 @@ if (prevManifestPath && fs.existsSync(prevManifestPath)) {
     relativeFiles.map((r) => async () => {
       const pathEntry = `${prefix}/${r}`;
       const fullPath = path.join(absPatchDir, r);
-      // Unchanged files: always reuse previous manifest. We only pull LFS for changed files,
-      // so unchanged LFS files are still pointers on disk; we must not read their size/hash.
+      // Unchanged files: reuse previous manifest. Unchanged LFS files may still be pointers — do not read disk.
+      // Non-LFS: confirm size/hash match the working tree so we never ship a manifest that disagrees with git
+      // (e.g. bad previous manifest or diff edge cases); mismatches force a fresh hash and R2 re-upload.
       if (prevMap && changedPathEntries && !changedPathEntries.has(pathEntry)) {
         const prevEntry = prevMap.get(pathEntry);
         if (prevEntry && prevEntry.hash != null) {
+          const ext = path.extname(r).toLowerCase();
+          if (!getLfsExtensions().includes(ext)) {
+            const stat = fs.statSync(fullPath);
+            const hash = sha256File(fullPath);
+            if (stat.size !== prevEntry.size || hash !== prevEntry.hash) {
+              console.warn('Previous manifest out of sync with disk (re-hashing):', pathEntry);
+              return { path: pathEntry, size: stat.size, hash };
+            }
+          }
           return { path: pathEntry, size: prevEntry.size, hash: prevEntry.hash };
         }
       }
