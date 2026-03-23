@@ -22,6 +22,9 @@
  * Optional: R2_VERIFY_COPY_DEST=1 — after CopyObject, Head the destination too (slower; default off: source Head
  *   already matched manifest size, server-side copy preserves length).
  * Optional: R2_LOG_EACH_COPIED_ASSET=0 — omit per-file "Copied ..." lines (faster CI / smaller logs); summary still prints.
+ * Optional: GIT_LFS_PULL_TIMEOUT_MS / GIT_CHECKOUT_TIMEOUT_MS — exec timeouts (default 480000 / 120000) so a stuck LFS
+ *   pull cannot block the whole upload job forever.
+ * Optional: R2_PUT_BUFFER_MAX_BYTES — files up to this size use an in-memory buffer for PutObject (default 33554432).
  */
 
 const fs = require('fs');
@@ -145,8 +148,33 @@ function isLfsTrackedManifestPath(pathEntry) {
   return getLfsExtensions().includes(path.extname(pathEntry).toLowerCase());
 }
 
+const GIT_CHECKOUT_TIMEOUT_MS = Math.max(
+  10_000,
+  parseInt(process.env.GIT_CHECKOUT_TIMEOUT_MS || '120000', 10) || 120000
+);
+const GIT_LFS_PULL_TIMEOUT_MS = Math.max(
+  30_000,
+  parseInt(process.env.GIT_LFS_PULL_TIMEOUT_MS || '480000', 10) || 480000
+);
+
+function execGitOrWarn(args, cwd, timeoutMs, label) {
+  try {
+    execFileSync('git', args, { cwd, stdio: 'inherit', timeout: timeoutMs, maxBuffer: 64 * 1024 * 1024 });
+  } catch (e) {
+    const timedOut =
+      e.code === 'ETIMEDOUT' ||
+      e.errno === 'ETIMEDOUT' ||
+      (e.signal === 'SIGTERM' && String(e.message || '').toLowerCase().includes('timeout'));
+    if (timedOut) {
+      console.error('[R2] git ' + label + ' timed out after ' + timeoutMs + 'ms:', args.join(' '));
+    }
+    throw e;
+  }
+}
+
 /**
  * Ensure working tree has real file content: checkout from git if missing, then LFS pull if still pointer or LFS-tracked without smudge.
+ * Call only while holding the materialize chain (see queueMaterialize).
  */
 function materializeFromGit(pathEntry, src) {
   const rel = gitPathFromManifestEntry(pathEntry);
@@ -155,7 +183,7 @@ function materializeFromGit(pathEntry, src) {
   if (!fs.existsSync(src)) {
     try {
       console.log('Restoring missing file from git:', rel);
-      execFileSync('git', ['checkout', 'HEAD', '--', rel], { cwd, stdio: 'inherit' });
+      execGitOrWarn(['checkout', 'HEAD', '--', rel], cwd, GIT_CHECKOUT_TIMEOUT_MS, 'checkout');
     } catch (e) {
       console.warn('git checkout failed:', rel, e.message);
     }
@@ -167,18 +195,26 @@ function materializeFromGit(pathEntry, src) {
 
   if (isLfsTrackedManifestPath(pathEntry) || (fs.existsSync(src) && isLfsPointer(src))) {
     try {
-      console.log('git lfs pull --include', rel);
-      execFileSync('git', ['lfs', 'pull', '--include', rel], { cwd, stdio: 'inherit' });
+      console.log('git lfs pull --include', rel, '(timeout ' + GIT_LFS_PULL_TIMEOUT_MS + 'ms)');
+      execGitOrWarn(['lfs', 'pull', '--include', rel], cwd, GIT_LFS_PULL_TIMEOUT_MS, 'lfs pull');
     } catch (e) {
       console.warn('git lfs pull failed:', rel, e.message);
     }
   }
 }
 
-/** Serialize git checkout / lfs pull — concurrent workers must not run lfs in parallel on one repo. */
+/**
+ * Serialize git checkout / lfs pull only when needed. If the file already exists and is not an LFS pointer, skip the
+ * queue entirely — otherwise one slow `git lfs pull` blocks every concurrent upload worker.
+ */
 let materializeChain = Promise.resolve();
 function queueMaterialize(pathEntry, src) {
+  if (fs.existsSync(src) && !isLfsPointer(src)) {
+    return Promise.resolve();
+  }
+  const rel = gitPathFromManifestEntry(pathEntry);
   const job = materializeChain.then(async () => {
+    console.log('[R2] materialize (git/LFS):', rel);
     materializeFromGit(pathEntry, src);
   });
   materializeChain = job.catch(() => {});
@@ -211,9 +247,15 @@ const s3 = new S3Client({
   })
 });
 
+const R2_PUT_BUFFER_MAX_BYTES = Math.max(
+  0,
+  parseInt(process.env.R2_PUT_BUFFER_MAX_BYTES || String(32 * 1024 * 1024), 10) || 32 * 1024 * 1024
+);
+
 /** Fail fast if PutObject did not store the expected byte length (mirrors post-copy HeadObject check). */
 async function verifyR2UploadedSize(destKey, expectedSize, pathEntry) {
   if (expectedSize <= 0) return;
+  console.log('[R2] HeadObject verify:', pathEntry);
   const head = await s3.send(new HeadObjectCommand({ Bucket: BUCKET, Key: destKey }));
   const got = head.ContentLength ?? 0;
   if (got !== expectedSize) {
@@ -318,11 +360,18 @@ async function uploadFromLocal(pathEntry, src, destKey, entry, logSuffix) {
     console.log('Fixed manifest size/hash from file:', pathEntry, '(' + expectedSize + ' -> ' + actualSize + ')');
   }
   const uploadSize = fs.statSync(src).size;
+  const useBuffer = R2_PUT_BUFFER_MAX_BYTES > 0 && uploadSize <= R2_PUT_BUFFER_MAX_BYTES;
+  const body = useBuffer ? fs.readFileSync(src) : fs.createReadStream(src);
+  console.log(
+    '[R2] PutObject:',
+    pathEntry,
+    '(' + uploadSize + ' bytes' + (useBuffer ? ', buffered' : ', stream') + ')'
+  );
   await s3.send(
     new PutObjectCommand({
       Bucket: BUCKET,
       Key: destKey,
-      Body: fs.createReadStream(src),
+      Body: body,
       CacheControl: PATCH_ASSETS_CACHE_CONTROL,
       ContentType: 'application/octet-stream'
     })
