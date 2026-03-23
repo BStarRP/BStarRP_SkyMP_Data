@@ -1,0 +1,15 @@
+		<hkobject name="#eaas$52" class="hkbBlenderGenerator" signature="0x22df7147">
+			<hkparam name="variableBindingSet">#eaas$59</hkparam>
+			<hkparam name="userData">0</hkparam>
+			<hkparam name="name">EasSneak_BackwardBlend</hkparam>
+			<hkparam name="referencePoseWeightThreshold">0.000000</hkparam>
+			<hkparam name="blendParameter">1.000000</hkparam>
+			<hkparam name="minCyclicBlendParameter">0.000000</hkparam>
+			<hkparam name="maxCyclicBlendParameter">1.000000</hkparam>
+			<hkparam name="indexOfSyncMasterChild">-1</hkparam>
+			<hkparam name="flags">17</hkparam>
+			<hkparam name="subtractLastChild">false</hkparam>
+			<hkparam name="children" numelements="3">
+				#eaas$57 #eaas$55 #eaas$53
+			</hkparam>
+		</hkobject>

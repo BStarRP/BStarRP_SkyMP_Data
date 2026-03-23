@@ -1,0 +1,16 @@
+		<hkobject name="#1284" class="hkbStateMachineStateInfo" signature="0xed7f9d0">
+			<hkparam name="variableBindingSet">null</hkparam>
+			<hkparam name="listeners" numelements="0"></hkparam>
+			<hkparam name="enterNotifyEvents">#1283</hkparam>
+			<hkparam name="exitNotifyEvents">null</hkparam>
+			<hkparam name="transitions">#1282</hkparam>
+<!-- MOD_CODE ~eaas~ OPEN -->
+			<hkparam name="generator">#eaas$55</hkparam>
+<!-- ORIGINAL -->
+			<hkparam name="generator">#1281</hkparam>
+<!-- CLOSE -->
+			<hkparam name="name">AOBarTableIdlePlayer</hkparam>
+			<hkparam name="stateId">56</hkparam>
+			<hkparam name="probability">1.000000</hkparam>
+			<hkparam name="enable">true</hkparam>
+		</hkobject>

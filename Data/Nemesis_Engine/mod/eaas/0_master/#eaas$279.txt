@@ -1,0 +1,9 @@
+		<hkobject name="#eaas$279" class="hkbEventsFromRangeModifier" signature="0xbc561b6e">
+			<hkparam name="variableBindingSet">#eaas$281</hkparam>
+			<hkparam name="userData">0</hkparam>
+			<hkparam name="name">EASSneakTurnRight_EFRM</hkparam>
+			<hkparam name="enable">true</hkparam>
+			<hkparam name="inputValue">0.000000</hkparam>
+			<hkparam name="lowerBound">-180.000000</hkparam>
+			<hkparam name="eventRanges">#eaas$280</hkparam>
+		</hkobject>

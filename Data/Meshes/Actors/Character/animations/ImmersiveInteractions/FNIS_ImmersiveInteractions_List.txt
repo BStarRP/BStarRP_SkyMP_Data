@@ -1,0 +1,20 @@
+ofa -a,k AO_OpenDoor ..\mt_ActivateDoor.hkx 
+ofa -a,k AO_PickUp ..\mt_ActivatePickup.hkx 
+ofa -a,k AO_PickupLow ..\mt_ActivatePickupLow.hkx 
+ofa -a,k AO_IdleLockPick ..\mt_LockPick.hkx 
+ofa -a,k AO_IdleTake ..\IdleTake.hkx 
+ofa -a,k AO_IdleKnock ..\mt_doorBang.hkx 
+ofa -a,k AO_KneelEnter ..\idlekneelenter.hkx 
+ofa -a,k AO_Kneel ..\idlekneel.hkx 
+ofa -a,k AO_KneelExit ..\idlekneelexit.hkx 
+ofa -a,k IdleTake ..\IdleTake.hkx 
+
+
+b -a,k AO_CannibalC ..\cannibal_feedcrouching.hkx 
+ofa -a,k,o AO_Cut ..\mt_handcut.hkx AnimObjectIronDagger
+o -a,k AO_Cut1 ..\mt_handcut.hkx AnimObjectIronDagger
+o -k AO_Tan ..\craftingtanningidleb.hkx AnimObjectIronDagger
+
+s -a,k AO_NoteStart ..\idlenoteread_enter.hkx 
++ -k,o AO_NoteDuring ..\idlenoteread.hkx animobjectnote
++ -a,k,o AO_NoteExit ..\idlenoteread_exit.hkx animobjectnote

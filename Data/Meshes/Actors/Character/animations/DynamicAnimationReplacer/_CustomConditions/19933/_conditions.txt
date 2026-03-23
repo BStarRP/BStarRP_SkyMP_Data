@@ -1,0 +1,1 @@
+ValueEqualTo("ImmersiveInteractions.esp"|0x0000AA13, 3)

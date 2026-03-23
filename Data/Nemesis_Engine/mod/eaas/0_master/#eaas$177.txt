@@ -1,0 +1,15 @@
+		<hkobject name="#eaas$177" class="hkbBlenderGenerator" signature="0x22df7147">
+			<hkparam name="variableBindingSet">#eaas$186</hkparam>
+			<hkparam name="userData">0</hkparam>
+			<hkparam name="name">MT_RightBlend</hkparam>
+			<hkparam name="referencePoseWeightThreshold">0.000000</hkparam>
+			<hkparam name="blendParameter">1.000000</hkparam>
+			<hkparam name="minCyclicBlendParameter">0.000000</hkparam>
+			<hkparam name="maxCyclicBlendParameter">1.000000</hkparam>
+			<hkparam name="indexOfSyncMasterChild">-1</hkparam>
+			<hkparam name="flags">17</hkparam>
+			<hkparam name="subtractLastChild">false</hkparam>
+			<hkparam name="children" numelements="4">
+				#eaas$184 #eaas$182 #eaas$180 #eaas$178
+			</hkparam>
+		</hkobject>

@@ -1,0 +1,7 @@
+		<hkobject name="#2041" class="hkbExpressionCondition" signature="0x1c3c1045">
+<!-- MOD_CODE ~eaas~ OPEN -->
+			<hkparam name="expression">(bIsInMT == 1) &amp;&amp; (bEasSitState == 0)</hkparam>
+<!-- ORIGINAL -->
+			<hkparam name="expression">bIsInMT == 1</hkparam>
+<!-- CLOSE -->
+		</hkobject>

@@ -1,0 +1,7 @@
+		<hkobject name="#eaas$226" class="hkbModifierGenerator" signature="0x1f81fae6">
+			<hkparam name="variableBindingSet">null</hkparam>
+			<hkparam name="userData">1</hkparam>
+			<hkparam name="name">EASSneakTurnLeft_MG</hkparam>
+			<hkparam name="modifier">#eaas$249</hkparam>
+			<hkparam name="generator">#eaas$227</hkparam>
+		</hkobject>

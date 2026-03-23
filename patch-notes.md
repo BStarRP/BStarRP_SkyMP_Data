@@ -1,8 +1,11 @@
 # Patch notes
 
 **Summary**
-Core framework improvement and locks!
+More addons for testing and improvements
 
 ## Changes
-- Added a lock system (testing)
-- Added support for .ESL file loading on client & server
+- Added First Person Height Fix
+- Added Body Mods and Textures
+- Added LOD's Redone
+- Added Masks of Skyrim
+- Fixed Nemesis Engine Missing Files

@@ -1,0 +1,24 @@
+		<hkobject name="#eaas$250" class="hkbEventRangeDataArray" signature="0x330a56ee">
+			<hkparam name="eventData" numelements="2">
+				<hkobject>
+					<hkparam name="upperBound">75.000000</hkparam>
+					<hkparam name="event">
+						<hkobject>
+							<hkparam name="id">$eventID[turnLeftSlow]$</hkparam>
+							<hkparam name="payload">null</hkparam>
+						</hkobject>
+					</hkparam>
+					<hkparam name="eventMode">EVENT_MODE_SEND_ON_ENTER_RANGE</hkparam>
+				</hkobject>
+				<hkobject>
+					<hkparam name="upperBound">180.000000</hkparam>
+					<hkparam name="event">
+						<hkobject>
+							<hkparam name="id">$eventID[turnLeftFast]$</hkparam>
+							<hkparam name="payload">null</hkparam>
+						</hkobject>
+					</hkparam>
+					<hkparam name="eventMode">EVENT_MODE_SEND_ON_ENTER_RANGE</hkparam>
+				</hkobject>
+			</hkparam>
+		</hkobject>

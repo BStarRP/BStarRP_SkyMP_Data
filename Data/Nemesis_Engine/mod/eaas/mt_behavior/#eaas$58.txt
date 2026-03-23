@@ -1,0 +1,12 @@
+		<hkobject name="#eaas$58" class="hkbStateMachineEventPropertyArray" signature="0xb07b4388">
+			<hkparam name="events" numelements="2">
+				<hkobject>
+					<hkparam name="id">393</hkparam>
+					<hkparam name="payload">#eaas$57</hkparam>
+				</hkobject>
+				<hkobject>
+					<hkparam name="id">394</hkparam>
+					<hkparam name="payload">#eaas$56</hkparam>
+				</hkobject>
+			</hkparam>
+		</hkobject>
