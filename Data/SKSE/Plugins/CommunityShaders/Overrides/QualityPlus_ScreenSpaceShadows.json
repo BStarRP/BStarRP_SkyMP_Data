@@ -1,0 +1,10 @@
+{
+	"Enable": 1,
+	"SampleCount": 2,
+	"_metadata": {
+		"modName": "Quality plus (repo preset)",
+		"version": "1.0.0",
+		"description": "Optional quality tier: contact shadows on with higher sample multiplier (2). Costs more GPU in sunlit scenes.",
+		"enabled": false
+	}
+}

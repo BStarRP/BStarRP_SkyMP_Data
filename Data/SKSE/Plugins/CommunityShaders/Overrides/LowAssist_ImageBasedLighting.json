@@ -1,0 +1,9 @@
+{
+	"EnableIBL": 0,
+	"_metadata": {
+		"modName": "Low assist (repo preset)",
+		"version": "1.0.0",
+		"description": "Tier 3 optional: turns IBL off for maximum GPU headroom in extreme crowds. Disable CustomLook_ImageBasedLighting while using this.",
+		"enabled": false
+	}
+}

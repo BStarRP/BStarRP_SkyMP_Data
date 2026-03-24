@@ -22,6 +22,51 @@ Each file is named `{EditorID}.json` (for example `SkyrimStormRain.json`) and us
 
 Shipped overwrite JSON files apply **only while you are in an interior cell**. Each file sets **one** feature field (Community Shaders merges them at load). Filenames end with `_{FeatureShortName}.json` (for example `WarmInt01_LinearLighting.json`). The repo includes a **WarmInt\*** set aimed at warm, localized lights and **dark corners** (lower ambient, stronger point lights and VL, reduced GI strength and IBL sky fill). Adjust or remove individual files to taste.
 
+### Repo preset tiers: `CustomLook_*`, `QualityPlus_*`, `LowAssist_*`
+
+These three prefixes are meant for **multiplayer / many actors** (default favors FPS while staying attractive), **optional max quality**, and **emergency low-FPS** toggles.
+
+**Important:** If two overrides touch the **same feature** (same `{FeatureShortName}`) and both are **enabled**, Community Shaders **merges** them in discovery order and values can fight. For predictable results: for each feature, keep **only one** of `CustomLook_`, `QualityPlus_`, or `LowAssist_` enabled, **or** only stack `LowAssist_` pieces you understand.
+
+#### Tier 1 - Default: `CustomLook_*` (`enabled`: true)
+
+Use this for **normal play** (including busy towns / MP-style crowds):
+
+-   **LinearLighting / Skylighting / ExponentialHeightFog** — dark, torch-forward nights, moon haze, low skylight floor.
+-   **ScreenSpaceGI** — **AO only** (`EnableGI`: false), **quarter res**, light slice/step count (no SSGI bounce; best FPS with many actors).
+-   **ImageBasedLighting** — **IBL off** (`EnableIBL`: 0) for maximum GPU headroom with crowds; ambient comes from vanilla + your other lighting. Use **`QualityPlus_ImageBasedLighting.json`** when you want IBL back.
+-   **VolumetricLighting** — **Medium** interior + exterior.
+-   **DynamicCubemaps** — **SSR off** on water.
+-   **SubsurfaceScattering** — **10** Burley samples.
+
+#### Tier 2 - Extra quality: `QualityPlus_*` (`enabled`: false until you turn them on)
+
+Enable in **Overrides** when you want **solo / screenshots / max eye candy**. For each file you enable, **disable** the matching **`CustomLook_{SameFeature}.json`** so settings are not merged twice.
+
+-   **`QualityPlus_ScreenSpaceGI.json`** — `EnableGI`: true, half res, fuller slices/steps/temporal.
+-   **`QualityPlus_ImageBasedLighting.json`** — full IBL scales.
+-   **`QualityPlus_VolumetricLighting.json`** — **High** VL.
+-   **`QualityPlus_DynamicCubemaps.json`** — water **SSR on**.
+-   **`QualityPlus_SubsurfaceScattering.json`** — **16** Burley samples.
+-   **`QualityPlus_ScreenSpaceShadows.json`** — contact shadows, **SampleCount** 2.
+
+#### Tier 3 - Low assist: `LowAssist_*` (`enabled`: false until you turn them on)
+
+Extra cuts when Tier 1 is not enough (stutter towns, huge PvP crowds):
+
+-   **`LowAssist_VolumetricLighting.json`** — VL **Low**.
+-   **`LowAssist_ScreenSpaceShadows.json`** — contact shadows **off**.
+-   **`LowAssist_SubsurfaceScattering.json`** — Burley **8** samples.
+-   **`LowAssist_ScreenSpaceGI.json`** — explicit AO-only quarter-res block (redundant with default; use if you changed SSGI in menu).
+-   **`LowAssist_ImageBasedLighting.json`** — forces **IBL off** if you enabled IBL in menu or used QualityPlus and need to claw back FPS.
+-   **`LowAssist_DynamicCubemaps.json`** / **`LowAssist_Global.json`** — SSR off / compiler thread cap.
+
+Try **VL** first, then **contact shadows**, then **SSS**. Default already has **IBL off**.
+
+Weather JSON keys for EH fog use the **display names** registered in CS (for example `"Fog Density"`, `"Directional Inscattering Multiplier"`). Overrides use the feature’s **settings field names** (for example `fogDensity`, `inscatteringTint`).
+
+If **clear daytime** feels too dim, raise **`ambientMult`** / **`directionalLightMult`** in the Linear Lighting menu or add `Weathers/{EditorID}.json` (confirm IDs in the **Weather Editor**). Restart after toggling overrides.
+
 ## File Naming Convention
 
 Override files must follow these naming patterns:

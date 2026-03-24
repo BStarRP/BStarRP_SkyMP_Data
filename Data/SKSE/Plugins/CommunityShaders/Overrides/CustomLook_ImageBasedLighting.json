@@ -1,9 +1,10 @@
 {
-	"EnableIBL": 1,
+	"EnableIBL": 0,
+	"PreserveFogLuminance": 0,
 	"_metadata": {
-		"modName": "Custom look (repo preset)",
-		"version": "1.0.0",
-		"description": "Enable SH-based ambient from cubemaps (pair with Dynamic Cubemaps for env IBL). Tune scales in CS menu if too bright indoors.",
+		"modName": "Custom look - default tier (repo)",
+		"version": "4.1.0",
+		"description": "Default tier: IBL off for best FPS with many actors (no SH/cubemap ambient pass). Turn on QualityPlus_ImageBasedLighting for full IBL, or EnableIBL in CS menu for a custom middle ground.",
 		"enabled": true
 	}
 }

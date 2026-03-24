@@ -1,0 +1,15 @@
+{
+	"Enabled": true,
+	"EnableGI": false,
+	"ResolutionMode": 2,
+	"NumSlices": 3,
+	"NumSteps": 6,
+	"MaxAccumFrames": 8,
+	"EnableExperimentalSpecularGI": false,
+	"_metadata": {
+		"modName": "Low assist (repo preset)",
+		"version": "1.0.0",
+		"description": "Tier 3 - max FPS: locks AO-only SSGI at quarter res / min slices. Enable in Overrides when crowded; can stack on top of default or disable CustomLook_ScreenSpaceGI to avoid duplicate merges.",
+		"enabled": false
+	}
+}

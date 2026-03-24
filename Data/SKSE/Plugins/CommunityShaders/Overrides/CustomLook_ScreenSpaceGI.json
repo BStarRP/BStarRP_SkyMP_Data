@@ -1,0 +1,16 @@
+{
+	"Enabled": true,
+	"EnableGI": false,
+	"EnableExperimentalSpecularGI": false,
+	"GIStrength": 0.75,
+	"ResolutionMode": 2,
+	"NumSlices": 3,
+	"NumSteps": 6,
+	"MaxAccumFrames": 8,
+	"_metadata": {
+		"modName": "Custom look - default tier (repo)",
+		"version": "4.0.0",
+		"description": "Default tier: AO-only SSGI (no EnableGI bounce) at quarter res - best FPS with many actors (multiplayer/crowds). Default IBL is off; use QualityPlus for IBL + SSGI bounce. Disable this override when enabling QualityPlus_ScreenSpaceGI.",
+		"enabled": true
+	}
+}

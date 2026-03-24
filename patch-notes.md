@@ -1,11 +1,8 @@
 # Patch notes
 
 **Summary**
-More updates for visual overhauls.
+Changed default shader settings and rebuild alst stable build for Testing
 
 ## Changes
-- Added smoking candles and torches
-- Improved lighting on campfires
-- Test on Quality vs Performance with Shaders
-- Small fixes for durability
-- Fixed an issue where npc's spawn briefly infront of you
+- Configured default shaders for performance
+- Rebuild framework from last stable build

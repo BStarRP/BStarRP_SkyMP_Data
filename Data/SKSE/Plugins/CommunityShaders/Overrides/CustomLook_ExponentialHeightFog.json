@@ -1,9 +1,13 @@
 {
 	"enabled": 1,
+	"directionalInscatteringMultiplier": 2.28,
+	"directionalInscatteringExponent": 3.7,
+	"inscatteringTint": [0.72, 0.82, 1.0, 1.06],
+	"fogDensity": 0.016,
 	"_metadata": {
-		"modName": "Custom look (repo preset)",
-		"version": "1.0.0",
-		"description": "Enable exponential height fog; storm Weathers/*.json adjust tint and inscattering.",
+		"modName": "Custom look - default tier (repo)",
+		"version": "4.0.0",
+		"description": "Slightly lighter veil than 2.0 so moon haze does not dull nearby torches as much; still cool directional glow.",
 		"enabled": true
 	}
 }

@@ -1,10 +1,10 @@
 {
-	"MinDiffuseVisibility": 0.026,
-	"MinSpecularVisibility": 0.042,
+	"MinDiffuseVisibility": 0.015,
+	"MinSpecularVisibility": 0.018,
 	"_metadata": {
-		"modName": "Custom look (repo preset)",
-		"version": "1.1.0",
-		"description": "Very dark exterior floor; storm weathers can raise slightly via Weathers/*.json.",
+		"modName": "Custom look - default tier (repo)",
+		"version": "4.0.0",
+		"description": "Very low skylight floor with a touch of outdoor air light so nights are not completely mud-flat (still torch-forward).",
 		"enabled": true
 	}
 }

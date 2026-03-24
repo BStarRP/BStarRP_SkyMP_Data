@@ -1,0 +1,10 @@
+{
+	"ExteriorQuality": 0,
+	"InteriorQuality": 0,
+	"_metadata": {
+		"modName": "Low assist (repo preset)",
+		"version": "1.0.0",
+		"description": "Tier 3: VL on Low (exterior+interior). Big win in lit towns.",
+		"enabled": false
+	}
+}

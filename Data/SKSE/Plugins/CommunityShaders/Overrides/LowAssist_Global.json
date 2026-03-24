@@ -1,0 +1,12 @@
+{
+	"Advanced": {
+		"Compiler Threads": 2,
+		"Background Compiler Threads": 2
+	},
+	"_metadata": {
+		"modName": "Low assist (repo preset)",
+		"version": "1.0.0",
+		"description": "Tier 3: caps shader compiler threads (compile-time hitch help, not in-game FPS).",
+		"enabled": false
+	}
+}
