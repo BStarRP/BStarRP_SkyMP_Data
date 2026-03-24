@@ -15,7 +15,8 @@ cbuffer PerFrameSSS : register(b1)
 	float4 HumanProfile;
 	float SSSS_FOVY;
 	uint BurleySamples;
-	uint2 pad;
+	uint SeparableSampleCount;
+	uint pad;
 	float4 MeanFreePathBase;
 	float4 MeanFreePathHuman;
 };

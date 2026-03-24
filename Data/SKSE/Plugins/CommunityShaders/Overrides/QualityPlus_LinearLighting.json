@@ -16,9 +16,9 @@
 	"fogGamma": 1.52,
 	"fogAlphaGamma": 1.52,
 	"_metadata": {
-		"modName": "Custom look - default tier (repo)",
-		"version": "4.4.0",
-		"description": "Cooler, crisper lighting: stronger directional key, less torch dominance, tighter gammas/VL; neutral ambient lift.",
-		"enabled": true
+		"modName": "Quality plus (repo preset)",
+		"version": "1.0.0",
+		"description": "Matches CustomLook 4.4 cooler/crisp linear lighting. Disable CustomLook_LinearLighting while using Quality+ tier.",
+		"enabled": false
 	}
 }

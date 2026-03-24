@@ -1,0 +1,13 @@
+{
+	"enabled": 1,
+	"directionalInscatteringMultiplier": 2.22,
+	"directionalInscatteringExponent": 4.1,
+	"inscatteringTint": [0.72, 0.82, 1.0, 1.05],
+	"fogDensity": 0.016,
+	"_metadata": {
+		"modName": "Low assist (repo preset)",
+		"version": "1.0.0",
+		"description": "Same cooler fog as CustomLook 4.4 when LowAssist tier is active. Disable CustomLook_ExponentialHeightFog while using this tier.",
+		"enabled": false
+	}
+}

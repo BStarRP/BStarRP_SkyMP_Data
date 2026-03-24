@@ -2,15 +2,15 @@
 	"Enabled": true,
 	"EnableGI": true,
 	"EnableExperimentalSpecularGI": false,
-	"GIStrength": 1.0,
+	"GIStrength": 0.28,
 	"ResolutionMode": 1,
 	"NumSlices": 4,
 	"NumSteps": 8,
 	"MaxAccumFrames": 16,
 	"_metadata": {
 		"modName": "Quality plus (repo preset)",
-		"version": "1.0.0",
-		"description": "Optional quality tier: full SSGI bounce, half res, vanilla-like slices/steps/temporal. Disable CustomLook_ScreenSpaceGI while using this (same feature - avoid merge conflicts). Heavier; best for solo/screenshots.",
+		"version": "1.2.0",
+		"description": "Indirect lighting on at low GIStrength (~0.28) plus half-res AO; subtler bounce than vanilla. Disable CustomLook_ScreenSpaceGI when using Quality+.",
 		"enabled": false
 	}
 }

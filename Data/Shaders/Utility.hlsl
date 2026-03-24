@@ -497,6 +497,15 @@ float GetPoissonDiskFilteredShadowVisibility(float noise, float2x2 rotationMatri
 		float2 sampleUV = sampleOffset * ShadowSampleParam.z + baseUV;
 		visibility += tex.SampleCmpLevelZero(samp, float3(sampleUV, layerIndex), compareValue).x;
 #		endif
+
+		// Match RENDER_SHADOWMASKDPB path: skip remaining taps when the penumbra is already obvious
+		if (sampleIndex >= 8) {
+			float currentAverage = visibility * rcp(float(sampleIndex + 1));
+			if (currentAverage < 0.1 || currentAverage > 0.9) {
+				visibility += float(sampleCount - sampleIndex - 1) * (currentAverage > 0.5 ? 1.0 : 0.0);
+				break;
+			}
+		}
 	}
 	return visibility * rcp((float)sampleCount);
 }

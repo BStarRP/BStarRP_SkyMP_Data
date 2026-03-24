@@ -140,8 +140,9 @@ float4 SSSSBlurCS(
 	uint2 maxCoord = uint2(SharedData::BufferDim.x, SharedData::BufferDim.y);
 #endif
 
-	// Accumulate the other samples:
-	for (uint i = kernelOffset + 1; i < kernelOffset + SSSS_N_SAMPLES; i++) {
+	// Accumulate the other samples (SeparableSampleCount from CPU, max SSSS_N_SAMPLES):
+	uint sampleEnd = kernelOffset + min(SeparableSampleCount, SSSS_N_SAMPLES);
+	for (uint i = kernelOffset + 1; i < sampleEnd; i++) {
 		float2 offset = Kernels[i].a * finalStep;
 
 		uint2 coords = DTid.xy + int2(offset + 0.5);

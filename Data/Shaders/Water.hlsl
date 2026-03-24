@@ -1206,8 +1206,8 @@ PS_OUTPUT main(PS_INPUT input)
 	if (LightLimitFix::GetClusterIndex(screenUV, viewPosition.z, clusterIndex)) {
 		lightCount = LightLimitFix::lightGrid[clusterIndex].lightCount;
 		uint lightOffset = LightLimitFix::lightGrid[clusterIndex].offset;
-		[loop] for (uint i = 0; i < lightCount; i++)
-		{
+		uint acceptedLights = 0;
+		[loop] for (uint i = 0; i < lightCount && acceptedLights < FORWARD_CLUSTERED_LIGHT_CAP; i++) {
 			uint clusteredLightIndex = LightLimitFix::lightList[lightOffset + i];
 			LightLimitFix::Light light = LightLimitFix::lights[clusteredLightIndex];
 			if (LightLimitFix::IsLightIgnored(light) || light.lightFlags & LightLimitFix::LightFlags::Shadow) {
@@ -1232,6 +1232,7 @@ PS_OUTPUT main(PS_INPUT input)
 			const bool isPointLightLinear = light.lightFlags & LightLimitFix::LightFlags::Linear;
 			float3 lightColor = Color::PointLight(light.color.xyz, isPointLightLinear) * pow(HdotN, FresnelRI.z) * light.fade;
 			specularLighting += lightColor * intensityMultiplier;
+			acceptedLights++;
 		}
 	}
 	specularColor += specularLighting * 3;

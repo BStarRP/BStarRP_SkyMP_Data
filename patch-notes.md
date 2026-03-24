@@ -1,9 +1,10 @@
 # Patch notes
 
 **Summary**
-This was important to get USSEP working after all the major engine fixes.
+Worked on making lightsources less laggy and getting all the world addons to work.
 
 ## Changes
-- Fix for weapon equiping animation playign in combat
-- Added USSEP
-- Added Argonion and Khajit overhauls
+- Updated shaders to work better on lower end pcs
+- Updated city maps
+- Fixed issue with combat animations
+- Fixed issue with durability sync

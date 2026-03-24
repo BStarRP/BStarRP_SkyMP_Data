@@ -636,6 +636,14 @@ float3 GetLightingShadow(float3 color, float3 worldPosition, float2 screenPositi
 			float t = (float(i) + noise) * rcpSampleCount;
 			float3 samplePositionWS = lerp(startPosition, endPosition, t);
 			shadow += ShadowSampling::GetWorldShadow(samplePositionWS, FrameBuffer::CameraPosAdjust[eyeIndex].xyz, eyeIndex);
+			// Wider thresholds than PCF: soft world shadow; extrapolate remaining taps when unambiguous
+			if (i >= 3) {
+				float currentAverage = shadow / float(i + 1);
+				if (currentAverage < 0.08 || currentAverage > 0.92) {
+					shadow += float(sampleCount - i - 1) * currentAverage;
+					break;
+				}
+			}
 		}
 		shadow *= rcpSampleCount;
 	}
@@ -726,8 +734,8 @@ PS_OUTPUT main(PS_INPUT input)
 	if (inWorld && LightLimitFix::GetClusterIndex(screenUV, viewPosition.z, clusterIndex)) {
 		lightCount = LightLimitFix::lightGrid[clusterIndex].lightCount;
 		uint lightOffset = LightLimitFix::lightGrid[clusterIndex].offset;
-		[loop] for (uint i = 0; i < lightCount; i++)
-		{
+		uint acceptedLights = 0;
+		[loop] for (uint i = 0; i < lightCount && acceptedLights < FORWARD_CLUSTERED_LIGHT_CAP; i++) {
 			uint clusteredLightIndex = LightLimitFix::lightList[lightOffset + i];
 			LightLimitFix::Light light = LightLimitFix::lights[clusteredLightIndex];
 			if (LightLimitFix::IsLightIgnored(light) || light.lightFlags & LightLimitFix::LightFlags::Shadow) {
@@ -746,6 +754,7 @@ PS_OUTPUT main(PS_INPUT input)
 			const bool isPointLightLinear = light.lightFlags & LightLimitFix::LightFlags::Linear;
 			float3 lightColor = Color::PointLight(light.color.xyz, isPointLightLinear) * intensityMultiplier * 0.5 * light.fade * Color::EffectLightingMult();
 			propertyColor += lightColor;
+			acceptedLights++;
 		}
 	}
 

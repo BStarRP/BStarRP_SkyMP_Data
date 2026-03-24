@@ -32,9 +32,10 @@ These three prefixes are meant for **multiplayer / many actors** (default favors
 
 Use this for **normal play** (including busy towns / MP-style crowds):
 
--   **LinearLighting / Skylighting / ExponentialHeightFog** — dark, torch-forward nights, moon haze, low skylight floor.
--   **ScreenSpaceGI** — **AO only** (`EnableGI`: false), **quarter res**, light slice/step count (no SSGI bounce; best FPS with many actors).
--   **ImageBasedLighting** — **IBL off** (`EnableIBL`: 0) for maximum GPU headroom with crowds; ambient comes from vanilla + your other lighting. Use **`QualityPlus_ImageBasedLighting.json`** when you want IBL back.
+-   **LinearLighting / Skylighting / ExponentialHeightFog** — cooler, crisper key light vs torches; blue-leaning fog inscattering; low skylight floor.
+-   **ScreenSpaceGI** — **AO only** (`EnableGI`: false), **quarter res** — no SSGI bounce (keeps deep outdoor shade dark). **`QualityPlus_ScreenSpaceGI`** uses **low indirect** (`EnableGI`: true, `GIStrength` ~0.28) at **half res** plus higher slices/steps/temporal.
+-   **ImageBasedLighting** — **IBL off** on all shipped tiers (including Quality+); **`PreserveFogLuminance`**: **on** in `CustomLook_` / `LowAssist_` / `QualityPlus_` IBL overrides for fog consistency. **`LowAssist_ImageBasedLighting`** still useful if you enabled IBL in the menu and need to force it off.
+-   **Skylighting** — low diffuse/spec floor for outdoor shade. **`QualityPlus_Skylighting`** / **`LowAssist_Skylighting`** mirror these values so switching tiers does not revert to brighter skylight defaults.
 -   **VolumetricLighting** — **Medium** interior + exterior.
 -   **DynamicCubemaps** — **SSR off** on water.
 -   **SubsurfaceScattering** — **10** Burley samples.
@@ -43,8 +44,10 @@ Use this for **normal play** (including busy towns / MP-style crowds):
 
 Enable in **Overrides** when you want **solo / screenshots / max eye candy**. For each file you enable, **disable** the matching **`CustomLook_{SameFeature}.json`** so settings are not merged twice.
 
--   **`QualityPlus_ScreenSpaceGI.json`** — `EnableGI`: true, half res, fuller slices/steps/temporal.
--   **`QualityPlus_ImageBasedLighting.json`** — full IBL scales.
+-   **`QualityPlus_LinearLighting.json`** / **`QualityPlus_ExponentialHeightFog.json`** — same cooler/crisp balance as CustomLook 4.4 when Quality+ is your active tier (disable matching `CustomLook_*` for those features).
+-   **`QualityPlus_Skylighting.json`** — same outdoor shade floor as CustomLook (disable `CustomLook_Skylighting`).
+-   **`QualityPlus_ScreenSpaceGI.json`** — **low** indirect (`GIStrength` ~0.28), half res, higher slices/steps/temporal vs default tier.
+-   **`QualityPlus_ImageBasedLighting.json`** — **IBL off** (same darkness as default tier outdoors/nights), **`PreserveFogLuminance`**: on; disable `CustomLook_ImageBasedLighting`.
 -   **`QualityPlus_VolumetricLighting.json`** — **High** VL.
 -   **`QualityPlus_DynamicCubemaps.json`** — water **SSR on**.
 -   **`QualityPlus_SubsurfaceScattering.json`** — **16** Burley samples.
@@ -54,14 +57,19 @@ Enable in **Overrides** when you want **solo / screenshots / max eye candy**. Fo
 
 Extra cuts when Tier 1 is not enough (stutter towns, huge PvP crowds):
 
--   **`LowAssist_VolumetricLighting.json`** — VL **Low**.
+-   **`LowAssist_Global.json`** — caps **shader compiler** threads only. **Clustered light limits** (`FORWARD_CLUSTERED_LIGHT_CAP` **16**, `DEFERRED_CLUSTERED_LIGHT_CAP` **24**) are **global defaults** in `LightLimitFix/Common.hlsli` so all preset tiers share the same cost without **Advanced → Shader Defines** or recompiles when switching profiles.
+-   **`LowAssist_LinearLighting.json`** / **`LowAssist_ExponentialHeightFog.json`** — same cooler/crisp LL/fog as CustomLook when LowAssist is active (disable matching `CustomLook_*`).
+-   **`LowAssist_Skylighting.json`** — same outdoor shade floor as CustomLook (disable `CustomLook_Skylighting`).
+-   **`LowAssist_VolumetricLighting.json`** — **VL off** interior and exterior (big cost with many lights).
 -   **`LowAssist_ScreenSpaceShadows.json`** — contact shadows **off**.
 -   **`LowAssist_SubsurfaceScattering.json`** — Burley **8** samples.
--   **`LowAssist_ScreenSpaceGI.json`** — explicit AO-only quarter-res block (redundant with default; use if you changed SSGI in menu).
+-   **`LowAssist_ScreenSpaceGI.json`** — **Screen Space GI disabled** (`Enabled`: false) to drop the whole AO/GI pass on weak GPUs.
 -   **`LowAssist_ImageBasedLighting.json`** — forces **IBL off** if you enabled IBL in menu or used QualityPlus and need to claw back FPS.
--   **`LowAssist_DynamicCubemaps.json`** / **`LowAssist_Global.json`** — SSR off / compiler thread cap.
+-   **`LowAssist_DynamicCubemaps.json`** — SSR off.
 
-Try **VL** first, then **contact shadows**, then **SSS**. Default already has **IBL off**.
+Try **VL off**, **`LowAssist_Global`** (compiler threads), **SSGI off**, then **contact shadows**, then **SSS**, then **`LowAssist_ImageBasedLighting`** if still GPU-bound.
+
+To change light caps for everyone, edit **`FORWARD_CLUSTERED_LIGHT_CAP`** / **`DEFERRED_CLUSTERED_LIGHT_CAP`** in the shipped **`LightLimitFix/Common.hlsli`** (or set **`Shader Defines`** in **Advanced** for a one-off override, which does require a shader recompile).
 
 Weather JSON keys for EH fog use the **display names** registered in CS (for example `"Fog Density"`, `"Directional Inscattering Multiplier"`). Overrides use the feature’s **settings field names** (for example `fogDensity`, `inscatteringTint`).
 

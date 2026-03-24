@@ -7,6 +7,17 @@
 #define GROUP_SIZE (NUMTHREAD_X * NUMTHREAD_Y * NUMTHREAD_Z)
 #define MAX_CLUSTER_LIGHTS 256
 
+// Forward shaders (Particle, Effect, Water, RunGrass) cap clustered point lights per pixel.
+// Deferred BSLightingShader uses DEFERRED_CLUSTERED_LIGHT_CAP (see Lighting.hlsl).
+// Defaults are conservative for dense scenes; override with shader defines only if needed.
+#ifndef FORWARD_CLUSTERED_LIGHT_CAP
+#	define FORWARD_CLUSTERED_LIGHT_CAP 16
+#endif
+
+#ifndef DEFERRED_CLUSTERED_LIGHT_CAP
+#	define DEFERRED_CLUSTERED_LIGHT_CAP 24
+#endif
+
 namespace LightFlags
 {
 	static const uint PortalStrict = (1 << 0);

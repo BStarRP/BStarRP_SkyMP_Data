@@ -16,9 +16,9 @@
 	"fogGamma": 1.52,
 	"fogAlphaGamma": 1.52,
 	"_metadata": {
-		"modName": "Custom look - default tier (repo)",
-		"version": "4.4.0",
-		"description": "Cooler, crisper lighting: stronger directional key, less torch dominance, tighter gammas/VL; neutral ambient lift.",
-		"enabled": true
+		"modName": "Low assist (repo preset)",
+		"version": "1.0.0",
+		"description": "Same cooler/crisp linear lighting as CustomLook 4.4 when LowAssist tier is active. Disable CustomLook_LinearLighting while using this tier.",
+		"enabled": false
 	}
 }

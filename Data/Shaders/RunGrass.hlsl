@@ -675,9 +675,9 @@ PS_OUTPUT main(PS_INPUT input, bool frontFace : SV_IsFrontFace)
 		lightCount = LightLimitFix::lightGrid[clusterIndex].lightCount;
 		if (lightCount) {
 			uint lightOffset = LightLimitFix::lightGrid[clusterIndex].offset;
+			uint acceptedLights = 0;
 
-			[loop] for (uint i = 0; i < lightCount; i++)
-			{
+			[loop] for (uint i = 0; i < lightCount && acceptedLights < FORWARD_CLUSTERED_LIGHT_CAP; i++) {
 				uint clusteredLightIndex = LightLimitFix::lightList[lightOffset + i];
 				LightLimitFix::Light light = LightLimitFix::lights[clusteredLightIndex];
 
@@ -737,6 +737,7 @@ PS_OUTPUT main(PS_INPUT input, bool frontFace : SV_IsFrontFace)
 				if (complex)
 					lightsSpecularColor += GrassLighting::GetLightSpecularInput(normalizedLightDirection, viewDirection, normal, lightColor, SharedData::grassLightingSettings.Glossiness) * Color::VanillaNormalization();
 #				endif
+				acceptedLights++;
 			}
 		}
 	}
@@ -897,9 +898,9 @@ PS_OUTPUT main(PS_INPUT input)
 		lightCount = LightLimitFix::lightGrid[clusterIndex].lightCount;
 		if (lightCount) {
 			uint lightOffset = LightLimitFix::lightGrid[clusterIndex].offset;
+			uint acceptedLights = 0;
 
-			[loop] for (uint i = 0; i < lightCount; i++)
-			{
+			[loop] for (uint i = 0; i < lightCount && acceptedLights < FORWARD_CLUSTERED_LIGHT_CAP; i++) {
 				uint clusteredLightIndex = LightLimitFix::lightList[lightOffset + i];
 				LightLimitFix::Light light = LightLimitFix::lights[clusteredLightIndex];
 
@@ -932,6 +933,7 @@ PS_OUTPUT main(PS_INPUT input)
 				lightColor *= lightShadow;
 
 				diffuseColor += lightColor;
+				acceptedLights++;
 			}
 		}
 	}

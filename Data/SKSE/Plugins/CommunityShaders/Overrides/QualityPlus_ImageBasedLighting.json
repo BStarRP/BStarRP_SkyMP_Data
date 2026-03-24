@@ -1,13 +1,10 @@
 {
-	"EnableIBL": 1,
-	"UseStaticIBL": 1,
-	"EnvIBLScale": 1.0,
-	"SkyIBLScale": 1.0,
-	"DALCAmount": 1.0,
+	"EnableIBL": 0,
+	"PreserveFogLuminance": 1,
 	"_metadata": {
 		"modName": "Quality plus (repo preset)",
-		"version": "1.0.0",
-		"description": "Optional quality tier: full IBL scales. Disable CustomLook_ImageBasedLighting while using this to avoid conflicting merges.",
+		"version": "1.4.0",
+		"description": "IBL off like CustomLook — exteriors/nights stay dark; extra quality comes from SSGI/VL/cubemaps/SSS/etc. Disable CustomLook_ImageBasedLighting when using Quality+.",
 		"enabled": false
 	}
 }
