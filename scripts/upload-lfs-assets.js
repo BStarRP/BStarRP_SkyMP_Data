@@ -29,6 +29,8 @@
  * Optional: R2_PUT_DEADLINE_MS, R2_HEAD_DEADLINE_MS, R2_LIST_DEADLINE_MS — hard abort per operation (0 = auto from size).
  * Optional: R2_COPY_DEADLINE_MS — CopyObject abort deadline (default 900000). Under load R2 can queue copies; keep
  *   R2_REQUEST_TIMEOUT_MS >= this or you will see @smithy/node-http-handler requestTimeout warnings / stalled copies.
+ * Optional: R2_CONCURRENCY — parallel S3 operations (default 24). Copy-from-previous scales with this: ~15k copies at
+ *   concurrency 8 can take ~12–15 min; raise toward 32–64 if R2 stays stable (keep R2_MAX_SOCKETS >= concurrency).
  * Optional: R2_MAX_SOCKETS — https agent maxSockets (default 128) to reduce connection pile-up with high concurrency.
  * Optional: R2_ENABLE_OLD_PATCH_CLEANUP=1 — run post-upload patches/* list+delete sweep (default off for faster releases).
  * Optional: R2_PREFETCH_PREV_PREFIX=0 — disable one-shot ListObjects of patches/<prev>/ (falls back to per-file Head before Copy).
@@ -719,7 +721,7 @@ async function run() {
     return await uploadFromLocal(pathEntry, src, destKey, entry, '');
   });
 
-  const concurrency = Math.max(1, parseInt(process.env.R2_CONCURRENCY || '12', 10) || 12);
+  const concurrency = Math.max(1, parseInt(process.env.R2_CONCURRENCY || '24', 10) || 24);
   const outcomes = await runWithLimit(tasks, concurrency);
   copied = outcomes.filter((o) => o === 'copied').length;
   uploaded = outcomes.filter((o) => o === 'uploaded').length;

@@ -369,7 +369,9 @@ jobs:
           PATCH_ASSETS_PUBLIC_URL: ${{ secrets.PATCH_ASSETS_PUBLIC_URL }}
           VERSION: ${{ steps.version.outputs.version }}
           FORCE_UPLOAD_ALL_SMALL_ASSETS: ${{ github.event.inputs.force_upload_all_small_assets == 'true' && '1' || '' }}
-          R2_CONCURRENCY: 8
+          # Copy-from-previous issues ~15k+ CopyObject calls per release; concurrency 8 → ~12–15 min wall time.
+          # 32–48 is usually safe with R2_MAX_SOCKETS=128; lower if you see throttling or copy timeouts.
+          R2_CONCURRENCY: 32
           R2_VERIFY_PUT_HEAD: '0'
           R2_MAX_SOCKETS: '128'
           R2_LOG_EACH_COPIED_ASSET: '0'
