@@ -1,9 +1,9 @@
 # Patch notes
 
 **Summary**
-Changed default shader settings and rebuild alst stable build for Testing.
+This was important to get USSEP working after all the major engine fixes.
 
 ## Changes
-- Added all reworks of the citys
-- Removed LOD's Redone
-- Removed the oversized Whiterun rework
+- Fix for weapon equiping animation playign in combat
+- Added USSEP
+- Added Argonion and Khajit overhauls
