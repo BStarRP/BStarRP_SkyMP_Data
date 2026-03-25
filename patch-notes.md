@@ -1,8 +1,8 @@
 # Patch notes
 
 **Summary**
-Some improvements with core systems.
+More testing trying to get core issues resolved!
 
 ## Changes
-- Improved npc handling for hosting
-- More work fore equipment syncing
+- Fixed issue with dead npc's still updating and moving.
+- More improvements to durability system.
