@@ -1,10 +1,8 @@
 # Patch notes
 
 **Summary**
-Improvements to Winterhold and Shader optimizations!
+Some improvements with core systems.
 
 ## Changes
-- Updated shaders to compile in the background
-- Updated winterhold college
-- Fixed combat animations (finaly)
-- Fixed opening and closing door synchronization
+- Improved npc handling for hosting
+- More work fore equipment syncing
