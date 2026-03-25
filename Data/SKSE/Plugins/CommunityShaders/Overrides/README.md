@@ -38,6 +38,8 @@ Use this for **normal play** (including busy towns / MP-style crowds):
 -   **Skylighting** — low diffuse/spec floor for outdoor shade. **`QualityPlus_Skylighting`** / **`LowAssist_Skylighting`** mirror these values so switching tiers does not revert to brighter skylight defaults.
 -   **VolumetricLighting** — **Medium** interior + exterior.
 -   **DynamicCubemaps** — **SSR off** on water.
+-   **ScreenSpaceShadows** — contact shadows **on**, **SampleCount** **1** (minimum). **`QualityPlus_ScreenSpaceShadows`** uses **2**.
+-   **ExtendedMaterials** — parallax soft shadows (**EnableShadows**) **off** to cut per-light parallax work in dense scenes; **`QualityPlus_ExtendedMaterials`** turns them back **on**.
 -   **SubsurfaceScattering** — **10** Burley samples.
 
 #### Tier 2 - Extra quality: `QualityPlus_*` (`enabled`: false until you turn them on)
@@ -62,6 +64,8 @@ Extra cuts when Tier 1 is not enough (stutter towns, huge PvP crowds):
 -   **`LowAssist_Skylighting.json`** — same outdoor shade floor as CustomLook (disable `CustomLook_Skylighting`).
 -   **`LowAssist_VolumetricLighting.json`** — **VL off** interior and exterior (big cost with many lights).
 -   **`LowAssist_ScreenSpaceShadows.json`** — contact shadows **off**.
+-   **`LowAssist_ExtendedMaterials.json`** — parallax soft shadows **off** (matches CustomLook; disable `CustomLook_ExtendedMaterials` when using this tier).
+-   **`LowAssist_TerrainShadows.json`** — **terrain shadow** compute **off**.
 -   **`LowAssist_SubsurfaceScattering.json`** — Burley **8** samples.
 -   **`LowAssist_ScreenSpaceGI.json`** — **Screen Space GI disabled** (`Enabled`: false) to drop the whole AO/GI pass on weak GPUs.
 -   **`LowAssist_ImageBasedLighting.json`** — forces **IBL off** if you enabled IBL in menu or used QualityPlus and need to claw back FPS.

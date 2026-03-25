@@ -1,10 +1,10 @@
 # Patch notes
 
 **Summary**
-Worked on making lightsources less laggy and getting all the world addons to work.
+Improvements to Winterhold and Shader optimizations!
 
 ## Changes
-- Updated shaders to work better on lower end pcs
-- Updated city maps
-- Fixed issue with combat animations
-- Fixed issue with durability sync
+- Updated shaders to compile in the background
+- Updated winterhold college
+- Fixed combat animations (finaly)
+- Fixed opening and closing door synchronization
