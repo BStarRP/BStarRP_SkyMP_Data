@@ -22,6 +22,9 @@
  * Optional: R2_VERIFY_COPY_DEST=1 — after CopyObject, Head the destination too (slower; default off: source Head
  *   already matched manifest size, server-side copy preserves length).
  * Optional: R2_LOG_EACH_COPIED_ASSET=0 — omit per-file "Copied ..." lines (faster CI / smaller logs); summary still prints.
+ * Optional: R2_PROGRESS_INTERVAL_MS — log "R2: progress done/total" on this timer while parallel work runs (default 30000
+ *   when per-copy log is off, 0 when R2_LOG_EACH_COPIED_ASSET=1). Set 0 to disable. Without this, PutObject lines can be
+ *   the last output for many minutes while ~15k server-side CopyObject calls finish (looks hung in CI).
  * Optional: GIT_LFS_PULL_TIMEOUT_MS / GIT_CHECKOUT_TIMEOUT_MS — exec timeouts (default 480000 / 120000) so a stuck LFS
  *   pull cannot block the whole upload job forever.
  * Optional: R2_PUT_BUFFER_MAX_BYTES — files up to this size use an in-memory buffer for PutObject (default 33554432).
@@ -29,8 +32,8 @@
  * Optional: R2_PUT_DEADLINE_MS, R2_HEAD_DEADLINE_MS, R2_LIST_DEADLINE_MS — hard abort per operation (0 = auto from size).
  * Optional: R2_COPY_DEADLINE_MS — CopyObject abort deadline (default 900000). Under load R2 can queue copies; keep
  *   R2_REQUEST_TIMEOUT_MS >= this or you will see @smithy/node-http-handler requestTimeout warnings / stalled copies.
- * Optional: R2_CONCURRENCY — parallel S3 operations (default 24). Copy-from-previous scales with this: ~15k copies at
- *   concurrency 8 can take ~12–15 min; raise toward 32–64 if R2 stays stable (keep R2_MAX_SOCKETS >= concurrency).
+ * Optional: R2_CONCURRENCY — parallel S3 operations (default 48). Copy-from-previous scales with this: ~15k copies at
+ *   concurrency 8 can take ~12–15 min; 32–48 usually cuts that sharply (keep R2_MAX_SOCKETS >= concurrency; try 64 if stable).
  * Optional: R2_MAX_SOCKETS — https agent maxSockets (default 128) to reduce connection pile-up with high concurrency.
  * Optional: R2_ENABLE_OLD_PATCH_CLEANUP=1 — run post-upload patches/* list+delete sweep (default off for faster releases).
  * Optional: R2_PREFETCH_PREV_PREFIX=0 — disable one-shot ListObjects of patches/<prev>/ (falls back to per-file Head before Copy).
@@ -529,7 +532,7 @@ function compareVersions(a, b) {
 const KEEP_PATCH_VERSIONS = 3;
 
 /** Run async tasks with a concurrency limit. */
-  async function runWithLimit(tasks, limit = 16) {
+async function runWithLimit(tasks, limit = 16) {
   const results = [];
   let index = 0;
   async function worker() {
@@ -540,6 +543,15 @@ const KEEP_PATCH_VERSIONS = 3;
   }
   await Promise.all(Array.from({ length: Math.min(limit, tasks.length) }, () => worker()));
   return results;
+}
+
+/** Heartbeat while many CopyObject run with per-file logging off (avoids "frozen after last upload" confusion). */
+function r2ParallelProgressIntervalMs() {
+  const raw = process.env.R2_PROGRESS_INTERVAL_MS;
+  if (raw !== undefined && String(raw).trim() !== '') {
+    return Math.max(0, parseInt(raw, 10) || 0);
+  }
+  return LOG_EACH_COPIED ? 0 : 30_000;
 }
 
 async function run() {
@@ -721,8 +733,44 @@ async function run() {
     return await uploadFromLocal(pathEntry, src, destKey, entry, '');
   });
 
-  const concurrency = Math.max(1, parseInt(process.env.R2_CONCURRENCY || '24', 10) || 24);
-  const outcomes = await runWithLimit(tasks, concurrency);
+  const concurrency = Math.max(1, parseInt(process.env.R2_CONCURRENCY || '48', 10) || 48);
+  const totalParallel = tasks.length;
+  const progressIntervalMs = r2ParallelProgressIntervalMs();
+  let completedParallel = 0;
+  const wrappedTasks = tasks.map((taskFn) => async () => {
+    try {
+      return await taskFn();
+    } finally {
+      completedParallel++;
+    }
+  });
+
+  const progressHint = progressIntervalMs > 0 ? ', progress every ' + progressIntervalMs / 1000 + 's' : '';
+  const copyHint =
+    copyFromPrevCount > 0 ? ' (~' + copyFromPrevCount + ' copy-from-previous' + progressHint + ')' : '';
+  console.log('R2: parallel phase', totalParallel, 'asset(s), concurrency', concurrency + copyHint);
+
+  let progressTimer;
+  if (progressIntervalMs > 0) {
+    const tPhase = Date.now();
+    progressTimer = setInterval(() => {
+      const pct = totalParallel ? Math.min(100, Math.round((100 * completedParallel) / totalParallel)) : 0;
+      console.log(
+        'R2: progress',
+        completedParallel + '/' + totalParallel,
+        '(' + pct + '%), elapsed',
+        Math.round((Date.now() - tPhase) / 1000) + 's'
+      );
+    }, progressIntervalMs);
+  }
+
+  let outcomes;
+  try {
+    outcomes = await runWithLimit(wrappedTasks, concurrency);
+  } finally {
+    if (progressTimer) clearInterval(progressTimer);
+  }
+
   copied = outcomes.filter((o) => o === 'copied').length;
   uploaded = outcomes.filter((o) => o === 'uploaded').length;
 
