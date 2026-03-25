@@ -1,8 +1,7 @@
 # Patch notes
 
 **Summary**
-More testing trying to get core issues resolved!
+Durable items no longer unequip!
 
 ## Changes
-- Fixed issue with dead npc's still updating and moving.
-- More improvements to durability system.
+- Fixed durability items and metadata
