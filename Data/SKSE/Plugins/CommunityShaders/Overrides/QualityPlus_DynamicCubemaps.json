@@ -1,9 +1,0 @@
-{
-	"EnabledSSR": 1,
-	"_metadata": {
-		"modName": "Quality plus (repo preset)",
-		"version": "1.0.0",
-		"description": "Optional quality tier: water SSR on. Disable CustomLook_DynamicCubemaps while using this.",
-		"enabled": false
-	}
-}

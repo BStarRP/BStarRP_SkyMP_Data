@@ -1,9 +1,0 @@
-{
-	"EnabledSSR": 0,
-	"_metadata": {
-		"modName": "Custom look - default tier (repo)",
-		"version": "2.0.0",
-		"description": "Default tier: water SSR off (large GPU save). QualityPlus_DynamicCubemaps enables SSR.",
-		"enabled": true
-	}
-}

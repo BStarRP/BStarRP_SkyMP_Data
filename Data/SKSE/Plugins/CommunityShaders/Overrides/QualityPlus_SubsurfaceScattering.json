@@ -1,9 +1,0 @@
-{
-	"BurleySamples": 16,
-	"_metadata": {
-		"modName": "Quality plus (repo preset)",
-		"version": "1.0.0",
-		"description": "Optional quality tier: vanilla Burley sample count (16). Disable CustomLook_SubsurfaceScattering while using this.",
-		"enabled": false
-	}
-}

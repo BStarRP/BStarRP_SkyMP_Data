@@ -1,9 +1,0 @@
-{
-	"EnabledSSR": 0,
-	"_metadata": {
-		"modName": "Low assist (repo preset)",
-		"version": "1.0.0",
-		"description": "Tier 3: ensures water SSR off (same as default; useful if you had QualityPlus on).",
-		"enabled": false
-	}
-}
