@@ -1,11 +1,11 @@
 # Patch notes
 
 **Summary**
-Cleanup with maps not loading properly, removed shaders to make them optional.
+Full ESL/Mod support, Synchornized World time set to E 185 and matched to realtime.
 
 ## Changes
-- Fixed broken whiterun map
-- Added Lockpicking functionality
-- Updated Lockpicking skill to work with lockpicking system
-- Updated Durability to take into material type as a factor
-- Removed shaders (will make them optional in the launcher)
+- Improved durability systems
+- Fixed tempering new items
+- Fixed teleporting and addon maps
+- Reworked inventory handling
+- Added synchronized time
