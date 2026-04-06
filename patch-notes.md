@@ -9,4 +9,4 @@ Updated textures, compatability for roads, and improved npc sync!
 - Added lipstick and more face textures
 - Added bodymarks and extra textures
 - Added more hair models and textures
-- I
+- Improved handling of NPC's tied to ESM
