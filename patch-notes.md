@@ -1,7 +1,12 @@
 # Patch notes
 
 **Summary**
-Small fix for last update
+Updated textures, compatability for roads, and improved npc sync!
 
 ## Changes
-- Fixed missing gardens map
+- Added Northern Roads patches
+- Added lots of bears
+- Added lipstick and more face textures
+- Added bodymarks and extra textures
+- Added more hair models and textures
+- I
