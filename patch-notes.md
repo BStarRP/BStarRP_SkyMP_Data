@@ -4,6 +4,4 @@
 Small update!
 
 ## Changes
-- Fixed missing files
-- Fixed issue with spawning objects before cell loaded
-
+- Fixed a few more missing files
