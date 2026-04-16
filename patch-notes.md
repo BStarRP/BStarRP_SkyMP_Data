@@ -1,11 +1,9 @@
 # Patch notes
 
 **Summary**
-Added animations for potion drinking, new load screen and several improvements.
+Small update!
 
 ## Changes
-- Added new main screen
-- Added potion drinking system
-- Improved npc spawning from world
-- Improved inventory syncing
+- Fixed missing files
+- Fixed issue with spawning objects before cell loaded
 
