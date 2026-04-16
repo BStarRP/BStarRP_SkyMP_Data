@@ -1,0 +1,3 @@
+;Sujamma
+;Sadri'sSujamma
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x000946A3)

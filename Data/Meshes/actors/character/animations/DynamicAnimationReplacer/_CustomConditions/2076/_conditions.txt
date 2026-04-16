@@ -1,0 +1,2 @@
+;CabbageSoup
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x00354710)

@@ -1,0 +1,24 @@
+{
+    "name": "Staff - On Hip",
+    "priority": 22000026,
+    "conditions": [
+        {
+            "condition": "IsEquippedType",
+            "requiredVersion": "1.0.0.0",
+            "Type": {
+                "value": 8.0
+            },
+            "Left hand": false
+        },
+        {
+            "condition": "IED_GearNodeEquippedPlacementHint",
+            "requiredPlugin": "OpenAnimationReplacer-IEDConditionExtensions",
+            "requiredVersion": "1.0.0.0",
+            "Left hand": false,
+            "Comparison": "==",
+            "Weapon placement ID": {
+                "value": 5.0
+            }
+        }
+    ]
+}

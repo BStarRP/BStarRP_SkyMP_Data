@@ -1,0 +1,2 @@
+;BlackBriarMead
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x0035470D)

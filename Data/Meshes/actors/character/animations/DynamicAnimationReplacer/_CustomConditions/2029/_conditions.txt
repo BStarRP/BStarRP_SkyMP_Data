@@ -1,0 +1,2 @@
+;PotatoBread
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x0035981E)

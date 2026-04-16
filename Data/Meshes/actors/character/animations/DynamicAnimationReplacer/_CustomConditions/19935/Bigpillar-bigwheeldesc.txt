@@ -1,0 +1,3 @@
+idlewave = Standing puzzle
+idlegreybeardwordteach = big wheel
+idletake = easteregg

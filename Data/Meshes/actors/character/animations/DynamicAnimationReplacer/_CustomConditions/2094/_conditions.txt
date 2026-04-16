@@ -1,0 +1,2 @@
+;SpicedWine
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x00359822)

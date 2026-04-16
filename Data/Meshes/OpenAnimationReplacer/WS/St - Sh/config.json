@@ -1,0 +1,90 @@
+{
+    "name": "Unarmed/Magic/Staff - Shield",
+    "description": "Some animations for Unarmed, Magic or Staff in right hand.\nOnly Equip animations for now.\n\nThe vanilla animations are very short,but the animations on this folder are a bit longer than that.\nIt's possible to cause some sort of issue due to the differences in the animation's times.",
+    "priority": 22000024,
+    "conditions": [
+        {
+            "condition": "OR",
+            "Conditions": [
+                {
+                    "condition": "IsEquippedType",
+                    "Type": {
+                        "value": 0.0
+                    },
+                    "Left hand": false
+                },
+                {
+                    "condition": "IsEquippedType",
+                    "Type": {
+                        "value": 8.0
+                    },
+                    "Left hand": false
+                },
+                {
+                    "condition": "IsEquippedType",
+                    "Type": {
+                        "value": 12.0
+                    },
+                    "Left hand": false
+                },
+                {
+                    "condition": "IsEquippedType",
+                    "Type": {
+                        "value": 13.0
+                    },
+                    "Left hand": false
+                },
+                {
+                    "condition": "IsEquippedType",
+                    "Type": {
+                        "value": 14.0
+                    },
+                    "Left hand": false
+                },
+                {
+                    "condition": "IsEquippedType",
+                    "Type": {
+                        "value": 15.0
+                    },
+                    "Left hand": false
+                },
+                {
+                    "condition": "IsEquippedType",
+                    "Type": {
+                        "value": 16.0
+                    },
+                    "Left hand": false
+                },
+                {
+                    "condition": "IsEquippedType",
+                    "Type": {
+                        "value": 17.0
+                    },
+                    "Left hand": false
+                }
+            ]
+        },
+        {
+            "condition": "IsEquippedType",
+            "Type": {
+                "value": 11.0
+            },
+            "Left hand": true
+        },
+        {
+            "condition": "IED_GearNodePlacementHint",
+            "requiredPlugin": "OpenAnimationReplacer-IEDConditionExtensions",
+            "Gear node ID": {
+                "value": 15.0
+            },
+            "Comparison": "<=",
+            "Weapon placement ID": {
+                "value": 1.0
+            }
+        },
+        {
+            "condition": "SDS_IsShieldOnBackEnabled",
+            "requiredPlugin": "OpenAnimationReplacer-IEDConditionExtensions"
+        }
+    ]
+}

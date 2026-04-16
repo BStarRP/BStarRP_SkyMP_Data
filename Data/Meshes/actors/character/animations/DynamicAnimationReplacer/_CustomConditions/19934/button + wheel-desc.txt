@@ -1,0 +1,3 @@
+idlewave = PressButton
+idlegreybeardwordteach = WheelPuzzle(medium)
+idlepickup_ground = wheel small

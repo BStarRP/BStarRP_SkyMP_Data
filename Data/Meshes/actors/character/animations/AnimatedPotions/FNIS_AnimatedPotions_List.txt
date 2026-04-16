@@ -1,0 +1,268 @@
+version v4.4.0
+ofa -o restorehealth01 ..\potionuse.hkx potionhealthlesseranimobject
+ofa -o restorehealth02 ..\potionuse.hkx potionhealthgreatanimobject
+ofa -o restorehealth03 ..\potionuse.hkx potionhealthextraanimobject
+ofa -o restorehealth04 ..\potionuse.hkx potionhealthextremeanimobject
+ofa -o restorehealth05 ..\potionuse.hkx potionhealthextremeanimobject
+ofa -o restorehealth06 ..\potionuse.hkx potionhealthextremeanimobject
+
+ofa -o restoremagicka01 ..\potionuse.hkx potionmagickalesseranimobject
+ofa -o restoremagicka02 ..\potionuse.hkx potionmagickagreatanimobject
+ofa -o restoremagicka03 ..\potionuse.hkx potionmagickaextraanimobject
+ofa -o restoremagicka04 ..\potionuse.hkx potionmagickaextremeanimobject
+ofa -o restoremagicka05 ..\potionuse.hkx potionmagickaextremeanimobject
+ofa -o restoremagicka06 ..\potionuse.hkx potionmagickaextremeanimobject
+
+ofa -o restorestamina01 ..\potionuse.hkx potionstaminalesseranimobject
+ofa -o restorestamina02 ..\potionuse.hkx potionstaminagreatanimobject
+ofa -o restorestamina03 ..\potionuse.hkx potionstaminaextraanimobject
+ofa -o restorestamina04 ..\potionuse.hkx potionstaminaextremeanimobject
+ofa -o restorestamina05 ..\potionuse.hkx potionstaminaextremeanimobject
+ofa -o restorestamina06 ..\potionuse.hkx potionstaminaextremeanimobject
+
+ofa -o fortifyhealth01 ..\potionuse.hkx potionfortifyhealthlesseranimobject
+ofa -o fortifyhealth02 ..\potionuse.hkx potionfortifyhealthextraanimobject
+ofa -o fortifyhealth03 ..\potionuse.hkx potionfortifyhealthgreatanimobject
+ofa -o fortifyhealth04 ..\potionuse.hkx potionfortifyhealthextremeanimobject
+ofa -o fortifyhealth05 ..\potionuse.hkx potionfortifyhealthextremeanimobject
+ofa -o fortifyhealth06 ..\potionuse.hkx potionfortifyhealthextremeanimobject
+
+ofa -o fortifymagicka01 ..\potionuse.hkx potionfortifymagickalesseranimobject
+ofa -o fortifymagicka02 ..\potionuse.hkx potionfortifymagickaextraanimobject
+ofa -o fortifymagicka03 ..\potionuse.hkx potionfortifymagickagreatanimobject
+ofa -o fortifymagicka04 ..\potionuse.hkx potionfortifymagickaextremeanimobject
+ofa -o fortifymagicka05 ..\potionuse.hkx potionfortifymagickaextremeanimobject
+ofa -o fortifymagicka06 ..\potionuse.hkx potionfortifymagickaextremeanimobject
+
+ofa -o fortifystamina01 ..\potionuse.hkx potionfortifystaminalesseranimobject
+ofa -o fortifystamina02 ..\potionuse.hkx potionfortifystaminaextraanimobject
+ofa -o fortifystamina03 ..\potionuse.hkx potionfortifystaminagreatanimobject
+ofa -o fortifystamina04 ..\potionuse.hkx potionfortifystaminaextremeanimobject
+ofa -o fortifystamina05 ..\potionuse.hkx potionfortifystaminaextremeanimobject
+ofa -o fortifystamina06 ..\potionuse.hkx potionfortifystaminaextremeanimobject
+
+ofa -o fortifyhealrate01 ..\potionuse.hkx potionfortifyhealratelesseranimobject
+ofa -o fortifyhealrate02 ..\potionuse.hkx potionfortifyhealrategreatanimobject
+ofa -o fortifyhealrate03 ..\potionuse.hkx potionfortifyhealrateextraanimobject
+ofa -o fortifyhealrate04 ..\potionuse.hkx potionfortifyhealrateextremeanimobject
+ofa -o fortifyhealrate05 ..\potionuse.hkx potionfortifyhealrateextremeanimobject
+ofa -o fortifyhealrate06 ..\potionuse.hkx potionfortifyhealrateextremeanimobject
+
+ofa -o fortifymagirate01 ..\potionuse.hkx potionfortifymagiratelesseranimobject
+ofa -o fortifymagirate02 ..\potionuse.hkx potionfortifymagirategreatanimobject
+ofa -o fortifymagirate03 ..\potionuse.hkx potionfortifymagirateextraanimobject
+ofa -o fortifymagirate04 ..\potionuse.hkx potionfortifymagirateextremeanimobject
+ofa -o fortifymagirate05 ..\potionuse.hkx potionfortifymagirateextremeanimobject
+ofa -o fortifymagirate06 ..\potionuse.hkx potionfortifymagirateextremeanimobject
+
+ofa -o fortifystamrate01 ..\potionuse.hkx potionfortifystamratelesseranimobject
+ofa -o fortifystamrate02 ..\potionuse.hkx potionfortifystamrategreatanimobject
+ofa -o fortifystamrate03 ..\potionuse.hkx potionfortifystamrateextraanimobject
+ofa -o fortifystamrate04 ..\potionuse.hkx potionfortifystamrateextremeanimobject
+ofa -o fortifystamrate05 ..\potionuse.hkx potionfortifystamrateextremeanimobject
+ofa -o fortifystamrate06 ..\potionuse.hkx potionfortifystamrateextremeanimobject
+
+ofa -o fortifyskill01 ..\potionuse.hkx potionfortifyskill01animobject
+
+ofa -o invisibilty01 ..\potionuse.hkx potioninvisibilitylesseranimobject
+ofa -o invisibilty02 ..\potionuse.hkx potioninvisibilityextraanimobject
+ofa -o invisibilty03 ..\potionuse.hkx potioninvisibilitygreatanimobject
+ofa -o invisibilty04 ..\potionuse.hkx potioninvisibilityextremeanimobject
+ofa -o invisibilty05 ..\potionuse.hkx potioninvisibilityextremeanimobject
+ofa -o invisibilty06 ..\potionuse.hkx potioninvisibilityextremeanimobject
+
+ofa -o fortifycarry01 ..\potionuse.hkx potionfortifycarrylesseranimobject
+ofa -o fortifycarry02 ..\potionuse.hkx potionfortifycarryextraanimobject
+ofa -o fortifycarry03 ..\potionuse.hkx potionfortifycarrygreatanimobject
+ofa -o fortifycarry04 ..\potionuse.hkx potionfortifycarryextremeanimobject
+ofa -o fortifycarry05 ..\potionuse.hkx potionfortifycarryextremeanimobject
+ofa -o fortifycarry06 ..\potionuse.hkx potionfortifycarryextremeanimobject
+
+ofa -o resistfire25 ..\potionuse.hkx potionresistfire50animobject
+ofa -o resistfire50 ..\potionuse.hkx potionresistfire50animobject
+ofa -o resistfire75 ..\potionuse.hkx potionresistfire50animobject
+ofa -o resistfire100 ..\potionuse.hkx potionresistfire100animobject
+
+ofa -o resistfrost25 ..\potionuse.hkx potionresistfrost50animobject
+ofa -o resistfrost50 ..\potionuse.hkx potionresistfrost50animobject
+ofa -o resistfrost75 ..\potionuse.hkx potionresistfrost50animobject
+ofa -o resistfrost100 ..\potionuse.hkx potionresistfrost100animobject
+
+ofa -o resistmagicka25 ..\potionuse.hkx potionresistmagicka50animobject
+ofa -o resistmagicka50 ..\potionuse.hkx potionresistmagicka50animobject
+ofa -o resistmagicka75 ..\potionuse.hkx potionresistmagicka50animobject
+ofa -o resistmagicka100 ..\potionuse.hkx potionresistmagicka100animobject
+
+ofa -o resistshock25 ..\potionuse.hkx potionresistshock50animobject
+ofa -o resistshock50 ..\potionuse.hkx potionresistshock50animobject
+ofa -o resistshock75 ..\potionuse.hkx potionresistshock50animobject
+ofa -o resistshock100 ..\potionuse.hkx potionresistshock100animobject
+
+ofa -o dlc01bloodpotion ..\potionuse.hkx dlc01bloodpotionanimobject
+
+ofa -o ms12whitephialrepaired ..\potionuse.hkx ms12whitephialrepairedanimobject
+
+ofa -o curedisease ..\potionuse.hkx potionhealthlesseranimobject
+
+ofa -o cricewraithresistfrost25 ..\potionuse.hkx potionresistfrost50animobject
+ofa -o dunsleepingtreecampsap ..\potionuse.hkx dunsleepingtreecampsapanimobject
+
+ofa -o skooma ..\potionuse.hkx potionskoomaanimobject
+
+ofa -o dlc1foodsoulhuskextract ..\potionuse.hkx potionresistmagicka100animobject
+
+ofa -o dlc2dunbloodskalpotionofwaterwalking ..\potionuse.hkx potionfortifycarrygreatanimobject
+
+ofa -o dlcrestoreall01 ..\potionuse.hkx potionhealthlesseranimobject
+ofa -o dlcrestoreall02 ..\potionuse.hkx potionhealthlesseranimobject
+ofa -o dlcrestoreall03 ..\potionuse.hkx potionhealthgreatanimobject
+ofa -o dlcrestoreall04 ..\potionuse.hkx potionhealthgreatanimobject
+ofa -o dlcrestoreall05 ..\potionuse.hkx potionhealthextremeanimobject
+ofa -o dlcrestoreall06 ..\potionuse.hkx potionhealthextremeanimobject
+
+ofa -o waterbreathing01 ..\potionuse.hkx potioninvisibilitylesseranimobject
+ofa -o waterbreathing02 ..\potionuse.hkx potioninvisibilitylesseranimobject
+ofa -o waterbreathing03 ..\potionuse.hkx potioninvisibilitylesseranimobject
+ofa -o waterbreathing04 ..\potionuse.hkx potioninvisibilitylesseranimobject
+ofa -o waterbreathing05 ..\potionuse.hkx potioninvisibilitylesseranimobject
+ofa -o waterbreathing06 ..\potionuse.hkx potioninvisibilitylesseranimobject
+
+ofa -o markarthbothelapotion ..\potionuse.hkx potionfortifystaminalesseranimobject
+
+ofa -o resistpoison100 ..\potionuse.hkx potionresistpoison100animobject
+ofa -o resistpoison50 ..\potionuse.hkx potionresistpoison50animobject
+
+
+
+ofa -o fastrestorehealth01 ..\fastpotionuse.hkx fastpotionhealthlesseranimobject
+ofa -o fastrestorehealth02 ..\fastpotionuse.hkx fastpotionhealthgreatanimobject
+ofa -o fastrestorehealth03 ..\fastpotionuse.hkx fastpotionhealthextraanimobject
+ofa -o fastrestorehealth04 ..\fastpotionuse.hkx fastpotionhealthextremeanimobject
+ofa -o fastrestorehealth05 ..\fastpotionuse.hkx fastpotionhealthextremeanimobject
+ofa -o fastrestorehealth06 ..\fastpotionuse.hkx fastpotionhealthextremeanimobject
+
+ofa -o fastrestoremagicka01 ..\fastpotionuse.hkx fastpotionmagickalesseranimobject
+ofa -o fastrestoremagicka02 ..\fastpotionuse.hkx fastpotionmagickagreatanimobject
+ofa -o fastrestoremagicka03 ..\fastpotionuse.hkx fastpotionmagickaextraanimobject
+ofa -o fastrestoremagicka04 ..\fastpotionuse.hkx fastpotionmagickaextremeanimobject
+ofa -o fastrestoremagicka05 ..\fastpotionuse.hkx fastpotionmagickaextremeanimobject
+ofa -o fastrestoremagicka06 ..\fastpotionuse.hkx fastpotionmagickaextremeanimobject
+
+ofa -o fastrestorestamina01 ..\fastpotionuse.hkx fastpotionstaminalesseranimobject
+ofa -o fastrestorestamina02 ..\fastpotionuse.hkx fastpotionstaminagreatanimobject
+ofa -o fastrestorestamina03 ..\fastpotionuse.hkx fastpotionstaminaextraanimobject
+ofa -o fastrestorestamina04 ..\fastpotionuse.hkx fastpotionstaminaextremeanimobject
+ofa -o fastrestorestamina05 ..\fastpotionuse.hkx fastpotionstaminaextremeanimobject
+ofa -o fastrestorestamina06 ..\fastpotionuse.hkx fastpotionstaminaextremeanimobject
+
+ofa -o fastfortifyhealth01 ..\fastpotionuse.hkx fastpotionfortifyhealthlesseranimobject
+ofa -o fastfortifyhealth02 ..\fastpotionuse.hkx fastpotionfortifyhealthextraanimobject
+ofa -o fastfortifyhealth03 ..\fastpotionuse.hkx fastpotionfortifyhealthgreatanimobject
+ofa -o fastfortifyhealth04 ..\fastpotionuse.hkx fastpotionfortifyhealthextremeanimobject
+ofa -o fastfortifyhealth05 ..\fastpotionuse.hkx fastpotionfortifyhealthextremeanimobject
+ofa -o fastfortifyhealth06 ..\fastpotionuse.hkx fastpotionfortifyhealthextremeanimobject
+
+ofa -o fastfortifymagicka01 ..\fastpotionuse.hkx fastpotionfortifymagickalesseranimobject
+ofa -o fastfortifymagicka02 ..\fastpotionuse.hkx fastpotionfortifymagickaextraanimobject
+ofa -o fastfortifymagicka03 ..\fastpotionuse.hkx fastpotionfortifymagickagreatanimobject
+ofa -o fastfortifymagicka04 ..\fastpotionuse.hkx fastpotionfortifymagickaextremeanimobject
+ofa -o fastfortifymagicka05 ..\fastpotionuse.hkx fastpotionfortifymagickaextremeanimobject
+ofa -o fastfortifymagicka06 ..\fastpotionuse.hkx fastpotionfortifymagickaextremeanimobject
+
+ofa -o fastfortifystamina01 ..\fastpotionuse.hkx fastpotionfortifystaminalesseranimobject
+ofa -o fastfortifystamina02 ..\fastpotionuse.hkx fastpotionfortifystaminaextraanimobject
+ofa -o fastfortifystamina03 ..\fastpotionuse.hkx fastpotionfortifystaminagreatanimobject
+ofa -o fastfortifystamina04 ..\fastpotionuse.hkx fastpotionfortifystaminaextremeanimobject
+ofa -o fastfortifystamina05 ..\fastpotionuse.hkx fastpotionfortifystaminaextremeanimobject
+ofa -o fastfortifystamina06 ..\fastpotionuse.hkx fastpotionfortifystaminaextremeanimobject
+
+ofa -o fastfortifyhealrate01 ..\fastpotionuse.hkx fastpotionfortifyhealratelesseranimobject
+ofa -o fastfortifyhealrate02 ..\fastpotionuse.hkx fastpotionfortifyhealrategreatanimobject
+ofa -o fastfortifyhealrate03 ..\fastpotionuse.hkx fastpotionfortifyhealrateextraanimobject
+ofa -o fastfortifyhealrate04 ..\fastpotionuse.hkx fastpotionfortifyhealrateextremeanimobject
+ofa -o fastfortifyhealrate05 ..\fastpotionuse.hkx fastpotionfortifyhealrateextremeanimobject
+ofa -o fastfortifyhealrate06 ..\fastpotionuse.hkx fastpotionfortifyhealrateextremeanimobject
+
+ofa -o fastfortifymagirate01 ..\fastpotionuse.hkx fastpotionfortifymagiratelesseranimobject
+ofa -o fastfortifymagirate02 ..\fastpotionuse.hkx fastpotionfortifymagirategreatanimobject
+ofa -o fastfortifymagirate03 ..\fastpotionuse.hkx fastpotionfortifymagirateextraanimobject
+ofa -o fastfortifymagirate04 ..\fastpotionuse.hkx fastpotionfortifymagirateextremeanimobject
+ofa -o fastfortifymagirate05 ..\fastpotionuse.hkx fastpotionfortifymagirateextremeanimobject
+ofa -o fastfortifymagirate06 ..\fastpotionuse.hkx fastpotionfortifymagirateextremeanimobject
+
+ofa -o fastfortifystamrate01 ..\fastpotionuse.hkx fastpotionfortifystamratelesseranimobject
+ofa -o fastfortifystamrate02 ..\fastpotionuse.hkx fastpotionfortifystamrategreatanimobject
+ofa -o fastfortifystamrate03 ..\fastpotionuse.hkx fastpotionfortifystamrateextraanimobject
+ofa -o fastfortifystamrate04 ..\fastpotionuse.hkx fastpotionfortifystamrateextremeanimobject
+ofa -o fastfortifystamrate05 ..\fastpotionuse.hkx fastpotionfortifystamrateextremeanimobject
+ofa -o fastfortifystamrate06 ..\fastpotionuse.hkx fastpotionfortifystamrateextremeanimobject
+
+ofa -o fastfortifyskill01 ..\fastpotionuse.hkx fastpotionfortifyskill01animobject
+
+ofa -o fastinvisibilty01 ..\fastpotionuse.hkx fastpotioninvisibilitylesseranimobject
+ofa -o fastinvisibilty02 ..\fastpotionuse.hkx fastpotioninvisibilityextraanimobject
+ofa -o fastinvisibilty03 ..\fastpotionuse.hkx fastpotioninvisibilitygreatanimobject
+ofa -o fastinvisibilty04 ..\fastpotionuse.hkx fastpotioninvisibilityextremeanimobject
+ofa -o fastinvisibilty05 ..\fastpotionuse.hkx fastpotioninvisibilityextremeanimobject
+ofa -o fastinvisibilty06 ..\fastpotionuse.hkx fastpotioninvisibilityextremeanimobject
+
+ofa -o fastfortifycarry01 ..\fastpotionuse.hkx fastpotionfortifycarrylesseranimobject
+ofa -o fastfortifycarry02 ..\fastpotionuse.hkx fastpotionfortifycarryextraanimobject
+ofa -o fastfortifycarry03 ..\fastpotionuse.hkx fastpotionfortifycarrygreatanimobject
+ofa -o fastfortifycarry04 ..\fastpotionuse.hkx fastpotionfortifycarryextremeanimobject
+ofa -o fastfortifycarry05 ..\fastpotionuse.hkx fastpotionfortifycarryextremeanimobject
+ofa -o fastfortifycarry06 ..\fastpotionuse.hkx fastpotionfortifycarryextremeanimobject
+
+ofa -o fastresistfire25 ..\fastpotionuse.hkx fastpotionresistfire50animobject
+ofa -o fastresistfire50 ..\fastpotionuse.hkx fastpotionresistfire50animobject
+ofa -o fastresistfire75 ..\fastpotionuse.hkx fastpotionresistfire50animobject
+ofa -o fastresistfire100 ..\fastpotionuse.hkx fastpotionresistfire100animobject
+
+ofa -o fastresistfrost25 ..\fastpotionuse.hkx fastpotionresistfrost50animobject
+ofa -o fastresistfrost50 ..\fastpotionuse.hkx fastpotionresistfrost50animobject
+ofa -o fastresistfrost75 ..\fastpotionuse.hkx fastpotionresistfrost50animobject
+ofa -o fastresistfrost100 ..\fastpotionuse.hkx fastpotionresistfrost100animobject
+
+ofa -o fastresistmagicka25 ..\fastpotionuse.hkx fastpotionresistmagicka50animobject
+ofa -o fastresistmagicka50 ..\fastpotionuse.hkx fastpotionresistmagicka50animobject
+ofa -o fastresistmagicka75 ..\fastpotionuse.hkx fastpotionresistmagicka50animobject
+ofa -o fastresistmagicka100 ..\fastpotionuse.hkx fastpotionresistmagicka100animobject
+
+ofa -o fastresistshock25 ..\fastpotionuse.hkx fastpotionresistshock50animobject
+ofa -o fastresistshock50 ..\fastpotionuse.hkx fastpotionresistshock50animobject
+ofa -o fastresistshock75 ..\fastpotionuse.hkx fastpotionresistshock50animobject
+ofa -o fastresistshock100 ..\fastpotionuse.hkx fastpotionresistshock100animobject
+
+ofa -o fastdlc01bloodpotion ..\fastpotionuse.hkx fastdlc01bloodpotionanimobject
+
+ofa -o fastms12whitephialrepaired ..\fastpotionuse.hkx fastms12whitephialrepairedanimobject
+
+ofa -o fastcuredisease ..\fastpotionuse.hkx fastpotionhealthlesseranimobject
+
+ofa -o fastcricewraithresistfrost25 ..\fastpotionuse.hkx fastpotionresistfrost50animobject
+ofa -o fastdunsleepingtreecampsap ..\fastpotionuse.hkx fastdunsleepingtreecampsapanimobject
+
+ofa -o fastskooma ..\fastpotionuse.hkx fastpotionskoomaanimobject
+
+ofa -o fastdlc1foodsoulhuskextract ..\fastpotionuse.hkx fastpotionresistmagicka100animobject
+
+ofa -o fastdlc2dunbloodskalpotionofwaterwalking ..\fastpotionuse.hkx fastpotionfortifycarrygreatanimobject
+
+ofa -o fastdlcrestoreall01 ..\fastpotionuse.hkx fastpotionhealthlesseranimobject
+ofa -o fastdlcrestoreall02 ..\fastpotionuse.hkx fastpotionhealthlesseranimobject
+ofa -o fastdlcrestoreall03 ..\fastpotionuse.hkx fastpotionhealthgreatanimobject
+ofa -o fastdlcrestoreall04 ..\fastpotionuse.hkx fastpotionhealthgreatanimobject
+ofa -o fastdlcrestoreall05 ..\fastpotionuse.hkx fastpotionhealthextremeanimobject
+ofa -o fastdlcrestoreall06 ..\fastpotionuse.hkx fastpotionhealthextremeanimobject
+
+ofa -o fastwaterbreathing01 ..\fastpotionuse.hkx fastpotioninvisibilitylesseranimobject
+ofa -o fastwaterbreathing02 ..\fastpotionuse.hkx fastpotioninvisibilitylesseranimobject
+ofa -o fastwaterbreathing03 ..\fastpotionuse.hkx fastpotioninvisibilitylesseranimobject
+ofa -o fastwaterbreathing04 ..\fastpotionuse.hkx fastpotioninvisibilitylesseranimobject
+ofa -o fastwaterbreathing05 ..\fastpotionuse.hkx fastpotioninvisibilitylesseranimobject
+ofa -o fastwaterbreathing06 ..\fastpotionuse.hkx fastpotioninvisibilitylesseranimobject
+
+ofa -o fastmarkarthbothelapotion ..\fastpotionuse.hkx fastpotionfortifystaminalesseranimobject
+
+ofa -o fastresistpoison100 ..\fastpotionuse.hkx fastpotionresistpoison100animobject
+ofa -o fastresistpoison50 ..\fastpotionuse.hkx fastpotionresistpoison50animobject

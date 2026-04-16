@@ -1,0 +1,2 @@
+;CookedGlassfish
+HasMagicEffect("Taberu Animation - Fishing Patch.esp" | 0x8A3)

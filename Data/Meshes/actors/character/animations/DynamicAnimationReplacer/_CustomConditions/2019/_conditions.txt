@@ -1,0 +1,2 @@
+;SalmonMeat
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x00178458)

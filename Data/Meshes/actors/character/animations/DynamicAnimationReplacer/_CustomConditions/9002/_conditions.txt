@@ -1,0 +1,2 @@
+;CookedBrookBass
+HasMagicEffect("Taberu Animation - Fishing Patch.esp" | 0x891)

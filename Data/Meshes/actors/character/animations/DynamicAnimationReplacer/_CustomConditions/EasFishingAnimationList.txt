@@ -1,0 +1,47 @@
+9000 - CookedCod
+9001 - Cooked Pearlfish
+9002 - Cooked Brook Bass
+9003 - Cooked Scorpion Fish
+9004 - Cooked Carp
+9005 - Cooked Catfish
+9006 - Cooked Direfish
+9007 - Cooked Angelfish
+9008 - Cooked Glass Catfish
+9009 - Cooked Goldfish
+9010 - Cooked Lyretail Anthias
+9011 - Cooked Pygmy Sunfish
+9012 - Cooked Spadefish
+9013 - Cooked Tripod Spiderfish
+9014 - Cooked Vampire Fish
+9015 - Cooked Pogfish
+9016 - Vampire Fish
+9017 - Cooked Arctic Grayling
+9018 - Cooked Arctic Char
+9019 - Cooked Angler Larvae
+9020 - Cooked Glassfish
+9021 - Angler
+9022 - Pogfish
+9023 - Direfish
+9024 - Catfish
+9025 - Carp
+9026 - Cooked Juvenile Mudcrab
+9027 - Salmon
+9028 - Brook Bass
+9029 - Tripod Spiderfish
+9030 - Glass Catfish
+9031 - Scorpion Fish
+9032 - Cod
+9033 - Arctic Grayling
+9034 - Arctic Char
+9035 - Cooked Angler
+9036 - Crab Meat
+9037 - Creamy Crab Bisque
+9038 - Roasted Tomato Crab Bisque
+9039 - Potato Crab Chowder
+9040 - Hot Creamy Crab Bisque
+9041 - Hot Potato Crab Chowder
+9042 - Hot Roasted Tomato Crab Bisque
+9043 - Slaughterfish
+9044 - Crab Stew
+9045 - Hot Crab Stew
+9046 - Crab Cakes

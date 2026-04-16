@@ -1,0 +1,4 @@
+;VelvetLeChance
+;White-GoldTower
+;CliffRacer
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x00317AF9)

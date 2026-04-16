@@ -1,0 +1,16 @@
+{
+    "name": "Right Hand - on Back",
+    "priority": 22000002,
+    "conditions": [
+        {
+            "condition": "IED_GearNodeEquippedPlacementHint",
+            "requiredPlugin": "OpenAnimationReplacer-IEDConditionExtensions",
+            "requiredVersion": "1.0.0.0",
+            "Left hand": false,
+            "Comparison": "==",
+            "Weapon placement ID": {
+                "value": 2.0
+            }
+        }
+    ]
+}

@@ -1,0 +1,1 @@
+ValueEqualTo("Simple Fishing Overhaul.esp"|0x00000800, 1)

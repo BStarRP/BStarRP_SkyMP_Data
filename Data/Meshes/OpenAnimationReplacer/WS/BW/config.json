@@ -1,0 +1,13 @@
+{
+    "name": "Bound Weapons",
+    "description": "Bound weapons won't sheathe.",
+    "priority": 22000050,
+    "conditions": [
+        {
+            "condition": "IED_IsBoundWeaponEquipped",
+            "requiredPlugin": "OpenAnimationReplacer-IEDConditionExtensions",
+            "requiredVersion": "1.0.0.0",
+            "Left hand": false
+        }
+    ]
+}

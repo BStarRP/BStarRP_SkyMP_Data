@@ -1,0 +1,44 @@
+{
+    "name": "Quiver - On Back Hip",
+    "priority": 22000029,
+    "conditions": [
+        {
+            "condition": "IsEquippedType",
+            "requiredVersion": "1.0.0.0",
+            "Type": {
+                "value": 7.0
+            },
+            "Left hand": false
+        },
+        {
+            "condition": "OR",
+            "requiredVersion": "1.0.0.0",
+            "Conditions": [
+                {
+                    "condition": "IED_GearNodePlacementHint",
+                    "requiredPlugin": "OpenAnimationReplacer-IEDConditionExtensions",
+                    "requiredVersion": "1.0.0.0",
+                    "Gear node ID": {
+                        "value": 16.0
+                    },
+                    "Comparison": "==",
+                    "Weapon placement ID": {
+                        "value": 6.0
+                    }
+                },
+                {
+                    "condition": "IED_GearNodePlacementHint",
+                    "requiredPlugin": "OpenAnimationReplacer-IEDConditionExtensions",
+                    "requiredVersion": "1.0.0.0",
+                    "Gear node ID": {
+                        "value": 16.0
+                    },
+                    "Comparison": "==",
+                    "Weapon placement ID": {
+                        "value": 5.0
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,2 @@
+;HonningbrewMead
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x000059A6)

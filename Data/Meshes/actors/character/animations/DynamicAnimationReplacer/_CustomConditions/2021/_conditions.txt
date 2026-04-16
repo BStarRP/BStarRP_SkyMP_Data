@@ -1,0 +1,2 @@
+;MudcrabLegs
+HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x0035981D)
