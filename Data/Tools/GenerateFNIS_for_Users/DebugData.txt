@@ -1,0 +1,5 @@
+DebugOutput=1
+InputLineDeb=0
+OutputLineDeb=0
+FromTemplate=0
+ToTemplate=9999

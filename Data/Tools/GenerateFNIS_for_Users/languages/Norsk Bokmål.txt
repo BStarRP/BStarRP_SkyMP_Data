@@ -1,0 +1,156 @@
+﻿'
+'	Note: 	If you are using special characters (german "Umlaute", japanese character, ...) 
+'			you have to store this file with the right encoding (usually UTF-8). Notepad++ can do it.
+'
+Language: Norsk Bokmål
+Translator: sssSami
+Date: 2013/09/30
+FNIS Version: 4.0
+'	User Interface GenerateFNISforUsers
+UIu.01=Oppdater FNIS-oppførsel
+UIu.02=Adferdskonsistens-sjekk
+UIu.03=Avslutt
+UIu.04=Tilgjengelige oppdateringer  (IKKE merk dersom ukjent!)
+UIu.06=* Oppdateringen krever ekstra filer (animasjoner, osv.) fra original mod
+UIu.07=Generer FNIS-oppførselfiler for brukere <v>
+UIu.09=Bruk dette verktøyet:
+UIu.10=- Etter installasjonen av FNIS, eller mod-er som bruker FNIS
+UIu.11=- Etter avinstallasjon av mod-er som bruker FNIS 
+UIu.12=   (VIKTIG, ellers vil alle karakterene FRYSES!!!)
+UIu.13=Avinstaller vesner
+UIu.14=NOTE: Skyrim will crash (CTD) whenever you add too many custom animations.
+UIu.15=FNIS will warn you when you have reached the critical animation limit.
+UIu.16=FNIS XXL will also calculate the contribution of each FNIS depending mod towards this limit.
+UIu.17=Character animation slots added (can be more than actual files)
+UIu.18=How many percent this mod / installation contributes reaching CTD
+UIu.19=How many percent this mod / installation can be optimized
+UIu.20=How many animations you could approx. add (with similar animation types) 
+UIu.21=Load Count (load measured in "simple" idles, maximum of 26162 for 3rd person)
+UIu.22=See article "Skyrim Anim Load CTD" https://www.nexusmods.com/skyrimspecialedition/articles/1168
+UIu.23=NOTE2 (VERY important!!!): 
+UIu.24=You can increase your animation number DRASTICALLY with these tools:
+UIu.25=Animation Limit Crash Fix (Skyrim SE and LE), SSE Engine Fixes (Skyrim SE only)
+UIu.26=Since FNIS cannot know if such mod is installed, it will still warn you at the original limit.
+UIu.27=But when such tool is used, load calculation can be switched off (FNIS.ini: "LoadCTDCalculation=0")
+UIu.28=Current FNIS limit: <1> animations (3rd person character only) 
+'	User Interface GenerateFNISforModders
+UIm.01=Generer Mod-oppførsel
+UIm.02=Avslutt
+UIm.03=Generer FNIS-oppførselsfil for Moddere <v>
+UIm.04=(FNIS_<mod>_Behavior.hkx).
+UIm.05=Dersom du IKKE er en modder: IKKE BRUK DETTE VERKTØYET. 
+UIm.06=Du kan ødelegge installsjonsfilene dine.
+'	Messages GenerateFNISforUsers
+MSGu.01=Oppdatering
+MSGu.02=Leser
+MSGu.03=Alle animasjonsfiler skannet. Genererer oppførselsfiler
+MSGu.04=Genererer <1>
+MSGu.05=Vesen-pakke ikke installert
+MSGu.06=(<1> furniture,<2> offset,<3> chair,<4> alternate animations)
+MSGu.07=Genererer <1> standardoppførsel-xml
+MSGu.08=Modifiserer oppførselfiler til KJØNNS-spesifikk
+MSGu.09=Konverterer oppførselsfiler (.xml til .hkx)
+MSGu.10=Genererer mt_behavior-xml ...
+MSGu.11=<1> animasjoner for <2> mod-er ble inkludert (<3>)
+MSGu.12=Dameskjelett: <1> (<2> bein)   mann: <3> (<4> bein)
+MSGu.13=*****
+MSGu.14=GAL <1>-filnavn
+MSGu.15=Ingen GENDER-mappe
+MSGu.16=KJØNN-modifikasjoner for
+MSGu.17=animasjonsfiler
+MSGu.18=Dupliserte AnimFil <1> for <2>, mod-er <3> og <4>
+MSGu.19=Manglende AnimFil <1> for <2>, mod <3>
+MSGu.20=Samme AnimEvent <1> i mod <2> og <3>
+MSGu.21=*****
+MSGu.22=(<1> paired,<2> kill,<3> alternate animations)
+MSGu.23=Dupliserte AnimEvent <1> for <2>, mod-er <3> og <4>
+MSGu.24=bruk
+MSGu.25=Vil du virkelig fjerne FNIS-vesenoppførselsfiler?
+MSGu.26=Uten dem kan du ikke bruke noen FNIS-vesenavhengige mod-er. Fortsette?
+MSGu.27=FNIS-vesenoppførsler avinstallert.
+MSGu.28=Lag vesenoppførsler ...
+MSGu.29=<1> animasjoner for<2> mod-er og<3> vesener ble inkludert.
+'MSGu.30=*****
+MSGu.30=<1> possible consistence issues
+MSGu.31=fjernet.
+'	Messages GenerateFNISforModders
+MSGm.01=FNIS-animasjonsliste
+MSGm.03=Velg FNIS-animasjonsliste for din mod
+MSGm.04=Animlist brukt
+MSGm.05=Leser animasjonsliste ...
+MSGm.06=Genererer FNIS-mod oppførselsfil xml...
+MSGm.07=Konverterer mod-oppførsel xml til hkx ...
+MSGm.09=Kopierer ny oppførselsfil til standard-mappe ...
+MSGm.10=vellykket opprettet
+MSGm.11=Lage snarvei på skrivebordet ditt?
+MSGm.12=(Avbryt: Nei, og ikke spør meg igjen!)
+'	Warnings
+WARN.01=Advarsler
+WARN.02=Ugyldig installasjon. Generator kjører ikke fra Skyrim-installasjonsmappen.
+WARN.03=Bad installation. Generator not run from <Skyrim_Data>\Tools\GenerateFNIS_for_Users. If you use a mod manager, run FNIS from its list of supported tools.
+WARN.04=ikke installert
+WARN.05=Generator <1> and FNISBase <2> have different versions
+WARN.06=AnimationList funnet i <1>, men ingen tilsvarende oppførsler. Inkomplett mod IGNORERT.
+WARN.07=Modifisert skjelett funnet. Velg SKJELETT-oppdatering.
+WARN.08=Advarsler
+WARN.09=umatchede <1> animasjon(er) (se GenerateFNIS_LogFile.txt)
+WARN.10=Kunne ikke lage snarveien
+WARN.11=Generator kjører ikke fra lovlig (Steam) Skyrim-installasjonsmappe.
+WARN.12=Den installerte versjonen av Skyrim er eldre enn den som kreves
+WARN.13=ikke-FNISoppførselsfiler i meshes\actors\character\behaviors. De KAN være årsaken til Skyrim-inkompatibiliteten:
+WARN.14=Objekt med oppførsel "<1>" ikke funnet i noen BehavioredObjectList. Bruker "returnToDefault" som standard AE.
+WARN.15=Animasjonsfiler mangler:
+WARN.16=PCEA is incompatible with FNIS PCEA2
+WARN.17=File missing:
+WARN.18=File version wrong:
+WARN.19=Incompatible template file:
+WARN.20=Generator:
+WARN.21=Expected generator path:
+WARN.22=Cannot find Skyrim executable (<1>)
+WARN.23=Too many custom animations. Your Skyrim is likely to crash (CTD, crash to desktop)
+WARN.24=Inconsistent mod <1>. Number of animations differs between FNIS List (<2>) and corresponding behavior file (<3>)
+'	Errors
+ERR.01=Viktige filer og/eller manglende mapper. RE-INSTALLLER FNIS.
+ERR.02=Språkfil(er) mangler i Data\Tools\GenerateFNIS_for_Users\languages. RE-INSTALLER FNIS.
+ERR.03=finnes ikke
+ERR.04=Linje
+ERR.05=Block Header mangler
+ERR.06=Forrige Block er ikke ferdig
+ERR.07=Dårlig Block Head
+ERR.08=Dårlig Block Count
+ERR.09=for lang
+ERR.10=Mangler
+ERR.11=Dårlig Modifier (count)
+ERR.12=Dårlig Modifier (oppførselselement)
+ERR.13=For mange animasjoner definert (maks 500 per type)
+ERR.14=Gammel FNIS-versjon? Dårlig valg i animasjonsliste, linje
+ERR.15=Gammel FNIS-versjon? Feil linje i animasjonsliste, linje
+ERR.16=Kunne ikke generere
+ERR.17=RE-INSTALL FNIS
+ERR.18=***
+ERR.19=Feil subblock header eller ende, linje
+ERR.20=Wrong patchblock header or end, linje
+ERR.21=PatchID ikke funnet i PatchList, mal-linje
+ERR.22=Mappe- og filnavn stemmer ikke
+ERR.23=PCEA-oppdatering merket, men ikke installert
+ERR.24=Filen "hkxcmd.exe" mangler. Kanskje den ble fjernet av en overreagerende antivirus-skanner
+ERR.25="+" følger ikke en "s"
+ERR.26=Sequenced Animations (s) are at least 2 animations, line
+ERR.27=For mange animasjoner
+ERR.28=For mange animasjoner. Reduser antall mod-er med møbel- eller offset -animasjoner.
+ERR.29=Møbelanimasjoner (fu) består av minst 3 animasjoner, første og siste er acyclic, linje
+ERR.30=Motion data not allowed here
+'	Patches
+PTCH.01="GENDER Specific Animations" - see FNIS Description > "Patches"
+PTCH.02="SKELETON Arm Fix" - see FNIS Description > "Patches"
+PTCH.03="HKX File Compatibility Check Skyrim/SSE" - see FNIS Description > "Patches"
+PTCH.04="File Redirection (Vortex/MO profiles support)" - see FNIS Description > "Patches"
+PTCH.05=* tktk1's "TK Dodge / Ultimate Combat" - www.nexusmods.com/skyrimspecialedition/mods/15309
+PTCH.06=* xp32's "PC Exclusive Animation Path" (PCEA) - Mod NOT AVAILABLE for SSE!
+PTCH.07=* xp32's "New Animation for Running with Bow" - Mod NOT AVAILABLE for SSE!
+PTCH.08=* xp32's "New Animation for 1H Weapon" - Mod NOT AVAILABLE for SSE!
+PTCH.09=* xp32's "Momo Acrobatic Jump" - Mod NOT AVAILABLE for SSE!
+PTCH.10=* rongphale's "Horsemen Mounted Combat Enh." - Mod NOT AVAILABLE for SSE!
+PTCH.11=* Moljka's "Blocking Combat Behavior Improv. for Skyrim" - Mod NOT AVAILABLE for SSE!
+PTCH.12=* DServant's "Archery Gameplay Overhaul SE" - http://www.nexusmods.com/.../mods/24296
+PTCH.13=* SpikeDragonLord's "Centaur Race Alpha WIP" - Mod NOT AVAILABLE for SSE!

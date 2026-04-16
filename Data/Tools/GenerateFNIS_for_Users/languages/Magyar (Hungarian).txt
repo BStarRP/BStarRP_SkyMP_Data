@@ -1,0 +1,160 @@
+﻿'
+'	Megyjegyzés: 	Ha különleges karaktereket használsz (német "Umlaute", japán karakterek, magyar őű, stb.) 
+'			akkor megfelelő kódolással (többnyire UTF-8) kell tárolnod ezt az állományt. Notepad++ képes rá.
+'
+Nyelv: Magyar
+Fordító: Vik/MorroHun Team
+Dátum: 2014.10.24
+FNIS Verzió: 5.1.1
+'	GenerateFNISforUsers felhasználói felület
+UIu.01=FNIS viselkedés frissítése
+UIu.02=Állag ellenőrzés
+UIu.03=Kilépés
+UIu.04=Javítások (ismeretlent NE jelölj be!)
+UIu.05=***
+UIu.06=* További dolgokat igényel az eredeti modból (animációk, stb.)
+UIu.07=FNIS viselkedés állományok képzése <v> felhasználók számára
+UIu.08=(FNISRoot_Behavior.hkx, defaultmale.hkx és defaultfemale.hkx).
+UIu.09=A következő esetekben kell használni ezt a programot:
+UIu.10=- FNIS, vagy bármilyen FNIS-t használó beépülő telepítése után,
+UIu.11=- bármilyen, FNIS-t használó beépülő eltávolítása után.
+UIu.12=   (FONTOS, különben a karakterek LEFAGYNAK!!!)
+UIu.13=Lények eltávolítása
+UIu.14=NOTE: Skyrim will crash (CTD) whenever you add too many custom animations.
+UIu.15=FNIS will warn you when you have reached the critical animation limit.
+UIu.16=FNIS XXL will also calculate the contribution of each FNIS depending mod towards this limit.
+UIu.17=Character animation slots added (can be more than actual files)
+UIu.18=How many percent this mod / installation contributes reaching CTD
+UIu.19=How many percent this mod / installation can be optimized
+UIu.20=How many animations you could approx. add (with similar animation types) 
+UIu.21=Load Count (load measured in "simple" idles, maximum of 26162 for 3rd person)
+UIu.22=See article "Skyrim Anim Load CTD" https://www.nexusmods.com/skyrimspecialedition/articles/1168
+UIu.23=NOTE2 (VERY important!!!): 
+UIu.24=You can increase your animation number DRASTICALLY with these tools:
+UIu.25=Animation Limit Crash Fix (Skyrim SE and LE), SSE Engine Fixes (Skyrim SE only)
+UIu.26=Since FNIS cannot know if such mod is installed, it will still warn you at the original limit.
+UIu.27=But when such tool is used, load calculation can be switched off (FNIS.ini: "LoadCTDCalculation=0")
+UIu.28=Current FNIS limit: <1> animations (3rd person character only) 
+'	GenerateFNISforModders felhasználói felület
+UIm.01=Mod viselkedés képzése
+UIm.02=Kilépés
+UIm.03=FNIS viselkedés állományok képzése <v> mod készítők számára
+UIm.04=(FNIS_<mod>_Behavior.hkx).
+UIm.05=Ha NEM vagy mod készítő: NE HASZNÁLD!
+UIm.06=Tönkreteheted a telepített dolgaidat.
+'	GenerateFNISforUsers üzenetek
+MSGu.01=Javítás
+MSGu.02=Beolvasás:
+MSGu.03=Minden animációs lista letapogatva. Viselkedés állományok képzése
+MSGu.04=<1> képzése
+MSGu.05=Lény csomag nincs telepítve.
+MSGu.06=(<1> bútor,<2> eltolás,<3> chair,<4> alternatív animáció)
+MSGu.07=<1> alapértelmezett viselkedés xml képzése
+MSGu.08=NEM specifikus viselkedés állományok módosítása
+MSGu.09=Viselkedés állományok konvertálása (.xml -> .hkx)
+MSGu.10=mt_behavior xml képzése...
+MSGu.11=<2> modhoz szükséges <1> animáció sikeresen beépítve (<3>)
+MSGu.12=Női csontváz: <1> (<2> csont)   férfi: <3> (<4> csont)
+MSGu.13=*****
+MSGu.14=HIBÁS <1> állománynév
+MSGu.15=Nincs NEM könyvtár
+MSGu.16=NEM módosítások a következőhöz:
+MSGu.17=animációs állomány
+MSGu.18=Dupla AnimFile <1> a következőhöz: <2>, <3> és <4> modoknál
+MSGu.19=Hiányzó AnimFile <1> a következőhöz: <2>, <3> modnál
+MSGu.20=Azonos AnimEvent <1> <2> és <3> modoknál
+MSGu.21=*****
+MSGu.22=(<1> paired,<2> kill,<3> alternate animations)
+MSGu.23=Dupla AnimEvent <1> a következőhöz: <2>, <3> és <4> modoknál
+MSGu.24=használat
+MSGu.25=Tényleg eltávolítod az FNIS lény viselkedés állományokat?
+MSGu.26=Nélkülük nem használhatsz FNIS lény modokat. Biztosan folytatod?
+MSGu.27=FNIS lény viselkedések eltávolítva.
+MSGu.28=Lény viselkedések készítése...
+MSGu.29=<2> modhoz és <3> teremtményhez szükséges <1> animáció sikeresen beépítve.
+'MSGu.30=*****
+MSGu.30=<1> lehetséges konzisztencia probléma.
+MSGu.31=eltávolítva.
+'	GenerateFNISforModders üzenetek
+MSGm.01=FNIS animáció lista
+MSGm.02=***
+MSGm.03=Válaszd ki a beépülődhöz tartozó FNIS animáció listát
+MSGm.04=Használt Animlist
+MSGm.05=Animációs lista beolvasása...
+MSGm.06=FNIS viselkedés xml képzése...
+MSGm.07=Mod viselkedés xml konvertálása hkx-re...
+MSGm.08=***
+MSGm.09=Új viselkedés állományok másolása szokásos mappába...
+MSGm.10=sikeresen létrehozva
+MSGm.11=Készítsek egy parancsikont az asztalodra?
+MSGm.12=(Mégse: Ne, és ne is kérdezzek rá többet!)
+'	Figyelmeztetések
+WARN.01=Figyelmeztetés
+WARN.02=Hibás telepítés. A program nem a Skyrim telepítési könyvtárából indult.
+WARN.03=Hibás telepítés. A program nem a <Skyrim_Data>\Tools\GenerateFNIS_for_Users könyvtárból indult. If you use a mod manager, run FNIS from its list of supported tools.
+WARN.04=nincs telepítve
+WARN.05=<1> program és <2> FNISBase eltérő verziójú.
+WARN.06=Animációs listát találtam <1> beépülőben, de nincs hozzá megfelelő viselkedés állomány. Csonka mod NEM ÉRDEKEL.
+WARN.07=Egyedi csontvázat találtam. Válaszd ki a CSONTVÁZ javítást.
+WARN.08=Figyelmeztetés
+WARN.09=<1> páratlan animáció (nézd meg a Skyrim\Data\tools\GenerateFNIS_for_Users\temporary_logs\GenerateFNIS_LogFile.txt-et).
+WARN.10=Nem tudtam elkészíteni a parancsikont.
+WARN.11=A program nem hivatalos (Steam) Skyrim telepítési könyvtárban futott.
+WARN.12=Szükségesnél régebbi telepített Skyrim verzió.
+WARN.13=nem-FNIS viselkedés állományok találhatók itt: meshes\actors\character\behaviors. Ezek Skyrim inkompatibilitási problémát okozhatnak:
+WARN.14="<1>" viselkedés objektum nem található egyik BehavioredObjectList-ben sem. "returnToDefault" használata alapértelmezett AE-ként.
+WARN.15=Hiányzó animációs állomány:
+WARN.16=PCEA is incompatible with FNIS PCEA2
+WARN.17=File missing:
+WARN.18=File version wrong:
+WARN.19=Incompatible template file:
+WARN.20=Generator:
+WARN.21=Expected generator path:
+WARN.22=Cannot find Skyrim executable (<1>)
+WARN.23=Too many custom animations. Your Skyrim is likely to crash (CTD, crash to desktop)
+WARN.24=Inconsistent mod <1>. Number of animations differs between FNIS List (<2>) and corresponding behavior file (<3>)
+'	Hibák
+ERR.01=Fontos állományok és/vagy könytárak hiányoznak. TELEPÍTSD ÚJRA az FNIS-t.
+ERR.02=Nyelvi állomány(ok) hiányoznak a Data\Tools\GenerateFNIS_for_Users\languages könyvtárból. TELEPÍTSD ÚJRA az FNIS-t.
+ERR.03=nem létezik
+ERR.04=Sor
+ERR.05=Blokk fejléc hiányzik
+ERR.06=Előző blokk még nem végzett
+ERR.07=Hibás blokk fejléc
+ERR.08=Hibás blokk szám
+ERR.09=túl hosszú
+ERR.10=Hiányzik
+ERR.11=Hibás módosító (szám)
+ERR.12=Hibás módosító (viselkedés elem)
+ERR.13=Túl sok definiált animáció (max. 500 lehet típusonként)
+ERR.14=RÉGI FNIS verzió? Hibás lehetőség animációs listában, sor
+ERR.15=RÉGI FNIS verzió? Hibás sor animációs listában, sor
+ERR.16=Generálás sikertelen
+ERR.17=RE-INSTALL FNIS
+ERR.18=***
+ERR.19=Hibás alblokk fejléc vagy vég, sor
+ERR.20=Hibás útvonalblokk fejléc vagy vég, sor
+ERR.21=PatchID-t nem találtam a PatchList-ben, sablon sor
+ERR.22=Mappa név és állomány név nem egyezik
+ERR.23=PCEA javítás kiválasztva, de nincs telepítve
+ERR.24="hkxcmd.exe" állomány hiányzik. Lehet, hogy egy túlreagáló víruskergető törölte.
+ERR.25="+" sort nem követ "s"
+ERR.26=Szekventált animációk (s) legalább 2 animációt igényelnek, sor
+ERR.27=Túl sok animáció.
+ERR.28=Túl sok animáció. Csökkentsd a modok számát bútor vagy eltolás animációkkal.
+ERR.29=Bútor animációk (fu) legalább 3 animációt igényelnek, az első és az utolsó aciklikus legyen, sor
+ERR.30=Motion data not allowed here
+'	Javítások
+PTCH.01="NEM specifikus animációk" - lásd FNIS leírást -> "Javítások"
+PTCH.02="CSONTVÁZ kar javítás" - lásd FNIS leírást -> "Javítások"
+PTCH.03="HKX File Compatibility Check Skyrim/SSE" - lásd FNIS leírást -> "Javítások"
+PTCH.04="File Redirection (Vortex/MO profiles support)" - see FNIS Description > "Patches"
+PTCH.05=* tktk1's "TK Dodge / Ultimate Combat" - www.nexusmods.com/skyrimspecialedition/mods/15309
+PTCH.06=* xp32's "PC Exclusive Animation Path" (PCEA) - Mod NOT AVAILABLE for SSE!
+PTCH.07=* xp32's "New Animation for Running with Bow" - Mod NOT AVAILABLE for SSE!
+PTCH.08=* xp32's "New Animation for 1H Weapon" - Mod NOT AVAILABLE for SSE!
+PTCH.09=* xp32's "Momo Acrobatic Jump" - Mod NOT AVAILABLE for SSE!
+PTCH.10=* rongphale's "Horsemen Mounted Combat Enh." - Mod NOT AVAILABLE for SSE!
+PTCH.11=* Moljka's "Blocking Combat Behavior Improv. for Skyrim" - Mod NOT AVAILABLE for SSE!
+PTCH.12=* DServant's "Archery Gameplay Overhaul SE" - http://www.nexusmods.com/.../mods/24296
+PTCH.13=* SpikeDragonLord's "Centaur Race Alpha WIP" - Mod NOT AVAILABLE for SSE!

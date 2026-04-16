@@ -1,0 +1,279 @@
+'
+'	Note: 	If you are using special characters (german "Umlaute", japanese character, ...) 
+'			you have to store this file with the right encoding (usually UTF-8). Notepad++ can do it.
+'
+'	참고:	특수문자를 사용하는 경우 (독일 "움라우트", 한국어 글자, ...)
+'			올바른 인코딩 (일반적으로 UTF-8)을 사용하여 파일을 저장해야 합니다. Notepad++ 에서 가능합니다.
+'
+'Language: English
+언어: 한국어 (Korean)
+'Translator: fore
+번역：nyaamolip
+'Date: 2017/06/16
+날짜: 2017/06/16
+FNIS Version: 6.3 Beta
+'	User Interface GenerateFNISforUsers
+UIu.01=FNIS Behavior 업데이트
+'UIu.02=Consistence Check
+UIu.02=일관성 검사
+'UIu.03=Exit
+UIu.03=나가기
+'UIu.04=Available Patches  (DON'T tick if unknown!)
+UIu.04=사용가능한 패치 (의미를 모른다면 선택하지 마세요!)
+'UIu.05=***
+UIu.05=***
+'UIu.06=* Patch requires additional files (animations, etc.) from original mod
+UIu.06=* 패치의 경우 해당 모드의 추가 파일(애니메이션 등)이 필요합니다.
+'UIu.07=Generate FNIS Behavior files for Users <v>
+UIu.07=사용자용 FNIS Behavior를 생성 <v>
+'UIu.08=(FNISRoot_Behavior.hkx, defaultmale.hkx, and defaultmale.hkx).
+UIu.08=(FNISRoot_Behavior.hkx, defaultmale.hkx 그리고 defaultmale.hkx).
+'UIu.09=Call this tool:
+UIu.09=이 도구를 구동해야 할 상황:
+'UIu.10=- After installing FNIS, or any mod that uses FNIS
+UIu.10=- FNIS 자체 도입 또는 FNIS를 활용하는 모드를 설치한 후
+'UIu.11=- After deinstallation of any mod that uses FNIS
+UIu.11=- FNIS를 활용했던 모드를 제거한 후
+'UIu.12=   (IMPORTANT, or else all charactes will FREEZE!!!)
+UIu.12=   (중요, 위의 상황을 무시하면 모든 캐릭터가 굳어버립니다!!!)
+'UIu.13=De-Install Creatures
+UIu.13=Creatures Pack 제거
+UIu.14=NOTE: Skyrim will crash (CTD) whenever you add too many custom animations.
+UIu.15=FNIS will warn you when you have reached the critical animation limit.
+UIu.16=FNIS XXL will also calculate the contribution of each FNIS depending mod towards this limit.
+UIu.17=Character animation slots added (can be more than actual files)
+UIu.18=How many percent this mod / installation contributes reaching CTD
+UIu.19=How many percent this mod / installation can be optimized
+UIu.20=How many animations you could approx. add (with similar animation types) 
+UIu.21=Load Count (load measured in "simple" idles, maximum of 26162 for 3rd person)
+UIu.22=See article "Skyrim Anim Load CTD" https://www.nexusmods.com/skyrimspecialedition/articles/1168
+UIu.23=NOTE2 (VERY important!!!): 
+UIu.24=You can increase your animation number DRASTICALLY with these tools:
+UIu.25=Animation Limit Crash Fix (Skyrim SE and LE), SSE Engine Fixes (Skyrim SE only)
+UIu.26=Since FNIS cannot know if such mod is installed, it will still warn you at the original limit.
+UIu.27=But when such tool is used, load calculation can be switched off (FNIS.ini: "LoadCTDCalculation=0")
+UIu.28=Current FNIS limit: <1> animations (3rd person character only) 
+'	User Interface GenerateFNISforModders
+'	모더용 사용자 인터페이스 FNIS 생성
+'UIm.01=Generate Mod Behavior
+UIm.01=Behavior를 생성합니다
+'UIm.02=Exit
+UIm.02=나가기
+'UIm.03=Generate FNIS Behavior file for Modders <v>
+UIm.03=모더용 FNIS Behavior 파일을 생성 <v>
+'UIm.04=(FNIS_<mod>_Behavior.hkx).
+UIm.04=(FNIS_<mod>_Behavior.hkx).
+'UIm.05=If you are NOT a modder: DONT USE THIS TOOL. 
+UIm.05=모더가 아니라면: 이 도구를 사용하지 마세요.
+'UIm.06=You might corrupt your installed files.
+UIm.06=당신이 설치한 파일이 손상될 수 있습니다.
+'	Messages GenerateFNISforUsers
+'	사용자용 FNIS 메시지
+'MSGu.01=Patch
+MSGu.01=패치
+'MSGu.02=Reading
+MSGu.02=불러오는 중
+'MSGu.03=All Anim Lists scanned. Generating Behavior Files
+MSGu.03=모든 애니메이션 목록을 검색했습니다. Behavior 파일 생성 중
+'MSGu.04=Generating <1>
+MSGu.04=생성 중 <1>
+'MSGu.05=Creature Pack not installed
+MSGu.05=Creature Pack이 설치되지 않았습니다
+'MSGu.06=(<1> furniture,<2> offset,<3> chair,<4> alternate animations)
+MSGu.06=(<1> 가구,<2> 개체,<3> 의자,<4> 대체 애니메이션)
+'MSGu.07=Generating <1> default Behavior xml
+MSGu.07=생성 <1> default Behavior xml
+'MSGu.08=Modify Behavior Files to GENDER specific
+MSGu.08=특정 성별에 대한 Behavior 파일 업데이트
+'MSGu.09=Converting Behavior Files (.xml to .hkx)
+MSGu.09=Behavior 파일 변환 (.xml to .hkx)
+'MSGu.10=Generating mt_behavior xml ...
+MSGu.10=생성 중: mt_behavior xml ...
+'MSGu.11=<1> animations for<2> mods successfully included (<3>)
+MSGu.11=<1>개의 애니메이션이 <2>개의 모드에 성공적으로 적용되었습니다 (<3>)
+'MSGu.12=Skeleton(hkx) female: <1> (<2> bones)   male: <3> (<4> bones)
+MSGu.12=Skeleton(hkx) 여성: <1> (<2> 뼈대)   남성: <3> (<4> 뼈대)
+MSGu.13=*****
+'MSGu.14=WRONG <1> file name
+MSGu.14=PCEA 파일명이 잘못됐습니다
+'MSGu.15=No GENDER directory
+MSGu.15=특정 성별에 대한 파일이 누락되었습니다
+'MSGu.16=GENDER modifications for
+MSGu.16=개의 파일이 특정 성별의 설정을 변경합니다 
+'MSGu.17=animation files
+MSGu.17=애니메이션 파일
+'MSGu.18=Duplicate AnimFile <1> for <2>, mods <3> and <4>
+MSGu.18=중복: AnimFile <1> for <2>, mods <3> 그리고 <4>
+'MSGu.19=Missing AnimFile <1> for <2>, mod <3>
+MSGu.19=누락: AnimFile <1> for <2>, mod <3>
+'MSGu.20=Same AnimEvent <1> in mod <2> 그리고 <3>
+MSGu.20=동일: AnimEvent <1> in mod <2> and <3>
+MSGu.21=*****
+'MSGu.22=(<1> paired,<2> kill,<3> alternate animations)
+MSGu.22=(<1> 한 쌍,<2> 죽음,<3> 대체 애니메이션)
+'MSGu.23=Duplicate AnimEvent <1> for <2>, mods <3> and <4>
+MSGu.23=중복: AnimEvent <1> 위해 <2>, mods <3> 과 <4>
+'MSGu.24=usage
+MSGu.24=사용 중
+'MSGu.25=Do you really want to remove the FNIS Creature Behavior files?
+MSGu.25=정말 FNIS Creature Behavior를 삭제하겠습니까?
+'MSGu.26=Without them you cannot use any FNIS Creature dependant mods. Continue?
+MSGu.26=이를 제거한다면, FNIS가 적용된 생물 의존 모드는 사용할 수 없게 됩니다. 계속하겠습니까?
+'MSGu.27=FNIS Creature Behaviors de-installed.
+MSGu.27=FNIS Creature Behaviors가 제거되었습니다.
+'MSGu.28=Create Creature Behaviors ...
+MSGu.28=생성 중: Creature Behaviors ...
+'MSGu.29=<1> animations for<2> mods and<3> creatures successfully included.
+MSGu.29=<1>개의 애니메이션이 <2>개의 모드와 <3>개의 생물에 성공적으로 적용되었습니다.
+'MSGu.30=*****
+'MSGu.30=*****
+'MSGu.30=<1> possible consistence issues
+MSGu.30=<1> 일관성 없는 조건
+'MSGu.31=removed.
+MSGu.31=삭제됨.
+'	Messages GenerateFNISforModders
+'	모더용 GenerateFNIS 메시지
+'MSGm.01=FNIS Animation List
+MSGm.01=FNIS 애니메이션 목록
+'MSGm.02=***
+MSGm.02=***
+'MSGm.03=Select FNIS Animation List of your mod
+MSGm.03=모드에 적용할 FNIS 애니메이션 목록을 선택하세요
+'MSGm.04=Animlist used
+MSGm.04=Animlist 사용함
+'MSGm.05=Reading Animation List ...
+MSGm.05=애니메이션 목록을 불러오는 중 ...
+'MSGm.06=Generating FNIS mod Behavior File xml...
+MSGm.06=각 모드의 FNIS Behavior 파일인 xml을 생성합니다... 
+'MSGm.07=Converting mod Behavior xml to hkx ...
+MSGm.07=Behavior 모드 파일 변환 xml to hkx ...
+'MSGm.08=***
+MSGm.08=***
+'MSGm.09=Copying new behavior files to standard folder ...
+MSGm.09=표준 폴더에서 새로운 behavior파일을 복사합니다...
+'MSGm.10=successfully created
+MSGm.10=성공적으로 만들어졌습니다
+'MSGm.11=Create a program shortcut on your desktop?
+MSGm.11=바탕화면에 프로그램 바로가기를 만들겠습니까?
+'MSGm.12=(Cancel: No, and don't ask me again!)
+MSGm.12=(아뇨: 아뇨, 그리고 더는 묻지 말아줘요!)
+'	Warnings
+'	경고
+'WARN.01=Warning
+WARN.01=경고
+'WARN.02=Bad installation. Generator not run from a Skyrim installation directory.
+WARN.02=설치가 잘못됐습니다. 스카이림 설치 경로가 올바르지 않습니다.
+'WARN.03=Bad installation. Generator not run from <Skyrim_Data>\Tools\GenerateFNIS_for_Users. If you use a mod manager, run FNIS from its list of supported tools.
+WARN.03=설치가 잘못됐습니다. <Skyrim_Data>\Tools\GenerateFNIS_for_Users 실행할 수 없습니다. If you use a mod manager, run FNIS from its list of supported tools.
+'WARN.04=not installed
+WARN.04=설치되지 않았습니다
+'WARN.05=Generator <1> and FNISBase <2> have different versions
+WARN.05=생성 <1> and FNISBase <2> 다른 버전입니다
+'WARN.06=AnimationList found in <1>, but no corresponding Behavior file. Incomplete mod IGNORED.
+WARN.06=<1>에서 AnimationList룰 발견했습니다만, 일치하지 Behavior 파일입니다. 불완전한 모드는 무시됩니다.
+'WARN.07=Custom skeleton found. Select SKELETON patch. 
+WARN.07=Custom skeleton을 발견했습니다. SKELETON patch를 선택합니다.
+'WARN.08=Warning(s)
+WARN.08=경고
+'WARN.09=unmatched <1> Animation(s) (see GenerateFNIS_LogFile.txt)
+WARN.09=불합치 <1> 애니메이션(GenerateFNIS_LogFile.txt이 보이지 않습니다)
+'WARN.10=Could not create the shortcut
+WARN.10=바로가기를 만들 수 없습니다
+'WARN.11=Generator not run from a legal (Steam) Skyrim installation directory. If you use SKSE, this can be fixed by starting Skyrim once through Steam.
+WARN.11=프로그램이 정식(Steam) 스카이림 설치 디렉토리에서 실행되지 않았습니다. 만약 SKSE를 사용한다면 다시 한번 스팀을 통해 스카이림을 설치하기 바랍니다. 그럼 이 경고는 재차 출력되지 않게 됩니다.
+'WARN.12=Installed Skyrim version older then required
+WARN.12=설치된 스카이림이 구버전이라 업데이트가 필요합니다.
+'WARN.13=non-FNIS behavior files in meshes\actors\character\behaviors. They CAN be the cause of Skyrim incompatibility:
+WARN.13=FNIS Behavior 파일이 아닌 파일이 감지됩니다 meshes\actors\character\behaviors 이는 비호환의 원인이 될 수 있습니다:
+'WARN.14=Behaviored object "<1>" not found in any BehavioredObjectList. Using "returnToDefault" as default AE.
+WARN.14=Behaviored object "<1>"BehavioredObjectList가 없습니다. 기본 값인 "returnToDefault"로 사용합니다.
+'WARN.15=Animation file missing:
+WARN.15=애니메이션 파일이 없습니다：
+'WARN.16=PCEA is incompatible with FNIS PCEA2
+WARN.16=PCEA는 FNIS의 PCEA2와 호환되지 않습니다
+WARN.17=File missing:
+WARN.18=File version wrong:
+WARN.19=Incompatible template file:
+WARN.20=Generator:
+WARN.21=Expected generator path:
+WARN.22=Cannot find Skyrim executable (<1>)
+WARN.23=Too many custom animations. Your Skyrim is likely to crash (CTD, crash to desktop)
+WARN.24=Inconsistent mod <1>. Number of animations differs between FNIS List (<2>) and corresponding behavior file (<3>)
+'	Errors
+'	오류
+'ERR.01=Important files and/or folders missing. RE-INSTALL FNIS.
+ERR.01=중요한 파일이나 폴더가 누락되어 있습니다. FNIS를 다시 설치하세요.
+'ERR.02=Language file(s) missing in Data\Tools\GenerateFNIS_for_Users\languages. RE-INSTALL FNIS.
+ERR.02=언어 파일을 찾을 수 없습니다 Data\Tools\GenerateFNIS_for_Users\languages. FNIS를 다시 설치하세요.
+'ERR.03=does not exist
+ERR.03=존재하지 않습니다
+'ERR.04=Line
+ERR.04=줄 (Line)
+'ERR.05=Block Header missing
+ERR.05=Block Header 가 감지되지 않았습니다
+'ERR.06=Previous Block not finished
+ERR.06=이전 블록이 제대로 종료되지 않았습니다
+'ERR.07=Bad Block Head
+ERR.07=Block Head 가 불량입니다
+'ERR.08=Bad Block Count
+ERR.08=Bad Block Count
+'ERR.09=too long
+ERR.09=너무 깁니다
+'ERR.10=Missing
+ERR.10=감지되지 않았습니다
+'ERR.11=Bad Modifier (count)
+ERR.11=잘못된 변경 (count)
+'ERR.12=Bad Modifier (behavior element)
+ERR.12=잘못된 변경 (behavior element)
+'ERR.13=Too many animations defined (max. 500 per type)
+ERR.13=애니메이션이 너무 많습니다 (유형마다 최대 500)
+'ERR.14=OLD FNIS version? Bad option in Animation List, line
+ERR.14=FNIS가 구버전인가요? 애니메이션 목록에 잘못된 설정값이 적용됐습니다
+'ERR.15=OLD FNIS version? Wrong line in Animation List, line
+ERR.15=FNIS가 구버전인가요? 애니메이션 목록에 잘못된 설정값이 적용됐습니다
+'ERR.16=Could not generate
+ERR.16=생성하지 못했습니다
+ERR.17=RE-INSTALL FNIS
+ERR.18=***
+ERR.18=DefaultMale.xml 에 불량 라인이 검출되었습니다
+'ERR.19=Wrong subblock header or end, line
+ERR.19=subblock의 앞 또는 끝부분이 잘못됐습니다
+'ERR.20=Wrong patchblock header or end, line
+ERR.20=patchblock의 앞 또는 끝부분이 잘못됐습니다
+'ERR.21=PatchID not found in PatchList, Template line
+ERR.21=패치 목록에서 패치ID를 찾을 수 없습니다, 템플릿 라인입니다
+'ERR.22=No match between folder name and filename
+ERR.22=폴더 명과 파일 명이 일치하지 않습니다
+'ERR.23=PCEA patch ticked, but PCEA is not installed
+ERR.23=PCEA 패치에 체크되어 있지만 PCEA이 설치되어 있지 않습니다
+'ERR.24=File "hkxcmd.exe" missing. Maybe it was wrongly removed by an over-reacting virus scanner
+ERR.24=파일 "hkxcmd.exe" 누락되었습니다. 아마 과잉 반응한 바이러스 스캐너에 의해 잘못 삭제된 듯합니다
+'ERR.25="+" line not following an "s"
+ERR.25="+" 라인 다음에 "s" 가 이어지지 않습니다
+'ERR.26=Sequenced Animations (s) are at least 2 animations, line
+ERR.26=연속된 애니메이션은 적어도 2개의 애니메이션 라인이 필요합니다
+'ERR.27=Too many animations
+ERR.27=너무 많은 애니메이션이 감지됩니다
+'ERR.28=Too many animations. Reduce the number of mods with furniture or offset animations.
+ERR.28=너무 많은 애니메이션이 감지됩니다. 가구 또는 개체 등 애니메이션 모드의 수를 줄이세요.
+'ERR.29=Furniture animations (fu) are at least 3 animations, first and last being acyclic, line
+ERR.29=가구의 애니메이션 (fu)은 적어도 3개의 애니메이션이 있어야 하며, 처음과 마지막 연결에 해당하는 라인이 잘못되었습니다
+'ERR.30=Motion data not allowed here
+ERR.30=모션 데이터는 여기에서 허용되지 않습니다
+'	Patches
+'	패치
+'PTCH.01="GENDER Specific Animations" - see FNIS Description > "Patches"
+PTCH.01="GENDER Specific Animations" - see FNIS Description > "Patches" 비고: 성별 고유의 동작 변경
+'PTCH.02="SKELETON Arm Fix" - see FNIS Description > "Patches"
+PTCH.02="SKELETON Arm Fix" - see FNIS Description > "Patches" 비고: SKELETON의 팔 수정
+PTCH.03="HKX File Compatibility Check Skyrim/SSE" - see FNIS Description > "Patches"
+PTCH.04="File Redirection (Vortex/MO profiles support)" - see FNIS Description > "Patches"
+PTCH.05=* tktk1's "TK Dodge / Ultimate Combat" - www.nexusmods.com/skyrimspecialedition/mods/15309
+PTCH.06=* xp32's "PC Exclusive Animation Path" (PCEA) - Mod NOT AVAILABLE for SSE!
+PTCH.07=* xp32's "New Animation for Running with Bow" - Mod NOT AVAILABLE for SSE!
+PTCH.08=* xp32's "New Animation for 1H Weapon" - Mod NOT AVAILABLE for SSE!
+PTCH.09=* xp32's "Momo Acrobatic Jump" - Mod NOT AVAILABLE for SSE!
+PTCH.10=* rongphale's "Horsemen Mounted Combat Enh." - Mod NOT AVAILABLE for SSE!
+PTCH.11=* Moljka's "Blocking Combat Behavior Improv. for Skyrim" - Mod NOT AVAILABLE for SSE!
+PTCH.12=* DServant's "Archery Gameplay Overhaul SE" - http://www.nexusmods.com/.../mods/24296
+PTCH.13=* SpikeDragonLord's "Centaur Race Alpha WIP" - Mod NOT AVAILABLE for SSE!

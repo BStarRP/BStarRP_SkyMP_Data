@@ -1,0 +1,95 @@
+'This file includes names and parameters for animation files that are included as patches, or other reasons aside of standard FNIS animations
+'These files will be added to default(fe)male.hkx and/or ADSF (AnimationDataSingleFile.txt) and/or ASDSF (AnimationSetDataSingleFile.txt)
+'1: default(fe)male  2: ADSF  3:to be implemented	4: MotionData
+
+*tktk1_1	1/2/4	TKDodge	StepDodgeForward.hkx	TKDodgeForward
+MD 0.0666667 -2.44943e-007 12.963 0
+MD 0.133333 -1.68889e-006 38.1847 -4.8472e-015
+MD 0.233333 -4.79072e-006 90.7585 6.86661e-015
+MD 0.366667 -1.05933e-005 178.629 -5.29365e-013
+MD 0.533333 -1.91211e-005 291.939 -8.52659e-014
+MD 0.633333 -2.41794e-005 348.552 -8.5266e-014
+MD 0.7 -2.72645e-005 376.935 -8.52661e-014
+MD 0.766667 -2.99817e-005 395.209 -8.52661e-014
+MD 0.866667 -3.30838e-005 409.283 -8.52661e-014
+RD 0.866667 0 0 0.000488281 1
+*tktk1_1	1/2/4	TKDodge	StepDodgeBack.hkx		TKDodgeBack
+MD 0.1 0 -38.0 0
+MD 0.16667 0 -78.5 0
+MD 0.26667 0 -129.6 0
+MD 0.46667 0 -223.2 0
+MD 0.53333 0 -250.8 0
+MD 0.56667 0 -265.2 0
+MD 0.6 0 -278.6 0
+MD 0.7 0 -296.5 0
+MD 0.8 0 -300.0 0
+RD 0.8 0 0 0 1
+*tktk1_1	1/2/4	TKDodge	StepDodgeLeft.hkx		TKDodgeLeft
+MD 0.06667 -23.0 0 0
+MD 0.1 -45.0 0 0
+MD 0.26667 -114.9 0 0
+MD 0.53333 -214.1 0 0
+MD 0.63333 -244.3 0 0
+MD 0.66667 -250.0 0 0
+MD 0.7 -251.7 0 0
+RD 0.7 0 0 0 1
+*tktk1_1	1/2/4	TKDodge	StepDodgeRight.hkx		TKDodgeRight
+MD 0.06667 28.6 0 0
+MD 0.1 50.0 0 0
+MD 0.23333 102.0 0 0
+MD 0.53333 224.5 0 0
+MD 0.66667 251.2 0 0
+MD 0.7 251.2 0 0
+RD 0.7 0 0 0 1
+*tktk1_1	1/2/4	TKBattleArts	1HMRunThrust.hkx	1HMRunThrust
+MD 0.03333 0 11.5 0
+MD 0.06667 0 38.3 0
+MD 0.2 0 85.3 0
+MD 0.3 0 135.0 0
+MD 0.5 0 229.1 0
+MD 0.7 0 306.7 0
+MD 0.76667 0 331.7 0
+MD 0.83333 0 344.4 0
+MD 0.93333 0 356.1 0
+MD 1.0 0 360.2 0
+MD 1.1 0 363.9 0
+MD 1.7 0 407.1 0
+RD 1.7 0 0 0 1
+
+*xp32_4		1	MomoAJ	mt_JumpFastBack.hkx	
+	
+*rong_1		1	Horsemen	HMMC_1HM_AttackAnticipate_L.hkx
+*rong_1		1	Horsemen	HMMC_1HM_AttackAnticipate_R.hkx
+*rong_1		1	Horsemen	HMMC_1HM_AttackLoop_L.hkx
+*rong_1		1	Horsemen	HMMC_1HM_AttackLoop_R.hkx
+*rong_1		1	Horsemen	HMMC_1HM_AttackRelease_L.hkx
+*rong_1		1	Horsemen	HMMC_1HM_AttackRelease_R.hkx
+*rong_1		1	Horsemen	HMMC_Spear_AttackAnticipate.hkx
+*rong_1		1	Horsemen	HMMC_SpearLoop.hkx  
+*rong_1		1	Horsemen	HMMC_Spear_AttackRelease.hkx  
+*rong_1		1	Horsemen	HMMC_SpearCouchAnticipate.hkx  
+*rong_1		1	Horsemen	HMMC_SpearCouchLoop.hkx  
+*rong_1		1	Horsemen	HMMC_SpearCouchReturn.hkx  
+*rong_1		1	Horsemen	HMMC_CastAnticipateFFA.hkx  
+*rong_1		1	Horsemen	HMMC_CastLoopFFA.hkx  
+*rong_1		1	Horsemen	HMMC_CastReleaseFFA.hkx  
+*rong_1		1	Horsemen	HMMC_CastReleaseConAim.hkx  
+*rong_1		1	Horsemen	HMMC_CastAnticipateConAim.hkx  
+*rong_1		1	Horsemen	HMMC_CastLoopConAim.hkx  
+*rong_1		1	Horsemen	HMMC_CastLoopConSelf.hkx  
+*rong_1		1	Horsemen	HMMC_CastAnticipateConSelf.hkx  
+*rong_1		1	Horsemen	HMMC_CastReleaseConSelf.hkx  
+*rong_1		1	Horsemen	HMMC_CastLoopFFSelf.hkx  
+*rong_1		1	Horsemen	HMMC_CastAnticipateFFSelf.hkx  
+*rong_1		1	Horsemen	HMMC_CastReleaseFFSelf.hkx
+
+DD	1	DD	abc1_H2H_LocoMotionPose.HKX
+DD	1	DD	abc2_H2H_LocoMotionPose.HKX
+DD	1	DD	abc3_H2H_LocoMotionPose.HKX
+DD	1	DD	abc4_H2H_LocoMotionPose.HKX
+DD	1	DD	abc5_H2H_LocoMotionPose.HKX
+DD	1	DD	abc6_H2H_LocoMotionPose.HKX
+DD	1	DD	abc7_H2H_LocoMotionPose.HKX
+DD	1	DD	abc8_H2H_LocoMotionPose.HKX
+DD	1	DD	abc9_H2H_LocoMotionPose.HKX
+DD	1	DD	abc0_H2H_LocoMotionPose.HKX

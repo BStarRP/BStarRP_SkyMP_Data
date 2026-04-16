@@ -1,12 +1,11 @@
 # Patch notes
 
 **Summary**
-Updated textures, compatability for roads, and improved npc sync!
+Added animations for potion drinking, new load screen and several improvements.
 
 ## Changes
-- Added Northern Roads patches
-- Added lots of bears
-- Added lipstick and more face textures
-- Added bodymarks and extra textures
-- Added more hair models and textures
-- Improved handling of NPC's tied to ESM
+- Added new main screen
+- Added potion drinking system
+- Improved npc spawning from world
+- Improved inventory syncing
+
