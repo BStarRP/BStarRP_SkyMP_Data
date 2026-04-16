@@ -1,2 +1,0 @@
-;HorseMeat
-HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x00154D3C)

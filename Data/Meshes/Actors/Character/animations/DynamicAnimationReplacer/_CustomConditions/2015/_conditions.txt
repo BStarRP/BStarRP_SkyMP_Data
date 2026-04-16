@@ -1,2 +1,0 @@
-;GarlicBread
-HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x00066D82)

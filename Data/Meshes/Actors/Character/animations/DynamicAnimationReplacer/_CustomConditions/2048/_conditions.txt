@@ -1,2 +1,0 @@
-;GrilledChickenBreast
-HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x00359817)

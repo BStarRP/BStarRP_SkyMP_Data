@@ -1,2 +1,0 @@
-;Wine02
-HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x00359826)

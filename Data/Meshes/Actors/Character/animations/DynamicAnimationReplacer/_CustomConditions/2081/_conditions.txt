@@ -1,2 +1,0 @@
-;PotatoSoup
-HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x0035981F)

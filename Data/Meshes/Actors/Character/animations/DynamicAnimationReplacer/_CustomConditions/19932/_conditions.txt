@@ -1,2 +1,0 @@
-ValueEqualTo("ImGladYoureHere.esp"|0x0017DF9A, 2) OR
-ValueEqualTo("ImmersiveInteractions.esp"|0x0000AA13, 2)

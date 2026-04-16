@@ -1,2 +1,0 @@
-;ArcticGrayling
-HasMagicEffect("Taberu Animation - Fishing Patch.esp" | 0x8B0)

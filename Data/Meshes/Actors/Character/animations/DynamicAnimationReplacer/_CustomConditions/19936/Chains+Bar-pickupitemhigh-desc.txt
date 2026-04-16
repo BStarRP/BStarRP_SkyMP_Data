@@ -1,4 +1,0 @@
-mt_lockpick = chain standing
-idlewave = pick up item very high
-idlepickup_ground = ground pickup
-idlegreybeardwordteach = lift a bar

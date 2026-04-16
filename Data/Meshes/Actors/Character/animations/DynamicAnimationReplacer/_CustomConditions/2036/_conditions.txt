@@ -1,2 +1,0 @@
-;DogMeat
-HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x0011D212)
