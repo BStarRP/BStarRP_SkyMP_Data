@@ -14,6 +14,9 @@ on:
     paths:
       - 'Data/**'
       - 'scripts/off-github-assets.json'
+      - 'scripts/build-changelog.js'
+      - 'scripts/changelog-seed.json'
+      - 'scripts/changelog-lib.js'
       - 'patch-notes.md'
   workflow_dispatch:
     inputs:
@@ -178,7 +181,7 @@ jobs:
           "
           cat release-notes.md
 
-      - name: Fetch previous release manifest
+      - name: Fetch previous release manifest and changelog
         if: steps.version.outputs.previous_tag != '' && steps.version.outputs.previous_tag != 'v0.0.0'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -188,6 +191,12 @@ jobs:
             echo "Fetched previous manifest for ${{ steps.version.outputs.previous_tag }}"
           else
             echo "Previous release or manifest not found; will do full LFS pull and upload all assets"
+          fi
+          if gh release download "${{ steps.version.outputs.previous_tag }}" --pattern "changelog.json" --dir . --clobber 2>/dev/null; then
+            mv changelog.json prev-changelog.json
+            echo "Fetched previous changelog for ${{ steps.version.outputs.previous_tag }}"
+          else
+            echo "No previous changelog.json; will use scripts/changelog-seed.json until first changelog is published"
           fi
 
       - name: Pull LFS for changed and new files only (no reference to reuse)
@@ -313,6 +322,22 @@ jobs:
             console.log('Merged off-GitHub assets and patch notes into manifest');
           "
 
+      - name: Build patch changelog
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          CHANGELOG_ARGS="${{ steps.version.outputs.version }} --release-date=$(date -u +%Y-%m-%d)"
+          if [ -f prev-changelog.json ]; then
+            CHANGELOG_ARGS="$CHANGELOG_ARGS --previous-changelog=prev-changelog.json"
+          fi
+          node scripts/build-changelog.js $CHANGELOG_ARGS
+          node -e "
+            const c = require('./dist-patch/changelog.json');
+            console.log('Changelog latest:', c.latest, 'entries:', c.releases.length);
+          "
+
       - name: Set manifest URLs and upload list
         env:
           GITHUB_REPOSITORY: ${{ github.repository }}
@@ -429,14 +454,14 @@ jobs:
           fi
           echo "Release $TAG is latest"
 
-      - name: Upload per-file assets and manifest.json
+      - name: Upload per-file assets, manifest.json, and changelog.json
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           TAG="${{ steps.version.outputs.tag }}"
           # Manifest URLs and github-assets-to-upload.txt already set in earlier step
-          # Upload manifest first so patcher can discover incremental mode
-          gh release upload "$TAG" dist-patch/manifest.json --clobber
+          # Upload manifest + changelog first so patcher/launcher can discover them
+          gh release upload "$TAG" dist-patch/manifest.json dist-patch/changelog.json --clobber
           # Upload only assets listed in github-assets-to-upload.txt (empty list = 0 uploads, all point to previous)
           files=()
           if [ -f dist-patch/github-assets-to-upload.txt ]; then
@@ -470,4 +495,4 @@ jobs:
           else
             echo "No assets to upload (unchanged point to previous release — copying)."
           fi
-          echo "Uploaded manifest.json and ${#files[@]} per-file assets to GitHub (R2 assets: LFS + oversized)"
+          echo "Uploaded manifest.json, changelog.json, and ${#files[@]} per-file assets to GitHub (R2 assets: LFS + oversized)"

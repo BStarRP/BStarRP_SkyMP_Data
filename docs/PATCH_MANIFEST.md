@@ -11,6 +11,31 @@ The patcher can use a `manifest.json` release asset to verify patch files (size 
   - **hash** (required): SHA-256 hash of the file (hex string).
   - **url** (optional): Direct download URL for this file. When present for all files, the patcher uses incremental download (only missing or changed files).
 - **zipUrl** (optional): URL of the full patch zip. Used as fallback when incremental is not available or when the patcher chooses full zip.
+- **patchNotes** (optional): Markdown notes for **this patch version only**. Kept small; do not embed full release history here.
+
+## Changelog (launcher news UI)
+
+Full release history lives in a separate GitHub release asset (not in each `manifest.json`):
+
+- **URL:** `https://github.com/<owner>/<repo>/releases/latest/download/changelog.json`
+- **Legacy seed:** `scripts/changelog-seed.json` (committed; run `npm run bootstrap-changelog-seed` once to refresh from GitHub)
+- **Each release:** `scripts/build-changelog.js` merges `prev-changelog.json` (previous release asset) **or** the seed with `patch-notes.md` for the current version
+- **Uploaded with:** `manifest.json` on the same GitHub release
+
+After the first `changelog.json` is published, later releases only download the previous asset + `patch-notes.md` (no GitHub API, no re-bootstrap).
+
+Schema:
+
+```json
+{
+  "latest": "0.38.0",
+  "releases": [
+    { "version": "0.38.0", "date": "2026-05-21", "notes": "# Patch notes\n\n..." }
+  ]
+}
+```
+
+Point the server manifest at this URL with a field such as `patchNotesUrl` or `changelogUrl` (launcher-side). Per-patch `manifest.json` keeps `patchNotes` for “what’s new in this version” only.
 
 ## Patcher behavior
 

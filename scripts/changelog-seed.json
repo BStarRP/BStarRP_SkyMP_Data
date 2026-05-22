@@ -1,0 +1,465 @@
+{
+  "latest": "0.38.0",
+  "releases": [
+    {
+      "version": "0.38.0",
+      "date": "2026-05-22",
+      "notes": "# Patch notes\n\n**Summary**\nSmall update!\n\n## Changes\n- Fixed a few more missing files"
+    },
+    {
+      "version": "0.37.5",
+      "date": "2026-04-16",
+      "notes": "# Patch notes\n\n**Summary**\nSmall update!\n\n## Changes\n- Fixed a few more missing files"
+    },
+    {
+      "version": "0.37.4",
+      "date": "2026-04-16",
+      "notes": "# Patch notes\n\n**Summary**\nSmall update!\n\n## Changes\n- Fixed a few more missing files"
+    },
+    {
+      "version": "0.37.3",
+      "date": "2026-04-16",
+      "notes": "# Patch notes\n\n**Summary**\nSmall update!\n\n## Changes\n- Fixed a few more missing files"
+    },
+    {
+      "version": "0.37.2",
+      "date": "2026-04-16",
+      "notes": "# Patch notes\n\n**Summary**\nSmall update!\n\n## Changes\n- Fixed a few more missing files"
+    },
+    {
+      "version": "0.37.1",
+      "date": "2026-04-16",
+      "notes": "# Patch notes\n\n**Summary**\nSmall update!\n\n## Changes\n- Fixed missing files\n- Fixed issue with spawning objects before cell loaded"
+    },
+    {
+      "version": "0.37.0",
+      "date": "2026-04-16",
+      "notes": "# Patch notes\n\n**Summary**\nAdded animations for potion drinking, new load screen and several improvements.\n\n## Changes\n- Added new main screen\n- Added potion drinking system\n- Improved npc spawning from world\n- Improved inventory syncing"
+    },
+    {
+      "version": "0.36.2",
+      "date": "2026-04-06",
+      "notes": "# Patch notes\n\n**Summary**\nUpdated textures, compatability for roads, and improved npc sync!\n\n## Changes\n- Added Northern Roads patches\n- Added lots of bears\n- Added lipstick and more face textures\n- Added bodymarks and extra textures\n- Added more hair models and textures\n- Improved handling of NPC's tied to ESM"
+    },
+    {
+      "version": "0.36.1",
+      "date": "2026-04-05",
+      "notes": "# Patch notes\n\n**Summary**\nSmall fix for last update\n\n## Changes\n- Fixed missing gardens map"
+    },
+    {
+      "version": "0.36.0",
+      "date": "2026-04-05",
+      "notes": "# Patch notes\n\n**Summary**\nFull ESL/Mod support, Synchornized World time set to E 185 and matched to realtime.\n\n## Changes\n- Improved durability systems\n- Fixed tempering new items\n- Fixed teleporting and addon maps\n- Reworked inventory handling\n- Added synchronized time"
+    },
+    {
+      "version": "0.35.0",
+      "date": "2026-03-30",
+      "notes": "# Patch notes\n\n**Summary**\nCleanup with maps not loading properly, removed shaders to make them optional.\n\n## Changes\n- Fixed broken whiterun map\n- Added Lockpicking functionality\n- Updated Lockpicking skill to work with lockpicking system\n- Updated Durability to take into material type as a factor\n- Removed shaders (will make them optional in the launcher)"
+    },
+    {
+      "version": "0.34.7",
+      "date": "2026-03-25",
+      "notes": "# Patch notes\n\n**Summary**\nDurable items no longer unequip!\n\n## Changes\n- Fixed durability items and metadata"
+    },
+    {
+      "version": "0.34.6",
+      "date": "2026-03-25",
+      "notes": "# Patch notes\n\n**Summary**\nMore testing trying to get core issues resolved!\n\n## Changes\n- Fixed issue with dead npc's still updating and moving.\n- More improvements to durability system."
+    },
+    {
+      "version": "0.34.5",
+      "date": "2026-03-25",
+      "notes": "# Patch notes\n\n**Summary**\nSome improvements with core systems.\n\n## Changes\n- Improved npc handling for hosting\n- More work fore equipment syncing"
+    },
+    {
+      "version": "0.34.4",
+      "date": "2026-03-25",
+      "notes": "# Patch notes\n\n**Summary**\nImprovements to Winterhold and Shader optimizations!\n\n## Changes\n- Updated shaders to compile in the background\n- Updated winterhold college\n- Fixed combat animations (finaly)\n- Fixed opening and closing door synchronization"
+    },
+    {
+      "version": "0.34.3",
+      "date": "2026-03-25",
+      "notes": "# Patch notes\n\n**Summary**\nImprovements to Winterhold and Shader optimizations!\n\n## Changes\n- Updated shaders to compile in the background\n- Updated winterhold college\n- Fixed combat animations (finaly)\n- Fixed opening and closing door synchronization"
+    },
+    {
+      "version": "0.34.2",
+      "date": "2026-03-25",
+      "notes": "# Patch notes\n\n**Summary**\nWorked on making lightsources less laggy and getting all the world addons to work.\n\n## Changes\n- Updated shaders to work better on lower end pcs\n- Updated city maps\n- Fixed issue with combat animations\n- Fixed issue with durability sync"
+    },
+    {
+      "version": "0.34.1",
+      "date": "2026-03-24",
+      "notes": "# Patch notes\n\n**Summary**\nThis was important to get USSEP working after all the major engine fixes.\n\n## Changes\n- Fix for weapon equiping animation playign in combat\n- Added USSEP\n- Added Argonion and Khajit overhauls"
+    },
+    {
+      "version": "0.34.0",
+      "date": "2026-03-24",
+      "notes": "# Patch notes\n\n**Summary**\nChanged default shader settings and rebuild alst stable build for Testing.\n\n## Changes\n- Added all reworks of the citys\n- Removed LOD's Redone\n- Removed the oversized Whiterun rework"
+    },
+    {
+      "version": "0.33.2",
+      "date": "2026-03-24",
+      "notes": "# Patch notes\n\n**Summary**\nChanged default shader settings and rebuild alst stable build for Testing\n\n## Changes\n- Configured default shaders for performance\n- Rebuild framework from last stable build"
+    },
+    {
+      "version": "0.33.1",
+      "date": "2026-03-24",
+      "notes": "# Patch notes\n\n**Summary**\nMore updates for visual overhauls.\n\n## Changes\n- Added smoking candles and torches\n- Improved lighting on campfires\n- Test on Quality vs Performance with Shaders\n- Small fixes for durability\n- Fixed an issue where npc's spawn briefly infront of you"
+    },
+    {
+      "version": "0.33.0",
+      "date": "2026-03-23",
+      "notes": "# Patch notes\n\n**Summary**\nThematic Overhaul and Important Gameplay Fixes.\n\n## Changes\n- Fixed opening containers\n- Fixed looting corpses\n- Fixed durability labels not saving\n- Added Weather Overhauls\n- Added Storms\n- Added Darker Nights\n- Tuned Shaders"
+    },
+    {
+      "version": "0.32.0",
+      "date": "2026-03-23",
+      "notes": "# Patch notes\n\n**Summary**\nCommunity Shaders 2nd Pass\n\n## Changes\n- Updated Community Shader Tone Tuning"
+    },
+    {
+      "version": "0.31.5",
+      "date": "2026-03-23",
+      "notes": "# Patch notes\n\n**Summary**\nSmall Cleanup\n\n## Changes\n- Removed / Organized Mods"
+    },
+    {
+      "version": "0.31.4",
+      "date": "2026-03-23",
+      "notes": "# Patch notes\n\n**Summary**\nFramework Improvements\n\n## Changes\n- Added Spaces in Filenames for Mods Support"
+    },
+    {
+      "version": "0.31.3",
+      "date": "2026-03-23",
+      "notes": "# Patch notes\n\n**Summary**\nMore addons for testing and improvements\n\n## Changes\n- Added More Kahjit & Argonians Options/Bodys\n- Added First Person Height Fix\n- Added Body Mods and Textures\n- Added LOD's Redone\n- Added Masks of Skyrim\n- Fixed Nemesis Engine Missing Files"
+    },
+    {
+      "version": "0.31.2",
+      "date": "2026-03-22",
+      "notes": "# Patch notes\n\n**Summary**\nCore framework improvement and locks!\n\n## Changes\n- Added a lock system (testing)\n- Added support for .ESL file loading on client & server"
+    },
+    {
+      "version": "0.31.1",
+      "date": "2026-03-22",
+      "notes": "# Patch notes\n\n**Summary**\nWe cant forget fishing! Test for fishing skill.\n\n## Additions\n- Added Fish Anywhere Mod\n\n## Removals\n- A few un-working DLL's and Patch's"
+    },
+    {
+      "version": "0.31.0",
+      "date": "2026-03-22",
+      "notes": "# Patch notes\n\n**Summary**\nMajor refactors and improvements, Prepping to work on economy and testing.\n\n## Additions\n- Added Dynamic Seasonal Weather System\n- Added Synchornized World Time with Server\n- Added New Mods for Apocrathy, Brewing, and Cooking\n\n## Updates\n- Updated Skill Menu QOL/Improvements\n- Updated Damage Formulas & Tied in Combat Skills\n- Updated Combat Skills and Many Others\n- Updated Several Skills and Tied in XP Conditions"
+    },
+    {
+      "version": "0.30.0",
+      "date": "2026-03-20",
+      "notes": "# Patch notes\n\n**Summary**\nSkill system revamp in this run, with skill degradation and tempering.\n\n## Changes\n- Added tempering\n- Added weapon specialization skills\n- Reworked skill cap to use memory points\n- Improved damage formulas\n- Incorporate skill impact on damage formulas\n- Fixed issues with respawning"
+    },
+    {
+      "version": "0.29.0",
+      "date": "2026-03-20",
+      "notes": "# Patch notes\n\n**Summary**\nMajor rework of syncing and hosting. Fluid animations and combat should be expected now.\n\n## Changes\n- Added CREA & LVLC support\n- Improved notification theme (more skyrim)\n- Improved host sync and queing\n- Test horse sync code\n- Several network improvements\n- Several animation improvements\n- Enabled Bandits!!!"
+    },
+    {
+      "version": "0.28.8",
+      "date": "2026-03-17",
+      "notes": "# Patch notes\n\n**Summary**\nMore testing for Horseriding and syncing.\n\n## Changes\n- Updated spawn process\n- Updated horse syncing"
+    },
+    {
+      "version": "0.28.7",
+      "date": "2026-03-16",
+      "notes": "# Patch notes\n\n**Summary**\nMore testing for Horseriding and syncing.\n\n## Changes\n- Updated horseriding syncing."
+    },
+    {
+      "version": "0.28.6",
+      "date": "2026-03-16",
+      "notes": "# Patch notes\n\n**Summary**\nMore testing for Horseriding and syncing.\n\n## Changes\n- Updated horseriding syncing."
+    },
+    {
+      "version": "0.28.5",
+      "date": "2026-03-16",
+      "notes": "# Patch notes\n\n**Summary**\nMore testing for Horseriding and syncing.\n\n## Changes\n- Updated horseriding syncing."
+    },
+    {
+      "version": "0.28.4",
+      "date": "2026-03-16",
+      "notes": "# Patch notes\n\n**Summary**\nMore testing for Horseriding and syncing.\n\n## Changes\n- Updated horseriding syncing."
+    },
+    {
+      "version": "0.28.3",
+      "date": "2026-03-16",
+      "notes": "# Patch notes\n\n**Summary**\nMore testing for Horseriding and syncing.\n\n## Changes\n- Updated horseriding syncing."
+    },
+    {
+      "version": "0.28.2",
+      "date": "2026-03-16",
+      "notes": "# Patch notes\n\n**Summary**\nMore testing for Horseriding and syncing.\n\n## Changes\n- Updated horseriding syncing."
+    },
+    {
+      "version": "0.28.1",
+      "date": "2026-03-16",
+      "notes": "# Patch notes\n\n**Summary**\nMajor test with horse riding working with new entity control system.\n\n## Changes\n- Updated horseriding syncing.\n\n## Fixes\n- Fixed syncing of hosted npc's animations in combat.\n- Fixed issue with eratic movement when mounted near someone."
+    },
+    {
+      "version": "0.28.0",
+      "date": "2026-03-16",
+      "notes": "# Patch notes\n\n**Summary**\nTest build to see how new syncing code reacts with other players!\n\n## Changes\n- Reworked how NPC control and syncing works."
+    },
+    {
+      "version": "0.27.0",
+      "date": "2026-03-15",
+      "notes": "# Patch notes\n\n**Summary**\nGamemode and crafting updates (leatherworking/loom), persistent admin teleport locations, server logging improvements (tee server, tick rate monitor, full-length lines), a looser combat validation distance, and Font Awesome skill icons in the skills menu.\n\n## Additions\n- Added leatherworking skill and loom support (crafting system)\n- Added persistent admin teleport locations (saved tp locations for admins)\n- Added Font Awesome support for skill icons in the skills menu\n- Added tee server and tick rate monitor for server logging\n- Added More Craftable Equipment and hooked into skills\n\n## Fixes\n- Server log lines now display at full length (no truncation)\n- Improved console logging on the server\n- Combat validation max distance loosened (less strict range check)\n\n## Infrastructure\n- Server logging pipeline (tee + tick rate monitor) for better diagnostics"
+    },
+    {
+      "version": "0.26.1",
+      "date": "2026-03-14",
+      "notes": "# Patch notes\n\n**Summary**\n\nSmall visual, meshes, and performance improvements.\n\n## Changes\n\n- Added High Poly Hair\n- Added Total Character Makeoever\n- Added Skyrim Priority\n- Added Auto Physics Reset\n- Removed First Person Camera Fix (not working)"
+    },
+    {
+      "version": "0.26.0",
+      "date": "2026-03-14",
+      "notes": "# Patch notes\n\n**Summary**\n\nRebuild from previous update with a few important added features.\n\n## Changes\n\n- Added main screen background picture.\n- Added 1st Person Race Height Camera Fix\n- Updated to allow server side script loading\n- Enabled interior, exterior, and Critter Spawns.\n\n## Fixes\n\n- Fixed Skyrim Souls RE not unpausing menus properly."
+    },
+    {
+      "version": "0.25.0",
+      "date": "2026-03-14",
+      "notes": "# Patch notes\n\n**Summary**\n\nSync not working in previous build, re-adjusted\n\n## Changes\n\n- Fixed syncing added debug"
+    },
+    {
+      "version": "0.24.5",
+      "date": "2026-03-13",
+      "notes": "# Patch notes\n\n**Summary**\n\nSync not working in previous build, re-adjusted\n\n## Changes\n\n- Fixed syncing added debug"
+    },
+    {
+      "version": "0.24.4",
+      "date": "2026-03-13",
+      "notes": "# Patch notes\n\n**Summary**\n\nFull sync support for extened features from RaceMenu.\n\n## Changes\n\n- Added extended sync support for Face options\n- Added full sync path for Morph Nodes"
+    },
+    {
+      "version": "0.18.27",
+      "date": "2026-03-05",
+      "notes": "### Fixes\n- another client"
+    },
+    {
+      "version": "0.18.25",
+      "date": "2026-03-05",
+      "notes": "### Fixes\n- plz work"
+    },
+    {
+      "version": "0.18.23",
+      "date": "2026-03-05",
+      "notes": "### Fixes\n- more debuggy"
+    },
+    {
+      "version": "0.18.21",
+      "date": "2026-03-05",
+      "notes": "### Fixes\n- more more more"
+    },
+    {
+      "version": "0.18.19",
+      "date": "2026-03-05",
+      "notes": "### Fixes\n- more improvement to mount code"
+    },
+    {
+      "version": "0.18.17",
+      "date": "2026-03-04",
+      "notes": "### Fixes\n- more horsey debug plz for the love of god"
+    },
+    {
+      "version": "0.18.15",
+      "date": "2026-03-04",
+      "notes": "### Fixes\n- horse ridey updates"
+    },
+    {
+      "version": "0.18.13",
+      "date": "2026-03-04",
+      "notes": "### Fixes\n- more debuging"
+    },
+    {
+      "version": "0.18.11",
+      "date": "2026-03-02",
+      "notes": "### Fixes\n- more sync checks"
+    },
+    {
+      "version": "0.18.9",
+      "date": "2026-03-02",
+      "notes": "### Fixes\n- more horesey debug )!@$#(!)$"
+    },
+    {
+      "version": "0.18.7",
+      "date": "2026-03-02",
+      "notes": "### Fixes\n- horsey debugf"
+    },
+    {
+      "version": "0.18.5",
+      "date": "2026-03-02",
+      "notes": "### Fixes\n- horse fix debug"
+    },
+    {
+      "version": "0.18.3",
+      "date": "2026-03-02",
+      "notes": "### Fixes\n- debug client"
+    },
+    {
+      "version": "0.18.1",
+      "date": "2026-03-02",
+      "notes": "### Fixes\n- more horse back riding tweaks + debug"
+    },
+    {
+      "version": "0.17.1",
+      "date": "2026-03-02",
+      "notes": "### Fixes\n- add skill perk system for skills to apply"
+    },
+    {
+      "version": "0.16.0",
+      "date": "2026-03-01",
+      "notes": "### Features\n- add whiterun valley\n\n### Fixes\n- Revert \"feat: add whiterun valley\""
+    },
+    {
+      "version": "0.15.4",
+      "date": "2026-03-01",
+      "notes": "### Fixes\n- reverted debug, cleaned up."
+    },
+    {
+      "version": "0.15.2",
+      "date": "2026-02-28",
+      "notes": "### Fixes\n- npc network improvements"
+    },
+    {
+      "version": "0.15.0",
+      "date": "2026-02-28",
+      "notes": "### Features\n- added head look, mouth movement with voice, and harvesting rework\n- skill system rework\n\n### Fixes\n- synchronized lip movement for voice across all players"
+    },
+    {
+      "version": "0.14.3",
+      "date": "2026-02-25",
+      "notes": "### Fixes\n- debug for animation ctx error\n- more improvements to progress bar"
+    },
+    {
+      "version": "0.14.1",
+      "date": "2026-02-25",
+      "notes": "### Fixes\n- minor issue with animation playing"
+    },
+    {
+      "version": "0.13.0",
+      "date": "2026-02-24",
+      "notes": "### Features\n- mining/skillls/admin commands"
+    },
+    {
+      "version": "0.12.1",
+      "date": "2026-02-24",
+      "notes": "### Fixes\n- moved skills to property and away from forms, more ui tweaks"
+    },
+    {
+      "version": "0.11.3",
+      "date": "2026-02-24",
+      "notes": "### Fixes\n- improve error handling and skills system"
+    },
+    {
+      "version": "0.11.1",
+      "date": "2026-02-24",
+      "notes": "### Fixes\n- more fixes and ui rework"
+    },
+    {
+      "version": "0.10.2",
+      "date": "2026-02-23",
+      "notes": "### Fixes\n- more improvements"
+    },
+    {
+      "version": "0.10.0",
+      "date": "2026-02-23",
+      "notes": "### Features\n- update starfall core"
+    },
+    {
+      "version": "0.8.1",
+      "date": "2026-02-23",
+      "notes": "### Fixes\n- commands and chat window updates"
+    },
+    {
+      "version": "0.7.0",
+      "date": "2026-02-15",
+      "notes": "### Features\n- added starfall.esp"
+    },
+    {
+      "version": "0.6.0",
+      "date": "2026-02-13",
+      "notes": "### Features\n- added chat system"
+    },
+    {
+      "version": "0.4.1",
+      "date": "2026-02-12",
+      "notes": "### Fixes\n- debug"
+    },
+    {
+      "version": "0.3.5",
+      "date": "2026-02-11",
+      "notes": "### Fixes\n- new gamemode system added"
+    },
+    {
+      "version": "0.3.3",
+      "date": "2026-02-11",
+      "notes": "### Fixes\n- react ui rebuild and flow"
+    },
+    {
+      "version": "0.3.1",
+      "date": "2026-02-11",
+      "notes": "### Fixes\n- packet byte size mismatch"
+    },
+    {
+      "version": "0.2.10",
+      "date": "2026-02-11",
+      "notes": "### Fixes\n- voice positioning is inverted, swapped positions"
+    },
+    {
+      "version": "0.2.8",
+      "date": "2026-02-11",
+      "notes": "### Fixes\n- more adjustments to position calculations"
+    },
+    {
+      "version": "0.2.6",
+      "date": "2026-02-11",
+      "notes": "### Fixes\n- improved voice chat positional audio"
+    },
+    {
+      "version": "0.2.4",
+      "date": "2026-02-10",
+      "notes": "### Fixes\n- adjusted how voice chat is initialized and added debug for testing"
+    },
+    {
+      "version": "0.2.2",
+      "date": "2026-02-10",
+      "notes": "### Fixes\n- added talking indicator and fixed push to talk issue"
+    },
+    {
+      "version": "0.2.0",
+      "date": "2026-02-10",
+      "notes": "### Features\n- added client plugins, engine fixes, SkyrimSoulsRE + enabled voicechat via client"
+    },
+    {
+      "version": "0.0.12",
+      "date": "2026-02-10",
+      "notes": "### Fixes\n- improved character deletion and master server connection"
+    },
+    {
+      "version": "0.0.10",
+      "date": "2026-02-06",
+      "notes": "### Fixes\n- rework authentication methods"
+    },
+    {
+      "version": "0.0.8",
+      "date": "2026-02-06",
+      "notes": "### Fixes\n- client debugging for finding the broken buttons"
+    },
+    {
+      "version": "0.0.6",
+      "date": "2026-02-06",
+      "notes": "### Fixes\n- added a close button"
+    },
+    {
+      "version": "0.0.4",
+      "date": "2026-02-06",
+      "notes": "### Fixes\n- change authentication header to login"
+    },
+    {
+      "version": "0.0.2",
+      "date": "2026-02-06",
+      "notes": "**Full Changelog**: https://github.com/BStarRP/BStarRP_SkyMP_Data/compare/v0.0.1...v0.0.2"
+    }
+  ]
+}

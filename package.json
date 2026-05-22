@@ -5,6 +5,8 @@
   "description": "Patch content for BStar Launcher (SkyMP mods + Platform data)",
   "scripts": {
     "build-patch": "node scripts/build-patch.js",
+    "build-changelog": "node scripts/build-changelog.js",
+    "bootstrap-changelog-seed": "node scripts/bootstrap-changelog-seed.js",
     "generate-manifest": "node scripts/generate-manifest.js"
   },
   "devDependencies": {
