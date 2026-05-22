@@ -144,6 +144,17 @@ export interface InventoryEntry {
 }
 export declare let getContainer: (baseId: number) => InventoryEntry[]
 
+/**
+ * In-place mutate ExtraHealth + ExtraTextDisplayData on the worn instance of
+ * `baseId` inside `refrId` (typically the local player). Used for live
+ * durability tier updates so we don't have to do an addItemEx remove/add swap
+ * (whose RemoveItem can target the wrong stack and leave the equipped slot
+ * showing the stale tier name). Pass an empty `newName` to leave the display
+ * name untouched. The mutation runs on the game thread; the call returns
+ * immediately.
+ */
+export declare let updateExtrasOnEquipped: (refrId: number, baseId: number, newHealth: number, newName: string) => void
+
 export interface ActivateEvent {
   target: ObjectReference
   caster: ObjectReference
@@ -3261,6 +3272,8 @@ export declare class TESModPlatform extends PapyrusObject {
   static from(papyrusObject: PapyrusObject | null): TESModPlatform | null
   static addItemEx(containerRefr: ObjectReference | null, item: Form | null, countDelta: number, health: number, enchantment: Enchantment | null, maxCharge: number, removeEnchantmentOnUnequip: boolean, chargePercent: number, textDisplayData: string, soul: number, poison: Potion | null, poisonCount: number): void
   static clearTintMasks(targetActor: Actor | null): void
+  static cloneNpcForActor(sourceFormId: number): ActorBase | null
+  static setObjectReference(refr: ObjectReference | null, newBase: Form | null): void
   static createNpc(): ActorBase | null
   static evaluateLeveledNpc(commaSeparatedListOfIds: string): ActorBase | null
   static getNthVtableElement(pointer: Form | null, pointerOffset: number, elementIndex: number): number

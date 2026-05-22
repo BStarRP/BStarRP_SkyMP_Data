@@ -1,2 +1,0 @@
-;SnowberryCrostata
-HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x00061C78)

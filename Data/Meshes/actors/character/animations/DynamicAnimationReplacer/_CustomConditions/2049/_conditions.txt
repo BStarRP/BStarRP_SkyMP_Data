@@ -1,2 +1,0 @@
-;PheasantBreast
-HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x0014FC35)

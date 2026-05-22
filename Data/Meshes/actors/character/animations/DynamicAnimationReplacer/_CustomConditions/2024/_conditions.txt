@@ -1,2 +1,0 @@
-;RedApple
-HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x0000598B)

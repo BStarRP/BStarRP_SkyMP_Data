@@ -1,3 +1,0 @@
-;Flin
-;EmberbrandWine
-HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x0008A499)

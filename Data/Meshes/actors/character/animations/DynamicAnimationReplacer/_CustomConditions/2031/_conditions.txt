@@ -1,2 +1,0 @@
-;Cabbage
-HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x000D63D3)

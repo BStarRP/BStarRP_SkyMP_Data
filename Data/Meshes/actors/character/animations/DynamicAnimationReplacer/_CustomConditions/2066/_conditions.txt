@@ -1,2 +1,0 @@
-;Potato
-HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x000DB4DB)

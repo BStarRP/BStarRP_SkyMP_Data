@@ -1,2 +1,0 @@
-;SteamedMudcrabLegs
-HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x00052964)

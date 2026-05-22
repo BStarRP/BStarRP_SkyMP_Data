@@ -1,3 +1,0 @@
-		<hkobject name="#eaas$36" class="hkbStringEventPayload" signature="0xed04256a">
-			<hkparam name="data">aaAOt_SmallTable</hkparam>
-		</hkobject>

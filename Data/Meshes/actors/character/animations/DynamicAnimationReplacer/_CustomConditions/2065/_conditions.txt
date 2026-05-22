@@ -1,3 +1,0 @@
-;ApplePie
-;HomecookedMeal
-HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x000059A1)

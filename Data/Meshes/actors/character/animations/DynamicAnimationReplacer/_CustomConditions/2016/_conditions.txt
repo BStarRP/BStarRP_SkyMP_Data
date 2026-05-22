@@ -1,2 +1,0 @@
-;JugOfMilk
-HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x0007608F)

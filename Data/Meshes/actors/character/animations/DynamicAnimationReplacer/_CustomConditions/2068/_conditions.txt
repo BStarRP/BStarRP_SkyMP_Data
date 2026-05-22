@@ -1,2 +1,0 @@
-;RawRabbitLeg
-HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x0016E252)

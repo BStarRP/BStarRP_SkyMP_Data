@@ -1,2 +1,0 @@
-;SoulHusk
-HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x000A8AB9)

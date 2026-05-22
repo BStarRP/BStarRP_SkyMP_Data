@@ -1,3 +1,0 @@
-;aa_EAAS
-NOT IsFemale() AND
-HasMagicEffectWithKeyword ("TaberuAnimation.esp" | 0x0019BB69)

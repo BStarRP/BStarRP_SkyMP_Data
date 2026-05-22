@@ -1,2 +1,0 @@
-;VenisonStew
-HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x00359825)

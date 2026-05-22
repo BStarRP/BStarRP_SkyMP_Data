@@ -1,4 +1,0 @@
-;AppleDumpling
-;ChickenDumpling
-;LavenderDumpling
-HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x0005CB6D)

@@ -1,2 +1,0 @@
-;Shein
-HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x0009E8AD)

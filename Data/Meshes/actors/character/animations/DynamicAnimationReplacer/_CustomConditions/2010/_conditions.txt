@@ -1,2 +1,0 @@
-;BraidedBread
-HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x0004D85D)

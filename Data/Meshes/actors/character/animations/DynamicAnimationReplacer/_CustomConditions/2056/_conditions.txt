@@ -1,2 +1,0 @@
-;HorseHaunch
-HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x00005991)

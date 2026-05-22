@@ -1,2 +1,0 @@
-;CookedAngler
-HasMagicEffect("Taberu Animation - Fishing Patch.esp" | 0x8B2)

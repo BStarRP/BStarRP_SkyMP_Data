@@ -1,2 +1,0 @@
-;SearedSlaughterfish
-HasMagicEffectWithKeyword("TaberuAnimation.esp" | 0x0000599A)
