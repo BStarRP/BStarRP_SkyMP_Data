@@ -54,8 +54,17 @@ function readCurrentNotes() {
   return stripDuplicateVersion(content);
 }
 
+function requireCurrentNotes() {
+  const notes = readCurrentNotes();
+  if (!notes) {
+    console.error('ERROR: patch-notes.md must contain release notes for version', VERSION);
+    process.exit(1);
+  }
+  return notes;
+}
+
 async function main() {
-  const currentNotes = readCurrentNotes();
+  const currentNotes = requireCurrentNotes();
   const currentDate = RELEASE_DATE || new Date().toISOString().slice(0, 10);
   const history = loadHistoryBase(PREVIOUS_CHANGELOG_PATH);
   const changelog = mergeChangelog(history, VERSION, currentNotes, currentDate);

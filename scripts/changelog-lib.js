@@ -41,10 +41,12 @@ function normalizeReleaseEntry(entry) {
 
 function mergeChangelog(previous, currentVersion, currentNotes, currentDate) {
   const map = new Map();
+  const currentVer = String(currentVersion).replace(/^v/i, '');
 
   for (const raw of previous?.releases || []) {
     const entry = normalizeReleaseEntry(raw);
-    if (entry) map.set(entry.version, entry);
+    if (!entry || entry.version === currentVer) continue;
+    map.set(entry.version, entry);
   }
 
   const current = normalizeReleaseEntry({
@@ -202,11 +204,12 @@ function buildLegacyEntriesFromReleases(releases, excludeVersion) {
       const date = r.published_at ? r.published_at.slice(0, 10) : gitTagDate(r.tag_name);
       const tagNotes = readPatchNotesAtTag(r.tag_name);
       const bodyNotes = stripDuplicateVersion(String(r.body || '').trim());
-      const notes = tagNotes || bodyNotes;
+      // Legacy: release body is what was published for that version; tag patch-notes.md is often stale/copied.
+      const notes = bodyNotes || tagNotes;
       if (!notes) return null;
 
-      if (tagNotes) fromTag++;
-      else fromBody++;
+      if (bodyNotes) fromBody++;
+      else fromTag++;
 
       return { version, date, notes };
     })

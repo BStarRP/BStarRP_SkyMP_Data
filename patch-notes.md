@@ -1,7 +1,8 @@
 # Patch notes
 
 **Summary**
-Small update!
+Prep for official Beta test!
 
 ## Changes
-- Fixed a few more missing files
+- Refactored all mods and files
+- New launcher changes with Nexus mod support

@@ -17,6 +17,7 @@ on:
       - 'scripts/build-changelog.js'
       - 'scripts/changelog-seed.json'
       - 'scripts/changelog-lib.js'
+      - 'scripts/verify-patch-notes-for-release.js'
       - 'patch-notes.md'
   workflow_dispatch:
     inputs:
@@ -325,9 +326,20 @@ jobs:
       - name: Build patch changelog
         env:
           VERSION: ${{ steps.version.outputs.version }}
+          PREVIOUS_VERSION: ${{ steps.version.outputs.previous_version }}
           GITHUB_REPOSITORY: ${{ github.repository }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          echo "patch-notes.md for release ${{ steps.version.outputs.version }}:"
+          head -20 patch-notes.md
+          PREV_CHANGELOG=""
+          if [ -f prev-changelog.json ]; then
+            PREV_CHANGELOG="--prev-changelog=prev-changelog.json"
+          fi
+          node scripts/verify-patch-notes-for-release.js \
+            "${{ steps.version.outputs.version }}" \
+            "${{ steps.version.outputs.previous_version }}" \
+            $PREV_CHANGELOG
           CHANGELOG_ARGS="${{ steps.version.outputs.version }} --release-date=$(date -u +%Y-%m-%d)"
           if [ -f prev-changelog.json ]; then
             CHANGELOG_ARGS="$CHANGELOG_ARGS --previous-changelog=prev-changelog.json"
