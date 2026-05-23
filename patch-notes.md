@@ -1,11 +1,8 @@
 # Patch notes
 
 **Summary**
-Worked on optimization pass and some new featurers
+Last update had a bug in it, fixed here.
 
 ## Changes
-- Improved loading of static refs (DOORS/CONT)
-- Improved corpses showing equipment.
-- Improved issues with crashing.
-- Improved issues with looting.
-- Added Beekeeping.
+- Fix movement deserialization bug
+- Sneak visibility is now scaled by your skill
