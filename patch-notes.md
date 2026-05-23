@@ -1,7 +1,7 @@
 # Patch notes
 
 **Summary**
-More cleanup and optimizations.
+Left a bug in new patch system, its fixed.
 
 ## Changes
-- Optimized trygetform paths!
+- Patched cache system.
