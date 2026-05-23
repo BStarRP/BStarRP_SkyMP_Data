@@ -1,7 +1,8 @@
 # Patch notes
 
 **Summary**
-Re-upload client files
+Finaly a playable state!
 
 ## Changes
-- Updated latest SkyMP client build.
+- Fix loading and order
+- Re-add Skyrim Souls RE
