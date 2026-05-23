@@ -1,8 +1,9 @@
 # Patch notes
 
 **Summary**
-Improvements to voice chat and NPC hosting!
+Voice effect test!
 
 ## Changes
-- Fix Proximity Voice to use the right slider ;P
-- Improved hosting of npc's to fix crashing issues
+- Fixed opening containers. 
+- Added test voice effects (cave, interior, outdoor)
+- More npc hosting improvements.
