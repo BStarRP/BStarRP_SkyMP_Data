@@ -1,9 +1,8 @@
 # Patch notes
 
 **Summary**
-Added a full load balance system for NPC handling!
+Need to improve open containers, debug logging added.
 
 ## Changes
-- Improve npc hosting
-- Fix issue with multiple data directory exceptions if not created.
-- Added unarmed specialization skill
+- More hosting improvements.
+- Debugging added to open containers.
