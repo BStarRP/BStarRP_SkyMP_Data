@@ -1,7 +1,11 @@
 # Patch notes
 
 **Summary**
-Debugging and crash fixing!
+Worked on optimization pass and some new featurers
 
 ## Changes
-- Crash fixes
+- Improved loading of static refs (DOORS/CONT)
+- Improved corpses showing equipment.
+- Improved issues with crashing.
+- Improved issues with looting.
+- Added Beekeeping.
