@@ -1,9 +1,9 @@
 # Patch notes
 
 **Summary**
-Voice effect test!
+Added a full load balance system for NPC handling!
 
 ## Changes
-- Fixed opening containers. 
-- Added test voice effects (cave, interior, outdoor)
-- More npc hosting improvements.
+- Improve npc hosting
+- Fix issue with multiple data directory exceptions if not created.
+- Added unarmed specialization skill
