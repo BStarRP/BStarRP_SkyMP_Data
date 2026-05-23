@@ -1,7 +1,7 @@
 # Patch notes
 
 **Summary**
-Adjusting settings
+Re-upload client files
 
 ## Changes
-- Resent SkyrimPlatform.ini
+- Updated latest SkyMP client build.
