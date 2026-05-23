@@ -1,8 +1,7 @@
 # Patch notes
 
 **Summary**
-Last update had a bug in it, fixed here.
+More cleanup and optimizations.
 
 ## Changes
-- Fix movement deserialization bug
-- Sneak visibility is now scaled by your skill
+- Optimized trygetform paths!
