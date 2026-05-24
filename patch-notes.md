@@ -1,7 +1,8 @@
 # Patch notes
 
 **Summary**
-Left a bug in new patch system, its fixed.
+Improved several checks causing errors.
 
 ## Changes
-- More cleanup
+- Improved take down of actors (fix door delay)
+- Fix error caused by out dated caching
