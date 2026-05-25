@@ -1,12 +1,17 @@
 # Patch notes
 
 **Summary**
-Working on fixing many of the big bugs!
+Working on smashing down more crashes and issues.
 
 ## Changes
-- Fixed issue with Dual Wield not gaining XP
-- Fixed teleport rules to allow movement validation.
-- Improved looting corpses/containers.
-- Improved performance issues going through doors.
-- Disabled COC command and routed it to admins.
-- Routed more admin commands from skyrim console coc, tcl, tgm and tfc.
+- Fixed a server side crash that caused the server to shut down.
+- Fixed an issue with npc's dieing and not syncing death state.
+- Fixed crash when looting corpses.
+- Updated starting zone to allow you to change skills.
+- Improved optimizations for going through doors.
+- Improved optimizations for NPC/Objects.
+- Added stamina drain when holding shield.
+- Added stamina drain when drawing a bow.
+- Added stmaina when aimin crossbow.
+- Added a quest service to set quest states.
+- Rebalanced stamina for all the weapons.
