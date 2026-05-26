@@ -1,6 +1,6 @@
 /**
- * git lfs pull --include for each path in a newline-separated list that is LFS-tracked,
- * then git checkout to smudge pointers into real files (pull alone often leaves ~130B pointers on disk).
+ * git lfs pull --include for LFS-tracked paths in a newline-separated list.
+ * Requires GIT_LFS_SKIP_SMUDGE=0 (actions/checkout with lfs:false sets skip=1; pull then only fetches).
  * Usage: node scripts/pull-lfs-for-path-list.js <paths.txt>
  */
 
@@ -8,6 +8,10 @@ const fs = require('fs');
 const path = require('path');
 const { execFileSync } = require('child_process');
 const { toGitPathspec } = require('./git-pathspec');
+
+// actions/checkout@v5 with lfs:false leaves this set; without clearing it, lfs pull never smudges the worktree.
+delete process.env.GIT_LFS_SKIP_SMUDGE;
+process.env.GIT_LFS_SKIP_SMUDGE = '0';
 
 const LFS_POINTER_HEADER = 'version https://git-lfs.github.com/spec/v1';
 
@@ -76,14 +80,24 @@ for (let i = 0; i < lfsPaths.length; i += BATCH) {
   }
   const batchNum = Math.floor(i / BATCH) + 1;
   console.log('git lfs pull', chunk.length, 'path(s) (batch', batchNum, ')');
-  execFileSync('git', pullArgs, { stdio: 'inherit', cwd: process.cwd() });
+  execFileSync('git', pullArgs, { stdio: 'inherit', cwd: process.cwd(), maxBuffer: 64 * 1024 * 1024 });
+}
 
-  const checkoutArgs = ['checkout', 'HEAD', '--'];
-  for (const p of chunk) {
-    checkoutArgs.push(toGitPathspec(p));
+/** If pull left pointers (e.g. skip-smudge race), materialize with git lfs checkout (not git checkout — that rewrites pointers). */
+const needCheckout = lfsPaths.filter((p) => {
+  const full = path.join(process.cwd(), p);
+  return fs.existsSync(full) && isLfsPointer(full);
+});
+if (needCheckout.length > 0) {
+  console.log('git lfs checkout for', needCheckout.length, 'path(s) still pointer after pull');
+  for (let i = 0; i < needCheckout.length; i += BATCH) {
+    const chunk = needCheckout.slice(i, i + BATCH);
+    const checkoutArgs = ['lfs', 'checkout'];
+    for (const p of chunk) checkoutArgs.push(toGitPathspec(p));
+    const batchNum = Math.floor(i / BATCH) + 1;
+    console.log('git lfs checkout', chunk.length, 'path(s) (batch', batchNum, ')');
+    execFileSync('git', checkoutArgs, { stdio: 'inherit', cwd: process.cwd(), maxBuffer: 64 * 1024 * 1024 });
   }
-  console.log('git checkout (smudge)', chunk.length, 'path(s) (batch', batchNum, ')');
-  execFileSync('git', checkoutArgs, { stdio: 'inherit', cwd: process.cwd(), maxBuffer: 64 * 1024 * 1024 });
 }
 
 const stillPointers = lfsPaths.filter((p) => {

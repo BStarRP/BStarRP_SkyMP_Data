@@ -201,27 +201,42 @@ function materializeFromGit(pathEntry, src) {
   const rel = gitPathFromManifestEntry(pathEntry);
   const gitSpec = toGitPathspec(rel);
   const cwd = process.cwd();
+  const prevSkip = process.env.GIT_LFS_SKIP_SMUDGE;
+  process.env.GIT_LFS_SKIP_SMUDGE = '0';
 
-  if (!fs.existsSync(src)) {
-    try {
-      console.log('Restoring missing file from git:', rel);
-      execGitOrWarn(['checkout', 'HEAD', '--', gitSpec], cwd, GIT_CHECKOUT_TIMEOUT_MS, 'checkout');
-    } catch (e) {
-      console.warn('git checkout failed:', rel, e.message);
+  try {
+    if (!fs.existsSync(src)) {
+      try {
+        console.log('Restoring missing file from git:', rel);
+        execGitOrWarn(['checkout', 'HEAD', '--', gitSpec], cwd, GIT_CHECKOUT_TIMEOUT_MS, 'checkout');
+      } catch (e) {
+        console.warn('git checkout failed:', rel, e.message);
+      }
     }
-  }
 
-  if (fs.existsSync(src) && !isLfsPointer(src)) {
-    return;
-  }
-
-  if (isLfsTrackedManifestPath(pathEntry) || (fs.existsSync(src) && isLfsPointer(src))) {
-    try {
-      console.log('git lfs pull --include', gitSpec, '(timeout ' + GIT_LFS_PULL_TIMEOUT_MS + 'ms)');
-      execGitOrWarn(['lfs', 'pull', '--include', gitSpec], cwd, GIT_LFS_PULL_TIMEOUT_MS, 'lfs pull');
-    } catch (e) {
-      console.warn('git lfs pull failed:', rel, e.message);
+    if (fs.existsSync(src) && !isLfsPointer(src)) {
+      return;
     }
+
+    if (isLfsTrackedManifestPath(pathEntry) || (fs.existsSync(src) && isLfsPointer(src))) {
+      try {
+        console.log('git lfs pull --include', gitSpec, '(timeout ' + GIT_LFS_PULL_TIMEOUT_MS + 'ms)');
+        execGitOrWarn(['lfs', 'pull', '--include', gitSpec], cwd, GIT_LFS_PULL_TIMEOUT_MS, 'lfs pull');
+      } catch (e) {
+        console.warn('git lfs pull failed:', rel, e.message);
+      }
+      if (fs.existsSync(src) && isLfsPointer(src)) {
+        try {
+          console.log('git lfs checkout', rel);
+          execGitOrWarn(['lfs', 'checkout', gitSpec], cwd, GIT_LFS_PULL_TIMEOUT_MS, 'lfs checkout');
+        } catch (e) {
+          console.warn('git lfs checkout failed:', rel, e.message);
+        }
+      }
+    }
+  } finally {
+    if (prevSkip === undefined) delete process.env.GIT_LFS_SKIP_SMUDGE;
+    else process.env.GIT_LFS_SKIP_SMUDGE = prevSkip;
   }
 }
 

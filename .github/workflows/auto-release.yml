@@ -201,6 +201,8 @@ jobs:
           fi
 
       - name: Pull LFS for changed and new files only (no reference to reuse)
+        env:
+          GIT_LFS_SKIP_SMUDGE: '0'
         run: |
           if [ ! -f prev-manifest.json ]; then
             echo "No previous manifest; pulling all LFS objects for current ref"
@@ -225,6 +227,8 @@ jobs:
 
       - name: Pull all LFS and smudge Data/ (when force re-upload all)
         if: github.event.inputs.force_upload_all_small_assets == 'true'
+        env:
+          GIT_LFS_SKIP_SMUDGE: '0'
         run: |
           echo "Force re-upload: pulling all LFS so manifest + R2 see real file sizes."
           git lfs pull
@@ -340,6 +344,8 @@ jobs:
           echo "Set manifest URLs; assets to upload: $(wc -l < dist-patch/github-assets-to-upload.txt 2>/dev/null || echo 0)"
 
       - name: Pull LFS for assets to upload (if still pointers)
+        env:
+          GIT_LFS_SKIP_SMUDGE: '0'
         run: node scripts/pull-lfs-for-upload-list.js
         # When previous release had different/missing assets, upload list is large; we only pull those LFS files here (no full fetch at checkout).
 
@@ -351,6 +357,7 @@ jobs:
       - name: Pull LFS for R2 upload paths only (no pull for copy-from-previous)
         env:
           VERSION: ${{ steps.version.outputs.version }}
+          GIT_LFS_SKIP_SMUDGE: '0'
         run: |
           PREV_ARGS=""
           if [ -f prev-manifest.json ]; then
@@ -374,6 +381,7 @@ jobs:
           PATCH_ASSETS_ACCOUNT_ID: ${{ secrets.PATCH_ASSETS_ACCOUNT_ID }}
           PATCH_ASSETS_PUBLIC_URL: ${{ secrets.PATCH_ASSETS_PUBLIC_URL }}
           VERSION: ${{ steps.version.outputs.version }}
+          GIT_LFS_SKIP_SMUDGE: '0'
           FORCE_UPLOAD_ALL_SMALL_ASSETS: ${{ github.event.inputs.force_upload_all_small_assets == 'true' && '1' || '' }}
           # Copy-from-previous issues ~15k+ CopyObject calls per release; low concurrency → long silent stretches.
           # 48 is a strong default with R2_MAX_SOCKETS=128; try 64 if stable, or drop to 24–32 on throttling / copy timeouts.
