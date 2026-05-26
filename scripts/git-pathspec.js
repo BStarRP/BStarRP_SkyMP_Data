@@ -9,9 +9,4 @@ function toGitPathspec(rel) {
   return p;
 }
 
-/** Always literal — use for git lfs fetch/pull --include so every path matches exactly. */
-function toGitLfsInclude(rel) {
-  return `:(literal)${String(rel).replace(/\\/g, '/')}`;
-}
-
-module.exports = { toGitPathspec, toGitLfsInclude };
+module.exports = { toGitPathspec };

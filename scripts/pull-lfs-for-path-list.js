@@ -1,6 +1,9 @@
 /**
- * Fetch then checkout LFS objects for paths in a newline-separated list.
- * actions/checkout with lfs:false sets GIT_LFS_SKIP_SMUDGE=1; we clear it for checkout.
+ * Materialize LFS files listed in a newline-separated path file.
+ * actions/checkout with lfs:false leaves GIT_LFS_SKIP_SMUDGE=1 and pointer files on disk.
+ *
+ * Strategy: fetch ALL LFS objects for HEAD once, then checkout listed paths (plain paths —
+ * do NOT use git :(literal) pathspec; git-lfs does not understand it).
  *
  * Usage: node scripts/pull-lfs-for-path-list.js <paths.txt>
  */
@@ -8,7 +11,6 @@
 const fs = require('fs');
 const path = require('path');
 const { execFileSync } = require('child_process');
-const { toGitLfsInclude } = require('./git-pathspec');
 
 delete process.env.GIT_LFS_SKIP_SMUDGE;
 process.env.GIT_LFS_SKIP_SMUDGE = '0';
@@ -16,6 +18,10 @@ process.env.GIT_LFS_SKIP_SMUDGE = '0';
 const LFS_POINTER_HEADER = 'version https://git-lfs.github.com/spec/v1';
 const REMOTE = process.env.GIT_LFS_REMOTE || 'origin';
 const BATCH = Math.max(1, parseInt(process.env.LFS_PULL_BATCH_SIZE || '50', 10) || 50);
+
+function gitPath(rel) {
+  return String(rel).replace(/\\/g, '/');
+}
 
 function isLfsPointer(filePath) {
   try {
@@ -34,7 +40,7 @@ function isLfsPointer(filePath) {
   }
 }
 
-function runGit(args, label) {
+function runGit(args) {
   execFileSync('git', args, {
     stdio: 'inherit',
     cwd: process.cwd(),
@@ -42,23 +48,17 @@ function runGit(args, label) {
   });
 }
 
-function fetchBatch(chunk, batchNum) {
-  const args = ['lfs', 'fetch', REMOTE];
-  for (const p of chunk) args.push('--include', toGitLfsInclude(p));
-  console.log('git lfs fetch', chunk.length, 'path(s) (batch', batchNum, ')');
-  runGit(args, 'fetch');
-}
-
 function checkoutBatch(chunk, batchNum) {
   const args = ['lfs', 'checkout'];
-  for (const p of chunk) args.push(toGitLfsInclude(p));
+  for (const p of chunk) args.push(gitPath(p));
   console.log('git lfs checkout', chunk.length, 'path(s) (batch', batchNum, ')');
-  runGit(args, 'checkout');
+  runGit(args);
 }
 
-function materializePath(p) {
-  fetchBatch([p], 'retry');
-  checkoutBatch([p], 'retry');
+function pullOnePath(p) {
+  const rel = gitPath(p);
+  console.log('git lfs pull --include', rel);
+  runGit(['lfs', 'pull', '--include', rel]);
 }
 
 const listPath = process.argv[2];
@@ -100,13 +100,13 @@ if (lfsPaths.length === 0) {
   process.exit(0);
 }
 
-console.log('Materializing', lfsPaths.length, 'LFS path(s) (fetch then checkout, batch', BATCH, ')');
+const head = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim();
+console.log('Fetching all LFS objects for', head, 'from', REMOTE, '(then checkout', lfsPaths.length, 'path(s))');
+runGit(['lfs', 'fetch', REMOTE, head]);
 
 for (let i = 0; i < lfsPaths.length; i += BATCH) {
   const chunk = lfsPaths.slice(i, i + BATCH);
-  const batchNum = Math.floor(i / BATCH) + 1;
-  fetchBatch(chunk, batchNum);
-  checkoutBatch(chunk, batchNum);
+  checkoutBatch(chunk, Math.floor(i / BATCH) + 1);
 }
 
 let stillPointers = lfsPaths.filter((p) => {
@@ -115,15 +115,15 @@ let stillPointers = lfsPaths.filter((p) => {
 });
 
 if (stillPointers.length > 0) {
-  console.log('Retrying', stillPointers.length, 'path(s) still pointer (per-path fetch+checkout)');
+  console.log('Retrying', stillPointers.length, 'path(s) with git lfs pull --include (per path)');
   const retry = stillPointers;
   stillPointers = [];
   for (let i = 0; i < retry.length; i++) {
     const p = retry[i];
     try {
-      materializePath(p);
+      pullOnePath(p);
     } catch (e) {
-      console.warn('Retry failed for', p, ':', e.message || e);
+      console.warn('pull failed for', p, ':', e.message || e);
       stillPointers.push(p);
       continue;
     }

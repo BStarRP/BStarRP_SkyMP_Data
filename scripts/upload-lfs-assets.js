@@ -48,7 +48,7 @@ const http = require('http');
 const https = require('https');
 const { execFileSync } = require('child_process');
 const toAssetName = require('./to-asset-name');
-const { toGitPathspec, toGitLfsInclude } = require('./git-pathspec');
+const { toGitPathspec } = require('./git-pathspec');
 
 const FORCE_UPLOAD_ALL = /^1|true|yes$/i.test(String(process.env.FORCE_UPLOAD_ALL_SMALL_ASSETS || ''));
 const VERIFY_COPY_DEST = /^1|true|yes$/i.test(String(process.env.R2_VERIFY_COPY_DEST || ''));
@@ -219,20 +219,11 @@ function materializeFromGit(pathEntry, src) {
     }
 
     if (isLfsTrackedManifestPath(pathEntry) || (fs.existsSync(src) && isLfsPointer(src))) {
-      const lfsInc = toGitLfsInclude(rel);
       try {
-        console.log('git lfs fetch --include', lfsInc);
-        execGitOrWarn(['lfs', 'fetch', 'origin', '--include', lfsInc], cwd, GIT_LFS_PULL_TIMEOUT_MS, 'lfs fetch');
+        console.log('git lfs pull --include', rel, '(timeout ' + GIT_LFS_PULL_TIMEOUT_MS + 'ms)');
+        execGitOrWarn(['lfs', 'pull', '--include', rel], cwd, GIT_LFS_PULL_TIMEOUT_MS, 'lfs pull');
       } catch (e) {
-        console.warn('git lfs fetch failed:', rel, e.message);
-      }
-      if (fs.existsSync(src) && isLfsPointer(src)) {
-        try {
-          console.log('git lfs checkout', rel);
-          execGitOrWarn(['lfs', 'checkout', lfsInc], cwd, GIT_LFS_PULL_TIMEOUT_MS, 'lfs checkout');
-        } catch (e) {
-          console.warn('git lfs checkout failed:', rel, e.message);
-        }
+        console.warn('git lfs pull failed:', rel, e.message);
       }
     }
   } finally {
