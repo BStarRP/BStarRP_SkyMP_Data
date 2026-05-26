@@ -171,7 +171,7 @@ if (prevManifestPath && fs.existsSync(prevManifestPath)) {
       if (isLfsPointer(fullPath)) {
         throw new Error(
           pathEntry +
-            ': still an LFS pointer on disk. Run git lfs pull for changed paths before build-patch (bracket paths need :(literal) — see scripts/git-pathspec.js).'
+            ': still an LFS pointer on disk. Run node scripts/pull-lfs-for-path-list.js on changed LFS paths before build-patch (pull + checkout smudge).'
         );
       }
       const stat = fs.statSync(fullPath);
