@@ -230,25 +230,10 @@ jobs:
             if [ ${#LFS_ONLY[@]} -eq 0 ]; then
               echo "No changed or new LFS files; no LFS pull needed"
             else
-              COUNT=0
-              ARGS=()
-              for p in "${LFS_ONLY[@]}"; do
-                [ -f "$p" ] || continue
-                ARGS+=(--include "$p")
-                COUNT=$((COUNT + 1))
-                if [ $((COUNT % 50)) -eq 0 ]; then
-                  git lfs pull "${ARGS[@]}"
-                  ARGS=()
-                fi
-              done
-              if [ ${#ARGS[@]} -gt 0 ]; then
-                git lfs pull "${ARGS[@]}"
-              fi
-              echo "Pulled LFS for $COUNT path(s) (changed + new, LFS only):"
-              for p in "${LFS_ONLY[@]}"; do
-                [ -f "$p" ] || continue
-                echo "  - $p"
-              done
+              mkdir -p dist-patch
+              printf '%s\n' "${LFS_ONLY[@]}" > dist-patch/lfs-changed-paths.txt
+              node scripts/pull-lfs-for-path-list.js dist-patch/lfs-changed-paths.txt
+              echo "Pulled LFS for ${#LFS_ONLY[@]} path(s) (changed + new, LFS only; :(literal) for [ ] in paths)"
             fi
           fi
 
@@ -389,12 +374,10 @@ jobs:
           if [ ${#R2_UPLOAD_PATHS[@]} -eq 0 ]; then
             echo "No R2 paths to upload from local (all will be copied from previous)"
           else
-            echo "Pulling LFS for ${#R2_UPLOAD_PATHS[@]} path(s) that will be uploaded to R2 (not copied):"
-            for p in "${R2_UPLOAD_PATHS[@]}"; do
-              [ -z "$p" ] && continue
-              echo "  $p"
-              git lfs pull --include "$p"
-            done
+            echo "Pulling LFS for ${#R2_UPLOAD_PATHS[@]} path(s) that will be uploaded to R2 (batched, not copied):"
+            mkdir -p dist-patch
+            printf '%s\n' "${R2_UPLOAD_PATHS[@]}" > dist-patch/r2-upload-paths.txt
+            node scripts/pull-lfs-for-path-list.js dist-patch/r2-upload-paths.txt
           fi
 
       - name: Upload R2 assets (LFS + oversized)

@@ -13,6 +13,7 @@ const fs = require('fs');
 const path = require('path');
 const toAssetName = require('./to-asset-name');
 const { execFileSync } = require('child_process');
+const { toGitPathspec } = require('./git-pathspec');
 
 const manifestPath = path.join(process.cwd(), 'dist-patch', 'manifest.json');
 const uploadListPath = path.join(process.cwd(), 'dist-patch', 'github-assets-to-upload.txt');
@@ -65,12 +66,23 @@ if (toPull.length === 0) {
 console.log('Pulling LFS for', toPull.length, 'asset(s) in upload list that are still pointers');
 // Per-file: pull (fetch to .git/lfs) then restore from index to trigger smudge and write real content.
 // "git lfs checkout" can leave pointers in place on some versions; "git checkout -- path" re-applies the smudge filter.
-for (const p of toPull) {
+const BATCH = 50;
+for (let i = 0; i < toPull.length; i += BATCH) {
+  const chunk = toPull.slice(i, i + BATCH);
+  const pullArgs = ['lfs', 'pull'];
+  for (const p of chunk) {
+    pullArgs.push('--include', toGitPathspec(p));
+  }
   try {
-    execFileSync('git', ['lfs', 'pull', '--include', p], { stdio: 'pipe', maxBuffer: 50 * 1024 * 1024 });
-    execFileSync('git', ['checkout', 'HEAD', '--', p], { stdio: 'pipe', maxBuffer: 10 * 1024 * 1024 });
+    execFileSync('git', pullArgs, { stdio: 'inherit', maxBuffer: 50 * 1024 * 1024 });
+    for (const p of chunk) {
+      execFileSync('git', ['checkout', 'HEAD', '--', toGitPathspec(p)], {
+        stdio: 'pipe',
+        maxBuffer: 10 * 1024 * 1024
+      });
+    }
   } catch (e) {
-    console.error('git lfs pull / checkout failed for', p, ':', e.message);
+    console.error('git lfs pull / checkout failed (batch', Math.floor(i / BATCH) + 1, '):', e.message);
     process.exit(1);
   }
 }

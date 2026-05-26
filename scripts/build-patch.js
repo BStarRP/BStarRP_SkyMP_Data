@@ -61,6 +61,25 @@ function sha256File(filePath) {
   return crypto.createHash('sha256').update(buf).digest('hex');
 }
 
+const LFS_POINTER_HEADER = 'version https://git-lfs.github.com/spec/v1';
+
+function isLfsPointer(filePath) {
+  try {
+    const st = fs.statSync(filePath);
+    if (st.size === 0) return false;
+    const n = Math.min(st.size, 8192);
+    const buf = Buffer.allocUnsafe(n);
+    const fd = fs.openSync(filePath, 'r');
+    fs.readSync(fd, buf, 0, n, 0);
+    fs.closeSync(fd);
+    let s = buf.toString('utf8');
+    if (s.charCodeAt(0) === 0xfeff) s = s.slice(1);
+    return s.includes(LFS_POINTER_HEADER) && s.includes('oid sha256:');
+  } catch (_) {
+    return false;
+  }
+}
+
 /** Run up to `limit` async tasks at a time. */
 async function runWithLimit(tasks, limit = 8) {
   const results = [];
@@ -148,6 +167,12 @@ if (prevManifestPath && fs.existsSync(prevManifestPath)) {
           }
           return { path: pathEntry, size: prevEntry.size, hash: prevEntry.hash };
         }
+      }
+      if (isLfsPointer(fullPath)) {
+        throw new Error(
+          pathEntry +
+            ': still an LFS pointer on disk. Run git lfs pull for changed paths before build-patch (bracket paths need :(literal) — see scripts/git-pathspec.js).'
+        );
       }
       const stat = fs.statSync(fullPath);
       const hash = sha256File(fullPath);

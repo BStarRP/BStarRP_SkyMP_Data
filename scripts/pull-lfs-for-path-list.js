@@ -6,6 +6,7 @@
 const fs = require('fs');
 const path = require('path');
 const { execFileSync } = require('child_process');
+const { toGitPathspec } = require('./git-pathspec');
 
 const listPath = process.argv[2];
 if (!listPath || !fs.existsSync(listPath)) {
@@ -39,7 +40,7 @@ for (let i = 0; i < lfsPaths.length; i += BATCH) {
   const chunk = lfsPaths.slice(i, i + BATCH);
   const args = ['lfs', 'pull'];
   for (const p of chunk) {
-    args.push('--include', p);
+    args.push('--include', toGitPathspec(p));
   }
   console.log('git lfs pull', chunk.length, 'path(s) (batch', Math.floor(i / BATCH) + 1, ')');
   execFileSync('git', args, { stdio: 'inherit', cwd: process.cwd() });

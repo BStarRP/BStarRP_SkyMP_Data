@@ -48,6 +48,7 @@ const http = require('http');
 const https = require('https');
 const { execFileSync } = require('child_process');
 const toAssetName = require('./to-asset-name');
+const { toGitPathspec } = require('./git-pathspec');
 
 const FORCE_UPLOAD_ALL = /^1|true|yes$/i.test(String(process.env.FORCE_UPLOAD_ALL_SMALL_ASSETS || ''));
 const VERIFY_COPY_DEST = /^1|true|yes$/i.test(String(process.env.R2_VERIFY_COPY_DEST || ''));
@@ -198,12 +199,13 @@ function execGitOrWarn(args, cwd, timeoutMs, label) {
  */
 function materializeFromGit(pathEntry, src) {
   const rel = gitPathFromManifestEntry(pathEntry);
+  const gitSpec = toGitPathspec(rel);
   const cwd = process.cwd();
 
   if (!fs.existsSync(src)) {
     try {
       console.log('Restoring missing file from git:', rel);
-      execGitOrWarn(['checkout', 'HEAD', '--', rel], cwd, GIT_CHECKOUT_TIMEOUT_MS, 'checkout');
+      execGitOrWarn(['checkout', 'HEAD', '--', gitSpec], cwd, GIT_CHECKOUT_TIMEOUT_MS, 'checkout');
     } catch (e) {
       console.warn('git checkout failed:', rel, e.message);
     }
@@ -215,8 +217,8 @@ function materializeFromGit(pathEntry, src) {
 
   if (isLfsTrackedManifestPath(pathEntry) || (fs.existsSync(src) && isLfsPointer(src))) {
     try {
-      console.log('git lfs pull --include', rel, '(timeout ' + GIT_LFS_PULL_TIMEOUT_MS + 'ms)');
-      execGitOrWarn(['lfs', 'pull', '--include', rel], cwd, GIT_LFS_PULL_TIMEOUT_MS, 'lfs pull');
+      console.log('git lfs pull --include', gitSpec, '(timeout ' + GIT_LFS_PULL_TIMEOUT_MS + 'ms)');
+      execGitOrWarn(['lfs', 'pull', '--include', gitSpec], cwd, GIT_LFS_PULL_TIMEOUT_MS, 'lfs pull');
     } catch (e) {
       console.warn('git lfs pull failed:', rel, e.message);
     }
