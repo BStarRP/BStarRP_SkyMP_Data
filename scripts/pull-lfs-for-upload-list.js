@@ -13,11 +13,6 @@ const fs = require('fs');
 const path = require('path');
 const toAssetName = require('./to-asset-name');
 const { execFileSync } = require('child_process');
-const { toGitPathspec } = require('./git-pathspec');
-
-delete process.env.GIT_LFS_SKIP_SMUDGE;
-process.env.GIT_LFS_SKIP_SMUDGE = '0';
-
 const manifestPath = path.join(process.cwd(), 'dist-patch', 'manifest.json');
 const uploadListPath = path.join(process.cwd(), 'dist-patch', 'github-assets-to-upload.txt');
 
@@ -67,35 +62,10 @@ if (toPull.length === 0) {
 }
 
 console.log('Pulling LFS for', toPull.length, 'asset(s) in upload list that are still pointers');
-const BATCH = 50;
-for (let i = 0; i < toPull.length; i += BATCH) {
-  const chunk = toPull.slice(i, i + BATCH);
-  const pullArgs = ['lfs', 'pull'];
-  for (const p of chunk) {
-    pullArgs.push('--include', toGitPathspec(p));
-  }
-  try {
-    execFileSync('git', pullArgs, { stdio: 'inherit', maxBuffer: 50 * 1024 * 1024 });
-  } catch (e) {
-    console.error('git lfs pull failed (batch', Math.floor(i / BATCH) + 1, '):', e.message);
-    process.exit(1);
-  }
-}
-const stillPointers = toPull.filter((p) => {
-  const full = path.join(process.cwd(), p.replace(/\//g, path.sep));
-  return fs.existsSync(full) && isLfsPointer(full);
+const listPath = path.join(process.cwd(), 'dist-patch', 'lfs-upload-pointer-paths.txt');
+fs.mkdirSync(path.dirname(listPath), { recursive: true });
+fs.writeFileSync(listPath, toPull.join('\n') + '\n', 'utf8');
+execFileSync('node', ['scripts/pull-lfs-for-path-list.js', listPath], {
+  stdio: 'inherit',
+  cwd: process.cwd()
 });
-if (stillPointers.length > 0) {
-  for (let i = 0; i < stillPointers.length; i += BATCH) {
-    const chunk = stillPointers.slice(i, i + BATCH);
-    const checkoutArgs = ['lfs', 'checkout'];
-    for (const p of chunk) checkoutArgs.push(toGitPathspec(p));
-    try {
-      execFileSync('git', checkoutArgs, { stdio: 'inherit', maxBuffer: 50 * 1024 * 1024 });
-    } catch (e) {
-      console.error('git lfs checkout failed (batch', Math.floor(i / BATCH) + 1, '):', e.message);
-      process.exit(1);
-    }
-  }
-}
-console.log('Pulled and smudged', toPull.length, 'path(s)');

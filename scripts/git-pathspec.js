@@ -1,6 +1,6 @@
 /**
  * Git pathspec magic for paths that must match literally.
- * Without :(literal), brackets in filenames (e.g. BasketBraidedBread[HF].nif) are treated as globs.
+ * Without :(literal), brackets/spaces in paths (e.g. "9 divines/", "[HF]") can break --include.
  */
 
 function toGitPathspec(rel) {
@@ -9,4 +9,9 @@ function toGitPathspec(rel) {
   return p;
 }
 
-module.exports = { toGitPathspec };
+/** Always literal — use for git lfs fetch/pull --include so every path matches exactly. */
+function toGitLfsInclude(rel) {
+  return `:(literal)${String(rel).replace(/\\/g, '/')}`;
+}
+
+module.exports = { toGitPathspec, toGitLfsInclude };
