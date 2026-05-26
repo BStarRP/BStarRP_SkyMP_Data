@@ -208,32 +208,18 @@ jobs:
           else
             PREV="${{ steps.version.outputs.previous_tag }}"
             echo "Pulling LFS only for files we need (changed or new, LFS-tracked only) — unchanged files are copied from previous, no pull."
-            mapfile -t CHANGED < <(git diff --name-only "$PREV" HEAD -- Data/ 2>/dev/null || true)
-            mapfile -t NEW < <(node scripts/list-new-lfs-paths.js prev-manifest.json 2>/dev/null || true)
-            ALL=("${CHANGED[@]}" "${NEW[@]}")
-            ALL=($(printf '%s\n' "${ALL[@]}" | sort -u))
-            # Only pull LFS for paths that are actually LFS-tracked (save storage/bandwidth)
-            mapfile -t LFS_ONLY < <(node -e "
-              const fs=require('fs');
-              const path=require('path');
-              const paths=process.argv.slice(2).filter(Boolean);
-              if (paths.length===0) process.exit(0);
-              const ga=fs.readFileSync('.gitattributes','utf8');
-              const exts=new Set();
-              ga.split(/\n/).forEach(l=>{
-                if(!l.includes('filter=lfs')) return;
-                const m=l.split(/\s+/)[0];
-                if(m&&m.startsWith('*.')) exts.add('.'+m.slice(2).toLowerCase());
-              });
-              paths.filter(p=>exts.has(path.extname(p).toLowerCase())).forEach(p=>console.log(p));
-            " "${ALL[@]}" 2>/dev/null || true)
-            if [ ${#LFS_ONLY[@]} -eq 0 ]; then
+            mkdir -p dist-patch
+            {
+              git diff --name-only "$PREV" HEAD -- Data/ 2>/dev/null || true
+              node scripts/list-new-lfs-paths.js prev-manifest.json 2>/dev/null || true
+            } | sort -u > dist-patch/changed-paths-raw.txt
+            node scripts/filter-lfs-paths.js dist-patch/changed-paths-raw.txt > dist-patch/lfs-changed-paths.txt
+            LFS_COUNT=$(wc -l < dist-patch/lfs-changed-paths.txt | tr -d ' ')
+            if [ -z "$LFS_COUNT" ] || [ "$LFS_COUNT" -eq 0 ]; then
               echo "No changed or new LFS files; no LFS pull needed"
             else
-              mkdir -p dist-patch
-              printf '%s\n' "${LFS_ONLY[@]}" > dist-patch/lfs-changed-paths.txt
               node scripts/pull-lfs-for-path-list.js dist-patch/lfs-changed-paths.txt
-              echo "Pulled LFS for ${#LFS_ONLY[@]} path(s) (changed + new, LFS only; :(literal) for [ ] in paths)"
+              echo "Pulled LFS for $LFS_COUNT path(s) (changed + new; paths with spaces preserved)"
             fi
           fi
 
