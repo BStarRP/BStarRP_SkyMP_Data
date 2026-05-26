@@ -87,9 +87,9 @@ const tracked = new Set(
 
 const lines = fs.readFileSync(listPath, 'utf8').split(/\n/).map((l) => l.trim()).filter(Boolean);
 const exts = getLfsExtensions();
-const lfsPaths = lines.filter((p) => exts.has(path.extname(p).toLowerCase()) && tracked.has(p));
+const lfsPaths = lines.filter((p) => exts.includes(path.extname(p).toLowerCase()) && tracked.has(p));
 
-const skipped = lines.filter((p) => exts.has(path.extname(p).toLowerCase()) && !tracked.has(p));
+const skipped = lines.filter((p) => exts.includes(path.extname(p).toLowerCase()) && !tracked.has(p));
 if (skipped.length > 0) {
   console.warn('Skipping', skipped.length, 'path(s) not in git index, e.g.:');
   skipped.slice(0, 5).forEach((p) => console.warn('  ', p));
