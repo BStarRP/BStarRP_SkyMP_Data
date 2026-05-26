@@ -3282,7 +3282,7 @@ export declare class TESModPlatform extends PapyrusObject {
   static createNpc(): ActorBase | null
   static evaluateLeveledNpc(commaSeparatedListOfIds: string): ActorBase | null
   static getNthVtableElement(pointer: Form | null, pointerOffset: number, elementIndex: number): number
-  static getSkinColor(base: ActorBase | null): ColorForm | null
+  static getBodyTintColor(base: ActorBase | null): ColorForm | null
   static isPlayerRunningEnabled(): boolean
   static moveRefrToPosition(refr: ObjectReference | null, cell: Cell | null, world: WorldSpace | null, posX: number, posY: number, posZ: number, rotX: number, rotY: number, rotZ: number): void
   static pushTintMask(targetActor: Actor | null, type: number, argb: number, texturePath: string): void
@@ -3291,10 +3291,10 @@ export declare class TESModPlatform extends PapyrusObject {
   static resizeHeadpartsArray(npc: ActorBase | null, newSize: number): void
   static resizeTintsArray(newSize: number): void
   static setFormIdUnsafe(Form: Form | null, newId: number): void
-  static setNpcHairColor(npc: ActorBase | null, hairColor: number): void
-  static setNpcRace(npc: ActorBase | null, race: Race | null): void
-  static setNpcSex(npc: ActorBase | null, sex: number): void
-  static setNpcSkinColor(npc: ActorBase | null, skinColor: number): void
+  static setHairColor(npc: ActorBase | null, hairColor: number): void
+  static setRace(npc: ActorBase | null, race: Race | null): void
+  static setSex(npc: ActorBase | null, sex: number): void
+  static setBodyTintColor(npc: ActorBase | null, skinColor: number): void
   static setWeaponDrawnMode(actor: Actor | null, mode: number): void
   static updateEquipment(actor: Actor | null, item: Form | null, leftHand: boolean): void
   static putRiderOnMount(rider: Actor | null, mount: Actor | null): boolean
