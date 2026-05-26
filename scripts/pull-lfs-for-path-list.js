@@ -11,6 +11,7 @@
 const fs = require('fs');
 const path = require('path');
 const { execFileSync } = require('child_process');
+const { toGitPathspec } = require('./git-pathspec');
 
 delete process.env.GIT_LFS_SKIP_SMUDGE;
 process.env.GIT_LFS_SKIP_SMUDGE = '0';
@@ -55,7 +56,22 @@ function checkoutBatch(chunk, batchNum) {
   runGit(args);
 }
 
+function hasBracketPath(p) {
+  return /[[\]]/.test(gitPath(p));
+}
+
+/** git-lfs treats [ ] as globs in --include/checkout; use git smudge after fetch instead. */
+function smudgeViaGitCheckout(p) {
+  const spec = toGitPathspec(gitPath(p));
+  console.log('git checkout HEAD --', spec);
+  runGit(['checkout', 'HEAD', '--', spec]);
+}
+
 function pullOnePath(p) {
+  if (hasBracketPath(p)) {
+    smudgeViaGitCheckout(p);
+    return;
+  }
   const rel = gitPath(p);
   console.log('git lfs pull --include', rel);
   runGit(['lfs', 'pull', '--include', rel]);
@@ -104,9 +120,23 @@ const head = execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).tr
 console.log('Fetching all LFS objects for', head, 'from', REMOTE, '(then checkout', lfsPaths.length, 'path(s))');
 runGit(['lfs', 'fetch', REMOTE, head]);
 
-for (let i = 0; i < lfsPaths.length; i += BATCH) {
-  const chunk = lfsPaths.slice(i, i + BATCH);
+const lfsCheckoutPaths = lfsPaths.filter((p) => !hasBracketPath(p));
+const gitCheckoutPaths = lfsPaths.filter((p) => hasBracketPath(p));
+
+for (let i = 0; i < lfsCheckoutPaths.length; i += BATCH) {
+  const chunk = lfsCheckoutPaths.slice(i, i + BATCH);
   checkoutBatch(chunk, Math.floor(i / BATCH) + 1);
+}
+
+if (gitCheckoutPaths.length > 0) {
+  console.log('git checkout (literal pathspec) for', gitCheckoutPaths.length, 'path(s) with [ ] in name');
+  for (let i = 0; i < gitCheckoutPaths.length; i += BATCH) {
+    const chunk = gitCheckoutPaths.slice(i, i + BATCH);
+    const args = ['checkout', 'HEAD', '--'];
+    for (const p of chunk) args.push(toGitPathspec(gitPath(p)));
+    console.log('git checkout', chunk.length, 'bracket path(s) (batch', Math.floor(i / BATCH) + 1, ')');
+    runGit(args);
+  }
 }
 
 let stillPointers = lfsPaths.filter((p) => {
@@ -115,7 +145,7 @@ let stillPointers = lfsPaths.filter((p) => {
 });
 
 if (stillPointers.length > 0) {
-  console.log('Retrying', stillPointers.length, 'path(s) with git lfs pull --include (per path)');
+  console.log('Retrying', stillPointers.length, 'path(s) (git checkout for [ ], else lfs pull)');
   const retry = stillPointers;
   stillPointers = [];
   for (let i = 0; i < retry.length; i++) {

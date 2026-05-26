@@ -219,11 +219,20 @@ function materializeFromGit(pathEntry, src) {
     }
 
     if (isLfsTrackedManifestPath(pathEntry) || (fs.existsSync(src) && isLfsPointer(src))) {
-      try {
-        console.log('git lfs pull --include', rel, '(timeout ' + GIT_LFS_PULL_TIMEOUT_MS + 'ms)');
-        execGitOrWarn(['lfs', 'pull', '--include', rel], cwd, GIT_LFS_PULL_TIMEOUT_MS, 'lfs pull');
-      } catch (e) {
-        console.warn('git lfs pull failed:', rel, e.message);
+      if (/[[\]]/.test(rel)) {
+        try {
+          console.log('git checkout HEAD --', gitSpec, '(bracket path; timeout ' + GIT_LFS_PULL_TIMEOUT_MS + 'ms)');
+          execGitOrWarn(['checkout', 'HEAD', '--', gitSpec], cwd, GIT_LFS_PULL_TIMEOUT_MS, 'checkout');
+        } catch (e) {
+          console.warn('git checkout failed:', rel, e.message);
+        }
+      } else {
+        try {
+          console.log('git lfs pull --include', rel, '(timeout ' + GIT_LFS_PULL_TIMEOUT_MS + 'ms)');
+          execGitOrWarn(['lfs', 'pull', '--include', rel], cwd, GIT_LFS_PULL_TIMEOUT_MS, 'lfs pull');
+        } catch (e) {
+          console.warn('git lfs pull failed:', rel, e.message);
+        }
       }
     }
   } finally {
