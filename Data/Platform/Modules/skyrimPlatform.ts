@@ -239,6 +239,7 @@ export interface HitEvent {
   isSneakAttack: boolean
   isBashAttack: boolean
   isHitBlocked: boolean
+  isDualCasting: boolean
 }
 
 export interface EquipEvent {
@@ -386,6 +387,8 @@ export interface PlayerBowShotEvent {
   ammo: Ammo
   power: number
   isSunGazing: boolean
+  aimAngle: number
+  aimHeading: number
 }
 
 export interface FastTravelEnd {
@@ -1630,6 +1633,8 @@ export interface ActorAnimationVariables {
 export declare function setInventory(formId: number, inventory: Inventory): void;
 
 export declare function castSpellImmediate(actorCasterFormId: number, castingSource: SpellType, formIdSpell: number, formIdTarget: number, aimAngle: number, aimHeading: number, animationVariables: ActorAnimationVariables): void;
+export declare function launchBowProjectile(actorFormId: number, weaponFormId: number, ammoFormId: number, aimAngle: number, aimHeading: number): void;
+export declare function getActorAim(actorFormId: number): { aimAngle: number, aimHeading: number } | undefined;
 export declare function interruptCast(actorCasterFormId: number, castingSource: SpellType, animationVariables: ActorAnimationVariables): void;
 export declare function getAnimationVariablesFromActor(actorFormId: number): ActorAnimationVariables;
 export declare function applyAnimationVariablesToActor(actorFormId: number, animationVariables: ActorAnimationVariables): boolean;

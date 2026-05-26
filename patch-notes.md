@@ -1,17 +1,27 @@
 # Patch notes
 
 **Summary**
-Working on smashing down more crashes and issues.
+Major refactors on systems, full damage formulas close to vanilla + racial abilitys and perks!  Alot here!
 
 ## Changes
-- Fixed a server side crash that caused the server to shut down.
-- Fixed an issue with npc's dieing and not syncing death state.
-- Fixed crash when looting corpses.
-- Updated starting zone to allow you to change skills.
-- Improved optimizations for going through doors.
-- Improved optimizations for NPC/Objects.
-- Added stamina drain when holding shield.
-- Added stamina drain when drawing a bow.
-- Added stmaina when aimin crossbow.
-- Added a quest service to set quest states.
-- Rebalanced stamina for all the weapons.
+- Fixed an issue with finding nearest temple on death.
+- Fixed death state for npcs.
+- Fixed container opening on npc corpses.
+- Fixed temper failure chance.
+- Fixed racial perks & starting spells.
+- Improved cleaning up actors (FPS FIX)
+- Improved standing still movement sync.
+- Improved positioning for arrow and spell projectiles
+- Added hit position for arrows landing and able to be looted or picked up
+- Added torches to consumables.
+- Added conjuration/illusion spell syncing.
+- Added full sync for spellFX for hit/buffs/debuffs.
+- Added poison/disease with dot effects.
+- Added full npc damageformulas and stats (HP, MANA, STAMINA)
+- Added full perk abilities and syncing.
+- Added spell learning by school tier.
+- Added full resistance checks to damage formulas.
+- Added mod support for custom perks and racials.
+- Added head look tracking and replication (See were your looking)
+- Added hunger and thirst bar + new hud for stats.
+- Added npc voice sync.
