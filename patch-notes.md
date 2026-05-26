@@ -1,8 +1,8 @@
 # Patch notes
 
 **Summary**
-Mostly debug client, trying to isolate some issues
+Mostly debug client, trying to isolate some issues.
 
 ## Changes
 - Improved npc spawning
-- Added debugging.
+- Reworked how framework gets actors.
