@@ -219,12 +219,19 @@ function materializeFromGit(pathEntry, src) {
     }
 
     if (isLfsTrackedManifestPath(pathEntry) || (fs.existsSync(src) && isLfsPointer(src))) {
-      if (/[[\]]/.test(rel)) {
+      if (/[[\]]/.test(rel) && fs.existsSync(src) && isLfsPointer(src)) {
         try {
-          console.log('git checkout HEAD --', gitSpec, '(bracket path; timeout ' + GIT_LFS_PULL_TIMEOUT_MS + 'ms)');
-          execGitOrWarn(['checkout', 'HEAD', '--', gitSpec], cwd, GIT_LFS_PULL_TIMEOUT_MS, 'checkout');
+          console.log('git lfs smudge (bracket path):', rel);
+          const ptr = fs.readFileSync(src, 'utf8');
+          const out = execFileSync('git', ['lfs', 'smudge'], {
+            input: ptr,
+            cwd,
+            maxBuffer: 512 * 1024 * 1024,
+            timeout: GIT_LFS_PULL_TIMEOUT_MS
+          });
+          fs.writeFileSync(src, out);
         } catch (e) {
-          console.warn('git checkout failed:', rel, e.message);
+          console.warn('git lfs smudge failed:', rel, e.message);
         }
       } else {
         try {

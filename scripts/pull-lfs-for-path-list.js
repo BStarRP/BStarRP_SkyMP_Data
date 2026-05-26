@@ -11,7 +11,6 @@
 const fs = require('fs');
 const path = require('path');
 const { execFileSync } = require('child_process');
-const { toGitPathspec } = require('./git-pathspec');
 
 delete process.env.GIT_LFS_SKIP_SMUDGE;
 process.env.GIT_LFS_SKIP_SMUDGE = '0';
@@ -60,19 +59,26 @@ function hasBracketPath(p) {
   return /[[\]]/.test(gitPath(p));
 }
 
-/** git-lfs treats [ ] as globs in --include/checkout; use git smudge after fetch instead. */
-function smudgeViaGitCheckout(p) {
-  const spec = toGitPathspec(gitPath(p));
-  console.log('git checkout HEAD --', spec);
-  runGit(['checkout', 'HEAD', '--', spec]);
+/** Write real LFS bytes from pointer file (works for paths where lfs checkout/--include break on [ ]). */
+function smudgePointerFile(repoPath) {
+  const full = path.join(process.cwd(), repoPath);
+  if (!fs.existsSync(full) || !isLfsPointer(full)) return;
+  const ptr = fs.readFileSync(full, 'utf8');
+  const out = execFileSync('git', ['lfs', 'smudge'], {
+    input: ptr,
+    cwd: process.cwd(),
+    maxBuffer: 512 * 1024 * 1024
+  });
+  fs.writeFileSync(full, out);
 }
 
 function pullOnePath(p) {
+  const rel = gitPath(p);
   if (hasBracketPath(p)) {
-    smudgeViaGitCheckout(p);
+    console.log('git lfs smudge (pointer stdin)', rel);
+    smudgePointerFile(p);
     return;
   }
-  const rel = gitPath(p);
   console.log('git lfs pull --include', rel);
   runGit(['lfs', 'pull', '--include', rel]);
 }
@@ -129,13 +135,9 @@ for (let i = 0; i < lfsCheckoutPaths.length; i += BATCH) {
 }
 
 if (gitCheckoutPaths.length > 0) {
-  console.log('git checkout (literal pathspec) for', gitCheckoutPaths.length, 'path(s) with [ ] in name');
-  for (let i = 0; i < gitCheckoutPaths.length; i += BATCH) {
-    const chunk = gitCheckoutPaths.slice(i, i + BATCH);
-    const args = ['checkout', 'HEAD', '--'];
-    for (const p of chunk) args.push(toGitPathspec(gitPath(p)));
-    console.log('git checkout', chunk.length, 'bracket path(s) (batch', Math.floor(i / BATCH) + 1, ')');
-    runGit(args);
+  console.log('git lfs smudge for', gitCheckoutPaths.length, 'path(s) with [ ] in name');
+  for (const p of gitCheckoutPaths) {
+    smudgePointerFile(p);
   }
 }
 
@@ -145,15 +147,20 @@ let stillPointers = lfsPaths.filter((p) => {
 });
 
 if (stillPointers.length > 0) {
-  console.log('Retrying', stillPointers.length, 'path(s) (git checkout for [ ], else lfs pull)');
+  console.log('Retrying', stillPointers.length, 'path(s) (smudge or lfs pull)');
   const retry = stillPointers;
   stillPointers = [];
   for (let i = 0; i < retry.length; i++) {
     const p = retry[i];
     try {
-      pullOnePath(p);
+      if (hasBracketPath(p)) {
+        console.log('git lfs smudge (retry)', gitPath(p));
+        smudgePointerFile(p);
+      } else {
+        pullOnePath(p);
+      }
     } catch (e) {
-      console.warn('pull failed for', p, ':', e.message || e);
+      console.warn('Retry failed for', p, ':', e.message || e);
       stillPointers.push(p);
       continue;
     }
