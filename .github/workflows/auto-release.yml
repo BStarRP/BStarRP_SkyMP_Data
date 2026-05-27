@@ -430,12 +430,35 @@ jobs:
         run: |
           TAG="${{ steps.version.outputs.tag }}"
           VERSION="${{ steps.version.outputs.version }}"
+          MAX_ATTEMPTS=5
+
+          run_release_api() {
+            local attempt=1
+            while [ "$attempt" -le "$MAX_ATTEMPTS" ]; do
+              if "$@"; then
+                return 0
+              fi
+              if gh release view "$TAG" &>/dev/null; then
+                echo "Release $TAG exists after API error; continuing with edit/update"
+                return 0
+              fi
+              if [ "$attempt" -eq "$MAX_ATTEMPTS" ]; then
+                echo "GitHub release API failed after $MAX_ATTEMPTS attempts (HTTP 5xx is usually transient — re-run workflow)"
+                return 1
+              fi
+              wait=$((attempt * 30))
+              echo "GitHub release API failed (attempt $attempt/$MAX_ATTEMPTS); retrying in ${wait}s..."
+              sleep "$wait"
+              attempt=$((attempt + 1))
+            done
+          }
+
           if gh release view "$TAG" &>/dev/null; then
             echo "Release $TAG already exists; marking as latest and updating notes (use this to fix out-of-wack versions or re-upload assets)"
-            gh release edit "$TAG" --latest --notes-file release-notes.md --target "${{ github.sha }}"
+            run_release_api gh release edit "$TAG" --latest --notes-file release-notes.md --target "${{ github.sha }}"
           else
             echo "Creating release: $TAG (Patch $VERSION) at commit ${{ github.sha }}"
-            gh release create "$TAG" \
+            run_release_api gh release create "$TAG" \
               --target "${{ github.sha }}" \
               --title "Patch $VERSION" \
               --notes-file release-notes.md \
