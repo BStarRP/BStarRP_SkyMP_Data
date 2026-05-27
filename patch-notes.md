@@ -1,7 +1,8 @@
 # Patch notes
 
 **Summary**
-Regression happened / fine tuning
+Doing more testing and wiring in features.
 
 ## Changes
-- Improve spawn/load bootstrap & ESL handling!
+- Improve spawn/load and opening racemenu.
+- Improved stagger effect & adde stagger chance server side.
