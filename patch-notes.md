@@ -7,3 +7,4 @@ Regression happened / fine tuning
 - Fixed players not seeing each other.
 - Fixed racemenu not clearing.
 - Fixed death state with npcs.
+- Fixed an issue with loading.
