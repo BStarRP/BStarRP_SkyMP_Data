@@ -1,9 +1,8 @@
 # Patch notes
 
 **Summary**
-A fixes for this run from beta list.
+Just fishing.
 
 ## Changes
-- Fixed containers and loot tables cloning
-- Using weapons or armor above your tier no has 90% effectivness
-- Appearance race fix.
+- Fixed issues with main rework.
+- Added fishing! Skill, xp, and rewards!
