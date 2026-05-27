@@ -4,4 +4,4 @@
 Doing more testing.
 
 ## Changes
-- Fixed another regreshing issue.
+- Fixed more hot paths.
