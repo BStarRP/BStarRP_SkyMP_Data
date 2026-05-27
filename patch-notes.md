@@ -1,7 +1,9 @@
 # Patch notes
 
 **Summary**
-Debug Run
+Regression happened / fine tuning
 
 ## Changes
-- Debug
+- Fixed players not seeing each other.
+- Fixed racemenu not clearing.
+- Fixed death state with npcs.
