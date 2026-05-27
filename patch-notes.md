@@ -1,8 +1,7 @@
 # Patch notes
 
 **Summary**
-Just fishing.
+Debug Run
 
 ## Changes
-- Fixed issues with main rework.
-- Added fishing! Skill, xp, and rewards!
+- Debug
