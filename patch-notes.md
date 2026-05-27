@@ -4,4 +4,4 @@
 Doing more testing.
 
 ## Changes
-- Fixed more hot paths.
+- Fixed some more issues with seeing other players.
