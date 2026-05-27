@@ -1,8 +1,7 @@
 # Patch notes
 
 **Summary**
-Doing more testing and wiring in features.
+Doing more testing.
 
 ## Changes
-- Improve spawn/load and opening racemenu.
-- Improved stagger effect & adde stagger chance server side.
+- Fixed another regreshing issue.
