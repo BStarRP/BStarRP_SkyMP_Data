@@ -4,4 +4,4 @@
 Doing more testing.
 
 ## Changes
-- Fixed some more issues with seeing other players.
+- Fixed applying appearance on local actor!
