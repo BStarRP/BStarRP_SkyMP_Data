@@ -1,7 +1,7 @@
 # Patch notes
 
 **Summary**
-Doing more testing.
+Doing more testing. I need to setup a dev server =P
 
 ## Changes
-- Fixed applying appearance on local actor!
+- Fixed several issues.
