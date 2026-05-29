@@ -1,7 +1,8 @@
 # Patch notes
 
 **Summary**
-Doing more testing!!
+This update fix's spawning issues and adds major perforamcne fixes.
 
 ## Changes
-- Fixed refs from spawning.
+- Improved spawning of npc method.
+- Improved performance of spawning npcs.
