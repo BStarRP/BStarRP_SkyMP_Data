@@ -1,7 +1,11 @@
 # Patch notes
 
 **Summary**
-This update fix's spawning issues and adds major perforamcne fixes.
+Everything is playable again!
 
 ## Changes
-- Fixed issue with spawn base id's.
+- Fixed Apprentice order before Adept.
+- Fixed issue with creating new character crash.
+- Fixed issue not being able to open settings menu.
+- Improved npc spawning.
+- Cleaned up logging!
