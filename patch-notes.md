@@ -4,5 +4,6 @@
 More bugfixes and improvements.
 
 ## Changes
-- Fixed issue with chat window not selecting command properly.
-- More improvements to player equipment and appearance.
+- Fixed issue with other spawn loop.
+- Fixed issue with appearance applying refreshes.
+- Added improved prep code for inventory rework!
