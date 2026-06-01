@@ -1,11 +1,12 @@
 # Patch notes
 
 **Summary**
-Everything is playable again!
+Working through alot of the bugs
 
 ## Changes
-- Fixed Apprentice order before Adept.
-- Fixed issue with creating new character crash.
-- Fixed issue not being able to open settings menu.
-- Improved npc spawning.
-- Cleaned up logging!
+- Fixed Issue with inventory not showing equipment
+- Fixed (mostly) with equipment showing on npc's.
+- Fixed looting containers.
+- Fixed weapon calculations requiring smithing skill???
+- Synced all the skill damage info to the inventory stats. (its not exact but close)
+- Rebalanced combat numbers for weapons.
