@@ -4,4 +4,4 @@
 Small fixes to test.
 
 ## Changes
-- Fixed error when appearance was being applied to npc's
+- Fixed issue with horse checks causing errors.
