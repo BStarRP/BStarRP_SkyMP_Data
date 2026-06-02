@@ -4,4 +4,4 @@
 More bugfixes and improvements.
 
 ## Changes
-- Another login spawn fix.
+- Fixed appearance issues.
