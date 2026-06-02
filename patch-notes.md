@@ -4,4 +4,4 @@
 More bugfixes and improvements.
 
 ## Changes
-- Refactor remote PC appearance and browser handling
+- Server-authority host refactor, add stream buffers.
