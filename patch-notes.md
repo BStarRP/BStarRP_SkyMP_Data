@@ -4,4 +4,4 @@
 More bugfixes and improvements.
 
 ## Changes
-- Skip MP player records; support NPC→PC upgrade
+- Refactor remote PC appearance and browser handling
