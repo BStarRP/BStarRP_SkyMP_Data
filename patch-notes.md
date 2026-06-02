@@ -4,6 +4,5 @@
 More bugfixes and improvements.
 
 ## Changes
-- Fixed issue with other spawn loop.
-- Fixed issue with appearance applying refreshes.
-- Added improved prep code for inventory rework!
+- Fixed not spawning to start area.
+- Fixed login spawning.
