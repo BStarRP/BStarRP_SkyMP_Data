@@ -4,4 +4,6 @@
 More bugfixes and improvements.
 
 ## Changes
-- Fixed appearance issues.
+- Improve worn equipment sync
+- Improve host requeue
+- Prep for inventory rework
