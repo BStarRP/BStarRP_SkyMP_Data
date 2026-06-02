@@ -4,5 +4,4 @@
 More bugfixes and improvements.
 
 ## Changes
-- Fixed not spawning to start area.
-- Fixed login spawning.
+- Another login spawn fix.
