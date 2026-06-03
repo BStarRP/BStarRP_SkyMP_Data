@@ -4,4 +4,4 @@
 Another test Client!
 
 ## Changes
-- Track pending bag deltas & native-ref metrics
+- Inventory drop handling, bag delta & worn sync
