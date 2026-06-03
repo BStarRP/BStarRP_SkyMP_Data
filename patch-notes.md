@@ -4,4 +4,4 @@
 Another test Client!
 
 ## Changes
-- Big refactor appearance/inventory.
+- Track pending drops and improve equipment sync
