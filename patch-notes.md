@@ -1,7 +1,8 @@
 # Patch notes
 
 **Summary**
-More bugfixes and improvements.
+First half of refactor test!
 
 ## Changes
-- Server-authority host refactor, add stream buffers.
+- Refactor client imports 
+- Refactor inventory
