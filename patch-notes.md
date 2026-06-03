@@ -4,5 +4,4 @@
 Another test Client!
 
 ## Changes
-- Add equipment stability guard
-- Refactor appearance
+- Big refactor appearance/inventory.
