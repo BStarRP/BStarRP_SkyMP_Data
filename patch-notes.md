@@ -4,4 +4,5 @@
 Another test Client!
 
 ## Changes
-- Track pending drops and improve equipment sync
+- Fixed internal helpers for native refs
+- Fixed dropping items not getting counted by server.
