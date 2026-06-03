@@ -4,4 +4,4 @@
 Another test Client!
 
 ## Changes
-- Inventory drop handling, bag delta & worn sync
+- Improve drop, host and appearance handling!
