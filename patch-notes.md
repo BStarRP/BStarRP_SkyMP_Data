@@ -1,8 +1,8 @@
 # Patch notes
 
 **Summary**
-First half of refactor test!
+Another test Client!
 
 ## Changes
-- Refactor client imports 
-- Refactor inventory
+- Add equipment stability guard
+- Refactor appearance
