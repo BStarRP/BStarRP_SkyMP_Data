@@ -4,5 +4,4 @@
 Another test Client!
 
 ## Changes
-- Cache spawn-base decisions
-- Register hosted locals
+- Enhance FormView logging and spawn handling
