@@ -4,5 +4,5 @@
 Another test Client!
 
 ## Changes
-- Track local hosted IDs
-- Improve spawn appearance
+- Cache spawn-base decisions
+- Register hosted locals
