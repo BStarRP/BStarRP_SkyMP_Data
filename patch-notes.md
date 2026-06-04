@@ -4,4 +4,4 @@
 Another test Client!
 
 ## Changes
-- Improve drop, host and appearance handling!
+- Cleanup local native drops & remove native extras!
