@@ -1,8 +1,9 @@
 # Patch notes
 
 **Summary**
-Another test Client!!
+Another test client!
 
 ## Changes
-- Fix add item command
-- Fix player base ids
+- Fix duplicate drop issues
+- Fix picking up of items
+- Fix player spawn bases
