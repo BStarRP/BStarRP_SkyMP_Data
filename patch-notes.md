@@ -4,5 +4,5 @@
 Another test Client!!
 
 ## Changes
-- Fix appearance application when logging in
-- Fix issue with players and npc's registering in wrong world
+- Fix add item command
+- Fix player base ids
