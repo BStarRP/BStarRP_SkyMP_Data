@@ -4,5 +4,4 @@
 Another test client!
 
 ## Changes
-- Dynamic object spawn
-- Fixed appearance cache
+- Fixed Pre-spawn remote PC bases and materialize inventory
