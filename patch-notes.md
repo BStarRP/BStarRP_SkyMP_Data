@@ -4,4 +4,5 @@
 Another test Client!
 
 ## Changes
-- Fix issue with players not spawning for other players.
+- Fix weight slider not syncing.
+- Fix player spawn appearance.
