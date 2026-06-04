@@ -4,4 +4,5 @@
 Another test Client!
 
 ## Changes
-- Cleanup local native drops & remove native extras!
+- Track local hosted IDs
+- Improve spawn appearance
