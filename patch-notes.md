@@ -4,5 +4,5 @@
 Another test Client!
 
 ## Changes
-- Fix weight slider not syncing.
-- Fix player spawn appearance.
+- Fix appearance application when logging in
+- Fix issue with players and npc's registering in wrong world
