@@ -1,7 +1,7 @@
 # Patch notes
 
 **Summary**
-Another test Client!
+Another test Client!!
 
 ## Changes
 - Fix appearance application when logging in
