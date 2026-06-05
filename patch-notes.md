@@ -1,7 +1,7 @@
 # Patch notes
 
 **Summary**
-Another test client!
+Another test client!!
 
 ## Changes
 - Refactor drop handling.
