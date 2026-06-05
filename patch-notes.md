@@ -4,4 +4,5 @@
 Another test client!
 
 ## Changes
-- Fixed Pre-spawn remote PC bases and materialize inventory
+- Added targeted non-worn inventory
+- Added extensive debug logging
