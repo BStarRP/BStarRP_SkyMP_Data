@@ -4,4 +4,5 @@
 Another test client!
 
 ## Changes
-- Fixed issue with picking up and dropping items
+- Refactor drop handling.
+- Appearance logging.
