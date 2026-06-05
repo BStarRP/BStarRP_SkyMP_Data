@@ -4,5 +4,5 @@
 Another test client!
 
 ## Changes
-- Added targeted non-worn inventory
-- Added extensive debug logging
+- Fixed item placement
+- Fixed lag from npc spawns
