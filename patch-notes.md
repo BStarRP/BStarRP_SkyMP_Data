@@ -4,5 +4,4 @@
 Another test client!
 
 ## Changes
-- Fixed item placement
-- Fixed lag from npc spawns
+- Fixed issue with picking up and dropping items
