@@ -1,8 +1,9 @@
 # Patch notes
 
 **Summary**
-More debug stuff..
+Improvments to appearance issues
 
 ## Changes
-- Debugging for appearance.
-- Impvored animation sync when moving slowly
+- Fixed player appearance (test)
+- Fixed issue with masks/capes not staying equipped
+- Fixed issue with weapon draw not working
