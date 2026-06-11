@@ -1,7 +1,7 @@
 # Patch notes
 
 **Summary**
-More debug stuff.
+More debug stuff..
 
 ## Changes
 - Debugging for appearance.
