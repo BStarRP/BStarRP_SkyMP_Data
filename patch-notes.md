@@ -1,8 +1,14 @@
 # Patch notes
 
 **Summary**
-Another test client!!
+Stable client for testing!
 
 ## Changes
-- Refactor drop handling.
-- Appearance logging.
+- Fixed spawning system
+- Fixed fps loss getting away from town
+- Fixed equipment loading on npc's
+- Fixed looting npc's
+- Fixed issue with npc's health not syncing
+- Added active buff bar to hud
+- Updated dropping items to have physics
+- Improved inventory systems
