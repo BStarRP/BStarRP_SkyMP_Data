@@ -1,8 +1,8 @@
 # Patch notes
 
 **Summary**
-Follow up for stable client!
+Test fixes for player appearance.
 
 ## Changes
-- Fixed issues with remote player appearance
-- Fixed issues with remote hosting other npc's animations not appearing
+- Debugging for appearance.
+- Impvored animation sync when moving slowly
