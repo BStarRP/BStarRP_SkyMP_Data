@@ -1,7 +1,7 @@
 # Patch notes
 
 **Summary**
-Test fixes for player appearance.
+More debug stuff.
 
 ## Changes
 - Debugging for appearance.
