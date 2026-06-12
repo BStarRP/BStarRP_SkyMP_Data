@@ -1,7 +1,8 @@
 # Patch notes
 
 **Summary**
-Diagnostics run only!!
+Test run only!!
 
 ## Changes
-- Added diagnostics
+- Fix weapon draw (hopefuly)
+- Fix female loging issue
