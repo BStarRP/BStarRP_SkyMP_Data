@@ -4,5 +4,5 @@
 Test run only!!
 
 ## Changes
-- Fix weapon draw (hopefuly)
-- Fix female loging issue
+- Fix female flag test
+- Cleanup spawning issues
