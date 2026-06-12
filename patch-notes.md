@@ -1,7 +1,7 @@
 # Patch notes
 
 **Summary**
-Diagnostics run only!
+Diagnostics run only!!
 
 ## Changes
 - Added diagnostics
