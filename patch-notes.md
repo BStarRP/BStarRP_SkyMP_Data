@@ -4,4 +4,4 @@
 Testing push for main issues.
 
 ## Changes
-- Fixed weapon draw state
+- Fixed crash issue with Draw Weapons
