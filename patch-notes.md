@@ -4,4 +4,4 @@
 Testing push for main issues.
 
 ## Changes
-- Fixed weapon drawing with sequencing
+- Fixed weapon draw state
