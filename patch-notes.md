@@ -1,7 +1,7 @@
 # Patch notes
 
 **Summary**
-Testing push for main issues.
+Diagnostics run only!
 
 ## Changes
-- Fixed crash issue with Draw Weapons
+- Added diagnostics
