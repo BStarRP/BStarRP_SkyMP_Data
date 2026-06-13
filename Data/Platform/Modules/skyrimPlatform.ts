@@ -43,6 +43,7 @@ export interface Face {
   headTextureSetId: number
   headPartIds: number[]
   presets: number[]
+  options?: number[]
   isFemale?: boolean
 }
 

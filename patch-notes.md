@@ -4,5 +4,6 @@
 Test run only!!
 
 ## Changes
-- Fix female flag test
-- Cleanup spawning issues
+- Fixed female walking animations and loading
+- Fixed issue with items duping
+- Fixed login flow
