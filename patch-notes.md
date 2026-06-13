@@ -1,9 +1,9 @@
 # Patch notes
 
 **Summary**
-Test run only!!
+Almost stable!
 
 ## Changes
-- Fixed female walking animations and loading
-- Fixed issue with items duping
-- Fixed login flow
+- Fixed issue with npc hosting hand off causing lag and churn.
+- Fixed issue with race menu causing errors after creation.
+- Fixed issue with inventory removing equipment after taking durability hits.
