@@ -1,9 +1,9 @@
 # Patch notes
 
 **Summary**
-Almost stable!
+Test client, working on fixes.
 
 ## Changes
-- Fixed issue with npc hosting hand off causing lag and churn.
-- Fixed issue with race menu causing errors after creation.
-- Fixed issue with inventory removing equipment after taking durability hits.
+- Fixed issue with not seeing other players
+- Fixed caching issues
+- Optimized performance
