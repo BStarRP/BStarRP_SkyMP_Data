@@ -4,6 +4,5 @@
 Test client, working on fixes.
 
 ## Changes
-- Fixed issue with not seeing other players
-- Fixed caching issues
-- Optimized performance
+- Fixed issue with remote players spawning incorrectly
+- Fixed issue with local player black face
