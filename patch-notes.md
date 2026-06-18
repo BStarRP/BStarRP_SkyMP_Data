@@ -4,5 +4,4 @@
 Test client, working on fixes.
 
 ## Changes
-- Fixed issue with remote players spawning incorrectly
-- Fixed issue with local player black face
+- Fixed an issue with remote character base matching
