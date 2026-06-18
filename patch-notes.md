@@ -4,4 +4,4 @@
 Test client, working on fixes.
 
 ## Changes
-- Fixed an issue with remote character base matching
+- Fixed an issue with applying tints on players
