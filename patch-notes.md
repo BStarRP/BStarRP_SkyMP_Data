@@ -4,4 +4,5 @@
 Test client, working on fixes...
 
 ## Changes
-- Improvements to inventory
+- Fixed equipment queue race issues
+- Improved the durability checks on inventory
