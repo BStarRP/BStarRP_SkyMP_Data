@@ -4,5 +4,5 @@
 Test client, working on fixes...
 
 ## Changes
-- Fixed equipment queue race issues
-- Improved the durability checks on inventory
+- Adjusted local values to server values (showing true health)
+- Test fix to apply appearance for players no NPC race base
