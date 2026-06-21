@@ -435,6 +435,7 @@ export interface PositionPlayerEvent {
 
 export interface FootstepEvent {
   tag: string
+  actorId: number
 }
 
 export interface TranslationEvent {
