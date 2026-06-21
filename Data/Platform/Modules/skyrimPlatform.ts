@@ -3280,6 +3280,8 @@ export declare class TESModPlatform extends PapyrusObject {
   static addItemEx(containerRefr: ObjectReference | null, item: Form | null, countDelta: number, health: number, enchantment: Enchantment | null, maxCharge: number, removeEnchantmentOnUnequip: boolean, chargePercent: number, textDisplayData: string, soul: number, poison: Potion | null, poisonCount: number): void
   static clearTintMasks(targetActor: Actor | null): void
   static cloneNpcForActor(sourceFormId: number): ActorBase | null
+  static armRemoteSoundScale(scale: number): void
+  static armRemoteSoundFor(actorFormId: number, scale: number): void
   static cloneNpcForActorStripped(sourceFormId: number): ActorBase | null
   static setObjectReference(refr: ObjectReference | null, newBase: Form | null): void
   static createNpc(): ActorBase | null
