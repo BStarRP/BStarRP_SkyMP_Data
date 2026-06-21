@@ -4,5 +4,6 @@
 Test client, working on fixes...
 
 ## Changes
-- Adjusted local values to server values (showing true health)
-- Test fix to apply appearance for players no NPC race base
+- Fixed issue with regen not working from food
+- Fixed issue with statistics not updating the hud
+- Improved spawning of remote players
