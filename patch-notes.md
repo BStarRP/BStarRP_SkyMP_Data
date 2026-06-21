@@ -1,7 +1,7 @@
 # Patch notes
 
 **Summary**
-Testing head look up and down!
+Final head look fix for now
 
 ## Changes
-- Fixed head look left and right
+- Fixed head look entirely
