@@ -1,7 +1,7 @@
 # Patch notes
 
 **Summary**
-Final test 3 before full inventory rework
+Testing head look up and down!
 
 ## Changes
-- Fixed head look
+- Fixed head look left and right
