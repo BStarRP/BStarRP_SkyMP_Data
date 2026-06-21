@@ -1,7 +1,8 @@
 # Patch notes
 
 **Summary**
-Test client, working on fixes...
+Final test before full inventory rework
 
 ## Changes
-- Testing only
+- Fixed head look
+- Fixed jumping sounds
