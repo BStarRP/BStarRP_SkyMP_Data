@@ -1,7 +1,9 @@
 # Patch notes
 
 **Summary**
-Small follow-up patch!
+Another follow-up patch!
 
 ## Changes
-- Fixed an issue with loading other players
+- Fixed an issue with looting containers
+- Fixed an issue with drop items
+- Added debuff effects to buff bar
