@@ -1,7 +1,10 @@
 # Patch notes
 
 **Summary**
-Debug client to catch appearance!
+Final fixes after several tests!
 
 ## Changes
-- Instrumentation test!
+- Fixed remaining black face issue
+- Fixed weapon draw issues
+- Fixed drop items and lag
+- Cleanup logging
