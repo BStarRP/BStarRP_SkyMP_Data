@@ -4,4 +4,5 @@
 Final fixes after several tests!
 
 ## Changes
-- Fixed issues with errors
+- Fixed the weapon draw issue
+- Fixed drop item lag
