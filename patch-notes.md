@@ -4,5 +4,4 @@
 Small follow-up patch!
 
 ## Changes
-- Fixed looting mod containers
-- Fixed opening mod stations/tables
+- Fixed an issue with loading other players
