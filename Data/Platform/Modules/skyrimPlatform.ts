@@ -15,6 +15,11 @@ export declare function getJsMemoryUsage(): number
 export declare function getPluginSourceCode(pluginName: string, overrideFolder?: string): string // overrideFolder is relative to Data/Platform
 export declare function writePlugin(pluginName: string, newSources: string, overrideFolder?: string): string // overrideFolder is relative to Data/Platform
 export declare function getPlatformVersion(): string
+export interface NativeBuildInfo {
+  built: string
+  hash: string
+}
+export declare function getNativeBuildInfo(): NativeBuildInfo
 export declare function disableCtrlPrtScnHotkey(): void
 export declare function blockPapyrusEvents(block: boolean): void
 export declare function sendIpcMessage(targetSystemName: string, message: ArrayBuffer): void
@@ -51,6 +56,24 @@ export interface ChangeFormNpc {
   raceId?: number
   name?: string
   face?: Face
+  isFemale?: boolean
+  bakeInventory?: { entries: ChangeFormBakeEntry[] }
+}
+
+export interface ChangeFormBakeEntry {
+  baseId: number
+  count: number
+  worn?: boolean
+  wornLeft?: boolean
+  handWeapon?: boolean
+  health?: number
+  charge?: number
+  chargePercent?: number
+  soul?: number
+  poisonId?: number
+  poisonCount?: number
+  enchantmentId?: number
+  enchantCharge?: number
 }
 
 export declare function loadGame(pos: number[], angle: number[], worldOrCell: number, changeFormNpc?: ChangeFormNpc, loadOrder?: string[], time?: { seconds: number, minutes: number, hours: number }): void
@@ -138,6 +161,8 @@ export interface InventoryChangesEntry {
   extendDataList: BaseExtraList[]
 }
 export declare let getExtraContainerChanges: (objectReferenceId: number) => InventoryChangesEntry[] | null
+/** Engine ExtraDroppedItemList on actor/container — refs the player just dropped. */
+export declare let getDroppedItemRefs: (objectReferenceId: number) => number[]
 
 export interface InventoryEntry {
   count: number
@@ -154,7 +179,23 @@ export declare let getContainer: (baseId: number) => InventoryEntry[]
  * name untouched. The mutation runs on the game thread; the call returns
  * immediately.
  */
-export declare let updateExtrasOnEquipped: (refrId: number, baseId: number, newHealth: number, newName: string) => void
+export declare let updateExtrasOnEquipped: (refrId: number, baseId: number, newHealth: number, newName: string, matchKind?: number, ordinal?: number) => boolean
+
+/** One-time login repair: prune legacy ghost ECC rows (count<=0, extra-less dupes). */
+export interface PruneLegacyGhostBaseResult {
+  baseId: number
+  before: number
+  after: number
+  auth: number
+}
+export interface PruneLegacyGhostResult {
+  removed: number
+  bases: PruneLegacyGhostBaseResult[]
+}
+export declare let pruneLegacyExtraContainerGhosts: (
+  refrId: number,
+  authEntries: Array<{ baseId: number; count?: number; worn?: boolean; wornLeft?: boolean; health?: number; name?: string }>,
+) => PruneLegacyGhostResult | null
 
 export interface ActivateEvent {
   target: ObjectReference

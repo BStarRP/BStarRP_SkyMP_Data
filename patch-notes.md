@@ -1,7 +1,10 @@
 # Patch notes
 
 **Summary**
-Final head look fix for now
+Stable build, full inventory rework+
 
 ## Changes
-- Fixed head look entirely
+- Fixed issues with looting
+- Fixed issues with equipment
+- Reworked inventory
+- Several other fixes
