@@ -1,8 +1,11 @@
 # Patch notes
 
 **Summary**
-Final fixes after several tests!
+More cleanup work now that we playing, smashing bugs and such!
 
 ## Changes
-- Fixed npc spawn in overworld
-- Fixed small issues
+- Fixed npc's spawning as wrong base creature
+- Fixed issue with head changing
+- Fixed issue with syncing helmets
+- Fixed issue with npc naming
+- Fixed various issues with caching
