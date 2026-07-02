@@ -1,10 +1,8 @@
 # Patch notes
 
 **Summary**
-Stable build, full inventory rework+
+Small follow-up patch!
 
 ## Changes
-- Fixed issues with looting
-- Fixed issues with equipment
-- Reworked inventory
-- Several other fixes
+- Fixed looting mod containers
+- Fixed opening mod stations/tables
