@@ -1,10 +1,11 @@
 # Patch notes
 
 **Summary**
-Big syncrhnoization rework along with energy system test.
+Cleanup and issue fixes
 
 ## Changes
-- Fixed animation menu scrolling
-- Reworked npc syncing and death states
-- Added more console commands to be blocked
-- Added a full energy/exhaution system
+- Animation menu re-theme
+- Fixed an issue with players not seeing each other
+- Fixed another issue with appearance
+- Moved exhaution/energy bar to right side
+- Made player needs hud independent updates
