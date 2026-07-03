@@ -1,11 +1,10 @@
 # Patch notes
 
 **Summary**
-More cleanup work now that we playing, smashing bugs and such!
+Big syncrhnoization rework along with energy system test.
 
 ## Changes
-- Fixed npc's spawning as wrong base creature
-- Fixed issue with head changing
-- Fixed issue with syncing helmets
-- Fixed issue with npc naming
-- Fixed various issues with caching
+- Fixed animation menu scrolling
+- Reworked npc syncing and death states
+- Added more console commands to be blocked
+- Added a full energy/exhaution system
