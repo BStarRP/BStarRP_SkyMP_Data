@@ -1,11 +1,8 @@
 # Patch notes
 
 **Summary**
-Cleanup and issue fixes
+Running debug for this to find extra create character call
 
 ## Changes
-- Animation menu re-theme
-- Fixed an issue with players not seeing each other
-- Fixed another issue with appearance
-- Moved exhaution/energy bar to right side
-- Made player needs hud independent updates
+- Fixed issue with how equipment spawns
+- Fixed issue with how players spawn
