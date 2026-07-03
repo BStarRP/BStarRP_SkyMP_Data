@@ -1,7 +1,7 @@
 # Patch notes
 
 **Summary**
-Debug Run!
+Full spawn rework
 
 ## Changes
-- Fixed spawn issue (again)
+- Reworked spawn system
