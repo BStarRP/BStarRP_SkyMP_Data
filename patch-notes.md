@@ -1,7 +1,7 @@
 # Patch notes
 
 **Summary**
-Full spawn rework
+Follow up test
 
 ## Changes
 - Reworked spawn system
