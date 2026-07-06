@@ -78,6 +78,9 @@ export interface ChangeFormBakeEntry {
 
 export declare function loadGame(pos: number[], angle: number[], worldOrCell: number, changeFormNpc?: ChangeFormNpc, loadOrder?: string[], time?: { seconds: number, minutes: number, hours: number }): void
 
+export declare function validateLoginBakeInventory(changeFormNpc: ChangeFormNpc): boolean
+export declare function loginBakeBaseEncodable(baseId: number): boolean
+
 export declare function worldPointToScreenPoint(...args: number[][]): number[][]
 
 /** Returns [posX, posY, posZ, yaw] - camera position and horizontal facing (radians) */
