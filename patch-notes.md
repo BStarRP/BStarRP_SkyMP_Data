@@ -1,10 +1,10 @@
 # Patch notes
 
 **Summary**
-Stable update for testing!
+Follow-up fixs!
 
 ## Changes
-- Fixed issue with weather not changing
-- Improved performance in the overworld
-- Several tweaks and fixes
-- Added musicianship skill
+- Fixed issue with equipment display
+- Fixed an issue with resolving id's
+- Fixed hiding hud from popping back on
+- Reduce energy drain from activities
