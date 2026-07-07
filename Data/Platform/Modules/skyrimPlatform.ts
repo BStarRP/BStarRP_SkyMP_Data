@@ -80,6 +80,7 @@ export declare function loadGame(pos: number[], angle: number[], worldOrCell: nu
 
 export declare function validateLoginBakeInventory(changeFormNpc: ChangeFormNpc): boolean
 export declare function loginBakeBaseEncodable(baseId: number): boolean
+export declare function loginBakeWithoutFormIdArrayGrowth(baseId: number): boolean
 
 export declare function worldPointToScreenPoint(...args: number[][]): number[][]
 
