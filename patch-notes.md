@@ -4,7 +4,6 @@
 Follow-up fixs!
 
 ## Changes
-- Fixed issues with f2 hiding menus
-- Fixed spell casting visuals
-- Fixed issue with missing instruments for bard songs
-- Added logging for verifying esl slot maps
+- Fixed bard instrument items
+- Fixed esl sequencing
+- Fixed issues with spell animations
