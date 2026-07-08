@@ -4,4 +4,5 @@
 Testing race menu!
 
 ## Changes
-- Full race menu support
+- Fixed missing sliders
+- Cleanup dead code
