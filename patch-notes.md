@@ -1,8 +1,7 @@
 # Patch notes
 
 **Summary**
-Follow-up fixs!
+Testing race menu!
 
 ## Changes
-- Fixed an issue with looting corpses
-- Fixed an issue with npc's changing on reload
+- Full race menu support

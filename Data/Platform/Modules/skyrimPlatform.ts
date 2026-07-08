@@ -21,7 +21,10 @@ export interface NativeBuildInfo {
 }
 export declare function getNativeBuildInfo(): NativeBuildInfo
 export declare function disableCtrlPrtScnHotkey(): void
-export declare function blockPapyrusEvents(block: boolean): void
+export declare function blockPapyrusEvents(block: boolean, allowScripts?: string[]): void
+export declare function readPresetFile(name: string): string | null
+export declare function writePresetFile(name: string, contents: string): boolean
+export declare function deletePresetFile(name: string): boolean
 export declare function sendIpcMessage(targetSystemName: string, message: ArrayBuffer): void
 export declare function encodeUtf8(text: string): ArrayBuffer
 export declare function decodeUtf8(buffer: ArrayBuffer): string
