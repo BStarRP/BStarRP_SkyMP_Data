@@ -4,5 +4,5 @@
 Follow-up fixs!
 
 ## Changes
-- Fixed ESL slot map sequencing
-- Added improved logging
+- Fixed an issue with looting corpses
+- Fixed an issue with npc's changing on reload
