@@ -4,5 +4,6 @@
 Follow-up fixs!
 
 ## Changes
-- Updated staffs to work with spell schools by Tier
-- Added client version authentication
+- Finished hunting skill
+- Fixed an issue with animations sequencing
+- Fixed an issue with learned spells not syncing
