@@ -4,5 +4,5 @@
 Testing race menu!
 
 ## Changes
-- Fixed crash with RaceMenu
-- More optimizations and cleanup
+- Fixed another crash
+- Clamped body sliders on RaceMenu
