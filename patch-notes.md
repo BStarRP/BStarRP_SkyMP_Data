@@ -4,4 +4,4 @@
 Testing race menu!
 
 ## Changes
-- RaceMenu crash fix test
+- ResizeHeadpartsArray crash fix
