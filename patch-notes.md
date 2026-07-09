@@ -5,4 +5,5 @@ Testing race menu!
 
 ## Changes
 - Fixed another crash
-- Clamped body sliders on RaceMenu
+- Fixed wood cutting
+- Fixed issue with not being able to move after potion/food/drink
