@@ -4,4 +4,4 @@
 Testing race menu!
 
 ## Changes
-- ResizeHeadpartsArray crash fix
+- Optimizations for dead NPC's
