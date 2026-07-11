@@ -1683,6 +1683,8 @@ export declare function setInventory(formId: number, inventory: Inventory): void
 
 export declare function castSpellImmediate(actorCasterFormId: number, castingSource: SpellType, formIdSpell: number, formIdTarget: number, aimAngle: number, aimHeading: number, animationVariables: ActorAnimationVariables): void;
 export declare function launchBowProjectile(actorFormId: number, weaponFormId: number, ammoFormId: number, aimAngle: number, aimHeading: number): void;
+export declare function setEngineArrowActor(formId: number, allowed: boolean): void;
+export declare function clearEngineArrowActors(): void;
 export declare function getActorAim(actorFormId: number): { aimAngle: number, aimHeading: number } | undefined;
 export declare function interruptCast(actorCasterFormId: number, castingSource: SpellType, animationVariables: ActorAnimationVariables): void;
 export declare function getAnimationVariablesFromActor(actorFormId: number): ActorAnimationVariables;
