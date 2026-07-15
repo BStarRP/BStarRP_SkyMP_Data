@@ -1687,6 +1687,8 @@ export declare function setEngineArrowActor(formId: number, allowed: boolean): v
 export declare function clearEngineArrowActors(): void;
 export declare function getActorAim(actorFormId: number): { aimAngle: number, aimHeading: number } | undefined;
 export declare function interruptCast(actorCasterFormId: number, castingSource: SpellType, animationVariables: ActorAnimationVariables): void;
+/** Dispel engine ActiveEffects cast by casterFormId. targetFormId omitted = player + parent-cell actors; set to limit to one target. Returns dispel count. */
+export declare function dispelEffectsByCaster(casterFormId: number, targetFormId?: number): number;
 export declare function getAnimationVariablesFromActor(actorFormId: number): ActorAnimationVariables;
 export declare function applyAnimationVariablesToActor(actorFormId: number, animationVariables: ActorAnimationVariables): boolean;
 
