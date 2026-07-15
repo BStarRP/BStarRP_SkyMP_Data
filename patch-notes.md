@@ -1,7 +1,9 @@
 # Patch notes
 
 **Summary**
-Debug run to get data for casting/aiming!
+Compiling data for testing.
 
 ## Changes
-- More logging/debug
+- Fixed issue with progress bars not showing
+- Fixed issue with bow syncing
+- Fixed issue with spell casting crashes
