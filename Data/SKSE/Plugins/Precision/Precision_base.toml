@@ -1,0 +1,793 @@
+# BStarRP Precision — single combined config (stock Ersh base + pack tweaks).
+# Locational weapon capsules, strong shield bash, stock dragons/werewolves/trails.
+# Reload: close the Precision MCM after saving.
+#
+# This file contains attack definitions that are used when the attack animation doesn't explicitly support Precision with its annotations.
+# I've only included the attacks of the playable races and a rough example of dragon attacks.
+# The werewolf attacks aren't great, particularly the vanilla sprinting dual attack has the weaponSwing annotation set very late. Using an animation replacer with Precision annotations is strongly suggested.
+#
+# Full list of possible values:
+#
+# - EventNames: (array of strings) the event name from inside the race attack data. The correct attack definition is selected on this basis. You can put multiple names here so you don't have to copy paste the same collisions multiple times
+# - NodeName: (string) the parent node (bone) from the actor's skeleton for the active collision.
+#     The WEAPON and SHIELD node names are special because the collision capsule will use the weapon reach and the weapon multipliers from MCM instead of using the parent node's radius and length
+# - ID: (integer) the ID of the collision. Collisions sharing the same ID won't hit the same target in the same attack. Use if you want a collision that spans multiple bones, but hits only once (e.g. dragon tail swipe). If you don't add this line, no ID is set.
+# - SwingEvent: (string) if set, the collision will be created on the specified event instead of on weaponSwing. I'm using this for vanilla attacks that have bad annotations.
+#   However you can't just specify any event here, the supported ones are: preHitFrame, CastOKStart, CastOKStop. (and weaponSwing, but that's the default value, same as when not adding the SwingEvent parameter at all).
+# - NoRecoil: (boolean) if set, the collision won't cause a static hit recoil even when the feature is enabled.
+# - NoTrail: (boolean) if set, the collision won't create a trail even when the feature is enabled.
+# - TrailUseTrueLength: (boolean) if set, the created trail will use the length of the weapon collision instead of the weapon mesh's length.
+# - WeaponTip: (boolean) (only used for WEAPON/SHIELD) if set, the collision capsule's root will be at the weapon tip instead of the hand. Used for stuff like a damage sweet spot in rapiers/spears/scythes, where you'd add a second capsule with the same ID and a damage mult.
+# - GroundShake: (vector) if set, hitting ground will cause a camera shake. The parameters are:
+#     Strength - the strength of the camera shake (how violent it is)
+#     Duration - the length of the camera shake. Note that the strength decays to 0 over the duration.
+#     Frequency - how quickly the shake oscillates (up-down)
+#     e.g. GroundShake: { Strength = 40, Duration = 0.3, Frequency = 40 }
+#     The camera shake strength is smoothly reduced by the distance from the hit position to the camera position.
+# - DamageMult: (float) the damage multiplier for this attack.
+# - Duration: (float) the collision duration that will override the default collision duration set in the MCM. Note that any collisions are removed when an 'attackStop' event is sent, regardless of their remaining lifetime.
+# - DurationMult: (float) if set, it will act as a multiplier for the collision duration.
+# - Delay: (float) if set, it will delay the creation of the attack collision for the given time in seconds. Used for collisions with the weaponSwing event set too early.
+# - Radius: (float) the radius of the attack capsule, if set it will override the parent node's collision capsule radius
+# - RadiusMult: (float) if set, it will act as a multiplier to the final radius
+# - Length: (float) the length of the attack capsule, if set it will override the parent node's collision capsule length
+# - LengthMult: (float) if set, it will act as a multiplier to the final length
+# - Rotation: (vector) local rotation of the capsule, in euler angles.
+#     e.g Rotation = { x = 0, y = -90, z = 90 }
+# - Translation: (vector) local translation of the capsule
+#     e.g. Translation = { x = 100, y = 0, z = 0 }
+# - Scale: (float) uniform local scale of the capsule, it's not a vector but a scalar
+#     e.g. Scale = 1.5
+
+# The mod uses BodyPartData instead of Race to select what is essentially a Race because many mods add custom races based on vanilla ones, but keep the vanilla BodyPartData.
+# This should automatically support most custom races thanks to that fact.
+
+[[AttackDefinitions]]
+    BodyPartDataFormIDs = [ { FormID = 0x13492, Plugin = "Skyrim.esm" }, { FormID = 0x1BC4A, Plugin = "Dragonborn.esm" } ] # DragonBodyPartData, DLC2DragonBodyPartData
+    [[AttackDefinitions.Attacks]]
+        EventNames = ["attackStartBite", "attackStartBiteLeft", "attackStartBiteRight"]
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC Head"
+            ID = 1
+            Scale = 1.5
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC Jaw"
+            ID = 1
+            Scale = 1.5
+    [[AttackDefinitions.Attacks]]
+        EventNames = ["attackStartTail", "attackStartTailLeft", "attackStartTailRight"]
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC Tail4"
+            ID = 1
+            Scale = 1.5
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC Tail5"
+            ID = 1
+            Scale = 1.5
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC Tail6"
+            ID = 1
+            Scale = 1.5
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC Tail7"
+            ID = 1
+            Scale = 2
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC Tail8"
+            ID = 1
+            Scale = 1.5
+    [[AttackDefinitions.Attacks]]
+        EventNames = ["attackStartWingLeft"]
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC LHand"
+            Rotation = { x = 0, y = -90, z = 90 }
+            Translation = { x = 100, y = -100, z = 0 }
+            RadiusMult = 4
+            LengthMult = 4
+    [[AttackDefinitions.Attacks]]
+        EventNames = ["attackStartWingRight"]
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC RHand"
+            Rotation = { x = 0, y = -90, z = 90 }
+            Translation = { x = 100, y = -100, z = 0 }
+            RadiusMult = 4
+            LengthMult = 4
+
+[[AttackDefinitions]]
+    BodyPartDataFormIDs = [ { FormID = 0xCDD85, Plugin = "Skyrim.esm" } ] # WerewolfBeastBodyPartData
+    [[AttackDefinitions.Attacks]]
+        EventNames = ["DEFAULT"]
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC R Hand [RHnd]"
+            Rotation = { x = 90, y = 0, z = 90 }
+            Translation = { x = 0, y = -25, z = -25 }
+            Scale = 2
+            Length = 50
+    [[AttackDefinitions.Attacks]]
+        EventNames = ["AttackStartLeftPower", "attackStartRightPower"]
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC L Hand [RHnd]"
+            Rotation = { x = 90, y = 0, z = 90 }
+            Translation = { x = 0, y = -25, z = -25 }
+            Scale = 2
+            Length = 50
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC R Hand [RHnd]"
+            Rotation = { x = 90, y = 0, z = 90 }
+            Translation = { x = 0, y = -25, z = -25 }
+            Scale = 2
+            Length = 50
+    [[AttackDefinitions.Attacks]]
+        EventNames = ["AttackStartBackHand"]
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC L Hand [RHnd]"
+            ID = 1
+            Rotation = { x = 90, y = 0, z = 90 }
+            Translation = { x = 0, y = -25, z = -25 }
+            Scale = 2
+            Length = 50
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC R Hand [RHnd]"
+            ID = 1
+            Rotation = { x = 90, y = 0, z = 90 }
+            Translation = { x = 0, y = -25, z = -25 }
+            Scale = 2
+            Length = 50
+    [[AttackDefinitions.Attacks]]
+        EventNames = ["AttackStartDual", "AttackStartDualRunning", "AttackStartDualSprinting", "AttackStartLeftSprinting", "AttackStartRightSprinting"]
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC L Hand [RHnd]"
+            Rotation = { x = 90, y = 0, z = 90 }
+            Translation = { x = 0, y = -25, z = -25 }
+            Scale = 2
+            Length = 50
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC R Hand [RHnd]"
+            Rotation = { x = 90, y = 0, z = 90 }
+            Translation = { x = 0, y = -25, z = -25 }
+            Scale = 2
+            Length = 50
+    [[AttackDefinitions.Attacks]]
+        EventNames = ["attackStartLeft", "AttackStartLeftRunningPower", "AttackStartLeftSide"]
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC L Hand [RHnd]"
+            Rotation = { x = 90, y = 0, z = 90 }
+            Translation = { x = 0, y = -25, z = -25 }
+            Scale = 2
+            Length = 50
+    [[AttackDefinitions.Attacks]]
+        EventNames = ["attackStartRight", "AttackStartRightRunningPower", "AttackStartRightSide"]
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC R Hand [RHnd]"
+            Rotation = { x = 90, y = 0, z = 90 }
+            Translation = { x = 0, y = -25, z = -25 }
+            Scale = 2
+            Length = 50
+
+# Playable races (DefaultBodyPartData) — BStar locational + shield bash
+[[AttackDefinitions]]
+    BodyPartDataFormIDs = [ { FormID = 0x1D, Plugin = "Skyrim.esm" } ] # DefaultBodyPartData
+
+    # --- Locational melee: thinner WEAPON capsules → clearer hitPos / armor slots ---
+    [[AttackDefinitions.Attacks]]
+        EventNames = ["DEFAULT"]
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "WEAPON"
+            ID = 1
+            RadiusMult = 0.8
+    [[AttackDefinitions.Attacks]]
+        EventNames = ["DEFAULT_UNARMED"]
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC R Hand [RHnd]"
+            Scale = 3.5
+    [[AttackDefinitions.Attacks]]
+        EventNames = ["attackPowerStartBackward", "attackPowerStartForward", "attackPowerStartInPlace", "attackPowerStartLeft", "attackPowerStartRight", "attackPowerStart_2HMSprint", "attackPowerStart_2HWSprint", "attackPowerStart_MC_1HMLeft", "attackPowerStart_MC_1HMRight", "attackPowerStart_Sprint", "attackStart", "attackStartSprint", "attackStart_MC", "attackStart_MC_1HMLeft", "attackStart_MC_1HMRight"]
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "WEAPON"
+            ID = 1
+            RadiusMult = 0.8
+    [[AttackDefinitions.Attacks]]
+        EventNames = ["attackPowerStartBackLeftHand", "attackPowerStartForwardLeftHand", "attackPowerStartInPlaceLeftHand", "attackPowerStartLeftLeftHand", "attackPowerStartRightLeftHand", "attackPowerStart_SprintLeftHand", "attackStartLeftHand", "attackStartSprintLeftHand"]
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "SHIELD"
+            ID = 1
+            RadiusMult = 1.35
+            LengthMult = 1.25
+            DamageMult = 1.1
+    [[AttackDefinitions.Attacks]]
+        EventNames = ["attackPowerStartForwardH2HRightHand", "attackPowerStartForwardH2HLeftHand"]
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC L Hand [LHnd]"
+            ID = 1
+            Translation = { x = 25, y = 0, z = 15 }
+            Scale = 2.75
+            LengthMult = 2
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC R Hand [RHnd]"
+            ID = 1
+            Translation = { x = -25, y = 0, z = 15 }
+            Scale = 2.75
+            LengthMult = 2
+    [[AttackDefinitions.Attacks]]
+        EventNames = ["AttackStartH2HRight"]
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC R Hand [RHnd]"
+            Translation = { x = -25, y = 0, z = 15 }
+            Scale = 2.75
+            LengthMult = 2
+    [[AttackDefinitions.Attacks]]
+        EventNames = ["AttackStartH2HLeft"]
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC L Hand [LHnd]"
+            Translation = { x = 25, y = 0, z = 15 }
+            Scale = 2.75
+            LengthMult = 2
+    [[AttackDefinitions.Attacks]]
+        EventNames = ["attackPowerStartDualWield", "attackStartDualWield"]
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "WEAPON"
+            ID = 1
+            RadiusMult = 0.8
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "SHIELD"
+            ID = 2
+            RadiusMult = 1.35
+            LengthMult = 1.25
+            DamageMult = 1.1
+    [[AttackDefinitions.Attacks]]
+        EventNames = ["attackPowerStartH2HCombo"]
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC R Hand [RHnd]"
+            Scale = 3.5
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC L Hand [LHnd]"
+            Scale = 3.5
+
+    # --- Bash event fallback (anim overrides below usually win) ---
+    [[AttackDefinitions.Attacks]]
+        EventNames = ["bashPowerStart", "bashStart"]
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "SHIELD"
+            ID = 1
+            DurationMult = 1.1
+            RadiusMult = 2.0
+            LengthMult = 1.6
+            DamageMult = 1.35
+            Translation = { x = 20, y = 15, z = -20 }
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "WEAPON"
+            ID = 1
+            DurationMult = 1.0
+            RadiusMult = 1.5
+            LengthMult = 1.3
+            DamageMult = 1.2
+            Translation = { x = -20, y = 10, z = 0 }
+
+    # --- Vampire lord (same BodyPartData, different event names) ---
+    [[AttackDefinitions.Attacks]]
+        EventNames = ["AttackPowerStart_Left", "attackStartLeft"]
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC L Hand [LHnd]"
+            Translation = { x = 0, y = 0, z = -50 }
+            Scale = 4
+            Length = 25
+    [[AttackDefinitions.Attacks]]
+        EventNames = ["AttackPowerStart_Right", "attackStartRight"]
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC R Hand [RHnd]"
+            Translation = { x = 0, y = 0, z = -50 }
+            Scale = 4
+            Length = 25
+    [[AttackDefinitions.Attacks]]
+        EventNames = ["AttackStartDual"]
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC R Hand [RHnd]"
+            Translation = { x = 0, y = 0, z = -50 }
+            Scale = 4
+            Length = 25
+        [[AttackDefinitions.Attacks.Collisions]]
+            NodeName = "NPC L Hand [LHnd]"
+            Translation = { x = 0, y = 0, z = -50 }
+            Scale = 4
+            Length = 25
+
+##################################################################################################
+
+# Attack animation definitions — BStar bash + stock FirstPerson non-bash fixes
+
+[[AttackAnimationDefinitions]]
+    ProjectNames = ["DefaultMale", "DefaultFemale"]
+
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/shd_BlockBash.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "SHIELD"
+            ID = 1
+            DurationMult = 1.15
+            RadiusMult = 2.0
+            LengthMult = 1.6
+            DamageMult = 1.25
+            Translation = { x = 20, y = 15, z = -20 }
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/shd_BlockBashPower.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "SHIELD"
+            ID = 1
+            Delay = 0.08
+            DurationMult = 1.0
+            RadiusMult = 2.25
+            LengthMult = 1.8
+            DamageMult = 1.5
+            Translation = { x = 25, y = 20, z = -20 }
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/1HM_BlockBash.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "WEAPON"
+            ID = 1
+            DurationMult = 0.95
+            RadiusMult = 1.5
+            LengthMult = 1.25
+            DamageMult = 1.15
+            Translation = { x = -20, y = 10, z = 0 }
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/1HM_BlockBashPower.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "WEAPON"
+            ID = 1
+            DurationMult = 1.05
+            RadiusMult = 1.65
+            LengthMult = 1.35
+            DamageMult = 1.35
+            Translation = { x = -20, y = 12, z = 0 }
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/2HM_BlockBash.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "WEAPON"
+            ID = 1
+            DurationMult = 0.95
+            RadiusMult = 1.5
+            LengthMult = 1.3
+            DamageMult = 1.15
+            Translation = { x = -20, y = 10, z = 0 }
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/2HM_BlockBashPower.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "WEAPON"
+            ID = 1
+            DurationMult = 1.1
+            RadiusMult = 1.7
+            LengthMult = 1.4
+            DamageMult = 1.35
+            Translation = { x = -20, y = 12, z = 0 }
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/2HW_BlockBash.hkx"
+        SwingEvent = "preHitFrame"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "WEAPON"
+            ID = 1
+            DurationMult = 0.95
+            RadiusMult = 1.55
+            LengthMult = 1.3
+            DamageMult = 1.15
+            Translation = { x = -20, y = -15, z = 0 }
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/2HW_BlockBashPower.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "WEAPON"
+            ID = 1
+            Delay = 0.05
+            DurationMult = 1.0
+            RadiusMult = 1.7
+            LengthMult = 1.4
+            DamageMult = 1.35
+            Translation = { x = -20, y = -15, z = 0 }
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/Bow_BlockBash.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "SHIELD"
+            ID = 1
+            DurationMult = 1.0
+            RadiusMult = 1.8
+            LengthMult = 1.4
+            DamageMult = 1.2
+            Translation = { x = 30, y = 10, z = 0 }
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/DLC01/CrossBow_BlockBash.HKX"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "WEAPON"
+            ID = 1
+            Delay = 0.1
+            DurationMult = 1.0
+            RadiusMult = 1.8
+            LengthMult = 1.3
+            DamageMult = 1.2
+            Translation = { x = 0, y = 10, z = 25 }
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/DW1HM1HMBlockBashPower.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "SHIELD"
+            ID = 1
+            DurationMult = 1.05
+            RadiusMult = 1.9
+            LengthMult = 1.5
+            DamageMult = 1.35
+            Translation = { x = 20, y = 12, z = -15 }
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/Sneak_1HMAttackPowerLeftHand.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "SHIELD"
+            ID = 1
+            DurationMult = 1.0
+            RadiusMult = 1.7
+            LengthMult = 1.4
+            DamageMult = 1.2
+
+##################################################################################################
+# 2b) Shield / bash animation overrides (1st person)
+##################################################################################################
+
+[[AttackAnimationDefinitions]]
+    ProjectNames = ["FirstPerson"]
+
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/shd_BlockBash.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "SHIELD"
+            ID = 1
+            DurationMult = 1.15
+            RadiusMult = 2.1
+            LengthMult = 1.7
+            DamageMult = 1.25
+            Translation = { x = 30, y = 15, z = -40 }
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/shd_BlockBashPower.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "SHIELD"
+            ID = 1
+            Delay = 0.06
+            DurationMult = 1.05
+            RadiusMult = 2.4
+            LengthMult = 1.9
+            DamageMult = 1.5
+            Translation = { x = 35, y = 20, z = -40 }
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/1HM_BlockBash.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "WEAPON"
+            ID = 1
+            DurationMult = 0.95
+            RadiusMult = 1.55
+            LengthMult = 1.3
+            DamageMult = 1.15
+            Translation = { x = -40, y = 10, z = 0 }
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/1HM_BlockBashPower.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "WEAPON"
+            ID = 1
+            DurationMult = 1.05
+            RadiusMult = 1.7
+            LengthMult = 1.4
+            DamageMult = 1.35
+            Translation = { x = -40, y = 12, z = 0 }
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/2HM_BlockBash.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "WEAPON"
+            ID = 1
+            DurationMult = 0.95
+            RadiusMult = 1.55
+            LengthMult = 1.35
+            DamageMult = 1.15
+            Translation = { x = -40, y = 10, z = 0 }
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/2HM_BlockBashPower.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "WEAPON"
+            ID = 1
+            DurationMult = 1.1
+            RadiusMult = 1.75
+            LengthMult = 1.45
+            DamageMult = 1.35
+            Translation = { x = -40, y = 12, z = 0 }
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/2HW_BlockBash.hkx"
+        SwingEvent = "preHitFrame"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "WEAPON"
+            ID = 1
+            Delay = 0.03
+            DurationMult = 0.95
+            RadiusMult = 1.6
+            LengthMult = 1.35
+            DamageMult = 1.15
+            Translation = { x = -40, y = -15, z = 0 }
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/2HW_BlockBashPower.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "WEAPON"
+            ID = 1
+            Delay = 0.05
+            DurationMult = 1.0
+            RadiusMult = 1.75
+            LengthMult = 1.45
+            DamageMult = 1.35
+            Translation = { x = -40, y = -15, z = 0 }
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/Bow_BlockBash.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "SHIELD"
+            ID = 1
+            Delay = 0.08
+            DurationMult = 1.0
+            RadiusMult = 1.9
+            LengthMult = 1.45
+            DamageMult = 1.2
+            Translation = { x = 50, y = 10, z = 0 }
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/DLC01/CrossBow_BlockBash.HKX"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "WEAPON"
+            ID = 1
+            Delay = 0.1
+            DurationMult = 1.0
+            RadiusMult = 1.9
+            LengthMult = 1.35
+            DamageMult = 1.2
+            Translation = { x = 0, y = 10, z = 50 }
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/DW1HM1HMBlockBashPower.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "SHIELD"
+            ID = 1
+            DurationMult = 1.05
+            RadiusMult = 2.0
+            LengthMult = 1.55
+            DamageMult = 1.35
+            Translation = { x = 30, y = 12, z = -30 }
+
+
+    # Stock FirstPerson non-bash fixes (Ersh)
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/Sneak_2HMAttack.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "WEAPON"
+            DurationMult = 2
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/2HM_AttackPowerRight.hkx"
+        SwingEvent = "CastOKStop"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "WEAPON"
+            Delay = 0.7
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/2HW_attackPowerRight.hkx"
+        SwingEvent = "CastOKStop"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "WEAPON"
+            Delay = 0.7
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/H2H_AttackRight.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "NPC R Hand [RHnd]"
+            Translation = { x = -25, y = 0, z = 15 }
+            Scale = 3
+            LengthMult = 4
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/H2H_AttackLeft.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "NPC L Hand [LHnd]"
+            Translation = { x = 25, y = 0, z = 15 }
+            Scale = 3
+            LengthMult = 4
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/H2H_AttackPowerForwardLeftHand.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "NPC L Hand [LHnd]"
+            Translation = { x = 25, y = 0, z = 15 }
+            Scale = 3
+            LengthMult = 4
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/H2H_AttackPowerForwardRightHand.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "NPC R Hand [RHnd]"
+            Translation = { x = -25, y = 0, z = 15 }
+            Scale = 3
+            LengthMult = 4
+    [[AttackAnimationDefinitions.Attacks]]
+        AnimationFilePath = "Animations/DW1HM1HMBlockBashPower.hkx"
+        [[AttackAnimationDefinitions.Attacks.Collisions]]
+            NodeName = "SHIELD"
+
+##################################################################################################
+
+# This is a table of attack trail definitions. If the weapon matches ALL or ANY of the conditions specified in an attack trail definition, the defined values will be used instead of the defaults.
+# Full list of possible values:
+
+# - Priority: (integer) - in case of multiple definitions matching, the one with the highest priority will be used
+# - All: (bool) - definitions with this parameter require all of the defined conditions to match, instead of any. Definitions with this set have priority over the others.
+#   For example, let's say your weapon's enchantment has both "MagicDamageFire" and "MagicDamageFrost" keywords. Defined trails are: one with ["MagicDamageFire"], one with ["MagicDamageFrost"], and one with ["MagicDamageFire", "MagicDamageFrost"] and the parameter ALL.
+#   The plugin will first check if the weapon is matching any of the definitions that require ALL conditions, and if it doesn't find a match, then it goes over the others according to the set priority. In that case the last trail will be selected as the weapon matches all the conditions.
+#   Supposed to be used for more unique cases, like multi-elemental trails.
+# THE CONDITION PARAMETERS:
+# Depending on whether the ALL parameter is present, either any/all of the set conditions need to be met for the trail to be selected. The words can be incomplete, i.e. "Fire" will match any keywords containing that word, like "MagicDamageFire", or the name "Dawn" will match "Dawnbreaker"
+# - WeaponNames: (array of strings) - the weapon name has to contain any/all of the strings specified.
+# - WeaponKeywords: (array of strings) - the weapon keywords have to contain any/all of the strings specified.
+# - EnchantmentNames: (array of strings) - the enchantment name has to contain any/all of the strings specified.
+# - EffectNames: (array of strings) - the costliest magic effect name has to contain any/all of the strings specified.
+# - EffectKeywords: (array of strings) - the keywords on the costliest magic effect on either the poison, if it's been applied, or the enchantment, have to contain any/all of the strings specified.
+# - EffectShaders: (pair of FormID and plugin name) - many of the vanilla enchantment effects unfortunately don't seem to have any keywords set. In this case you can use the Effect Shader that's set as the Enchant Shader in the enchantment.
+#   In this particular case the "ALL" is ignored as it wouldn't make sense, an enchantment can only have one enchant shader, but the ALL parameter is still respected overall, so if you additionally set a keyword requirement, it has to be met as well.
+# THE VISUAL PARAMETERS:
+# These parameters are the actual trail definition, and define the looks of the trail
+# - LifetimeMult: (float) - a multiplier for the trail lifetime set in MCM
+# - BaseColorOverride: (hex color) - if defined, the Base Color of the trail mesh will be overridden by this value
+# - BaseColorScaleMult: (float) - if defined, the Base Color Scale of the trail mesh will be multiplied by this value. It controls the luminance of the trail material.
+# - TrailMeshOverride: (string) - if defined, the mesh found at the given path will be used instead of the default one
+
+[[TrailDefinition]]
+    [TrailDefinition.Conditions]
+        EffectKeywords = ["MagicDamageFire"]
+        EffectShaders = [ { FormID = 0x4E810, Plugin = "Skyrim.esm" } ]  #EnchFireFXShader
+    [TrailDefinition.Visuals]
+        LifetimeMult = 1.5
+        BaseColorOverride = { r = 1, g = 0.35, b = 0.1, a = 1 }
+        BaseColorScaleMult = 2.5
+        TrailMeshOverride = "Effects/WeaponTrails/AttackTrailMagic.nif"
+[[TrailDefinition]]
+    [TrailDefinition.Conditions]
+        EffectKeywords = ["MagicDamageFrost"]
+        EffectShaders = [ { FormID = 0x4FA1D, Plugin = "Skyrim.esm" } ]  #EnchFrostFXShader
+    [TrailDefinition.Visuals]
+        LifetimeMult = 2
+        BaseColorOverride = { r = 0.64, g = 0.76, b = 0.84, a = 1 }
+        BaseColorScaleMult = 2
+        TrailMeshOverride = "Effects/WeaponTrails/AttackTrailMagic.nif"
+[[TrailDefinition]]
+    [TrailDefinition.Conditions]
+        EffectKeywords = ["MagicDamageShock"]
+        EffectShaders = [ { FormID = 0x59EDA, Plugin = "Skyrim.esm" } ]  #EnchShockFXShader
+    [TrailDefinition.Visuals]
+        LifetimeMult = 1.25
+        BaseColorOverride = { r = 0.58, g = 0.47, b = 0.77, a = 1 }
+        BaseColorScaleMult = 3
+        TrailMeshOverride = "Effects/WeaponTrails/AttackTrailMagic.nif"
+[[TrailDefinition]]
+    Priority = 1
+    [TrailDefinition.Conditions]
+        EffectShaders = [ { FormID = 0x5D606, Plugin = "Skyrim.esm" } ]  #EnchGreenFXShader
+    [TrailDefinition.Visuals]
+        LifetimeMult = 1.0
+        BaseColorOverride = { r = 0.36, g = 1.0, b = 0.15, a = 1 }
+        BaseColorScaleMult = 2
+        TrailMeshOverride = "Effects/WeaponTrails/AttackTrailMagic.nif"
+[[TrailDefinition]]
+    Priority = 1
+    [TrailDefinition.Conditions]
+        EffectShaders = [ { FormID = 0x5D607, Plugin = "Skyrim.esm" } ]  #EnchPurpleFXShader
+    [TrailDefinition.Visuals]
+        LifetimeMult = 1.25
+        BaseColorOverride = { r = 0.36, g = 0.15, b = 1.0, a = 1 }
+        BaseColorScaleMult = 3
+        TrailMeshOverride = "Effects/WeaponTrails/AttackTrailMagic.nif"
+[[TrailDefinition]]
+    Priority = 1
+    [TrailDefinition.Conditions]
+        EffectShaders = [ { FormID = 0x5D608, Plugin = "Skyrim.esm" } ]  #EnchBlueFXShader
+    [TrailDefinition.Visuals]
+        LifetimeMult = 1.25
+        BaseColorOverride = { r = 0.35, g = 0.49, b = 1.0, a = 1 }
+        BaseColorScaleMult = 2.5
+        TrailMeshOverride = "Effects/WeaponTrails/AttackTrailMagic.nif"
+[[TrailDefinition]]
+    Priority = 1
+    [TrailDefinition.Conditions]
+        EffectShaders = [ { FormID = 0xD7661, Plugin = "Skyrim.esm" } ]  #EnchRedFXShader
+    [TrailDefinition.Visuals]
+        LifetimeMult = 1.25
+        BaseColorOverride = { r = 0.8, g = 0.2, b = 0.2, a = 1 }
+        BaseColorScaleMult = 2.5
+        TrailMeshOverride = "Effects/WeaponTrails/AttackTrailMagic.nif"
+[[TrailDefinition]]
+    Priority = 2
+    [TrailDefinition.Conditions]
+        WeaponNames = ["Dawnbreaker"]
+        EnchantmentNames = ["Sun", "Dawnbreaker"]
+        EffectNames = ["Sun Damage"]
+        EffectKeywords = ["MagicTurnUndead"]
+    [TrailDefinition.Visuals]
+        LifetimeMult = 1.5
+        BaseColorOverride = { r = 1, g = 0.9, b = 0.75, a = 1 }
+        BaseColorScaleMult = 2.5
+        TrailMeshOverride = "Effects/WeaponTrails/AttackTrailMagic.nif"
+[[TrailDefinition]]
+    Priority = 3
+    All = true
+    [TrailDefinition.Conditions]
+        EffectNames = ["Bound", "FX"]
+    [TrailDefinition.Visuals]
+        LifetimeMult = 1.25
+        BaseColorOverride = { r = 0.30, g = 0.40, b = 1.0, a = 1 }
+        BaseColorScaleMult = 2
+        TrailMeshOverride = "Effects/WeaponTrails/AttackTrailMagic.nif"
+
+##################################################################################################
+
+# This is a table of weapon overrides. You can define a custom weapon length and/or radius override here for weapons that aren't detected correctly by the plugin (e.g. mesh is just the handle and the blade is a VFX only visible when unsheathed)
+# There are no default overrides here as the plugin should handle all vanilla weapons correctly, which is why the example is commented out
+# Feel free to create your own .toml files with overrides for modded weapons that don't work correctly
+
+#[[WeaponOverride]]
+#Weapon = { FormID = 0x12EB7, Plugin = "Skyrim.esm" }  # IronSword
+#Length = 100
+#[[WeaponOverride]]
+#Weapon = { FormID = 0x1397E, Plugin = "Skyrim.esm" }  # IronDagger
+#Length = 80
+#Radius = 15
+
+##################################################################################################
+
+# This is a list of right hand attack events and their left hand counterparts, used to replace attack data for collisions when the game has the opposite attack data set
+# This probably doesn't need to be edited
+
+[[AttackEventPair]]
+RightEvent = "attackPowerStartBackward"
+LeftEvent = "attackPowerStartBackLeftHand"
+[[AttackEventPair]]
+RightEvent = "attackPowerStartForward"
+LeftEvent = "attackPowerStartForwardLeftHand"
+[[AttackEventPair]]
+RightEvent = "attackPowerStartForwardH2HRightHand"
+LeftEvent = "attackPowerStartForwardH2HLeftHand"
+[[AttackEventPair]]
+RightEvent = "attackPowerStartInPlace"
+LeftEvent = "attackPowerStartInPlaceLeftHand"
+[[AttackEventPair]]
+RightEvent = "attackPowerStartLeft"
+LeftEvent = "attackPowerStartLeftLeftHand"
+[[AttackEventPair]]
+RightEvent = "attackPowerStartRight"
+LeftEvent = "attackPowerStartRightLeftHand"
+[[AttackEventPair]]
+RightEvent = "attackPowerStart_MC_1HMRight"
+LeftEvent = "attackPowerStart_MC_1HMLeft"
+[[AttackEventPair]]
+RightEvent = "attackPowerStart_Sprint"
+LeftEvent = "attackPowerStart_SprintLeftHand"
+[[AttackEventPair]]
+RightEvent = "attackStart"
+LeftEvent = "attackStartLeftHand"
+[[AttackEventPair]]
+RightEvent = "AttackStartH2HRight"
+LeftEvent = "AttackStartH2HLeft"
+[[AttackEventPair]]
+RightEvent = "attackStartSprint"
+LeftEvent = "attackStartSprintLeftHand"
+[[AttackEventPair]]
+RightEvent = "attackStart_MC_1HMRight"
+LeftEvent = "attackStart_MC_1HMLeft"
+
+[[AttackEventPair]]
+RightEvent = "attackStartRightPower"
+LeftEvent = "AttackStartLeftPower"
+[[AttackEventPair]]
+RightEvent = "AttackStartRightRunningPower"
+LeftEvent = "AttackStartLeftRunningPower"
+[[AttackEventPair]]
+RightEvent = "AttackStartRightSide"
+LeftEvent = "AttackStartLeftSide"
+[[AttackEventPair]]
+RightEvent = "AttackStartRightSprinting"
+LeftEvent = "AttackStartLeftSprinting"
+
+[[AttackEventPair]]
+RightEvent = "AttackPowerStart_Right"
+LeftEvent = "AttackPowerStart_Left"
+[[AttackEventPair]]
+RightEvent = "attackStartRight"
+LeftEvent = "attackStartLeft"
+
+# BStarRP — add pack weapon length fixes here when needed:
+# [[WeaponOverride]]
+# Weapon = { FormID = 0x12EB7, Plugin = "Skyrim.esm" }
+# Length = 100
+# Radius = 12
