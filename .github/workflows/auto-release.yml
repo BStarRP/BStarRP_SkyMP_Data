@@ -508,3 +508,15 @@ jobs:
             echo "No assets to upload (unchanged point to previous release — copying)."
           fi
           echo "Uploaded manifest.json, changelog.json, and ${#files[@]} per-file assets to GitHub (R2 assets: LFS + oversized)"
+
+      # Posts patch-notes.md to the Discord server-updates channel when a new version ships.
+      # Requires repo secret DISCORD_WEBHOOK_URL (channel Integrations → Webhooks).
+      - name: Post patch notes to Discord
+        if: steps.version.outputs.version != steps.version.outputs.previous_version
+        continue-on-error: true
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          VERSION: ${{ steps.version.outputs.version }}
+          RELEASE_TAG: ${{ steps.version.outputs.tag }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+        run: node scripts/notify-discord-patch.js "${{ steps.version.outputs.version }}" release-notes.md
