@@ -1,9 +1,8 @@
 # Patch notes
 
 **Summary**
-Everything is looking good, just a little cleanup for more testing tonight!
+Working to fix a small syncing bug!
 
 ## Changes
-- Fixed an issue with eating/drinking progress bar not displaying the right name
-- Fixed an issue with progress bar freezing camera movement
-- Fixed an issue with syncing players animations
+- Fixed an issue with syncing movement
+- Updated combat timers after swings with delays based on weapon type
