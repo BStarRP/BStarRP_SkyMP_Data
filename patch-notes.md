@@ -1,8 +1,8 @@
 # Patch notes
 
 **Summary**
-Working to fix a small syncing bug!
+Here it is, the final broken bug!  We need to test big groups with NPC's again!  Should be perfromant with no crashing!
 
 ## Changes
-- Fixed an issue with syncing movement
-- Updated combat timers after swings with delays based on weapon type
+- Fixed issue with animations not syncing
+- Cleanup code & optimizations
