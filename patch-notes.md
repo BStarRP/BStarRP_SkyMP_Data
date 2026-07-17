@@ -1,11 +1,9 @@
 # Patch notes
 
 **Summary**
-Final test run for magic/crash issues!
+Everything is looking good, just a little cleanup for more testing tonight!
 
 ## Changes
-- Fixed several crashes
-- Fixed an issue with dead npc's showing up T-posed
-- Improved NPC cleanup code
-- Improved NPC AI code
-- Updated java crash catches
+- Fixed an issue with eating/drinking progress bar not displaying the right name
+- Fixed an issue with progress bar freezing camera movement
+- Fixed an issue with syncing players animations
