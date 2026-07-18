@@ -1,0 +1,1304 @@
+{
+    "modName": "Precision",
+    "displayName": "Precision",
+    "minMcmVersion": 9,
+    "cursorFillMode": "topToBottom",
+    "pages": [{
+        "pageDisplayName": "$Precision_AttackCollisions_Page",
+        "cursorFillMode": "topToBottom",
+        "content": [
+            {
+                "text": "$Precision_AttackCollisionGeneralSettings_HeaderText",
+                "type": "header"
+            },
+            {
+                "id": "bAttackCollisionsEnabled:AttackCollisions",
+                "text": "$Precision_AttackCollisionsEnabled_OptionText",
+                "type": "toggle",
+                "help": "$Precision_AttackCollisionsEnabled_InfoText",
+                "groupControl": 1,
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "bEnableJumpIframes:AttackCollisions",
+                "text": "$Precision_EnableJumpIframes_OptionText",
+                "type": "toggle",
+                "help": "$Precision_EnableJumpIframes_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "bDisablePhysicalCollisionOnHit:AttackCollisions",
+                "text": "$Precision_DisablePhysicalCollisionOnHit_OptionText",
+                "type": "toggle",
+                "help": "$Precision_DisablePhysicalCollisionOnHit_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "fHitSameRefCooldown:AttackCollisions",
+                "text": "$Precision_HitSameRefCooldown_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitSameRefCooldown_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0.01,
+                    "max": 1,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitSameMaterialCooldown:AttackCollisions",
+                "text": "$Precision_HitSameMaterialCooldown_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitSameMaterialCooldown_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0.01,
+                    "max": 1,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fGroundFeetDistanceThreshold:AttackCollisions",
+                "text": "$Precision_GroundFeetDistanceThreshold_OptionText",
+                "type": "slider",
+                "help": "$Precision_GroundFeetDistanceThreshold_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0,
+                    "max": 100,
+                    "step": 1,
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "text": "$Precision_AttackCollisionFilterSettings_HeaderText",
+                "type": "header"
+            },
+            {
+                "id": "bNoPlayerTeammateAttackCollision:AttackCollisions",
+                "text": "$Precision_NoPlayerTeammateAttackCollision_OptionText",
+                "type": "toggle",
+                "help": "$Precision_NoPlayerTeammateAttackCollision_InfoText",
+                "groupCondition": 1,
+                "groupControl": 2,
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "bNoNonHostileAttackCollision:AttackCollisions",
+                "text": "$Precision_NoNonHostileAttackCollision_OptionText",
+                "type": "toggle",
+                "help": "$Precision_NoNonHostileAttackCollision_InfoText",
+                "groupCondition": 1,
+                "groupControl": 3,
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "fCombatStateLingerTime:AttackCollisions",
+                "text": "$Precision_CombatStateLingerTime_OptionText",
+                "type": "slider",
+                "help": "$Precision_CombatStateLingerTime_InfoText",
+                "groupCondition": {"AND": [1, {"OR": [2, 3]}]},
+                "valueOptions": {
+                    "min": 1,
+                    "max": 5,
+                    "step": 0.1,
+                    "formatString": "{1}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "text": "$Precision_SweepAttackSettings_HeaderText",
+                "type": "header"
+            },
+            {
+                "id": "uSweepAttackMode:AttackCollisions",
+                "text": "$Precision_SweepAttackMode_OptionText",
+                "type": "enum",
+                "help": "$Precision_SweepAttackMode_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "options": [
+                        "$Precision_SweepAttackMode_Unlimited",
+                        "$Precision_SweepAttackMode_MaxTargets",
+                        "$Precision_SweepAttackMode_DiminishingReturns"
+                    ],
+                    "shortNames": [
+                        "$Precision_SweepAttackMode_Unlimited",
+                        "$Precision_SweepAttackMode_MaxTargets",
+                        "$Precision_SweepAttackMode_Diminishing"
+                      ],
+                    "sourceType": "ModSettingInt"
+                }
+            },
+            {
+                "type": "hiddenToggle",
+                "groupControl": 4,
+                "valueOptions": {
+                  "sourceType": "PropertyValueBool",
+                  "propertyName": "bSweepAttackModeMaxTargets"
+                }
+            },
+            {
+                "type": "hiddenToggle",
+                "groupControl": 5,
+                "valueOptions": {
+                  "sourceType": "PropertyValueBool",
+                  "propertyName": "bSweepAttackModeDiminishingReturns"
+                }
+            },
+            {
+                "id": "uMaxTargetsNoSweepAttack:AttackCollisions",
+                "text": "$Precision_MaxTargetsNoSweepAttack_OptionText",
+                "type": "slider",
+                "help": "$Precision_MaxTargetsNoSweepAttack_InfoText",
+                "groupCondition": {"AND": [1, 4]},
+                "valueOptions": {
+                    "min": 0,
+                    "max": 10,
+                    "step": 1,
+                    "sourceType": "ModSettingInt"
+                }
+            },
+            {
+                "id": "uMaxTargetsSweepAttack:AttackCollisions",
+                "text": "$Precision_MaxTargetsSweepAttack_OptionText",
+                "type": "slider",
+                "help": "$Precision_MaxTargetsSweepAttack_InfoText",
+                "groupCondition": {"AND": [1, 4]},
+                "valueOptions": {
+                    "min": 0,
+                    "max": 10,
+                    "step": 1,
+                    "sourceType": "ModSettingInt"
+                }
+            },
+            {
+                "id": "fSweepAttackDiminishingReturnsFactor:AttackCollisions",
+                "text": "$Precision_SweepAttackDiminishingReturnsFactor_OptionText",
+                "type": "slider",
+                "help": "$Precision_SweepAttackDiminishingReturnsFactor_InfoText",
+                "groupCondition": {"AND": [1, 5]},
+                "valueOptions": {
+                    "min": 0.1,
+                    "max": 1,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "text": "$Precision_AttackCollisionCapsuleSettings_HeaderText",
+                "type": "header",
+                "position": 1
+            },
+            {
+                "id": "fWeaponLengthMult:AttackCollisions",
+                "text": "$Precision_WeaponLengthMult_OptionText",
+                "type": "slider",
+                "help": "$Precision_WeaponLengthMult_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0.1,
+                    "max": 4,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },        
+            {
+                "id": "fWeaponCapsuleRadius:AttackCollisions",
+                "text": "$Precision_WeaponCapsuleRadius_OptionText",
+                "type": "slider",
+                "help": "$Precision_WeaponCapsuleRadius_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 5,
+                    "max": 50,
+                    "step": 1,
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fMinWeaponLength:AttackCollisions",
+                "text": "$Precision_MinWeaponLength_OptionText",
+                "type": "slider",
+                "help": "$Precision_MinWeaponLength_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 20,
+                    "max": 100,
+                    "step": 1,
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fDefaultCollisionLifetime:AttackCollisions",
+                "text": "$Precision_DefaultCollisionLifetime_OptionText",
+                "type": "slider",
+                "help": "$Precision_DefaultCollisionLifetime_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0.05,
+                    "max": 1,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fDefaultCollisionLifetimePowerAttackMult:AttackCollisions",
+                "text": "$Precision_DefaultCollisionLifetimePowerAttackMult_OptionText",
+                "type": "slider",
+                "help": "$Precision_DefaultCollisionLifetimePowerAttackMult_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 1,
+                    "max": 4,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fFirstPersonAttackLengthOffset:AttackCollisions",
+                "text": "$Precision_FirstPersonAttackLengthOffset_OptionText",
+                "type": "slider",
+                "help": "$Precision_FirstPersonAttackLengthOffset_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": -50,
+                    "max": 50,
+                    "step": 1,
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fPlayerAttackLengthMult:AttackCollisions",
+                "text": "$Precision_PlayerAttackLengthMult_OptionText",
+                "type": "slider",
+                "help": "$Precision_PlayerAttackLengthMult_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0.1,
+                    "max": 4,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fPlayerAttackRadiusMult:AttackCollisions",
+                "text": "$Precision_PlayerAttackRadiusMult_OptionText",
+                "type": "slider",
+                "help": "$Precision_PlayerAttackRadiusMult_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0.1,
+                    "max": 4,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fMountedAttackLengthMult:AttackCollisions",
+                "text": "$Precision_MountedAttackLengthMult_OptionText",
+                "type": "slider",
+                "help": "$Precision_MountedAttackLengthMult_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0.1,
+                    "max": 4,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fMountedAttackRadiusMult:AttackCollisions",
+                "text": "$Precision_MountedAttackRadiusMult_OptionText",
+                "type": "slider",
+                "help": "$Precision_MountedAttackRadiusMult_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0.1,
+                    "max": 4,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            }
+        ]
+    },
+    {
+        "pageDisplayName": "$Precision_Trails_Page",
+        "cursorFillMode": "topToBottom",
+        "content": [
+            {
+                "text": "$Precision_TrailSettings_HeaderText",
+                "type": "header"
+            },
+            {
+                "id": "bDisplayTrails:Trails",
+                "text": "$Precision_DisplayTrails_OptionText",
+                "type": "toggle",
+                "help": "$Precision_DisplayTrails_InfoText",
+                "groupControl": 1,
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "bTrailUseAttackCollisionLength:Trails",
+                "text": "$Precision_TrailUseAttackCollisionLength_OptionText",
+                "type": "toggle",
+                "help": "$Precision_TrailUseAttackCollisionLength_InfoText",
+                "groupControl": 1,
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "fTrailSegmentLifetime:Trails",
+                "text": "$Precision_TrailSegmentLifetime_OptionText",
+                "type": "slider",
+                "help": "$Precision_TrailSegmentLifetime_InfoText",
+                "valueOptions": {
+                    "min": 0.01,
+                    "max": 1,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fTrailFadeOutTime:Trails",
+                "text": "$Precision_TrailFadeOutTime_OptionText",
+                "type": "slider",
+                "help": "$Precision_TrailFadeOutTime_InfoText",
+                "valueOptions": {
+                    "min": 0.01,
+                    "max": 1,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "uTrailSegmentsPerSecond:Trails",
+                "text": "$Precision_TrailSegmentsPerSecond_OptionText",
+                "type": "slider",
+                "help": "$Precision_TrailSegmentsPerSecond_InfoText",
+                "valueOptions": {
+                    "min": 60,
+                    "max": 200,
+                    "step": 1,
+                    "sourceType": "ModSettingInt"
+                }
+            },
+            {
+                "text": "$Precision_TrailColorSettings_HeaderText",
+                "type": "header",
+                "position": 1
+            },
+            {
+                "id": "fTrailDefaultBaseColorR:Trails",
+                "text": "$Precision_TrailDefaultBaseColorR_OptionText",
+                "type": "slider",
+                "help": "$Precision_TrailDefaultBaseColorR_InfoText",
+                "valueOptions": {
+                    "min": 0,
+                    "max": 1,
+                    "step": 0.001,
+                    "formatString": "{3}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fTrailDefaultBaseColorG:Trails",
+                "text": "$Precision_TrailDefaultBaseColorG_OptionText",
+                "type": "slider",
+                "help": "$Precision_TrailDefaultBaseColorG_InfoText",
+                "valueOptions": {
+                    "min": 0,
+                    "max": 1,
+                    "step": 0.001,
+                    "formatString": "{3}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fTrailDefaultBaseColorB:Trails",
+                "text": "$Precision_TrailDefaultBaseColorB_OptionText",
+                "type": "slider",
+                "help": "$Precision_TrailDefaultBaseColorB_InfoText",
+                "valueOptions": {
+                    "min": 0,
+                    "max": 1,
+                    "step": 0.001,
+                    "formatString": "{3}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fTrailDefaultBaseColorA:Trails",
+                "text": "$Precision_TrailDefaultBaseColorA_OptionText",
+                "type": "slider",
+                "help": "$Precision_TrailDefaultBaseColorA_InfoText",
+                "valueOptions": {
+                    "min": 0,
+                    "max": 1,
+                    "step": 0.001,
+                    "formatString": "{3}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "type": "empty"
+            },
+            {
+                "id": "fTrailBaseColorScaleMult:Trails",
+                "text": "$Precision_TrailBaseColorScaleMult_OptionText",
+                "type": "slider",
+                "help": "$Precision_TrailBaseColorScaleMult_InfoText",
+                "valueOptions": {
+                    "min": 0.01,
+                    "max": 10,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            }
+        ]
+    },
+    {
+        "pageDisplayName": "$Precision_Hitstop_Page",
+        "cursorFillMode": "topToBottom",
+        "content": [
+            {
+                "text": "$Precision_HitstopSettings_HeaderText",
+                "type": "header"
+            },
+            {
+                "id": "bEnableHitstop:Hitstop",
+                "text": "$Precision_EnableHitstop_OptionText",
+                "type": "toggle",
+                "help": "$Precision_EnableHitstop_InfoText",
+                "groupControl": 1,
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "bApplyHitstopToTarget:Hitstop",
+                "text": "$Precision_ApplyHitstopToTarget_OptionText",
+                "type": "toggle",
+                "help": "$Precision_ApplyHitstopToTarget_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "fHitstopDurationNPC:Hitstop",
+                "text": "$Precision_HitstopDurationNPC_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitstopDurationNPC_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0.01,
+                    "max": 1,
+                    "step": 0.001,
+                    "formatString": "{3}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitstopDurationOther:Hitstop",
+                "text": "$Precision_HitstopDurationOther_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitstopDurationOther_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0.01,
+                    "max": 1,
+                    "step": 0.001,
+                    "formatString": "{3}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitstopSlowdownTimeMultiplier:Hitstop",
+                "text": "$Precision_HitstopSlowdownTimeMultiplier_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitstopSlowdownTimeMultiplier_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0.01,
+                    "max": 1,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitstopDurationPowerAttackMultiplier:Hitstop",
+                "text": "$Precision_HitstopDurationPowerAttackMultiplier_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitstopDurationPowerAttackMultiplier_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 1,
+                    "max": 4,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitstopDurationTwoHandedMultiplier:Hitstop",
+                "text": "$Precision_HitstopDurationTwoHandedMultiplier_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitstopDurationTwoHandedMultiplier_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 1,
+                    "max": 4,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitstopDurationDiminishingReturnsFactor:Hitstop",
+                "text": "$Precision_HitstopDurationDiminishingReturnsFactor_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitstopDurationDiminishingReturnsFactor_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0,
+                    "max": 1,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "text": "$Precision_HitstopCameraShakeSettings_HeaderText",
+                "type": "header",
+                "position": 1
+            },
+            {
+                "id": "bEnableHitstopCameraShake:Hitstop",
+                "text": "$Precision_EnableHitstopCameraShake_OptionText",
+                "type": "toggle",
+                "help": "$Precision_EnableHitstopCameraShake_InfoText",
+                "groupControl": 2,
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "fHitstopCameraShakeStrengthNPC:Hitstop",
+                "text": "$Precision_HitstopCameraShakeStrengthNPC_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitstopCameraShakeStrengthNPC_InfoText",
+                "groupCondition": 2,
+                "valueOptions": {
+                    "min": 0,
+                    "max": 50,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitstopCameraShakeStrengthOther:Hitstop",
+                "text": "$Precision_HitstopCameraShakeStrengthOther_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitstopCameraShakeStrengthOther_InfoText",
+                "groupCondition": 2,
+                "valueOptions": {
+                    "min": 0,
+                    "max": 50,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitstopCameraShakeDurationNPC:Hitstop",
+                "text": "$Precision_HitstopCameraShakeDurationNPC_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitstopCameraShakeDurationNPC_InfoText",
+                "groupCondition": 2,
+                "valueOptions": {
+                    "min": 0,
+                    "max": 1,
+                    "step": 0.001,
+                    "formatString": "{3}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitstopCameraShakeDurationOther:Hitstop",
+                "text": "$Precision_HitstopCameraShakeDurationOther_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitstopCameraShakeDurationOther_InfoText",
+                "groupCondition": 2,
+                "valueOptions": {
+                    "min": 0,
+                    "max": 1,
+                    "step": 0.001,
+                    "formatString": "{3}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitstopCameraShakeFrequency:Hitstop",
+                "text": "$Precision_HitstopCameraShakeFrequency_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitstopCameraShakeFrequency_InfoText",
+                "groupCondition": 2,
+                "valueOptions": {
+                    "min": 10,
+                    "max": 200,
+                    "step": 1,
+                    "formatString": "{1}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitstopCameraShakePowerAttackMultiplier:Hitstop",
+                "text": "$Precision_HitstopCameraShakePowerAttackMultiplier_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitstopCameraShakePowerAttackMultiplier_InfoText",
+                "groupCondition": 2,
+                "valueOptions": {
+                    "min": 1,
+                    "max": 4,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitstopCameraShakeTwoHandedMultiplier:Hitstop",
+                "text": "$Precision_HitstopCameraShakeTwoHandedMultiplier_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitstopCameraShakeTwoHandedMultiplier_InfoText",
+                "groupCondition": 2,
+                "valueOptions": {
+                    "min": 1,
+                    "max": 4,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitstopCameraShakeDurationDiminishingReturnsFactor:Hitstop",
+                "text": "$Precision_HitstopCameraShakeDurationDiminishingReturnsFactor_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitstopCameraShakeDurationDiminishingReturnsFactor_InfoText",
+                "groupCondition": 2,
+                "valueOptions": {
+                    "min": 0,
+                    "max": 1,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            }
+        ]
+    },
+    {
+        "pageDisplayName": "$Precision_Recoil_Page",
+        "cursorFillMode": "topToBottom",
+        "content": [
+            {
+                "text": "$Precision_RecoilSettings_HeaderText",
+                "type": "header"
+            },
+            {
+                "id": "bRecoilPlayer:Recoil",
+                "text": "$Precision_RecoilPlayer_OptionText",
+                "type": "toggle",
+                "help": "$Precision_RecoilPlayer_InfoText",
+                "groupControl": 1,
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "bRecoilNPC:Recoil",
+                "text": "$Precision_RecoilNPC_OptionText",
+                "type": "toggle",
+                "help": "$Precision_RecoilNPC_InfoText",
+                "groupControl": 2,
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "bRecoilPowerAttack:Recoil",
+                "text": "$Precision_RecoilPowerAttack_OptionText",
+                "type": "toggle",
+                "help": "$Precision_RecoilPowerAttack_InfoText",
+                "groupCondition": [1, 2],
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "bUseVanillaRecoil:Recoil",
+                "text": "$Precision_UseVanillaRecoil_OptionText",
+                "type": "toggle",
+                "help": "$Precision_UseVanillaRecoil_InfoText",
+                "groupCondition": [1, 2],
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "bRemoveRecoilOnHitframe:Recoil",
+                "text": "$Precision_RemoveRecoilOnHitframe_OptionText",
+                "type": "toggle",
+                "help": "$Precision_RemoveRecoilOnHitframe_InfoText",
+                "groupCondition": [1, 2],
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "fRecoilCollisionLength:Recoil",
+                "text": "$Precision_RecoilCollisionLength_OptionText",
+                "type": "slider",
+                "help": "$Precision_RecoilCollisionLength_InfoText",
+                "groupCondition": [1, 2],
+                "valueOptions": {
+                    "min": 1,
+                    "max": 100,
+                    "step": 1,
+                    "formatString": "{1}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "text": "$Precision_RecoilCameraShakeSettings_HeaderText",
+                "type": "header",
+                "position": 1
+            },
+            {
+                "id": "bEnableRecoilCameraShake:Recoil",
+                "text": "$Precision_EnableRecoilCameraShake_OptionText",
+                "type": "toggle",
+                "help": "$Precision_EnableRecoilCameraShake_InfoText",
+                "groupControl": 3,
+                "groupCondition": [1, 2],
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "fRecoilCameraShakeStrength:Recoil",
+                "text": "$Precision_RecoilCameraShakeStrength_OptionText",
+                "type": "slider",
+                "help": "$Precision_RecoilCameraShakeStrength_InfoText",
+                "groupCondition": {"AND": [{"OR": [1, 2]}, 3]},
+                "valueOptions": {
+                    "min": 0,
+                    "max": 50,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fRecoilCameraShakeDuration:Recoil",
+                "text": "$Precision_RecoilCameraShakeDuration_OptionText",
+                "type": "slider",
+                "help": "$Precision_RecoilCameraShakeDuration_InfoText",
+                "groupCondition": {"AND": [{"OR": [1, 2]}, 3]},
+                "valueOptions": {
+                    "min": 0,
+                    "max": 1,
+                    "step": 0.001,
+                    "formatString": "{3}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fRecoilCameraShakeFrequency:Recoil",
+                "text": "$Precision_RecoilCameraShakeFrequency_OptionText",
+                "type": "slider",
+                "help": "$Precision_RecoilCameraShakeFrequency_InfoText",
+                "groupCondition": {"AND": [{"OR": [1, 2]}, 3]},
+                "valueOptions": {
+                    "min": 10,
+                    "max": 200,
+                    "step": 1,
+                    "formatString": "{1}",
+                    "sourceType": "ModSettingFloat"
+                }
+            }
+        ]
+    },
+    {
+        "pageDisplayName": "$Precision_HitImpulse_Page",
+        "cursorFillMode": "topToBottom",
+        "content": [
+            {
+                "text": "$Precision_HitImpulseSettings_HeaderText",
+                "type": "header"
+            },
+            {
+                "id": "bApplyImpulseOnHit:HitImpulse",
+                "text": "$Precision_ApplyImpulseOnHit_OptionText",
+                "type": "toggle",
+                "help": "$Precision_ApplyImpulseOnHit_InfoText",
+                "groupControl": 1,
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "bApplyImpulseOnKill:HitImpulse",
+                "text": "$Precision_ApplyImpulseOnKill_OptionText",
+                "type": "toggle",
+                "help": "$Precision_ApplyImpulseOnKill_InfoText",
+                "groupControl": 2,
+                "groupCondition": 1,                
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "fHitImpulseBaseMult:HitImpulse",
+                "text": "$Precision_HitImpulseBaseMult_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitImpulseBaseMult_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0.1,
+                    "max": 5,
+                    "step": 0.1,
+                    "formatString": "{1}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitImpulseBlockMult:HitImpulse",
+                "text": "$Precision_HitImpulseBlockMult_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitImpulseBlockMult_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0.1,
+                    "max": 5,
+                    "step": 0.1,
+                    "formatString": "{1}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitImpulsePowerAttackMult:HitImpulse",
+                "text": "$Precision_HitImpulsePowerAttackMult_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitImpulsePowerAttackMult_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0.1,
+                    "max": 5,
+                    "step": 0.1,
+                    "formatString": "{1}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitImpulseRagdollMult:HitImpulse",
+                "text": "$Precision_HitImpulseRagdollMult_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitImpulseRagdollMult_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0.1,
+                    "max": 5,
+                    "step": 0.1,
+                    "formatString": "{1}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitImpulseKillMult:HitImpulse",
+                "text": "$Precision_HitImpulseKillMult_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitImpulseKillMult_InfoText",
+                "groupCondition": {"AND": [1, 2]},
+                "valueOptions": {
+                    "min": 0.1,
+                    "max": 5,
+                    "step": 0.1,
+                    "formatString": "{1}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "text": "$Precision_HitImpulseDetailedSettings_HeaderText",
+                "type": "header",
+                "position": 1
+            },
+            {
+                "id": "fHitImpulseBaseStrength:HitImpulse",
+                "text": "$Precision_HitImpulseBaseStrength_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitImpulseBaseStrength_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0.1,
+                    "max": 5,
+                    "step": 0.1,
+                    "formatString": "{1}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitImpulseProportionalStrength:HitImpulse",
+                "text": "$Precision_HitImpulseProportionalStrength_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitImpulseProportionalStrength_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": -1,
+                    "max": 1,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitImpulseMassExponent:HitImpulse",
+                "text": "$Precision_HitImpulseMassExponent_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitImpulseMassExponent_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0.1,
+                    "max": 1,
+                    "step": 0.1,
+                    "formatString": "{1}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitImpulseMinStrength:HitImpulse",
+                "text": "$Precision_HitImpulseMinStrength_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitImpulseMinStrength_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0.01,
+                    "max": 10,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitImpulseMaxStrength:HitImpulse",
+                "text": "$Precision_HitImpulseMaxStrength_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitImpulseMaxStrength_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0.01,
+                    "max": 10,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitImpulseMaxVelocity:HitImpulse",
+                "text": "$Precision_HitImpulseMaxVelocity_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitImpulseMaxVelocity_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 100,
+                    "max": 10000,
+                    "step": 1,
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitImpulseDownwardsMultiplier:HitImpulse",
+                "text": "$Precision_HitImpulseDownwardsMultiplier_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitImpulseDownwardsMultiplier_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0.01,
+                    "max": 1,
+                    "step": 0.01,
+                    "formatString": "{2}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitImpulseDecayMult1:HitImpulse",
+                "text": "$Precision_HitImpulseDecayMult1_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitImpulseDecayMult1_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0.01,
+                    "max": 1,
+                    "step": 0.001,
+                    "formatString": "{3}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitImpulseDecayMult2:HitImpulse",
+                "text": "$Precision_HitImpulseDecayMult2_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitImpulseDecayMult2_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0.01,
+                    "max": 1,
+                    "step": 0.001,
+                    "formatString": "{3}",
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "fHitImpulseDecayMult3:HitImpulse",
+                "text": "$Precision_HitImpulseDecayMult3_OptionText",
+                "type": "slider",
+                "help": "$Precision_HitImpulseDecayMult3_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "min": 0.01,
+                    "max": 1,
+                    "step": 0.001,
+                    "formatString": "{3}",
+                    "sourceType": "ModSettingFloat"
+                }
+            }
+        ]
+    },
+    {
+        "pageDisplayName": "$Precision_Misc_Page",
+        "cursorFillMode": "topToBottom",
+        "content": [
+            {
+                "text": "$Precision_MiscellaneousSettings_HeaderText",
+                "type": "header"
+            },
+            {
+                "id": "fActiveActorDistance:Miscellaneous",
+                "text": "$Precision_ActiveActorDistance_OptionText",
+                "type": "slider",
+                "help": "$Precision_ActiveActorDistance_InfoText",
+                "valueOptions": {
+                    "min": 1000,
+                    "max": 10000,
+                    "step": 1,
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "bHookAIWeaponReach:Miscellaneous",
+                "text": "$Precision_HookAIWeaponReach_OptionText",
+                "type": "toggle",
+                "help": "$Precision_HookAIWeaponReach_InfoText",
+                "groupControl": 2,
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "fAIWeaponReachOffset:Miscellaneous",
+                "text": "$Precision_AIWeaponReachOffset_OptionText",
+                "type": "slider",
+                "help": "$Precision_AIWeaponReachOffset_InfoText",
+                "groupCondition": 2,
+                "valueOptions": {
+                    "min": -50,
+                    "max": 50,
+                    "step": 1,
+                    "sourceType": "ModSettingFloat"
+                }
+            },
+            {
+                "id": "bDisableCharacterBumper:Miscellaneous",
+                "text": "$Precision_DisableCharacterBumper_OptionText",
+                "type": "toggle",
+                "help": "$Precision_DisableCharacterBumper_InfoText",
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "bUseRagdollCollisionWhenAllowed:Miscellaneous",
+                "text": "$Precision_UseRagdollCollisionWhenAllowed_OptionText",
+                "type": "toggle",
+                "help": "$Precision_UseRagdollCollisionWhenAllowed_InfoText",
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "text": "$Precision_Nemesis_HeaderText",
+                "type": "header",
+                "position": 1
+            },
+            {
+                "type": "hiddenToggle",
+                "groupControl": 1,
+                "valueOptions": {
+                    "sourceType": "GlobalValue",
+                    "sourceForm": "Precision.esp|801"
+                }
+            },
+            {
+                "text": "$Precision_Nemesis_OptionText",
+                "type": "text",
+                "help": "$Precision_NemesisInstalled_InfoText",
+                "groupCondition": 1,
+                "groupBehavior": "skip",
+                "valueOptions": {
+                    "value": "$Precision_NemesisInstalled_ValueText"
+                }
+            },
+            {
+                "text": "$Precision_Nemesis_OptionText",
+                "type": "text",
+                "help": "$Precision_NemesisNotInstalled_InfoText",
+                "groupCondition": {"NOT": 1},
+                "groupBehavior": "skip",
+                "valueOptions": {
+                    "value": "$Precision_NemesisNotInstalled_ValueText"
+                }
+            }
+        ]
+    },
+    {
+        "pageDisplayName": "$Precision_Debug_Page",
+        "cursorFillMode": "topToBottom",
+        "content": [
+            {
+                "text": "$Precision_DebugSettings_HeaderText",
+                "type": "header"
+            },
+            {
+                "id": "bDebug:Debug",
+                "text": "$Precision_Debug_OptionText",
+                "type": "toggle",
+                "help": "$Precision_Debug_InfoText",
+                "groupControl": 1,
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "bDisplayWeaponCapsule:Debug",
+                "text": "$Precision_DisplayWeaponCapsule_OptionText",
+                "type": "toggle",
+                "help": "$Precision_DisplayWeaponCapsule_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "bDisplayHitNodeCollisions:Debug",
+                "text": "$Precision_DisplayHitNodeCollisions_OptionText",
+                "type": "toggle",
+                "help": "$Precision_DisplayHitNodeCollisions_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "bDisplayHitLocations:Debug",
+                "text": "$Precision_DisplayHitLocations_OptionText",
+                "type": "toggle",
+                "help": "$Precision_DisplayHitLocations_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "bDisplayIframeHits:Debug",
+                "text": "$Precision_DisplayIframeHits_OptionText",
+                "type": "toggle",
+                "help": "$Precision_DisplayIframeHits_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "bDisplayRecoilCollisions:Debug",
+                "text": "$Precision_DisplayRecoilCollisions_OptionText",
+                "type": "toggle",
+                "help": "$Precision_DisplayRecoilCollisions_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "bDisplaySkeletonColliders:Debug",
+                "text": "$Precision_DisplaySkeletonColliders_OptionText",
+                "type": "toggle",
+                "help": "$Precision_DisplaySkeletonColliders_InfoText",
+                "groupCondition": 1,
+                "valueOptions": {
+                    "sourceType": "ModSettingBool"
+                }
+            },
+            {
+                "id": "uToggleKey:Debug",
+                "text": "$Precision_ToggleKey_OptionText",
+                "type": "keymap",
+                "help": "$Precision_ToggleKey_InfoText",
+                "ignoreConflicts": false,
+                "valueOptions": {
+                    "sourceType": "ModSettingInt"
+                }
+            },
+            {
+                "id": "uReloadSettingsKey:Debug",
+                "text": "$Precision_ReloadSettingsKey_OptionText",
+                "type": "keymap",
+                "help": "$Precision_ReloadSettingsKey_InfoText",
+                "ignoreConflicts": false,
+                "valueOptions": {
+                    "sourceType": "ModSettingInt"
+                }
+            }
+        ]
+    }]
+}

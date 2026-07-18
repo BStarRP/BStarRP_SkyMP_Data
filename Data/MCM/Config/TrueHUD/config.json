@@ -1,0 +1,2344 @@
+{
+    "modName": "TrueHUD",
+    "displayName": "TrueHUD",
+    "minMcmVersion": 11,
+    "cursorFillMode": "topToBottom",
+    "pages": [
+      {
+        "pageDisplayName": "$TrueHUD_GeneralPage",
+        "cursorFillMode": "topToBottom",
+        "content": [
+          {
+            "text": "$TrueHUD_GeneralSettings_HeaderText",
+            "type": "header"
+          },
+          {
+            "id": "bEnableActorInfoBars:General",
+            "text": "$TrueHUD_EnableActorInfoBars_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_EnableActorInfoBars_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "bEnableBossBars:General",
+            "text": "$TrueHUD_EnableBossBars_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_EnableBossBars_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "bEnablePlayerWidget:General",
+            "text": "$TrueHUD_EnablePlayerWidget_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_EnablePlayerWidget_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "bEnableRecentLoot:General",
+            "text": "$TrueHUD_EnableRecentLoot_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_EnableRecentLoot_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "bHideVanillaTargetBar:General",
+            "text": "$TrueHUD_HideVanillaTargetBar_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_HideVanillaTargetBar_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          }
+        ]
+      },
+      {
+        "pageDisplayName": "$TrueHUD_ActorInfoBars",
+        "cursorFillMode": "topToBottom",
+        "content": [
+          {
+            "id": "bEnableActorInfoBars:General",
+            "type": "hiddenToggle",
+            "groupControl": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "text": "$TrueHUD_DisplayCriteria_HeaderText",
+            "type": "header"
+          },
+          {
+            "id": "uInfoBarDisplayHostiles:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarDisplayHostiles_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_InfoBarDisplayHostiles_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_InfoBarDisplay_Never",
+                "$TrueHUD_InfoBarDisplay_OnHit",
+                "$TrueHUD_InfoBarDisplay_OnCombatStart"
+              ],
+              "shortNames": [
+                "$TrueHUD_InfoBarDisplay_Never",
+                "$TrueHUD_InfoBarDisplay_OnHit",
+                "$TrueHUD_InfoBarDisplay_Combat"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uInfoBarDisplayTeammates:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarDisplayTeammates_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_InfoBarDisplayTeammates_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_InfoBarDisplay_Never",
+                "$TrueHUD_InfoBarDisplay_OnHit",
+                "$TrueHUD_InfoBarDisplay_OnCombatStart"
+              ],
+              "shortNames": [
+                "$TrueHUD_InfoBarDisplay_Never",
+                "$TrueHUD_InfoBarDisplay_OnHit",
+                "$TrueHUD_InfoBarDisplay_Combat"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uInfoBarDisplayOthers:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarDisplayOthers_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_InfoBarDisplayOthers_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_InfoBarDisplay_Never",
+                "$TrueHUD_InfoBarDisplay_OnHit",
+                "$TrueHUD_InfoBarDisplay_OnCombatStart"
+              ],
+              "shortNames": [
+                "$TrueHUD_InfoBarDisplay_Never",
+                "$TrueHUD_InfoBarDisplay_OnHit",
+                "$TrueHUD_InfoBarDisplay_Combat"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "type": "header"
+          },
+          {
+            "id": "bInfoBarDisplayPhantomBars:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarDisplayPhantomBars_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_InfoBarDisplayPhantomBars_InfoText",
+            "groupControl": 2,
+            "groupCondition": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "uInfoBarDisplayName:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarDisplayName_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_InfoBarDisplayName_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_InfoBarDisplayAttitude_Never",
+                "$TrueHUD_InfoBarDisplayAttitude_TargetOnly",
+                "$TrueHUD_InfoBarDisplayAttitude_Hostiles",
+                "$TrueHUD_InfoBarDisplayAttitude_HostilesAndTeammates",
+                "$TrueHUD_InfoBarDisplayAttitude_Everyone"
+              ],
+              "shortNames": [
+                "$TrueHUD_InfoBarDisplayAttitude_Never",
+                "$TrueHUD_InfoBarDisplayAttitude_TargetOnly",
+                "$TrueHUD_InfoBarDisplayAttitude_Enemy",
+                "$TrueHUD_InfoBarDisplayAttitude_EnemyAndTeam",
+                "$TrueHUD_InfoBarDisplayAttitude_Everyone"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uInfoBarDisplayDamageCounter:ActorInfoBars",
+            "type": "hiddenToggle",
+            "groupControl": 3,
+            "valueOptions": {
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uInfoBarDisplayDamageCounter:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarDisplayDamageCounter_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_InfoBarDisplayDamageCounter_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_InfoBarDisplayAttitude_Never",
+                "$TrueHUD_InfoBarDisplayAttitude_TargetOnly",
+                "$TrueHUD_InfoBarDisplayAttitude_Hostiles",
+                "$TrueHUD_InfoBarDisplayAttitude_HostilesAndTeammates",
+                "$TrueHUD_InfoBarDisplayAttitude_Everyone"
+              ],
+              "shortNames": [
+                "$TrueHUD_InfoBarDisplayAttitude_Never",
+                "$TrueHUD_InfoBarDisplayAttitude_TargetOnly",
+                "$TrueHUD_InfoBarDisplayAttitude_Enemy",
+                "$TrueHUD_InfoBarDisplayAttitude_EnemyAndTeam",
+                "$TrueHUD_InfoBarDisplayAttitude_Everyone"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uInfoBarDisplayIndicator:ActorInfoBars",
+            "type": "hiddenToggle",
+            "groupControl": 4,
+            "valueOptions": {
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uInfoBarDisplayIndicator:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarDisplayIndicator_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_InfoBarDisplayIndicator_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_InfoBarDisplayAttitude_Never",
+                "$TrueHUD_InfoBarDisplayAttitude_TargetOnly",
+                "$TrueHUD_InfoBarDisplayAttitude_Hostiles",
+                "$TrueHUD_InfoBarDisplayAttitude_HostilesAndTeammates",
+                "$TrueHUD_InfoBarDisplayAttitude_Everyone"
+              ],
+              "shortNames": [
+                "$TrueHUD_InfoBarDisplayAttitude_Never",
+                "$TrueHUD_InfoBarDisplayAttitude_TargetOnly",
+                "$TrueHUD_InfoBarDisplayAttitude_Enemy",
+                "$TrueHUD_InfoBarDisplayAttitude_EnemyAndTeam",
+                "$TrueHUD_InfoBarDisplayAttitude_Everyone"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "type": "header"
+          },
+          {
+            "id": "uInfoBarResourcesModeTarget:ActorInfoBars",
+            "type": "hiddenToggle",
+            "groupControl": 5,
+            "valueOptions": {
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uInfoBarResourcesModeHostiles:ActorInfoBars",
+            "type": "hiddenToggle",
+            "groupControl": 6,
+            "valueOptions": {
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uInfoBarResourcesModeTeammates:ActorInfoBars",
+            "type": "hiddenToggle",
+            "groupControl": 7,
+            "valueOptions": {
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uInfoBarResourcesModeOthers:ActorInfoBars",
+            "type": "hiddenToggle",
+            "groupControl": 8,
+            "valueOptions": {
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uInfoBarResourcesModeTarget:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarResourcesModeTarget_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_InfoBarResourcesModeTarget_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_ResourcesDisplayMode_Never",
+                "$TrueHUD_ResourcesDisplayMode_WhenChangedFromDefault",
+                "$TrueHUD_ResourcesDisplayMode_Always"
+              ],
+              "shortNames": [
+                "$TrueHUD_ResourcesDisplayMode_Never",
+                "$TrueHUD_ResourcesDisplayMode_Changed",
+                "$TrueHUD_ResourcesDisplayMode_Always"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uInfoBarResourcesModeHostiles:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarResourcesModeHostiles_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_InfoBarResourcesModeHostiles_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_ResourcesDisplayMode_Never",
+                "$TrueHUD_ResourcesDisplayMode_WhenChangedFromDefault",
+                "$TrueHUD_ResourcesDisplayMode_Always"
+              ],
+              "shortNames": [
+                "$TrueHUD_ResourcesDisplayMode_Never",
+                "$TrueHUD_ResourcesDisplayMode_Changed",
+                "$TrueHUD_ResourcesDisplayMode_Always"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uInfoBarResourcesModeTeammates:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarResourcesModeTeammates_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_InfoBarResourcesModeTeammates_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_ResourcesDisplayMode_Never",
+                "$TrueHUD_ResourcesDisplayMode_WhenChangedFromDefault",
+                "$TrueHUD_ResourcesDisplayMode_Always"
+              ],
+              "shortNames": [
+                "$TrueHUD_ResourcesDisplayMode_Never",
+                "$TrueHUD_ResourcesDisplayMode_Changed",
+                "$TrueHUD_ResourcesDisplayMode_Always"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uInfoBarResourcesModeOthers:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarResourcesModeOthers_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_InfoBarResourcesModeOthers_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_ResourcesDisplayMode_Never",
+                "$TrueHUD_ResourcesDisplayMode_WhenChangedFromDefault",
+                "$TrueHUD_ResourcesDisplayMode_Always"
+              ],
+              "shortNames": [
+                "$TrueHUD_ResourcesDisplayMode_Never",
+                "$TrueHUD_ResourcesDisplayMode_Changed",
+                "$TrueHUD_ResourcesDisplayMode_Always"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "text": "$TrueHUD_SpecialBar_HeaderText",
+            "type": "header"
+          },
+          {
+            "type": "hiddenToggle",
+            "groupControl": 9,
+            "valueOptions": {
+                "sourceType": "GlobalValue",
+                "sourceForm": "TrueHUD.esl|802"
+            }
+          },
+          {
+            "text": "$TrueHUD_SpecialBars_OptionText",
+            "type": "text",
+            "help": "$TrueHUD_SpecialBarsControlled_OptionText",
+            "groupCondition": {"AND": [1, 9]},
+            "groupBehavior": "skip",
+            "valueOptions": {
+                "value": "$TrueHUD_SpecialBarsControlled_ValueText"
+            }
+          },
+          {
+            "text": "$TrueHUD_SpecialBars_OptionText",
+            "type": "text",
+            "help": "$TrueHUD_SpecialBarsNotControlled_OptionText",
+            "groupCondition": {"AND": [1, {"NOT": 9}]},
+            "groupBehavior": "skip",
+            "valueOptions": {
+                "value": "$TrueHUD_SpecialBarsNotControlled_ValueText"
+            }
+          },
+          {
+            "id": "uInfoBarSpecialModeTarget:ActorInfoBars",
+            "type": "hiddenToggle",
+            "groupControl": 10,
+            "valueOptions": {
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uInfoBarSpecialModeHostiles:ActorInfoBars",
+            "type": "hiddenToggle",
+            "groupControl": 11,
+            "valueOptions": {
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uInfoBarSpecialModeTeammates:ActorInfoBars",
+            "type": "hiddenToggle",
+            "groupControl": 12,
+            "valueOptions": {
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uInfoBarSpecialModeOthers:ActorInfoBars",
+            "type": "hiddenToggle",
+            "groupControl": 13,
+            "valueOptions": {
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "bInfoBarDisplaySpecialPhantomBar:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarDisplaySpecialPhantomBar_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_InfoBarDisplaySpecialPhantomBar_InfoText",
+            "groupCondition": {"AND": [1, 9]},
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "uInfoBarSpecialModeTarget:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarSpecialModeTarget_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_InfoBarSpecialModeTarget_InfoText",
+            "groupCondition": {"AND": [1, 9]},
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_ResourcesDisplayMode_Never",
+                "$TrueHUD_ResourcesDisplayMode_WhenChangedFromDefault",
+                "$TrueHUD_ResourcesDisplayMode_Always"
+              ],
+              "shortNames": [
+                "$TrueHUD_ResourcesDisplayMode_Never",
+                "$TrueHUD_ResourcesDisplayMode_Changed",
+                "$TrueHUD_ResourcesDisplayMode_Always"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uInfoBarSpecialModeHostiles:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarSpecialModeHostiles_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_InfoBarSpecialModeHostiles_InfoText",
+            "groupCondition": {"AND": [1, 9]},
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_ResourcesDisplayMode_Never",
+                "$TrueHUD_ResourcesDisplayMode_WhenChangedFromDefault",
+                "$TrueHUD_ResourcesDisplayMode_Always"
+              ],
+              "shortNames": [
+                "$TrueHUD_ResourcesDisplayMode_Never",
+                "$TrueHUD_ResourcesDisplayMode_Changed",
+                "$TrueHUD_ResourcesDisplayMode_Always"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uInfoBarSpecialModeTeammates:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarSpecialModeTeammates_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_InfoBarSpecialModeTeammates_InfoText",
+            "groupCondition": {"AND": [1, 9]},
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_ResourcesDisplayMode_Never",
+                "$TrueHUD_ResourcesDisplayMode_WhenChangedFromDefault",
+                "$TrueHUD_ResourcesDisplayMode_Always"
+              ],
+              "shortNames": [
+                "$TrueHUD_ResourcesDisplayMode_Never",
+                "$TrueHUD_ResourcesDisplayMode_Changed",
+                "$TrueHUD_ResourcesDisplayMode_Always"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uInfoBarSpecialModeOthers:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarSpecialModeOthers_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_InfoBarSpecialModeOthers_InfoText",
+            "groupCondition": {"AND": [1, 9]},
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_ResourcesDisplayMode_Never",
+                "$TrueHUD_ResourcesDisplayMode_WhenChangedFromDefault",
+                "$TrueHUD_ResourcesDisplayMode_Always"
+              ],
+              "shortNames": [
+                "$TrueHUD_ResourcesDisplayMode_Never",
+                "$TrueHUD_ResourcesDisplayMode_Changed",
+                "$TrueHUD_ResourcesDisplayMode_Always"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "text": "$TrueHUD_AlignmentSettings_HeaderText",
+            "type": "header",
+            "position": 1
+          },
+          {
+            "id": "uInfoBarDirection:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarDirection_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_InfoBarDirection_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_BarDirection_Normal",
+                "$TrueHUD_BarDirection_Center",
+                "$TrueHUD_BarDirection_Reverse"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uInfoBarDamageCounterAlignment:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarDamageCounterAlignment_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_InfoBarDamageCounterAlignment_InfoText",
+            "groupCondition": {"AND": [1, 3]},
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_Alignment_Center",
+                "$TrueHUD_Alignment_Left",
+                "$TrueHUD_Alignment_Right"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "text": "$TrueHUD_MiscSettings_HeaderText",
+            "type": "header"
+          },
+          {
+            "id": "bInfoBarLevelColorOutline:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarLevelColorOutline_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_InfoBarLevelColorOutline_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "uInfoBarLevelThreshold:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarLevelThreshold_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_InfoBarLevelThreshold_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "min": 0,
+              "max": 50,
+              "step": 1,
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uInfoBarIndicatorMode:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarIndicatorMode_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_InfoBarIndicatorMode_InfoText",
+            "groupCondition": {"AND": [1, 4]},
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_IndicatorMode_SoulIcon",
+                "$TrueHUD_IndicatorMode_LevelText",
+                "$TrueHUD_IndicatorMode_SquareDifficultyIcon"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "fInfoBarPhantomDuration:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarPhantomDuration_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_InfoBarPhantomDuration_InfoText",
+            "groupCondition": {"AND": [1, 2]},
+            "valueOptions": {
+              "min": 0.01,
+              "max": 5,
+              "step": 0.01,
+              "formatString": "{2} s",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fInfoBarDamageCounterDuration:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarDamageCounterDuration_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_InfoBarDamageCounterDuration_InfoText",
+            "groupCondition": {"AND": [1, 3]},
+            "valueOptions": {
+              "min": 0.01,
+              "max": 5,
+              "step": 0.01,
+              "formatString": "{2} s",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "text": "$TrueHUD_DisplaySettings_HeaderText",
+            "type": "header"
+          },
+          {
+            "id": "uInfoBarAnchor:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarAnchor_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_InfoBarAnchor_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_WidgetAnchor_Body",
+                "$TrueHUD_WidgetAnchor_Head"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "fInfoBarOffsetZ:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarOffsetZ_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_InfoBarOffsetZ_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "min": -200,
+              "max": 200,
+              "step": 1,
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fInfoBarScale:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarScale_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_InfoBarScale_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "min": 0.1,
+              "max": 2,
+              "step": 0.1,
+              "formatString": "{1}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "bInfoBarScaleWithDistance:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarScaleWithDistance_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_InfoBarScaleWithDistance_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "bInfoBarUseHUDOpacity:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarUseHUDOpacity_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_InfoBarUseHUDOpacity_InfoText",
+            "groupControl": 14,
+            "groupCondition": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "fInfoBarOpacity:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarOpacity_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_InfoBarOpacity_InfoText",
+            "groupCondition": {"AND": [1, {"NOT": 14}]},
+            "valueOptions": {
+              "min": 0.01,
+              "max": 1,
+              "step": 0.01,
+              "formatString": "{2}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fInfoBarWidth:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarWidth_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_InfoBarWidth_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "min": 30,
+              "max": 300,
+              "step": 1,
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fInfoBarResourceWidth:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarResourceWidth_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_InfoBarResourceWidth_InfoText",
+            "groupCondition": {"AND": [1, {"OR": [5, 6, 7, 8, {"AND": [9, {"OR": [10, 11, 12, 13]}]}]}]},
+            "valueOptions": {
+              "min": 30,
+              "max": 300,
+              "step": 1,
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fInfoBarTargetWidth:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarTargetWidth_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_InfoBarTargetWidth_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "min": 30,
+              "max": 300,
+              "step": 1,
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fInfoBarTargetResourceWidth:ActorInfoBars",
+            "text": "$TrueHUD_InfoBarTargetResourceWidth_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_InfoBarTargetResourceWidth_InfoText",
+            "groupCondition": {"AND": [1, {"OR": [5, 6, 7, 8, {"AND": [9, {"OR": [10, 11, 12, 13]}]}]}]},
+            "valueOptions": {
+              "min": 30,
+              "max": 300,
+              "step": 1,
+              "sourceType": "ModSettingFloat"
+            }
+          }
+        ]
+      },
+      {
+        "pageDisplayName": "$TrueHUD_BossBars",
+        "cursorFillMode": "topToBottom",
+        "content": [
+          {
+            "id": "bEnableBossBars:General",
+            "type": "hiddenToggle",
+            "groupControl": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "text": "$TrueHUD_Presets_HeaderText",
+            "type": "header"
+          },
+          {
+            "text": "$TrueHUD_Preset_BossBarTop_OptionText",
+            "type": "text",
+            "help": "$TrueHUD_Preset_BossBarTop_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "value": "$TrueHUD_LoadPreset_ValueText"
+            },
+            "action": {
+              "type": "CallFunction",
+              "function": "LoadPreset",
+              "params": ["BossBarTop"]
+            }
+          },
+          {
+            "text": "$TrueHUD_Preset_BossBarBottom_OptionText",
+            "type": "text",
+            "help": "$TrueHUD_Preset_BossBarBottom_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "value": "$TrueHUD_LoadPreset_ValueText"
+            },
+            "action": {
+              "type": "CallFunction",
+              "function": "LoadPreset",
+              "params": ["BossBarBottom"]
+            }
+          },
+          {
+            "text": "$TrueHUD_DisplayCriteria_HeaderText",
+            "type": "header"
+          },
+          {
+            "id": "bBossBarDisplayPhantomBars:BossBars",
+            "text": "$TrueHUD_BossBarDisplayPhantomBars_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_BossBarDisplayPhantomBars_InfoText",
+            "groupControl": 2,
+            "groupCondition": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "bBossBarDisplayDamageCounter:BossBars",
+            "text": "$TrueHUD_BossBarDisplayDamageCounter_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_BossBarDisplayDamageCounter_InfoText",
+            "groupControl": 3,
+            "groupCondition": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "bBossBarDisplayIndicator:BossBars",
+            "text": "$TrueHUD_BossBarDisplayIndicator_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_BossBarDisplayIndicator_InfoText",
+            "groupControl": 4,
+            "groupCondition": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "uBossBarResourcesMode:BossBars",
+            "type": "hiddenToggle",
+            "groupControl": 5,
+            "valueOptions": {
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uBossBarResourcesMode:BossBars",
+            "text": "$TrueHUD_BossBarResourcesMode_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_BossBarResourcesMode_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_ResourcesDisplayMode_Never",
+                "$TrueHUD_ResourcesDisplayMode_WhenChangedFromDefault",
+                "$TrueHUD_ResourcesDisplayMode_Always"
+              ],
+              "shortNames": [
+                "$TrueHUD_ResourcesDisplayMode_Never",
+                "$TrueHUD_ResourcesDisplayMode_Changed",
+                "$TrueHUD_ResourcesDisplayMode_Always"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "text": "$TrueHUD_SpecialBar_HeaderText",
+            "type": "header"
+          },
+          {
+            "type": "hiddenToggle",
+            "groupControl": 6,
+            "valueOptions": {
+                "sourceType": "GlobalValue",
+                "sourceForm": "TrueHUD.esl|802"
+            }
+          },
+          {
+            "text": "$TrueHUD_SpecialBars_OptionText",
+            "type": "text",
+            "help": "$TrueHUD_SpecialBarsControlled_OptionText",
+            "groupCondition": {"AND": [1, 6]},
+            "groupBehavior": "skip",
+            "valueOptions": {
+                "value": "$TrueHUD_SpecialBarsControlled_ValueText"
+            }
+          },
+          {
+            "text": "$TrueHUD_SpecialBars_OptionText",
+            "type": "text",
+            "help": "$TrueHUD_SpecialBarsNotControlled_OptionText",
+            "groupCondition": {"AND": [1, {"NOT": 6}]},
+            "groupBehavior": "skip",
+            "valueOptions": {
+                "value": "$TrueHUD_SpecialBarsNotControlled_ValueText"
+            }
+          },
+          {
+            "id": "uBossBarSpecialMode:BossBars",
+            "type": "hiddenToggle",
+            "groupControl": 7,
+            "valueOptions": {
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "bBossBarDisplaySpecialPhantomBar:BossBars",
+            "text": "$TrueHUD_BossBarDisplaySpecialPhantomBar_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_BossBarDisplaySpecialPhantomBar_InfoText",
+            "groupCondition": {"AND": [1, 6]},
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "uBossBarSpecialMode:BossBars",
+            "text": "$TrueHUD_BossBarSpecialMode_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_BossBarSpecialMode_InfoText",
+            "groupCondition": {"AND": [1, 6]},
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_ResourcesDisplayMode_Never",
+                "$TrueHUD_ResourcesDisplayMode_WhenChangedFromDefault",
+                "$TrueHUD_ResourcesDisplayMode_Always"
+              ],
+              "shortNames": [
+                "$TrueHUD_ResourcesDisplayMode_Never",
+                "$TrueHUD_ResourcesDisplayMode_Changed",
+                "$TrueHUD_ResourcesDisplayMode_Always"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "text": "$TrueHUD_AlignmentSettings_HeaderText",
+            "type": "header"
+          },
+          {
+            "id": "uBossBarDirection:BossBars",
+            "text": "$TrueHUD_BossBarDirection_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_BossBarDirection_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_BarDirection_Normal",
+                "$TrueHUD_BarDirection_Center",
+                "$TrueHUD_BarDirection_Reverse"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uBossBarDamageCounterAlignment:BossBars",
+            "text": "$TrueHUD_BossBarDamageCounterAlignment_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_BossBarDamageCounterAlignment_InfoText",
+            "groupCondition": {"AND": [1, 3]},
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_Alignment_Center",
+                "$TrueHUD_Alignment_Left",
+                "$TrueHUD_Alignment_Right"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uBossBarResourceAlignment:BossBars",
+            "text": "$TrueHUD_BossBarResourceAlignment_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_BossBarResourceAlignment_InfoText",
+            "groupCondition": {"AND": [1, {"OR": [5, {"AND": [6, 7]}]}]},
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_Alignment_Center",
+                "$TrueHUD_Alignment_Left",
+                "$TrueHUD_Alignment_Right"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uBossBarNameAlignment:BossBars",
+            "text": "$TrueHUD_BossBarNameAlignment_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_BossBarNameAlignment_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_Alignment_Center",
+                "$TrueHUD_Alignment_Left",
+                "$TrueHUD_Alignment_Right"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "text": "$TrueHUD_MiscSettings_HeaderText",
+            "type": "header",
+            "position": 1
+          },
+          {
+            "id": "bBossBarLevelColorOutline:BossBars",
+            "text": "$TrueHUD_BossBarLevelColorOutline_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_BossBarLevelColorOutline_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "uBossBarLevelThreshold:BossBars",
+            "text": "$TrueHUD_BossBarLevelThreshold_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_BossBarLevelThreshold_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "min": 0,
+              "max": 50,
+              "step": 1,
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uBossBarIndicatorMode:BossBars",
+            "text": "$TrueHUD_BossBarIndicatorMode_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_BossBarIndicatorMode_InfoText",
+            "groupCondition": {"AND": [1, 4]},
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_IndicatorMode_SoulIcon",
+                "$TrueHUD_IndicatorMode_LevelText",
+                "$TrueHUD_IndicatorMode_SquareDifficultyIcon"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "fBossBarPhantomDuration:BossBars",
+            "text": "$TrueHUD_BossBarPhantomDuration_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_BossBarPhantomDuration_InfoText",
+            "groupCondition": {"AND": [1, 2]},
+            "valueOptions": {
+              "min": 0.01,
+              "max": 5,
+              "step": 0.01,
+              "formatString": "{2} s",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fBossBarDamageCounterDuration:BossBars",
+            "text": "$TrueHUD_BossBarDamageCounterDuration_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_BossBarDamageCounterDuration_InfoText",
+            "groupCondition": {"AND": [1, 3]},
+            "valueOptions": {
+              "min": 0.01,
+              "max": 5,
+              "step": 0.01,
+              "formatString": "{2} s",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "uBossBarMaxCount:BossBars",
+            "text": "$TrueHUD_BossBarMaxCount_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_BossBarMaxCount_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "min": 1,
+              "max": 5,
+              "step": 1,
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "type": "hiddenToggle",
+            "groupControl": 8,
+            "valueOptions": {
+              "sourceType": "PropertyValueBool",
+              "propertyName": "bBossBarsHideCompass"
+            }
+          },
+          {
+            "id": "uBossBarModifyHUD:BossBars",
+            "text": "$TrueHUD_BossBarModifyHUD_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_BossBarModifyHUD_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_BossBarModifyHUD_None",
+                "$TrueHUD_BossBarModifyHUD_MoveSubtitles",
+                "$TrueHUD_BossBarModifyHUD_HideCompass"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "bDisplayStandaloneShoutWidgetWhenHidingCompass:BossBars",
+            "text": "$TrueHUD_DisplayStandaloneShoutWidgetWhenHidingCompass_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_DisplayStandaloneShoutWidgetWhenHidingCompass_InfoText",
+            "groupCondition": {"AND": [1, 8]},
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          
+          {
+            "text": "$TrueHUD_DisplaySettings_HeaderText",
+            "type": "header"
+          },
+          {
+            "id": "fBossBarAnchorX:BossBars",
+            "text": "$TrueHUD_BossBarAnchorX_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_BossBarAnchorX_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "min": -0.500,
+              "max": 1.500,
+              "step": 0.001,
+              "formatString": "{3}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fBossBarAnchorY:BossBars",
+            "text": "$TrueHUD_BossBarAnchorY_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_BossBarAnchorY_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "min": 0.001,
+              "max": 1,
+              "step": 0.001,
+              "formatString": "{3}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fMultipleBossBarsOffset:BossBars",
+            "text": "$TrueHUD_MultipleBossBarsOffset_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_MultipleBossBarsOffset_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "min": 1,
+              "max": 100,
+              "step": 1,
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "uMultipleBossBarsStackDirection:BossBars",
+            "text": "$TrueHUD_MultipleBossBarsStackDirection_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_MultipleBossBarsStackDirection_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_VerticalDirection_Up",
+                "$TrueHUD_VerticalDirection_Down"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "fBossBarScale:BossBars",
+            "text": "$TrueHUD_BossBarScale_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_BossBarScale_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "min": 0.1,
+              "max": 2,
+              "step": 0.1,
+              "formatString": "{1}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "bBossBarUseHUDOpacity:BossBars",
+            "text": "$TrueHUD_BossBarUseHUDOpacity_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_BossBarUseHUDOpacity_InfoText",
+            "groupControl": 9,
+            "groupCondition": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "fBossBarOpacity:BossBars",
+            "text": "$TrueHUD_BossBarOpacity_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_BossBarOpacity_InfoText",
+            "groupCondition": {"AND": [1, {"NOT": 9}]},
+            "valueOptions": {
+              "min": 0.01,
+              "max": 1,
+              "step": 0.01,
+              "formatString": "{2}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fBossBarWidth:BossBars",
+            "text": "$TrueHUD_BossBarWidth_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_BossBarWidth_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "min": 100,
+              "max": 1000,
+              "step": 1,
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fBossBarResourceWidth:BossBars",
+            "text": "$TrueHUD_BossBarResourceWidth_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_BossBarResourceWidth_InfoText",
+            "groupCondition": {"AND": [1, {"OR": [5, {"AND": [6, 7]}]}]},
+            "valueOptions": {
+              "min": 30,
+              "max": 1000,
+              "step": 1,
+              "sourceType": "ModSettingFloat"
+            }
+          }
+        ]
+      },
+      {
+        "pageDisplayName": "$TrueHUD_PlayerWidget",
+        "cursorFillMode": "topToBottom",
+        "content": [
+          {
+            "id": "bEnablePlayerWidget:General",
+            "type": "hiddenToggle",
+            "groupControl": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "text": "$TrueHUD_Presets_HeaderText",
+            "type": "header"
+          },
+          {
+            "text": "$TrueHUD_Preset_PlayerWidgetVanilla_OptionText",
+            "type": "text",
+            "help": "$TrueHUD_Preset_PlayerWidgetVanilla_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "value": "$TrueHUD_LoadPreset_ValueText"
+            },
+            "action": {
+              "type": "CallFunction",
+              "function": "LoadPreset",
+              "params": ["PlayerWidgetVanilla"]
+            }
+          },
+          {
+            "text": "$TrueHUD_Preset_PlayerWidgetCombined_OptionText",
+            "type": "text",
+            "help": "$TrueHUD_Preset_PlayerWidgetCombined_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "value": "$TrueHUD_LoadPreset_ValueText"
+            },
+            "action": {
+              "type": "CallFunction",
+              "function": "LoadPreset",
+              "params": ["PlayerWidgetCombined"]
+            }
+          },
+          {
+            "text": "$TrueHUD_DisplayCriteria_HeaderText",
+            "type": "header"
+          },
+          {
+            "id": "bPlayerWidgetDisplayPhantomBars:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetDisplayPhantomBars_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_PlayerWidgetDisplayPhantomBars_InfoText",
+            "groupControl": 2,
+            "groupCondition": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "uPlayerWidgetHealthMode:PlayerWidget",
+            "type": "hiddenToggle",
+            "groupControl": 3,
+            "valueOptions": {
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uPlayerWidgetHealthMode:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetHealthMode_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_PlayerWidgetHealthMode_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_PlayerWidgetDisplayMode_Never",
+                "$TrueHUD_PlayerWidgetDisplayMode_Dynamic",
+                "$TrueHUD_PlayerWidgetDisplayMode_InCombat",
+                "$TrueHUD_PlayerWidgetDisplayMode_WhenAnotherDisplayed",
+                "$TrueHUD_PlayerWidgetDisplayMode_Always"                
+              ],
+              "shortNames": [
+                "$TrueHUD_PlayerWidgetDisplayMode_Never",
+                "$TrueHUD_PlayerWidgetDisplayMode_Dynamic",
+                "$TrueHUD_PlayerWidgetDisplayMode_Combat",
+                "$TrueHUD_PlayerWidgetDisplayMode_Together",
+                "$TrueHUD_PlayerWidgetDisplayMode_Always"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uPlayerWidgetMagickaMode:PlayerWidget",
+            "type": "hiddenToggle",
+            "groupControl": 4,
+            "valueOptions": {
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uPlayerWidgetMagickaMode:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetMagickaMode_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_PlayerWidgetMagickaMode_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_PlayerWidgetDisplayMode_Never",
+                "$TrueHUD_PlayerWidgetDisplayMode_Dynamic",
+                "$TrueHUD_PlayerWidgetDisplayMode_InCombat",
+                "$TrueHUD_PlayerWidgetDisplayMode_WhenAnotherDisplayed",
+                "$TrueHUD_PlayerWidgetDisplayMode_Always"
+              ],
+              "shortNames": [
+                "$TrueHUD_PlayerWidgetDisplayMode_Never",
+                "$TrueHUD_PlayerWidgetDisplayMode_Dynamic",
+                "$TrueHUD_PlayerWidgetDisplayMode_Combat",
+                "$TrueHUD_PlayerWidgetDisplayMode_Together",
+                "$TrueHUD_PlayerWidgetDisplayMode_Always"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uPlayerWidgetStaminaMode:PlayerWidget",
+            "type": "hiddenToggle",
+            "groupControl": 5,
+            "valueOptions": {
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uPlayerWidgetStaminaMode:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetStaminaMode_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_PlayerWidgetStaminaMode_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_PlayerWidgetDisplayMode_Never",
+                "$TrueHUD_PlayerWidgetDisplayMode_Dynamic",
+                "$TrueHUD_PlayerWidgetDisplayMode_InCombat",
+                "$TrueHUD_PlayerWidgetDisplayMode_WhenAnotherDisplayed",
+                "$TrueHUD_PlayerWidgetDisplayMode_Always"
+              ],
+              "shortNames": [
+                "$TrueHUD_PlayerWidgetDisplayMode_Never",
+                "$TrueHUD_PlayerWidgetDisplayMode_Dynamic",
+                "$TrueHUD_PlayerWidgetDisplayMode_Combat",
+                "$TrueHUD_PlayerWidgetDisplayMode_Together",
+                "$TrueHUD_PlayerWidgetDisplayMode_Always"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uPlayerWidgetShoutIndicatorMode:PlayerWidget",
+            "type": "hiddenToggle",
+            "groupControl": 6,
+            "valueOptions": {
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uPlayerWidgetShoutIndicatorMode:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetShoutIndicatorMode_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_PlayerWidgetShoutIndicatorMode_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_PlayerWidgetDisplayMode_Never",
+                "$TrueHUD_PlayerWidgetDisplayMode_Dynamic",
+                "$TrueHUD_PlayerWidgetDisplayMode_InCombat",
+                "$TrueHUD_PlayerWidgetDisplayMode_WhenAnotherDisplayed",
+                "$TrueHUD_PlayerWidgetDisplayMode_Always"
+              ],
+              "shortNames": [
+                "$TrueHUD_PlayerWidgetDisplayMode_Never",
+                "$TrueHUD_PlayerWidgetDisplayMode_Dynamic",
+                "$TrueHUD_PlayerWidgetDisplayMode_Combat",
+                "$TrueHUD_PlayerWidgetDisplayMode_Together",
+                "$TrueHUD_PlayerWidgetDisplayMode_Always"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "bPlayerWidgetHideVanillaBars:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetHideVanillaBars_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_PlayerWidgetHideVanillaBars_InfoText",
+            "groupControl": 13,
+            "groupCondition": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "bPlayerWidgetForceHideVanillaBars:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetForceHideVanillaBars_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_PlayerWidgetForceHideVanillaBars_InfoText",
+            "groupCondition": {"AND": [1, 13]},
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "bPlayerWidgetDisplayEnchantmentChargeMeter:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetDisplayEnchantmentChargeMeter_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_PlayerWidgetDisplayEnchantmentChargeMeter_InfoText",
+            "groupControl": 8,
+            "groupCondition": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "text": "$TrueHUD_AlignmentSettings_HeaderText",
+            "type": "header"
+          },
+          {
+            "id": "uPlayerWidgetHealthBarDirection:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetHealthBarDirection_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_PlayerWidgetHealthBarDirection_InfoText",
+            "groupCondition": {"AND": [1, 3]},
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_BarDirection_Normal",
+                "$TrueHUD_BarDirection_Center",
+                "$TrueHUD_BarDirection_Reverse"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uPlayerWidgetMagickaBarDirection:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetMagickaBarDirection_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_PlayerWidgetMagickaBarDirection_InfoText",
+            "groupCondition": {"AND": [1, 4]},
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_BarDirection_Normal",
+                "$TrueHUD_BarDirection_Center",
+                "$TrueHUD_BarDirection_Reverse"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "uPlayerWidgetStaminaBarDirection:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetStaminaBarDirection_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_PlayerWidgetStaminaBarDirection_InfoText",
+            "groupCondition": {"AND": [1, 5]},
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_BarDirection_Normal",
+                "$TrueHUD_BarDirection_Center",
+                "$TrueHUD_BarDirection_Reverse"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "text": "$TrueHUD_MiscSettings_HeaderText",
+            "type": "header"
+          },
+          {
+            "id": "bPlayerWidgetDisplayMountStamina:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetDisplayMountStamina_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_PlayerWidgetDisplayMountStamina_InfoText",
+            "groupCondition": {"AND": [1, 5]},
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "fPlayerWidgetPhantomDuration:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetPhantomDuration_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_PlayerWidgetPhantomDuration_InfoText",
+            "groupCondition": {"AND": [1, 2]},
+            "valueOptions": {
+              "min": 0.01,
+              "max": 5,
+              "step": 0.01,
+              "formatString": "{2} s",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "text": "$TrueHUD_SpecialBar_HeaderText",
+            "type": "header"
+          },
+          {
+            "type": "hiddenToggle",
+            "groupControl": 9,
+            "valueOptions": {
+                "sourceType": "GlobalValue",
+                "sourceForm": "TrueHUD.esl|802"
+            }
+          },
+          {
+            "text": "$TrueHUD_SpecialBars_OptionText",
+            "type": "text",
+            "help": "$TrueHUD_SpecialBarsControlled_OptionText",
+            "groupCondition": {"AND": [1, 9]},
+            "groupBehavior": "skip",
+            "valueOptions": {
+                "value": "$TrueHUD_SpecialBarsControlled_ValueText"
+            }
+          },
+          {
+            "text": "$TrueHUD_SpecialBars_OptionText",
+            "type": "text",
+            "help": "$TrueHUD_SpecialBarsNotControlled_OptionText",
+            "groupCondition": {"AND": [1, {"NOT": 9}]},
+            "groupBehavior": "skip",
+            "valueOptions": {
+                "value": "$TrueHUD_SpecialBarsNotControlled_ValueText"
+            }
+          },
+          {
+            "id": "uPlayerWidgetSpecialMode:PlayerWidget",
+            "type": "hiddenToggle",
+            "groupControl": 7,
+            "valueOptions": {
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "bPlayerWidgetDisplaySpecialPhantomBar:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetDisplaySpecialPhantomBar_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_PlayerWidgetDisplaySpecialPhantomBar_InfoText",
+            "groupCondition": {"AND": [1, 9]},
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "uPlayerWidgetSpecialMode:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetSpecialMode_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_PlayerWidgetSpecialMode_InfoText",
+            "groupCondition": {"AND": [1, 9]},
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_PlayerWidgetDisplayMode_Never",
+                "$TrueHUD_PlayerWidgetDisplayMode_Dynamic",
+                "$TrueHUD_PlayerWidgetDisplayMode_InCombat",
+                "$TrueHUD_PlayerWidgetDisplayMode_WhenAnotherDisplayed",
+                "$TrueHUD_PlayerWidgetDisplayMode_Always"
+              ],
+              "shortNames": [
+                "$TrueHUD_PlayerWidgetDisplayMode_Never",
+                "$TrueHUD_PlayerWidgetDisplayMode_Dynamic",
+                "$TrueHUD_PlayerWidgetDisplayMode_Combat",
+                "$TrueHUD_PlayerWidgetDisplayMode_Together",
+                "$TrueHUD_PlayerWidgetDisplayMode_Always"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "text": "$TrueHUD_DisplaySettings_HeaderText",
+            "type": "header",
+            "position": 1
+          },
+          {
+            "id": "bPlayerWidgetCombined:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetCombined_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_PlayerWidgetCombined_InfoText",
+            "groupControl": 10,
+            "groupCondition": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "fPlayerWidgetScale:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetScale_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_PlayerWidgetScale_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "min": 0.01,
+              "max": 1,
+              "step": 0.01,
+              "formatString": "{2}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "bPlayerWidgetUseHUDOpacity:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetUseHUDOpacity_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_PlayerWidgetUseHUDOpacity_InfoText",
+            "groupControl": 12,
+            "groupCondition": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "fPlayerWidgetOpacity:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetOpacity_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_PlayerWidgetOpacity_InfoText",
+            "groupCondition": {"AND": [1, {"NOT": 12}]},
+            "valueOptions": {
+              "min": 0.01,
+              "max": 1,
+              "step": 0.01,
+              "formatString": "{2}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fPlayerWidgetBarWidth:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetBarWidth_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_PlayerWidgetBarWidth_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "min": 50,
+              "max": 1000,
+              "step": 1,
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fPlayerWidgetSpecialBarWidth:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetSpecialBarWidth_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_PlayerWidgetSpecialBarWidth_InfoText",
+            "groupCondition": {"AND": [1, 7]},
+            "valueOptions": {
+              "min": 30,
+              "max": 1000,
+              "step": 1,
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "bPlayerWidgetScaleBars:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetScaleBars_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_PlayerWidgetScaleBars_InfoText",
+            "groupControl": 11,
+            "groupCondition": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "fPlayerWidgetMinBarWidth:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetMinBarWidth_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_PlayerWidgetMinBarWidth_InfoText",
+            "groupCondition": {"AND": [1, 11]},
+            "valueOptions": {
+              "min": 30,
+              "max": 200,
+              "step": 1,
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fPlayerWidgetMaxBarWidth:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetMaxBarWidth_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_PlayerWidgetMaxBarWidth_InfoText",
+            "groupCondition": {"AND": [1, 11]},
+            "valueOptions": {
+              "min": 100,
+              "max": 1000,
+              "step": 1,
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fPlayerWidgetHealthBarScaleMult:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetHealthBarScaleMult_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_PlayerWidgetHealthBarScaleMult_InfoText",
+            "groupCondition": {"AND": [1, 3, 11]},
+            "valueOptions": {
+              "min": 0.1,
+              "max": 10,
+              "step": 0.1,
+              "formatString": "{1}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fPlayerWidgetMagickaBarScaleMult:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetMagickaBarScaleMult_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_PlayerWidgetMagickaBarScaleMult_InfoText",
+            "groupCondition": {"AND": [1, 4, 11]},
+            "valueOptions": {
+              "min": 0.1,
+              "max": 10,
+              "step": 0.1,
+              "formatString": "{1}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fPlayerWidgetStaminaBarScaleMult:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetStaminaBarScaleMult_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_PlayerWidgetStaminaBarScaleMult_InfoText",
+            "groupCondition": {"AND": [1, 5, 11]},
+            "valueOptions": {
+              "min": 0.1,
+              "max": 10,
+              "step": 0.1,
+              "formatString": "{1}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fPlayerWidgetX:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetX_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_PlayerWidgetX_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "min": -0.500,
+              "max": 1.500,
+              "step": 0.001,
+              "formatString": "{3}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fPlayerWidgetY:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetY_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_PlayerWidgetY_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "min": 0.001,
+              "max": 1,
+              "step": 0.001,
+              "formatString": "{3}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fPlayerWidgetHealthX:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetHealthX_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_PlayerWidgetHealthX_InfoText",
+            "groupCondition": {"AND": [1, 3, {"NOT": 10}]},
+            "valueOptions": {
+              "min": -0.500,
+              "max": 1.500,
+              "step": 0.001,
+              "formatString": "{3}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fPlayerWidgetHealthY:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetHealthY_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_PlayerWidgetHealthY_InfoText",
+            "groupCondition": {"AND": [1, 3, {"NOT": 10}]},
+            "valueOptions": {
+              "min": 0.001,
+              "max": 1,
+              "step": 0.001,
+              "formatString": "{3}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fPlayerWidgetMagickaX:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetMagickaX_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_PlayerWidgetMagickaX_InfoText",
+            "groupCondition": {"AND": [1, 4, {"NOT": 10}]},
+            "valueOptions": {
+              "min": -0.500,
+              "max": 1.500,
+              "step": 0.001,
+              "formatString": "{3}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fPlayerWidgetMagickaY:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetMagickaY_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_PlayerWidgetMagickaY_InfoText",
+            "groupCondition": {"AND": [1, 4, {"NOT": 10}]},
+            "valueOptions": {
+              "min": 0.001,
+              "max": 1,
+              "step": 0.001,
+              "formatString": "{3}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fPlayerWidgetStaminaX:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetStaminaX_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_PlayerWidgetStaminaX_InfoText",
+            "groupCondition": {"AND": [1, 5, {"NOT": 10}]},
+            "valueOptions": {
+              "min": -0.500,
+              "max": 1.500,
+              "step": 0.001,
+              "formatString": "{3}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fPlayerWidgetStaminaY:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetStaminaY_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_PlayerWidgetStaminaY_InfoText",
+            "groupCondition": {"AND": [1, 5, {"NOT": 10}]},
+            "valueOptions": {
+              "min": 0.001,
+              "max": 1,
+              "step": 0.001,
+              "formatString": "{3}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fPlayerWidgetEnchantmentChargeMeterX:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetEnchantmentChargeMeterX_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_PlayerWidgetEnchantmentChargeMeterX_InfoText",
+            "groupCondition": {"AND": [1, 8, {"NOT": 10}]},
+            "valueOptions": {
+              "min": -0.500,
+              "max": 1.500,
+              "step": 0.001,
+              "formatString": "{3}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fPlayerWidgetEnchantmentChargeMeterY:PlayerWidget",
+            "text": "$TrueHUD_PlayerWidgetEnchantmentChargeMeterY_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_PlayerWidgetEnchantmentChargeMeterY_InfoText",
+            "groupCondition": {"AND": [1, 8, {"NOT": 10}]},
+            "valueOptions": {
+              "min": 0.001,
+              "max": 1,
+              "step": 0.001,
+              "formatString": "{3}",
+              "sourceType": "ModSettingFloat"
+            }
+          }
+        ]
+      },
+      {
+        "pageDisplayName": "$TrueHUD_RecentLoot",
+        "cursorFillMode": "topToBottom",
+        "content": [
+          {
+            "id": "bEnableRecentLoot:General",
+            "type": "hiddenToggle",
+            "groupControl": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "text": "$TrueHUD_RecentLoot_HeaderText",
+            "type": "header"
+          },
+          {
+            "id": "bRecentLootHideVanillaMessage:RecentLoot",
+            "text": "$TrueHUD_RecentLootHideVanillaMessage_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_RecentLootHideVanillaMessage_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "bRecentLootHideInInventoryMenus:RecentLoot",
+            "text": "$TrueHUD_RecentLootHideInInventoryMenus_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_RecentLootHideInInventoryMenus_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "bRecentLootHideInCraftingMenus:RecentLoot",
+            "text": "$TrueHUD_RecentLootHideInCraftingMenus_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_RecentLootHideInCraftingMenus_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "uRecentLootMaxMessageCount:RecentLoot",
+            "text": "$TrueHUD_RecentLootMaxMessageCount_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_RecentLootMaxMessageCount_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "min": 1,
+              "max": 20,
+              "step": 1,
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "fRecentLootMessageDuration:RecentLoot",
+            "text": "$TrueHUD_RecentLootMessageDuration_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_RecentLootMessageDuration_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "min": 0.5,
+              "max": 20.0,
+              "step": 0.1,
+              "formatString": "{1}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fRecentLootScale:RecentLoot",
+            "text": "$TrueHUD_RecentLootScale_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_RecentLootScale_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "min": 0.01,
+              "max": 1,
+              "step": 0.01,
+              "formatString": "{2}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "bRecentLootUseHUDOpacity:RecentLoot",
+            "text": "$TrueHUD_RecentLootUseHUDOpacity_OptionText",
+            "type": "toggle",
+            "help": "$TrueHUD_RecentLootUseHUDOpacity_InfoText",
+            "groupControl": 2,
+            "groupCondition": 1,
+            "valueOptions": {
+              "sourceType": "ModSettingBool"
+            }
+          },
+          {
+            "id": "fRecentLootOpacity:RecentLoot",
+            "text": "$TrueHUD_RecentLootOpacity_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_RecentLootOpacity_InfoText",
+            "groupCondition": {"AND": [1, {"NOT": 2}]},
+            "valueOptions": {
+              "min": 0.01,
+              "max": 1,
+              "step": 0.01,
+              "formatString": "{2}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "uRecentLootListDirection:RecentLoot",
+            "text": "$TrueHUD_RecentLootListDirection_OptionText",
+            "type": "enum",
+            "help": "$TrueHUD_RecentLootListDirection_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "options": [
+                "$TrueHUD_VerticalDirection_Up",
+                "$TrueHUD_VerticalDirection_Down"
+              ],
+              "sourceType": "ModSettingInt"
+            }
+          },
+          {
+            "id": "fRecentLootX:RecentLoot",
+            "text": "$TrueHUD_RecentLootX_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_RecentLootX_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "min": -0.500,
+              "max": 1.500,
+              "step": 0.001,
+              "formatString": "{3}",
+              "sourceType": "ModSettingFloat"
+            }
+          },
+          {
+            "id": "fRecentLootY:RecentLoot",
+            "text": "$TrueHUD_RecentLootY_OptionText",
+            "type": "slider",
+            "help": "$TrueHUD_RecentLootY_InfoText",
+            "groupCondition": 1,
+            "valueOptions": {
+              "min": 0.001,
+              "max": 1,
+              "step": 0.001,
+              "formatString": "{3}",
+              "sourceType": "ModSettingFloat"
+            }
+          }
+        ]
+      },
+      {
+        "pageDisplayName": "$TrueHUD_Colors",
+        "cursorFillMode": "topToBottom",
+        "content": [
+          {
+            "text": "$TrueHUD_HealthColors_HeaderText",
+            "type": "header"
+          },
+          {
+            "id": "sHealthColor:Colors",
+            "text": "$TrueHUD_HealthColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_HealthColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "id": "sHealthPhantomColor:Colors",
+            "text": "$TrueHUD_HealthPhantomColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_HealthPhantomColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "id": "sHealthBackgroundColor:Colors",
+            "text": "$TrueHUD_HealthBackgroundColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_HealthBackgroundColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "id": "sHealthPenaltyColor:Colors",
+            "text": "$TrueHUD_HealthPenaltyColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_HealthPenaltyColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "id": "sHealthFlashColor:Colors",
+            "text": "$TrueHUD_HealthFlashColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_HealthFlashColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "text": "$TrueHUD_MagickaColors_HeaderText",
+            "type": "header"
+          },
+          {
+            "id": "sMagickaColor:Colors",
+            "text": "$TrueHUD_MagickaColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_MagickaColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "id": "sMagickaPhantomColor:Colors",
+            "text": "$TrueHUD_MagickaPhantomColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_MagickaPhantomColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "id": "sMagickaBackgroundColor:Colors",
+            "text": "$TrueHUD_MagickaBackgroundColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_MagickaBackgroundColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "id": "sMagickaPenaltyColor:Colors",
+            "text": "$TrueHUD_MagickaPenaltyColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_MagickaPenaltyColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "id": "sMagickaFlashColor:Colors",
+            "text": "$TrueHUD_MagickaFlashColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_MagickaFlashColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "text": "$TrueHUD_StaminaColors_HeaderText",
+            "type": "header"
+          },
+          {
+            "id": "sStaminaColor:Colors",
+            "text": "$TrueHUD_StaminaColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_StaminaColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "id": "sStaminaPhantomColor:Colors",
+            "text": "$TrueHUD_StaminaPhantomColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_StaminaPhantomColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "id": "sStaminaBackgroundColor:Colors",
+            "text": "$TrueHUD_StaminaBackgroundColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_StaminaBackgroundColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "id": "sStaminaPenaltyColor:Colors",
+            "text": "$TrueHUD_StaminaPenaltyColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_StaminaPenaltyColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "id": "sStaminaFlashColor:Colors",
+            "text": "$TrueHUD_StaminaFlashColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_StaminaFlashColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "text": "$TrueHUD_SpecialColors_HeaderText",
+            "type": "header"
+          },
+          {
+            "id": "sSpecialColor:Colors",
+            "text": "$TrueHUD_SpecialColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_SpecialColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "id": "sSpecialPhantomColor:Colors",
+            "text": "$TrueHUD_SpecialPhantomColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_SpecialPhantomColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "id": "sSpecialBackgroundColor:Colors",
+            "text": "$TrueHUD_SpecialBackgroundColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_SpecialBackgroundColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "id": "sSpecialPenaltyColor:Colors",
+            "text": "$TrueHUD_SpecialPenaltyColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_SpecialPenaltyColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "id": "sSpecialFlashColor:Colors",
+            "text": "$TrueHUD_SpecialFlashColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_SpecialFlashColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "text": "$TrueHUD_MiscColors_HeaderText",
+            "type": "header",
+            "position": 1
+          },
+          {
+            "id": "sDefaultColor:Colors",
+            "text": "$TrueHUD_DefaultColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_DefaultColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "id": "sDefaultColorOutline:Colors",
+            "text": "$TrueHUD_DefaultColorOutline_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_DefaultColorOutline_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "id": "sWeakerColor:Colors",
+            "text": "$TrueHUD_WeakerColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_WeakerColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "id": "sWeakerColorOutline:Colors",
+            "text": "$TrueHUD_WeakerColorOutline_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_WeakerColorOutline_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "id": "sStrongerColor:Colors",
+            "text": "$TrueHUD_StrongerColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_StrongerColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "id": "sStrongerColorOutline:Colors",
+            "text": "$TrueHUD_StrongerColorOutline_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_StrongerColorOutline_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "id": "sTeammateColor:Colors",
+            "text": "$TrueHUD_TeammateColor_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_TeammateColor_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          },
+          {
+            "id": "sTeammateColorOutline:Colors",
+            "text": "$TrueHUD_TeammateColorOutline_OptionText",
+            "type": "input",
+            "help": "$TrueHUD_TeammateColorOutline_InfoText",
+            "valueOptions": {
+              "sourceType": "ModSettingString"
+            }
+          }
+        ]
+      }
+    ]
+  }

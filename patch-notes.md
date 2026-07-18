@@ -1,13 +1,15 @@
 # Patch notes
 
 **Summary**
-More preparations for tomorrow, cleaning up skills, spell conditions, and adding more equipment like backpacks and jewelry!
+Getting last minute fixes in, if logging works, then we will work on interactions next!
 
 ## Changes
-- Fixed titles menu to only show the titles you have unlocked
-- Fixed attacking timing on same target only
-- Attacking the same target eventually yields diminishing returns for XP
-- Added FOV/FPS command allowance
-- Added more realistic carry weight - effected by survival needs
-- Added backpacks and satchels
-- Added spells that create walls/zones to do damage
+- Fixed looting animals/monsters to require hunting
+- Fixed an issue with crafting not always working
+- Fixed woodcutting skill xp from charcoal
+- Renamed woodworking back to Carpentry
+- Rebalance energy drain system
+- Finished Beekeeping skill with tiers
+- Added placeable scenes for display text
+- Added admin/moderator server commands
+- Added admin/moderator server logs
