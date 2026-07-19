@@ -4,4 +4,4 @@
 Small followup fix!
 
 ## Changes
-- Fixed an issue with countdown menu for disconnect causing not able to login!
+- Fixed another issue with server sending eslmap
