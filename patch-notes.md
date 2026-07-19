@@ -1,8 +1,7 @@
 # Patch notes
 
 **Summary**
-This is final go live patch!
+Small fix!
 
 ## Changes
-- Added a starter kit menu /kit
-- Last minute optimizations
+- Fixed an issue with /Kit not closing
