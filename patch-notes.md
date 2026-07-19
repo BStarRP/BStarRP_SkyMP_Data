@@ -1,12 +1,9 @@
 # Patch notes
 
 **Summary**
-Small followup fix!
+Fixed major combat issues!
 
 ## Changes
-- Fixed an issue with players having alot of items not loading/crashing
-- Fixed chat box text to re-appear when chat box is focused
-- Fixed an issue with scenes not being able to be placed
-- Fixed an issue with NPC's stalling and not having a host
-- Fixed an issue with some hits not registering
-- Remapped missing bard songs for musician skill
+- Fixed music playing for other players, not just local player
+- Fixed issue with combat not syncing
+- Fixed issue with players not drawing weapons
