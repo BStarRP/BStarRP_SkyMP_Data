@@ -1,8 +1,8 @@
 # Patch notes
 
 **Summary**
-Prepping for launch!
+This is final go live patch!
 
 ## Changes
-- Updated modlist
-- Added more admin commands
+- Added a starter kit menu /kit
+- Last minute optimizations
