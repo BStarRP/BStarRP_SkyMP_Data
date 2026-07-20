@@ -1,28 +1,20 @@
 # Patch notes
 
 **Summary**
-Working on adding systems we need and fixing the ones we have!
+Quick update to fix interaction menu
 
 ## Changes
-- Fixed an issue with buffbar clearing when double pressing f2
-- Fixed an issue with equipment not always registering on server when equipped
-- Fixed an issue with combat registration
-- Fixed bound weapons now show localy on player
-- Fixed summoned pets, now should follow you
-- Fixed more issues with crafts sometimes not giving xp and rejecting on the server
-- Fixed an issue with Archery not gaining XP
-- Fixed an issue with lesser powers like racials not triggering
-- Fixed an issue with scenes not placing text where you selected
-- Fixed an issue with clicking stop performance not stopping bard songs
-- Fixed an issue with your inventory showing someone elses name
-- Rebalanced XP gains on crafting skills
-- Synced locks with the server, set to espm by default unless changed with /setlock command
-- Updated bardic inspiration to give 10% per tier of musicanship
-- Updated instrumental/vocals to have a mute check box to allow bards to do their own music ;+)
-- Reworked combat timers more, exposed engine key block state to delay attacks to fix hit registration
-- Reworked how inventory registers taking items and crafting
-- Changed sitting to only work when exhausted, bardic inspiration stacks with both sitting, being at an inn, and listening to a bard
-- Added backpacks and satchels to leatherworking (this will change a bit)
-- Added interaction system for testing, target options, tackle, cuff, trade, lite introduction (60 minutes)
-- Added +10 carry weight to all races
-- Added object animation syncing & script syncing for puzzles/traps
+- Fixed racials from being permanet after timer
+- Fixed an issue with trade menu
+- Fixed an issue with interaction/targeting
+- Fixed an issue with tackle not letting you up
+- Fixed an issue with woodcutting animation
+- Fixed an issue with hitskin racial
+- Fixed an issue with not being able to sit
+- Fixed stamina regen bug
+- Fixed an issue with permanent debuffs reapplying constantly
+- Updated missive board to not let you remove notes of others and only allow 1 per person, lasts for 3 days
+- Added more interactions, cleaned up UI menu, also Z sit down, X hands up, T tackle, E trade/changes to Pickpocket when behind/sneaking
+- Added interaction objects through our new target system on all objects/npcs
+- Added helgen quest at login to open up helgen
+- Reduced respawn timers on npc's to help stimulate more population (yall are animals)

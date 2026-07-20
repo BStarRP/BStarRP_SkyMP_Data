@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 1080p scale: fill extends slightly past border; soft transparent grey stroke -->
+<svg xmlns="http://www.w3.org/2000/svg" width="41.25" height="41.25" viewBox="0 0 41.25 41.25" fill="none">
+  <rect x="0.25" y="0.25" width="40.75" height="40.75" rx="9.05" ry="9.05" fill="rgba(26,26,26,0.64)"/>
+  <rect x="2.25" y="2.25" width="36.75" height="36.75" rx="8.28" ry="8.28" fill="none" stroke="rgba(218,218,218,0.4)" stroke-width="3"/>
+  <text x="20.625" y="20.625" fill="#FFFFFF" font-family="Segoe UI,system-ui,Arial,sans-serif" font-size="24.375" font-weight="700" text-anchor="middle" dominant-baseline="central">T</text>
+</svg>
