@@ -1695,6 +1695,13 @@ export declare function applyAnimationVariablesToActor(actorFormId: number, anim
 
 export declare function setCollision(refrFormId: number, collision: boolean): void;
 
+/** Clear ButtonEvent.userEvent for the given control names (e.g. Right Attack) so PlayerControls ignores them. */
+export declare function setBlockedUserEvents(names: string[]): void
+export declare function clearBlockedUserEvents(): void
+/** Canonical attack UserEvent names from RE::UserEvents (Right/Left Attack/Block). */
+export declare function getAttackUserEventNames(): string[]
+
+
 // Based on Form.pex
 export declare class Form extends PapyrusObject {
   static from(papyrusObject: PapyrusObject | null): Form | null
