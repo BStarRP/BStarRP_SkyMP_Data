@@ -1,10 +1,10 @@
 # Patch notes
 
 **Summary**
-Will work on a better door lock sysytem and hold system next!
+I'm tired enough for now!
 
 ## Changes
-- Fixed doors being loocked on inside
-- Fixed issue with dual wield items not equipping
-- Fixed more issues with syncing
-- Fixed an issue with right hand/left hand spells not equiping for server side
+- Fixed pickpocketing creatues
+- Fixed dropping items
+- Fixed an issue with harvesting items not respawning
+- Fixed an issue with aiming
