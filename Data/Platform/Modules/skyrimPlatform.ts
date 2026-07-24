@@ -578,6 +578,7 @@ export interface LocationDiscoveryEvent {
   isVisible: boolean
   canTravelTo: boolean
   isShowAllHidden: boolean
+  markerFormId: number
 }
 
 export interface ShoutAttackEvent {
