@@ -1,14 +1,14 @@
 # Patch notes
 
 **Summary**
-Follow up patch from the last big update, fixing a few smalll glitches!
+One more!!!
  
 ## Changes
-- Fixed an issue with movement syncing
-- Fixed an issue with activators erroring out
-- Increase size of bonus stats text
-- Updated door to the interior of Cidhna mine to teleport, so the Reachmen can actually go in and out
-- Added items for locks and keys (more on this in next patch)
-- Atomized the tanning rack at the hall of the vigilant
-- Removed Morthal overhaul as a master for both cores
-- Reverted all Morthal changes so we can change the overhaul 
+- Fixed an issue with sawmill not working
+- Fixed an issue with going through doors
+- Fixed an issue with sealed doors causing lag
+- Fixed an issue with objects failing causing fps loss and other issues
+- Fixed an issue with energy running out not triggering exhaution
+- Fixed an issue with eye blinking keeping eyes closed then opening, reversed behavior like they should be
+- Reverted cave entering with weapons drawn, causing too many issues just remember any doors you need to undraw your weapon including caves for now
+- More improvements to inventory speed/timing
