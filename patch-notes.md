@@ -1,16 +1,18 @@
 # Patch notes
 
 **Summary**
-Hopefully last one, after this I can focus on the hold system since alot of the major bugs/issues are squashed! (aside from some combat bugs I need to resolve still)
-
-I am also happy to report, spiders no longer are crashing its been confirmed.
+Still working on fixing the FPS issue, I tracked down an issue with binding of objects, it should be fixed, but I added some extra diagnostics just in-case so I can pin point it by next update, also re-stored missing recipes + some extras! 
  
 ## Changes
-- Fixed another issue with frame loss & activators
-- Fixed an issue with eye blinking not always working correctly
-- Fixed an issue with explored areas not reseting on login
-- Fixed an issue with NPC's and spells not resolving
-- Fixed a major exploit for gaining XP while crafting
-- Fixed buffs/blessings to actually modify stats properly
-- Fixed buffs/debuffs so they show properly on the buff bar with all the proper data
-- Updated all crafting & gathering on success notifications to show gained +N XP
+- Fixed silver in Cidhna mine not being minable
+- Fixed another issue with objects not binding properly causing fps loss
+- Fixed an issue with sawmills not showing animations after the first attempt
+- Fixed ghost grindstones or other objects that are one shot to not continue playing animations
+- Fixed an issue with quest syncing that caused a challenger npc to hunt you down lol
+- Updated objects & triggers to work with 2-state animations like saw mills, wheat mills, dungeon switches
+- Restored missing crafting recipes
+- Riften changes the Jarl requested
+- Winterhold changes the Regent requested
+- Added custom helmet for the Jarl of Riften
+- Added custom helmet for the Jarl of Markarth
+- Added material keywords to the thief armour
