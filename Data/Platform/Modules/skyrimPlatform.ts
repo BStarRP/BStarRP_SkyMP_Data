@@ -1691,6 +1691,11 @@ export declare function interruptCast(actorCasterFormId: number, castingSource: 
 export declare function finishChannelCast(actorFormId: number, castingSource: SpellType): void;
 /** Dispel engine ActiveEffects cast by casterFormId. targetFormId omitted = player + parent-cell actors; set to limit to one target. Returns dispel count. */
 export declare function dispelEffectsByCaster(casterFormId: number, targetFormId?: number): number;
+/**
+ * Apply a SPEL's ActiveEffects for vanilla compass icons, then zero magnitudes
+ * so BuffSync / server AME remain authoritative.
+ */
+export declare function applySpellHud(targetFormId: number, spellFormId: number, durationSec?: number): void;
 export declare function getAnimationVariablesFromActor(actorFormId: number): ActorAnimationVariables;
 export declare function applyAnimationVariablesToActor(actorFormId: number, animationVariables: ActorAnimationVariables): boolean;
 
