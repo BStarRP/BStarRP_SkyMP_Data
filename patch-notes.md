@@ -1,8 +1,12 @@
 # Patch notes
 
 **Summary**
-Another quick folow-up to fix what I broke!
+I hope this is the last for tonight!  Fixing the tinting issue after collecting data!
 
 ## Changes
-- Fixed an issue with not being able to select a character
-- Fixed an issue with disenchanting items not saving
+- Fixed an issue with remote players applying tint on your character model
+- Fixed an issue with tints being applied improperly
+- Fixed an issue with enchantments not saving properly
+- Fixed an issue with capentry crafting not processing fails properly
+- Fixed an issue with diseases not removing properly
+- Fixed an issue with sawmill not playing animations
