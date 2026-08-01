@@ -1,7 +1,8 @@
 # Patch notes
 
 **Summary**
-A quick fix on spell auditing
+Another quick folow-up to fix what I broke!
 
 ## Changes
-- Removed spell audit at login that may remove spells
+- Fixed an issue with not being able to select a character
+- Fixed an issue with disenchanting items not saving
