@@ -1,9 +1,10 @@
 # Patch notes
 
 **Summary**
-Loosing my mind.
+Loosing my mind x10.
 
 ## Changes
-- Fixed a bug with carryweight not updating properly after buffs/debuffs wear off
-- Fixed an issue with dropping items and picking them up causing phantom items
-- Removed model update when remote appearance shares local players base temprorarily to apply unique appearance
+- Rolled back to 4 days ago when this shit was working right
+- Fixed items not re-quipping
+- Fixed an issue with movement speed not updating 
+- Fixed an issue with enchanting not properly enchanting items
