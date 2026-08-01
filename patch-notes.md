@@ -1,9 +1,8 @@
 # Patch notes
 
 **Summary**
-Loosing my mind x30.
+Is this the definition of insantity?
 
 ## Changes
-- Fixed an issue with the new holdstone skill buffs not landing on craft benches
-- Fixed an issue with crafting having duplicated results
-- FIXED THE APPEARANCE BUG BUT IM GOING TO SEE IF I DID WITH THIS FIX THAT PROBABLY WONT WORK BUT I COULD GET LUCKY? PLZ 
+- One more attempt before bed to fix the blackface glitch
+- Fixed dual weild/equipping not always working at login
