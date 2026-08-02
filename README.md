@@ -32,6 +32,66 @@ Pushing `Data/` changes to `dev` publishes a `-dev` patch. Merging `dev` → `ma
 
 **Prod version promote:** if `dev` has already shipped ahead (e.g. `0.67.19-dev`), the next prod release becomes **`0.67.19`** (not stuck at `0.67.17`). When that happens, unchanged files are copied from `patches/0.67.19-dev/` → `patches/0.67.19/` (hash-matched); only real diffs upload from `main`.
 
+**Patch notes:**
+- **`dev`:** flat `## Changes` list (no category headings). Summary from commit description.
+- **`main` (promote/direct):** rolls up Changes; if any `Added`/`Updated`/`Reworked`/`Fixed` prefixes exist, group those and put the rest under **Other**. If none of those prefixes exist, keep a flat list (no category headings). Summary = **final commit description before merge** (newest since last prod).
+- Prefer starting bullets with `Added` / `Updated` / `Reworked` / `Fixed` so prod can group them.
+- **Discord:** only on **prod** when the version actually bumps.
+
+### Example
+
+**Commit:**
+```text
+fix: hunting and report polish
+
+Hunting XP fixes and /report command for tonight's test pass.
+```
+
+**`patch-notes.md` on `dev`:**
+```markdown
+# Patch notes
+
+## Changes
+- Fixed mudcrab giving XP equivalent to giant for hunting
+- Updated hunting/taming skill, moved skeever to t1
+- Added a /report command (or insert key) for staff reports
+- Updated mining XP to scale based on tier/nodes
+```
+
+**What `dev` ships** (flat):
+```markdown
+# Patch notes
+
+**Summary**
+Hunting XP fixes and /report command for tonight's test pass.
+
+## Changes
+- Fixed mudcrab giving XP equivalent to giant for hunting
+- Updated hunting/taming skill, moved skeever to t1
+- Added a /report command (or insert key) for staff reports
+- Updated mining XP to scale based on tier/nodes
+```
+
+**What `main` ships after merge** (rolled up + organized):
+```markdown
+# Patch notes
+
+**Summary**
+Hunting XP fixes and /report command for tonight's test pass.
+
+## Changes
+
+### Added
+- Added a /report command (or insert key) for staff reports
+
+### Updated
+- Updated hunting/taming skill, moved skeever to t1
+- Updated mining XP to scale based on tier/nodes
+
+### Fixed
+- Fixed mudcrab giving XP equivalent to giant for hunting
+```
+
 **Option A – Automatic (recommended):**  
 Push changes to `Data/` on `main` or `dev` using [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0/) in your commit messages. The **Auto release on patch change** workflow sets the version from your commits.
 

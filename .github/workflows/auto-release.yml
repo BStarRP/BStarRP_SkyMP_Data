@@ -28,6 +28,7 @@ on:
       - 'scripts/changelog-lib.js'
       - 'scripts/verify-patch-notes-for-release.js'
       - 'scripts/resolve-release-version.js'
+      - 'scripts/build-release-notes.js'
       - 'patch-notes.md'
   workflow_dispatch:
     inputs:
@@ -161,51 +162,6 @@ jobs:
             echo "Prod promote: version aligned to latest -dev base; assets copy from asset_source (prefer -dev when bases match)."
           fi
 
-      - name: Prepare patch notes from patch-notes.md
-        id: notes
-        run: |
-          if [ -f patch-notes.md ]; then
-            cp patch-notes.md release-notes.md
-            echo "Using patch-notes.md for release and manifest notes"
-          else
-            echo "No patch-notes.md; generating notes from commit messages"
-            LATEST_TAG="${{ steps.version.outputs.previous_tag }}"
-            LATEST_TAG="${LATEST_TAG:-v0.0.0}"
-            NOTES=""
-            FEATURES=""
-            FIXES=""
-            BREAKING=""
-            while IFS= read -r subject; do
-              [[ -z "$subject" ]] && continue
-              desc=$(echo "$subject" | sed -E 's/^[a-z]+(\([^)]*\))?!?:\s*//')
-              if echo "$subject" | grep -qiE '^[a-z]+!.*:' || echo "$subject" | grep -qi 'BREAKING'; then
-                BREAKING="$BREAKING- $desc"$'\n'
-              elif echo "$subject" | grep -qE '^feat(\([^)]*\))?:'; then
-                FEATURES="$FEATURES- $desc"$'\n'
-              elif echo "$subject" | grep -qE '^fix(\([^)]*\))?:'; then
-                FIXES="$FIXES- $desc"$'\n'
-              else
-                FIXES="${FIXES}- $desc"$'\n'
-              fi
-            done < <(git log "$LATEST_TAG..HEAD" --format="%s" --reverse -- Data/ 2>/dev/null || true)
-            [[ -n "$BREAKING" ]] && NOTES="${NOTES}## Breaking Changes"$'\n'$'\n'"$BREAKING"$'\n'
-            [[ -n "$FEATURES" ]] && NOTES="${NOTES}## Features"$'\n'$'\n'"$FEATURES"$'\n'
-            [[ -n "$FIXES" ]] && NOTES="${NOTES}## Fixes"$'\n'$'\n'"$FIXES"
-            echo -n "$NOTES" > release-notes.md
-          fi
-          # Strip leading "Patch X.Y.Z" or "Patch X.Y.Z-dev" so release description doesn't duplicate the title
-          node -e "
-            const fs = require('fs');
-            const path = 'release-notes.md';
-            let s = fs.readFileSync(path, 'utf8');
-            const stripped = s.replace(/^#?\s*Patch\s+[\d.]+(?:-dev(?:\.\d+)?)?\s*\n?/i, '').trimStart();
-            if (stripped !== s) {
-              fs.writeFileSync(path, stripped, 'utf8');
-              console.log('Removed duplicate Patch version line from release notes');
-            }
-          "
-          cat release-notes.md
-
       - name: Fetch previous release manifest and changelog
         if: steps.version.outputs.previous_tag != '' && steps.version.outputs.previous_tag != 'v0.0.0'
         env:
@@ -223,6 +179,28 @@ jobs:
           else
             echo "No previous changelog.json; will use scripts/changelog-seed.json until first changelog is published"
           fi
+
+      # Normal push: patch-notes.md as-is.
+      # Prod promote: Summary from patch-notes.md (merge-time); Changes rolled up from -dev changelog.
+      - name: Build release notes
+        id: notes
+        run: |
+          set -e
+          PROD_VER="${{ steps.version.outputs.latest_prod_tag }}"
+          PROD_VER="${PROD_VER#v}"
+          DEV_CL_ARG=""
+          if [ -f prev-changelog.json ]; then
+            DEV_CL_ARG="--dev-changelog=prev-changelog.json"
+          fi
+          node scripts/build-release-notes.js \
+            --channel="${{ steps.version.outputs.channel }}" \
+            --version="${{ steps.version.outputs.version }}" \
+            --latest-prod-version="$PROD_VER" \
+            --previous-tag="${{ steps.version.outputs.previous_tag }}" \
+            --promoted-from-dev="${{ steps.version.outputs.promoted_from_dev }}" \
+            $DEV_CL_ARG \
+            --out=release-notes.md
+          cat release-notes.md
 
       - name: Pull LFS for changed and new files only (no reference to reuse)
         env:
@@ -303,19 +281,18 @@ jobs:
                 }
               }
             }
-            // Patch notes for manifest: prefer patch-notes.md, else release-notes.md
-            // Strip leading \"Patch X.Y.Z\" / \"Patch X.Y.Z-dev\" so launcher doesn't show version twice
+            // Prefer built release-notes.md (includes promote rollup); fall back to patch-notes.md
             const stripDuplicateVersion = (s) => s.replace(/^#?\s*Patch\s+[\d.]+(?:-dev(?:\.\d+)?)?\s*\n?/i, '').trimStart();
-            const patchNotesPath = 'patch-notes.md';
             const releaseNotesPath = 'release-notes.md';
-            if (fs.existsSync(patchNotesPath)) {
-              let content = fs.readFileSync(patchNotesPath, 'utf8').trim();
+            const patchNotesPath = 'patch-notes.md';
+            if (fs.existsSync(releaseNotesPath)) {
+              let content = fs.readFileSync(releaseNotesPath, 'utf8').trim();
               if (content) {
                 m.patchNotes = stripDuplicateVersion(content);
-                console.log('Merged patch notes from patch-notes.md into manifest');
+                console.log('Merged patch notes from release-notes.md into manifest');
               }
-            } else if (fs.existsSync(releaseNotesPath)) {
-              let content = fs.readFileSync(releaseNotesPath, 'utf8').trim();
+            } else if (fs.existsSync(patchNotesPath)) {
+              let content = fs.readFileSync(patchNotesPath, 'utf8').trim();
               if (content) m.patchNotes = stripDuplicateVersion(content);
             }
             fs.writeFileSync('dist-patch/manifest.json', JSON.stringify(m, null, 2), 'utf8');
@@ -329,17 +306,25 @@ jobs:
           GITHUB_REPOSITORY: ${{ github.repository }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "patch-notes.md for release ${{ steps.version.outputs.version }}:"
-          head -20 patch-notes.md
+          echo "release-notes.md for ${{ steps.version.outputs.version }}:"
+          head -40 release-notes.md
           PREV_CHANGELOG=""
           if [ -f prev-changelog.json ]; then
             PREV_CHANGELOG="--prev-changelog=prev-changelog.json"
           fi
+          # On promote, compare against last *prod* notes (not the -dev tip we copy assets from).
+          COMPARE_VER="${{ steps.version.outputs.previous_version }}"
+          if [ "${{ steps.version.outputs.promoted_from_dev }}" = "true" ]; then
+            COMPARE_VER="${{ steps.version.outputs.latest_prod_tag }}"
+            COMPARE_VER="${COMPARE_VER#v}"
+          fi
           node scripts/verify-patch-notes-for-release.js \
             "${{ steps.version.outputs.version }}" \
             "${{ steps.version.outputs.previous_version }}" \
+            --notes-file=release-notes.md \
+            --compare-version="$COMPARE_VER" \
             $PREV_CHANGELOG
-          CHANGELOG_ARGS="${{ steps.version.outputs.version }} --release-date=$(date -u +%Y-%m-%d)"
+          CHANGELOG_ARGS="${{ steps.version.outputs.version }} --release-date=$(date -u +%Y-%m-%d) --notes-file=release-notes.md"
           if [ -f prev-changelog.json ]; then
             CHANGELOG_ARGS="$CHANGELOG_ARGS --previous-changelog=prev-changelog.json"
           fi
