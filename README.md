@@ -34,8 +34,8 @@ Pushing `Data/` changes to `dev` publishes a `-dev` patch. Merging `dev` → `ma
 
 **Patch notes:**
 - **`dev`:** flat `## Changes` list (no category headings). Summary from commit description.
-- **`main` (promote/direct):** rolls up Changes; if any `Added`/`Updated`/`Reworked`/`Fixed` prefixes exist, group those and put the rest under **Other**. If none of those prefixes exist, keep a flat list (no category headings). Summary = **final commit description before merge** (newest since last prod).
-- Prefer starting bullets with `Added` / `Updated` / `Reworked` / `Fixed` so prod can group them.
+- **`main` (promote/direct):** rolls up Changes; if any `Added`/`Improved`/`Updated`/`Reworked`/`Fixed` prefixes exist, group those and put the rest under **Other**. If none of those prefixes exist, keep a flat list (no category headings). Summary = **final commit description before merge** (newest since last prod).
+- Prefer starting bullets with `Added` / `Improved` / `Updated` / `Reworked` / `Fixed` so prod can group them.
 - **Discord:** only on **prod** when the version actually bumps.
 
 ### Example
@@ -54,6 +54,7 @@ Hunting XP fixes and /report command for tonight's test pass.
 ## Changes
 - Fixed mudcrab giving XP equivalent to giant for hunting
 - Updated hunting/taming skill, moved skeever to t1
+- Improved mining feedback when a node is depleted
 - Added a /report command (or insert key) for staff reports
 - Updated mining XP to scale based on tier/nodes
 ```
@@ -68,6 +69,7 @@ Hunting XP fixes and /report command for tonight's test pass.
 ## Changes
 - Fixed mudcrab giving XP equivalent to giant for hunting
 - Updated hunting/taming skill, moved skeever to t1
+- Improved mining feedback when a node is depleted
 - Added a /report command (or insert key) for staff reports
 - Updated mining XP to scale based on tier/nodes
 ```
@@ -83,6 +85,9 @@ Hunting XP fixes and /report command for tonight's test pass.
 
 ### Added
 - Added a /report command (or insert key) for staff reports
+
+### Improved
+- Improved mining feedback when a node is depleted
 
 ### Updated
 - Updated hunting/taming skill, moved skeever to t1

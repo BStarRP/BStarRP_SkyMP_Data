@@ -5,8 +5,8 @@
  *   - Dev push: Summary from latest commit description; Changes as a flat list
  *     (no category headings / sorting).
  *   - Prod (promote or direct): Summary from latest -dev (promote) or commit;
- *     Changes organized Added→Updated→Reworked→Fixed. Category headings only when
- *     bullets use those prefixes — otherwise stays a flat list.
+ *     Changes organized Added→Improved→Updated→Reworked→Fixed→Other.
+ *     Category headings only when bullets use those prefixes — otherwise flat list.
  *
  * Usage:
  *   node scripts/build-release-notes.js \
@@ -107,7 +107,7 @@ function dedupeBullets(bullets) {
 }
 
 /** Preferred player-facing order. */
-const CHANGE_CATEGORIES = ['Added', 'Updated', 'Reworked', 'Fixed'];
+const CHANGE_CATEGORIES = ['Added', 'Improved', 'Updated', 'Reworked', 'Fixed'];
 
 /**
  * Classify a bullet: "Fixed foo" / "fixed: foo" → { category, text, display }.
@@ -115,7 +115,7 @@ const CHANGE_CATEGORIES = ['Added', 'Updated', 'Reworked', 'Fixed'];
  */
 function classifyBullet(raw) {
   const cleaned = String(raw || '').replace(/\s+/g, ' ').trim();
-  const m = cleaned.match(/^(Added|Updated|Reworked|Fixed)\b[:\s-]*(.*)$/i);
+  const m = cleaned.match(/^(Added|Improved|Updated|Reworked|Fixed)\b[:\s-]*(.*)$/i);
   if (m) {
     const category = CHANGE_CATEGORIES.find((c) => c.toLowerCase() === m[1].toLowerCase());
     const rest = (m[2] || '').trim();
@@ -127,13 +127,14 @@ function classifyBullet(raw) {
 }
 
 /**
- * Dedupe, group by Added → Updated → Reworked → Fixed → Other,
+ * Dedupe, group by Added → Improved → Updated → Reworked → Fixed → Other,
  * sort alphabetically within each group.
  */
 function organizeBullets(bullets) {
   const deduped = dedupeBullets(bullets);
   const buckets = {
     Added: [],
+    Improved: [],
     Updated: [],
     Reworked: [],
     Fixed: [],
@@ -160,8 +161,11 @@ function organizeBullets(bullets) {
 function formatNotes(summary, bullets, opts = {}) {
   const organize = !!opts.organize;
   const list = organize ? organizeBullets(bullets) : dedupeBullets(bullets);
-  const parts = ['# Patch notes', '', '**Summary**', ''];
-  parts.push(summary || '', '');
+  const parts = ['# Patch notes', ''];
+  const summaryText = String(summary || '').trim();
+  if (summaryText) {
+    parts.push('**Summary**', '', summaryText, '');
+  }
   parts.push('## Changes');
   if (!list.length) {
     parts.push('- (no changes listed)', '');
@@ -174,10 +178,11 @@ function formatNotes(summary, bullets, opts = {}) {
     return parts.join('\n');
   }
 
-  // Prod: Added → Updated → Reworked → Fixed, then Other for unprefixed bullets.
+  // Prod: Added → Improved → Updated → Reworked → Fixed, then Other for unprefixed.
   // If NOTHING has a known prefix, stay flat — no ### Other / empty category headings.
   const byCat = {
     Added: [],
+    Improved: [],
     Updated: [],
     Reworked: [],
     Fixed: [],
@@ -358,9 +363,7 @@ if (CHANNEL === 'prod' && PROMOTED) {
       `${organizeBullets(bullets).length} change bullet(s) organized; summary from ${summarySource}`
   );
   if (!summary) {
-    console.warn(
-      'Warning: no summary found from -dev releases or commits — add a commit description on the last -dev ship.'
-    );
+    console.log('No summary found — omitting **Summary** section from prod notes');
   }
   if (!collected.bullets.length) {
     console.warn(
@@ -381,14 +384,11 @@ if (CHANNEL === 'prod' && PROMOTED) {
     `Prod organize: ${organizeBullets(parsedFile.bullets).length} change bullet(s); summary from ${summarySource}`
   );
   if (!summary) {
-    console.warn(
-      'Warning: no commit description found — use a body under your conventional commit, e.g.\n' +
-        '  fix: hunting xp\n\n  Hunting XP and report command polish for tonight\'s test.'
-    );
+    console.log('No summary found — omitting **Summary** section');
   }
 } else {
   mode = 'dev-flat';
-  // Dev: flat Changes list only; Summary from commit description
+  // Dev: flat Changes list only; Summary from commit description (omitted if empty)
   if (!parsedFile.bullets.length) {
     console.error('ERROR: patch-notes.md needs ## Changes bullets for', VERSION);
     process.exit(1);
@@ -400,10 +400,7 @@ if (CHANNEL === 'prod' && PROMOTED) {
     `Dev flat list: ${dedupeBullets(parsedFile.bullets).length} change bullet(s); summary from ${summarySource}`
   );
   if (!summary) {
-    console.warn(
-      'Warning: no commit description found — use a body under your conventional commit, e.g.\n' +
-        '  fix: hunting xp\n\n  Hunting XP and report command polish for tonight\'s test.'
-    );
+    console.log('No summary found — omitting **Summary** section');
   }
 }
 fs.writeFileSync(OUT, outText.endsWith('\n') ? outText : outText + '\n', 'utf8');
