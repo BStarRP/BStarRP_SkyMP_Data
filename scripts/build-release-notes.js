@@ -242,9 +242,9 @@ function collectDevBulletsSinceProd(changelog, latestProdVersion) {
 }
 
 /**
- * Summary from the newest commit in previousTag..HEAD.
- * Prefers commit body (description); falls back to subject minus conventional type.
- * Skips merges and pure chore: commits when a better candidate exists.
+ * Summary from the newest commit *description* (body) in previousTag..HEAD.
+ * Never uses the subject line — if no body exists, returns '' (Summary section omitted).
+ * Skips merges; prefers non-chore commits.
  */
 function extractSummaryFromCommits(previousTag) {
   const range =
@@ -268,35 +268,26 @@ function extractSummaryFromCommits(previousTag) {
   for (let i = 0; i + 1 < chunks.length; i += 2) {
     const subject = chunks[i] || '';
     const body = (chunks[i + 1] || '').trim();
-    if (!subject) continue;
+    if (!subject || !body) continue;
     candidates.push({ subject, body });
   }
 
-  function fromCommit(c) {
-    if (c.body) {
-      // First paragraph of the description
-      return c.body
-        .split(/\n\s*\n/)[0]
-        .replace(/\s+/g, ' ')
-        .trim();
-    }
-    return c.subject.replace(/^[a-z]+(\([^)]*\))?!?:\s*/i, '').trim();
+  function bodySummary(c) {
+    // First paragraph of the description only
+    return c.body
+      .split(/\n\s*\n/)[0]
+      .replace(/\s+/g, ' ')
+      .trim();
   }
 
-  // Newest first: prefer non-chore with a body, then any non-chore, then anything
+  // Newest first: prefer non-chore with a body, then any commit with a body
   const nonChore = candidates.filter((c) => !/^chore(\([^)]*\))?!?:/i.test(c.subject));
   for (const c of nonChore) {
-    if (c.body) {
-      const s = fromCommit(c);
-      if (s) return s;
-    }
-  }
-  for (const c of nonChore) {
-    const s = fromCommit(c);
+    const s = bodySummary(c);
     if (s) return s;
   }
   for (const c of candidates) {
-    const s = fromCommit(c);
+    const s = bodySummary(c);
     if (s) return s;
   }
   return '';

@@ -40,7 +40,7 @@ Pushing `Data/` changes to `dev` publishes a `-dev` patch. Merging `dev` → `ma
 
 ### Example
 
-**Commit:**
+**Commit** (Summary = body only; subject is never used — no body ⇒ no Summary section):
 ```text
 fix: hunting and report polish
 
