@@ -538,10 +538,16 @@ async function uploadFromLocal(pathEntry, src, destKey, entry, logSuffix) {
   return 'uploaded';
 }
 
-/** Parse "X.Y.Z" or "X.Y" to [major, minor, patch] for comparison. */
+/** True for channel -dev versions (X.Y.Z-dev or X.Y.Z-dev.N). */
+function isDevChannelVersion(v) {
+  return /^\d+\.\d+\.\d+-dev(\.\d+)?$/i.test(String(v).replace(/^v/i, ''));
+}
+
+/** Parse "X.Y.Z", "X.Y.Z-dev", or "X.Y" to [major, minor, patch] for comparison. */
 function parseVersion(v) {
-  const parts = String(v).split('.').map((n) => parseInt(n, 10) || 0);
-  return [parts[0] ?? 0, parts[1] ?? 0, parts[2] ?? 0];
+  const m = String(v).replace(/^v/i, '').match(/^(\d+)\.(\d+)(?:\.(\d+))?/);
+  if (!m) return [0, 0, 0];
+  return [Number(m[1]) || 0, Number(m[2]) || 0, Number(m[3]) || 0];
 }
 
 /** Compare two version strings; returns positive if a > b, negative if a < b, 0 if equal. */
@@ -812,8 +818,12 @@ async function run() {
     return;
   }
 
-  // List all patch version prefixes (patches/X.Y.Z/) and delete any older than the 3 most recent
-  console.log('R2: listing patch prefixes for cleanup (separate phase from per-file uploads)...');
+  // List patch version prefixes and delete older than the 3 most recent *in this channel only*
+  // (prod = X.Y.Z, dev = X.Y.Z-dev). Never cross-delete the other channel.
+  const cleanupChannel = isDevChannelVersion(VERSION) ? 'dev' : 'prod';
+  console.log(
+    'R2: listing patch prefixes for cleanup (channel=' + cleanupChannel + ', keep last ' + KEEP_PATCH_VERSIONS + ')...'
+  );
   let prefixToken = undefined;
   const versionPrefixes = [];
   do {
@@ -832,7 +842,12 @@ async function run() {
     for (const p of prefixes) {
       const prefix = p.Prefix || '';
       const match = prefix.match(/^patches\/([^/]+)\/$/);
-      if (match) versionPrefixes.push(match[1]);
+      if (!match) continue;
+      const ver = match[1];
+      const verIsDev = isDevChannelVersion(ver);
+      if (cleanupChannel === 'dev' ? verIsDev : !verIsDev) {
+        versionPrefixes.push(ver);
+      }
     }
     prefixToken = list.IsTruncated ? list.NextContinuationToken : undefined;
   } while (prefixToken);
@@ -840,7 +855,13 @@ async function run() {
   versionPrefixes.sort((a, b) => -compareVersions(a, b)); // newest first
   const toDelete = versionPrefixes.slice(KEEP_PATCH_VERSIONS);
   if (toDelete.length === 0) {
-    console.log('R2: no patch folders older than the last ' + KEEP_PATCH_VERSIONS + ' version(s); nothing to delete');
+    console.log(
+      'R2: no ' +
+        cleanupChannel +
+        ' patch folders older than the last ' +
+        KEEP_PATCH_VERSIONS +
+        ' version(s); nothing to delete'
+    );
   } else {
     let totalDeleted = 0;
     for (const ver of toDelete) {
@@ -875,7 +896,17 @@ async function run() {
       totalDeleted += deletedCount;
       console.log('Deleted patches/' + ver + '/ (' + deletedCount + ' objects)');
     }
-    console.log('R2: deleted ' + totalDeleted + ' objects from ' + toDelete.length + ' old patch folder(s) (kept last ' + KEEP_PATCH_VERSIONS + ' version(s))');
+    console.log(
+      'R2: deleted ' +
+        totalDeleted +
+        ' objects from ' +
+        toDelete.length +
+        ' old ' +
+        cleanupChannel +
+        ' patch folder(s) (kept last ' +
+        KEEP_PATCH_VERSIONS +
+        ' version(s))'
+    );
   }
 }
 

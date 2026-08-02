@@ -2,7 +2,8 @@
 # differs from manifest.json or are missing. Cheaper than "Force re-upload ALL assets".
 #
 # Actions → Repair R2 manifest mismatches → Run workflow
-# Optional: set release tag (e.g. v0.31.0); leave empty to use the latest GitHub release.
+# Optional: set release tag (e.g. v0.31.0, v0.31.0-dev, or floating "dev").
+# Leave empty to use the latest *prod* GitHub release (/releases/latest).
 
 name: Repair R2 manifest mismatches
 
@@ -10,7 +11,7 @@ on:
   workflow_dispatch:
     inputs:
       release_tag:
-        description: 'Release tag to repair (e.g. v0.31.0). Empty = latest release.'
+        description: 'Release tag to repair (e.g. v0.31.0, v0.31.0-dev, or dev). Empty = latest prod release.'
         required: false
         type: string
 
@@ -31,14 +32,16 @@ jobs:
         run: |
           set -e
           if [ -z "$INPUT_TAG" ]; then
+            # Latest non-prerelease (prod). Never resolves to -dev / floating "dev".
             TAG=$(gh release view --repo "${{ github.repository }}" --json tagName -q .tagName)
+          elif [ "$INPUT_TAG" = "dev" ]; then
+            TAG=dev
           else
             T="${INPUT_TAG#v}"
             TAG="v${T}"
           fi
           echo "tag=$TAG" >> $GITHUB_OUTPUT
-          echo "version=${TAG#v}" >> $GITHUB_OUTPUT
-          echo "Repairing release $TAG (patch version ${TAG#v})"
+          echo "Repairing release $TAG"
 
       # Default branch has scripts/verify-r2-vs-manifest.js etc. A tag points at an older commit
       # that does not include those files — so we must not checkout only the tag.
@@ -51,7 +54,7 @@ jobs:
       - name: Restore Data/ from the release tag being repaired
         run: |
           set -e
-          git fetch origin "${{ steps.rel.outputs.tag }}"
+          git fetch origin "${{ steps.rel.outputs.tag }}" --tags
           git checkout "${{ steps.rel.outputs.tag }}" -- Data/
 
       - name: Setup Git LFS (no fetch)
@@ -70,6 +73,15 @@ jobs:
           gh release download "${{ steps.rel.outputs.tag }}" --repo "${{ github.repository }}" \
             --pattern "manifest.json" --dir dist-patch --clobber
           test -f dist-patch/manifest.json
+          # VERSION must match the CDN folder (manifest.version), especially for floating tag "dev"
+          VER=$(node -e "console.log(JSON.parse(require('fs').readFileSync('dist-patch/manifest.json','utf8')).version || '')")
+          if [ -z "$VER" ]; then
+            echo "ERROR: dist-patch/manifest.json missing version"
+            exit 1
+          fi
+          echo "version=$VER" >> $GITHUB_OUTPUT
+          echo "Using CDN/R2 version $VER (tag ${{ steps.rel.outputs.tag }})"
+        id: man
 
       - name: npm ci
         run: npm ci
@@ -77,7 +89,7 @@ jobs:
       - name: Audit R2 vs manifest (HEAD only)
         id: audit
         env:
-          VERSION: ${{ steps.rel.outputs.version }}
+          VERSION: ${{ steps.man.outputs.version }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           PATCH_ASSETS_BUCKET: ${{ secrets.PATCH_ASSETS_BUCKET }}
@@ -121,7 +133,7 @@ jobs:
       - name: Re-upload mismatched objects to R2
         if: steps.audit.outputs.mismatch_count != '0'
         env:
-          VERSION: ${{ steps.rel.outputs.version }}
+          VERSION: ${{ steps.man.outputs.version }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           PATCH_ASSETS_BUCKET: ${{ secrets.PATCH_ASSETS_BUCKET }}
@@ -156,12 +168,22 @@ jobs:
         run: |
           gh release upload "${{ steps.rel.outputs.tag }}" dist-patch/manifest.json \
             --repo "${{ github.repository }}" --clobber
+          # Keep floating "dev" pointer in sync when repairing a versioned -dev release
+          VER="${{ steps.man.outputs.version }}"
+          case "$VER" in
+            *-dev|*-dev.*)
+              if gh release view dev --repo "${{ github.repository }}" &>/dev/null; then
+                gh release upload dev dist-patch/manifest.json \
+                  --repo "${{ github.repository }}" --clobber || true
+              fi
+              ;;
+          esac
 
       - name: Purge Cloudflare cache for this patch (optional)
         if: steps.audit.outputs.mismatch_count != '0'
         continue-on-error: true
         env:
-          VERSION: ${{ steps.rel.outputs.version }}
+          VERSION: ${{ steps.man.outputs.version }}
           CLOUDFLARE_ZONE_ID: ${{ secrets.CLOUDFLARE_ZONE_ID }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           PATCH_ASSETS_PUBLIC_URL: ${{ secrets.PATCH_ASSETS_PUBLIC_URL }}
@@ -170,6 +192,7 @@ jobs:
       - name: Summary
         if: always()
         run: |
+          echo "tag=${{ steps.rel.outputs.tag }} version=${{ steps.man.outputs.version }}"
           echo "mismatch_count=${{ steps.audit.outputs.mismatch_count }}"
           if [ "${{ steps.audit.outputs.mismatch_count }}" = "0" ]; then
             echo "All R2 objects matched manifest sizes; no uploads."

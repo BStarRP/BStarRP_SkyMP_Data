@@ -10,7 +10,7 @@ const SEED_PATH = path.join(__dirname, 'changelog-seed.json');
 
 function stripDuplicateVersion(s) {
   return String(s || '')
-    .replace(/^#?\s*Patch\s+[\d.]+\s*\n?/i, '')
+    .replace(/^#?\s*Patch\s+[\d.]+(?:-dev(?:\.\d+)?)?\s*\n?/i, '')
     .trimStart();
 }
 

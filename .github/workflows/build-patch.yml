@@ -1,6 +1,6 @@
-# Build patch zip and attach it to the release when you publish a new release.
-# Put your patch content (mods, SkyrimPlatform output) in the Data/ folder,
-# then create a Release with a tag (e.g. v1.0.0). This workflow builds the zip and uploads it.
+# Legacy zip attach on release publish.
+# Incremental patching (manifest + R2) is handled by "Auto release on patch change".
+# Kept so older docs/links still resolve; exits successfully without failing the release.
 
 name: Build patch
 
@@ -10,46 +10,11 @@ on:
 
 jobs:
   build-patch:
+    # Floating "dev" pointer is manifest/changelog only — nothing to zip.
+    if: github.event.release.tag_name != 'dev'
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-        with:
-          lfs: true
-
-      - name: Setup Node
-        uses: actions/setup-node@v5
-        with:
-          node-version: '22'
-          cache: 'npm'
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build patch zip
-        id: build
+      - name: Skip legacy zip (incremental pipeline owns releases)
         run: |
-          VERSION="${GITHUB_REF#refs/tags/v}"
-          node scripts/build-patch.js Data "$VERSION"
-          echo "zip_path=dist-patch/patch-${VERSION}.zip" >> $GITHUB_OUTPUT
-          echo "version=$VERSION" >> $GITHUB_OUTPUT
-
-      - name: Verify zip contains only Data
-        run: |
-          ZIP="dist-patch/patch-${GITHUB_REF#refs/tags/v}.zip"
-          # Fail if zip contains repo folders that must not be installed
-          if unzip -l "$ZIP" | grep -qE '(\.github/|/scripts/|node_modules/|package\.json)'; then
-            echo "ERROR: Zip contains repo files - should only have manifest.json and Data contents"
-            unzip -l "$ZIP" | head -40
-            exit 1
-          fi
-          echo "Zip contents (first 40 entries):"
-          unzip -l "$ZIP" | head -40
-
-      - name: Upload to release
-        uses: softprops/action-gh-release@v2
-        with:
-          release_id: ${{ github.event.release.id }}
-          files: dist-patch/patch-*.zip
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          echo "Skipping legacy patch-*.zip build for tag ${{ github.event.release.tag_name }}."
+          echo "Assets ship via Auto release on patch change (manifest.json + R2)."

@@ -2,15 +2,24 @@
 # fix: → PATCH, feat: → MINOR, BREAKING CHANGE / ! → MAJOR (https://www.conventionalcommits.org/)
 # Builds manifest.json + per-file assets (small on GitHub, large on R2). No zip; launcher uses incremental download only.
 #
-# Manual run (Actions → "Auto release on patch change" → Run workflow):
-# - No version override: updates the *latest* release with manifest + assets (no version bump).
-# - With "Create release version" set (e.g. 0.22.0): creates that release (or updates existing) and sets it as latest. Use to fix out-of-wack versions or re-upload after failed runs.
+# Channels:
+#   main → prod  (tags vX.Y.Z, CDN patches/X.Y.Z/, GitHub --latest)
+#   dev  → dev   (tags vX.Y.Z-dev, CDN patches/X.Y.Z-dev/, GitHub prerelease + floating tag "dev")
+# Prod promote: version = max(conventionalBump, stripDev(latest -dev)); when bases match,
+#   previous assets copy from patches/X.Y.Z-dev/ (else last prod).
+# Prod /releases/latest is never moved by -dev releases. Point bstarrpdev at:
+#   .../releases/download/dev/manifest.json  and  .../releases/download/dev/changelog.json
+#
+# Manual run (Actions → "Auto release on patch change" → Run workflow on main or dev):
+# - No version override: updates the *current channel tip* with manifest + assets (no version bump).
+# - With "Create release version" set (e.g. 0.22.0): creates that release (dev auto-appends -dev) and publishes.
+# - Merge or push to main with Data/ changes: ships an official prod patch as before.
 
 name: Auto release on patch change
 
 on:
   push:
-    branches: [main]
+    branches: [main, dev]
     paths:
       - 'Data/**'
       - 'scripts/off-github-assets.json'
@@ -18,15 +27,16 @@ on:
       - 'scripts/changelog-seed.json'
       - 'scripts/changelog-lib.js'
       - 'scripts/verify-patch-notes-for-release.js'
+      - 'scripts/resolve-release-version.js'
       - 'patch-notes.md'
   workflow_dispatch:
     inputs:
       create_release_version:
-        description: 'Create new release at this version and set as latest (e.g. 0.22.0). Leave empty to just update current latest.'
+        description: 'Create new release at this version (e.g. 0.22.0). On dev, -dev is appended if missing. Leave empty to just update current channel tip.'
         required: false
         type: string
       use_previous_version_for_assets:
-        description: 'Use this version as "previous" for manifest/R2 copy (e.g. 0.24.5). Use to fix a bad release by re-running and copying from a good one — no full re-upload.'
+        description: 'Use this version as "previous" for manifest/R2 copy (e.g. 0.24.5 or 0.24.5-dev). Use to fix a bad release by re-running and copying from a good one — no full re-upload.'
         required: false
         type: string
       force_upload_all_small_assets:
@@ -60,12 +70,37 @@ jobs:
           node-version: '22'
           cache: 'npm'
 
+      - name: Resolve release channel
+        id: channel
+        run: |
+          set -e
+          REF="${{ github.ref_name }}"
+          if [ "$REF" = "dev" ]; then
+            echo "name=dev" >> $GITHUB_OUTPUT
+          elif [ "$REF" = "main" ]; then
+            echo "name=prod" >> $GITHUB_OUTPUT
+          else
+            echo "ERROR: auto-release only supports main (prod) or dev; got ref_name=$REF"
+            exit 1
+          fi
+          echo "Channel branch=$REF"
+
       - name: Determine version bump from commits
         id: bump
         if: github.event_name != 'workflow_dispatch'
         run: |
           set -e
-          LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+          CHANNEL="${{ steps.channel.outputs.name }}"
+          # Latest tag for this channel only (prod ignores -dev; first -dev uses latest prod as range base)
+          if [ "$CHANNEL" = "dev" ]; then
+            LATEST_TAG=$(git tag -l 'v*-dev' --sort=-v:refname | head -n1 || true)
+            if [ -z "$LATEST_TAG" ]; then
+              LATEST_TAG=$(git tag -l 'v*.*.*' --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -n1 || true)
+            fi
+          else
+            LATEST_TAG=$(git tag -l 'v*.*.*' --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -n1 || true)
+          fi
+          LATEST_TAG="${LATEST_TAG:-v0.0.0}"
           LOG=$(git log "$LATEST_TAG..HEAD" --format="%s%n%b" || true)
           # Use highest-scope change in range: one feat/fix/breaking triggers a bump; only pure chore = none
           BUMP=none
@@ -84,58 +119,46 @@ jobs:
             BUMP=major
           fi
           echo "bump=$BUMP" >> $GITHUB_OUTPUT
-          echo "Bump type: $BUMP"
+          echo "Bump type: $BUMP (since $LATEST_TAG, channel=$CHANNEL)"
 
       - name: Get latest version and compute new version
         id: version
         run: |
-          LATEST=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
-          VERSION=${LATEST#v}
-          PREV_FOR_ASSETS="${{ github.event.inputs.use_previous_version_for_assets }}"
-          if [ -n "$PREV_FOR_ASSETS" ]; then
-            # Rebuild/fix: use specified version as previous for manifest fetch and R2 copy (e.g. 0.24.5)
-            PREV_TAG="v${PREV_FOR_ASSETS#v}"
-            PREV_VER="${PREV_FOR_ASSETS#v}"
-            echo "previous_tag=$PREV_TAG" >> $GITHUB_OUTPUT
-            echo "previous_version=$PREV_VER" >> $GITHUB_OUTPUT
-            echo "Using $PREV_TAG as previous for assets (rebuild/fix mode)"
-          else
-            PREV_TAG="$LATEST"
-            echo "previous_tag=$LATEST" >> $GITHUB_OUTPUT
-            echo "previous_version=$VERSION" >> $GITHUB_OUTPUT
+          set -e
+          CHANNEL="${{ steps.channel.outputs.name }}"
+          PREV_ARGS=()
+          PREV_FOR="${{ github.event.inputs.use_previous_version_for_assets }}"
+          if [ -n "$PREV_FOR" ]; then
+            PREV_ARGS+=(--prev-for-assets="$PREV_FOR")
           fi
+
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             OVERRIDE="${{ inputs.create_release_version }}"
             if [ -n "$OVERRIDE" ]; then
-              echo "Manual run with version override: creating release $OVERRIDE (tag v${OVERRIDE#v}), previous for assets: $PREV_TAG"
-              echo "version=$OVERRIDE" >> $GITHUB_OUTPUT
-              echo "tag=v${OVERRIDE#v}" >> $GITHUB_OUTPUT
+              echo "Manual run with version override: $OVERRIDE (channel=$CHANNEL)"
+              node scripts/resolve-release-version.js \
+                --channel="$CHANNEL" \
+                --bump=none \
+                --override="$OVERRIDE" \
+                "${PREV_ARGS[@]}"
             else
-              echo "Manual run: using existing version $VERSION (tag $LATEST)"
-              echo "version=$VERSION" >> $GITHUB_OUTPUT
-              echo "tag=$LATEST" >> $GITHUB_OUTPUT
+              echo "Manual run: rebuild current channel tip (channel=$CHANNEL)"
+              node scripts/resolve-release-version.js \
+                --channel="$CHANNEL" \
+                --bump=none \
+                "${PREV_ARGS[@]}"
             fi
           else
-            if [ "${{ steps.bump.outputs.bump }}" = "none" ]; then
-              echo "Chore: no version bump, rebuilding current release $VERSION (tag $LATEST)"
-              echo "version=$VERSION" >> $GITHUB_OUTPUT
-              echo "tag=$LATEST" >> $GITHUB_OUTPUT
-            else
-              MAJOR=$(echo "$VERSION" | cut -d. -f1)
-              MINOR=$(echo "$VERSION" | cut -d. -f2)
-              PATCH=$(echo "$VERSION" | cut -d. -f3)
-              [[ -z "$PATCH" ]] && PATCH=0
-              case "${{ steps.bump.outputs.bump }}" in
-                major) MAJOR=$((MAJOR + 1)); MINOR=0; PATCH=0 ;;
-                minor) MINOR=$((MINOR + 1)); PATCH=0 ;;
-                patch) PATCH=$((PATCH + 1)) ;;
-                *) PATCH=$((PATCH + 1)) ;;
-              esac
-              NEW_VERSION="$MAJOR.$MINOR.$PATCH"
-              echo "version=$NEW_VERSION" >> $GITHUB_OUTPUT
-              echo "tag=v$NEW_VERSION" >> $GITHUB_OUTPUT
-              echo "New version: $NEW_VERSION (tag v$NEW_VERSION)"
-            fi
+            echo "Push run: bump=${{ steps.bump.outputs.bump }} channel=$CHANNEL"
+            node scripts/resolve-release-version.js \
+              --channel="$CHANNEL" \
+              --bump="${{ steps.bump.outputs.bump }}" \
+              "${PREV_ARGS[@]}"
+          fi
+          echo "Wrote version outputs (channel=$CHANNEL):"
+          grep -E '^(channel|version|tag|previous_tag|previous_version|floating_tag|is_prerelease|make_latest|promoted_from_dev|asset_source)=' "$GITHUB_OUTPUT" | tail -n 30
+          if grep -q '^promoted_from_dev=true' "$GITHUB_OUTPUT"; then
+            echo "Prod promote: version aligned to latest -dev base; assets copy from asset_source (prefer -dev when bases match)."
           fi
 
       - name: Prepare patch notes from patch-notes.md
@@ -146,7 +169,8 @@ jobs:
             echo "Using patch-notes.md for release and manifest notes"
           else
             echo "No patch-notes.md; generating notes from commit messages"
-            LATEST_TAG=$(git describe --tags --abbrev=0 2>/dev/null || echo "v0.0.0")
+            LATEST_TAG="${{ steps.version.outputs.previous_tag }}"
+            LATEST_TAG="${LATEST_TAG:-v0.0.0}"
             NOTES=""
             FEATURES=""
             FIXES=""
@@ -169,12 +193,12 @@ jobs:
             [[ -n "$FIXES" ]] && NOTES="${NOTES}## Fixes"$'\n'$'\n'"$FIXES"
             echo -n "$NOTES" > release-notes.md
           fi
-          # Strip leading "Patch X.Y.Z" or "# Patch X.Y.Z" so release description doesn't duplicate the title
+          # Strip leading "Patch X.Y.Z" or "Patch X.Y.Z-dev" so release description doesn't duplicate the title
           node -e "
             const fs = require('fs');
             const path = 'release-notes.md';
             let s = fs.readFileSync(path, 'utf8');
-            const stripped = s.replace(/^#?\s*Patch\s+[\d.]+\s*\n?/i, '').trimStart();
+            const stripped = s.replace(/^#?\s*Patch\s+[\d.]+(?:-dev(?:\.\d+)?)?\s*\n?/i, '').trimStart();
             if (stripped !== s) {
               fs.writeFileSync(path, stripped, 'utf8');
               console.log('Removed duplicate Patch version line from release notes');
@@ -280,8 +304,8 @@ jobs:
               }
             }
             // Patch notes for manifest: prefer patch-notes.md, else release-notes.md
-            // Strip leading \"Patch X.Y.Z\" so launcher doesn't show version twice (it shows version separately)
-            const stripDuplicateVersion = (s) => s.replace(/^#?\s*Patch\s+[\d.]+\s*\n?/i, '').trimStart();
+            // Strip leading \"Patch X.Y.Z\" / \"Patch X.Y.Z-dev\" so launcher doesn't show version twice
+            const stripDuplicateVersion = (s) => s.replace(/^#?\s*Patch\s+[\d.]+(?:-dev(?:\.\d+)?)?\s*\n?/i, '').trimStart();
             const patchNotesPath = 'patch-notes.md';
             const releaseNotesPath = 'release-notes.md';
             if (fs.existsSync(patchNotesPath)) {
@@ -424,12 +448,18 @@ jobs:
         run: node scripts/purge-cloudflare-patch-cache.js
 
       - name: Create or update release
-        if: (github.event_name != 'workflow_dispatch' || (github.event_name == 'workflow_dispatch' && inputs.create_release_version != '')) && steps.version.outputs.version != steps.version.outputs.previous_version
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           TAG="${{ steps.version.outputs.tag }}"
           VERSION="${{ steps.version.outputs.version }}"
+          CHANNEL="${{ steps.version.outputs.channel }}"
+          MAKE_LATEST="${{ steps.version.outputs.make_latest }}"
+          IS_PRERELEASE="${{ steps.version.outputs.is_prerelease }}"
+          IS_NEW_VERSION=false
+          if [ "$VERSION" != "${{ steps.version.outputs.previous_version }}" ]; then
+            IS_NEW_VERSION=true
+          fi
           MAX_ATTEMPTS=5
 
           run_release_api() {
@@ -453,18 +483,35 @@ jobs:
             done
           }
 
+          EXTRA_FLAGS=()
+          if [ "$IS_PRERELEASE" = "true" ]; then
+            EXTRA_FLAGS+=(--prerelease)
+          fi
+          # Prereleases are never GitHub "Latest"; only pass --latest for prod.
+          if [ "$MAKE_LATEST" = "true" ]; then
+            EXTRA_FLAGS+=(--latest)
+          fi
+
           if gh release view "$TAG" &>/dev/null; then
-            echo "Release $TAG already exists; marking as latest and updating notes (use this to fix out-of-wack versions or re-upload assets)"
-            run_release_api gh release edit "$TAG" --latest --notes-file release-notes.md --target "${{ github.sha }}"
+            if [ "$IS_NEW_VERSION" = "true" ]; then
+              echo "Release $TAG exists; updating notes (channel=$CHANNEL)"
+              run_release_api gh release edit "$TAG" --notes-file release-notes.md --target "${{ github.sha }}" "${EXTRA_FLAGS[@]}"
+            else
+              echo "Release $TAG exists; leaving notes as-is (rebuild/upload only)"
+            fi
           else
-            echo "Creating release: $TAG (Patch $VERSION) at commit ${{ github.sha }}"
+            echo "Creating release: $TAG (Patch $VERSION) at commit ${{ github.sha }} (channel=$CHANNEL)"
             run_release_api gh release create "$TAG" \
               --target "${{ github.sha }}" \
               --title "Patch $VERSION" \
               --notes-file release-notes.md \
-              --latest
+              "${EXTRA_FLAGS[@]}"
           fi
-          echo "Release $TAG is latest"
+          if [ "$MAKE_LATEST" = "true" ]; then
+            echo "Release $TAG is latest (prod)"
+          else
+            echo "Release $TAG is prerelease (dev; prod /releases/latest unchanged)"
+          fi
 
       - name: Upload per-file assets, manifest.json, and changelog.json
         env:
@@ -509,10 +556,45 @@ jobs:
           fi
           echo "Uploaded manifest.json, changelog.json, and ${#files[@]} per-file assets to GitHub (R2 assets: LFS + oversized)"
 
-      # Posts patch-notes.md to the Discord server-updates channel when a new version ships.
-      # Requires repo secret DISCORD_WEBHOOK_URL (channel Integrations → Webhooks).
+      # Stable URLs for bstarrpdev (does not affect /releases/latest):
+      #   .../releases/download/dev/manifest.json
+      #   .../releases/download/dev/changelog.json
+      - name: Update floating dev release pointer
+        if: steps.version.outputs.channel == 'dev'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          FLOAT=dev
+          VERSION="${{ steps.version.outputs.version }}"
+          NOTES="Floating pointer to the latest **dev** patch (\`${VERSION}\` / \`${{ steps.version.outputs.tag }}\`).
+
+          Point Mereth Roleplay DEV server settings at:
+          - \`https://github.com/${{ github.repository }}/releases/download/dev/manifest.json\`
+          - \`https://github.com/${{ github.repository }}/releases/download/dev/changelog.json\`
+
+          Prod continues to use \`/releases/latest/download/...\`."
+
+          if gh release view "$FLOAT" &>/dev/null; then
+            gh release edit "$FLOAT" \
+              --title "Dev patch (latest -> $VERSION)" \
+              --notes "$NOTES" \
+              --target "${{ github.sha }}" \
+              --prerelease
+          else
+            gh release create "$FLOAT" \
+              --title "Dev patch (latest -> $VERSION)" \
+              --notes "$NOTES" \
+              --target "${{ github.sha }}" \
+              --prerelease
+          fi
+          gh release upload "$FLOAT" dist-patch/manifest.json dist-patch/changelog.json --clobber
+          echo "Updated floating release '$FLOAT' -> $VERSION"
+
+      # Posts patch-notes.md to Discord server-updates when a new *prod* version ships.
+      # Requires repo secret DISCORD_WEBHOOK_URL. Dev channel skips so test ships stay quiet.
       - name: Post patch notes to Discord
-        if: steps.version.outputs.version != steps.version.outputs.previous_version
+        if: steps.version.outputs.channel == 'prod' && steps.version.outputs.version != steps.version.outputs.previous_version
         continue-on-error: true
         env:
           DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
