@@ -5,8 +5,10 @@
 # Channels:
 #   main → prod  (tags vX.Y.Z, CDN patches/X.Y.Z/, GitHub --latest)
 #   dev  → dev   (tags vX.Y.Z-dev, CDN patches/X.Y.Z-dev/, GitHub prerelease + floating tag "dev-latest")
-# Prod promote: version = max(conventionalBump, stripDev(latest -dev)); when bases match,
+# Prod promote (merge-up): version = max(conventionalBump, stripDev(latest -dev)); when bases match,
 #   previous assets copy from patches/X.Y.Z-dev/ (else last prod).
+# Dev sync (merge-down): version = max(devBumpOrTip, latestProd as -dev); when catching up,
+#   previous assets copy from patches/X.Y.Z/ → patches/X.Y.Z-dev/.
 # Prod /releases/latest is never moved by -dev releases. Point bstarrpdev at:
 #   .../releases/download/dev-latest/manifest.json  and  .../releases/download/dev-latest/changelog.json
 # Floating tag is "dev-latest" (not "dev") so it never collides with branch refs/heads/dev.
@@ -15,22 +17,14 @@
 # - No version override: updates the *current channel tip* with manifest + assets (no version bump).
 # - With "Create release version" set (e.g. 0.22.0): creates that release (dev auto-appends -dev) and publishes.
 # - Merge or push to main with Data/ changes: ships an official prod patch as before.
+# - Merge main → dev: syncs the -dev channel / floating tip to the prod tip.
 
 name: Auto release on patch change
 
 on:
   push:
     branches: [main, dev]
-    paths:
-      - 'Data/**'
-      - 'scripts/off-github-assets.json'
-      - 'scripts/build-changelog.js'
-      - 'scripts/changelog-seed.json'
-      - 'scripts/changelog-lib.js'
-      - 'scripts/verify-patch-notes-for-release.js'
-      - 'scripts/resolve-release-version.js'
-      - 'scripts/build-release-notes.js'
-      - 'patch-notes.md'
+    # No path filters: merge-down/up must always run the decide job (skips unrelated pushes).
   workflow_dispatch:
     inputs:
       create_release_version:
@@ -48,7 +42,81 @@ on:
         default: false
 
 jobs:
+  decide:
+    runs-on: ubuntu-latest
+    outputs:
+      release: ${{ steps.gate.outputs.release }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          lfs: false
+
+      - name: Decide whether to release
+        id: gate
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -e
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            echo "release=true" >> $GITHUB_OUTPUT
+            echo "workflow_dispatch → release"
+            exit 0
+          fi
+
+          BEFORE="${{ github.event.before }}"
+          AFTER="${{ github.sha }}"
+          REF="${{ github.ref_name }}"
+          RELEVANT='^(Data/|patch-notes\.md|scripts/(off-github-assets\.json|build-changelog\.js|changelog-seed\.json|changelog-lib\.js|verify-patch-notes-for-release\.js|resolve-release-version\.js|build-release-notes\.js)|\.github/workflows/auto-release\.yml)'
+
+          if [ -z "$BEFORE" ] || [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            echo "release=true" >> $GITHUB_OUTPUT
+            echo "New branch tip → release"
+            exit 0
+          fi
+
+          CHANGED=$(git diff --name-only "$BEFORE" "$AFTER" || true)
+          if echo "$CHANGED" | grep -Eq "$RELEVANT"; then
+            echo "release=true" >> $GITHUB_OUTPUT
+            echo "Relevant path changes → release"
+            exit 0
+          fi
+
+          # Merge commit (merge-up or merge-down)
+          if git rev-parse -q --verify "${AFTER}^2" >/dev/null; then
+            echo "release=true" >> $GITHUB_OUTPUT
+            echo "Merge commit → release"
+            exit 0
+          fi
+
+          git fetch --tags --force origin || true
+          # Fast-forward sync onto dev while prod tip is ahead of latest -dev
+          if [ "$REF" = "dev" ]; then
+            LATEST_PROD=$(git tag -l 'v*.*.*' --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -n1 || true)
+            LATEST_DEV=$(git tag -l 'v*-dev' --sort=-v:refname | head -n1 || true)
+            if [ -n "$LATEST_PROD" ]; then
+              PROD_BASE="${LATEST_PROD#v}"
+              DEV_BASE="${LATEST_DEV#v}"
+              DEV_BASE="${DEV_BASE%-dev*}"
+              if [ -z "$LATEST_DEV" ] || [ "$PROD_BASE" != "$DEV_BASE" ]; then
+                # Semver compare via sort -V
+                NEWER=$(printf '%s\n%s\n' "$DEV_BASE" "$PROD_BASE" | sort -V | tail -n1)
+                if [ "$NEWER" = "$PROD_BASE" ] && [ "$PROD_BASE" != "$DEV_BASE" ]; then
+                  echo "release=true" >> $GITHUB_OUTPUT
+                  echo "Dev channel behind prod ($LATEST_DEV < $LATEST_PROD) → release"
+                  exit 0
+                fi
+              fi
+            fi
+          fi
+
+          echo "release=false" >> $GITHUB_OUTPUT
+          echo "No relevant changes / channel already aligned → skip"
+
   auto-release:
+    needs: decide
+    if: needs.decide.outputs.release == 'true'
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -185,9 +253,12 @@ jobs:
               "${PREV_ARGS[@]}"
           fi
           echo "Wrote version outputs (channel=$CHANNEL):"
-          grep -E '^(channel|version|tag|previous_tag|previous_version|floating_tag|is_prerelease|make_latest|promoted_from_dev|asset_source)=' "$GITHUB_OUTPUT" | tail -n 30
+          grep -E '^(channel|version|tag|previous_tag|previous_version|floating_tag|is_prerelease|make_latest|promoted_from_dev|synced_from_prod|asset_source)=' "$GITHUB_OUTPUT" | tail -n 30
           if grep -q '^promoted_from_dev=true' "$GITHUB_OUTPUT"; then
             echo "Prod promote: version aligned to latest -dev base; assets copy from asset_source (prefer -dev when bases match)."
+          fi
+          if grep -q '^synced_from_prod=true' "$GITHUB_OUTPUT"; then
+            echo "Dev sync: version aligned to latest prod; assets copy from prod when bases match."
           fi
 
       - name: Fetch previous release manifest and changelog

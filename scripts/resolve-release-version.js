@@ -6,11 +6,15 @@
  *   dev  (dev)  — tags vX.Y.Z-dev, CDN patches/X.Y.Z-dev/, GitHub prerelease + floating "dev-latest" tag
  *                 (not "dev" — that collides with branch refs/heads/dev and breaks Desktop pushes)
  *
- * Prod alignment (#1 promote):
+ * Prod alignment (merge-up / promote):
  *   On a real bump, version = max(conventionalBump(lastProd), stripDev(latestDevTag)).
  *   When the new prod version matches that -dev base, previous assets/manifest come from
  *   the latest -dev release (R2 copy patches/X.Y.Z-dev/ → patches/X.Y.Z/). Otherwise
  *   previous stays at last prod.
+ *
+ * Dev alignment (merge-down / catch-up):
+ *   version = max(devBumpOrTip, latestProd as -dev). When catching up to prod, previous
+ *   assets copy from the prod release (patches/X.Y.Z/ → patches/X.Y.Z-dev/).
  *
  * Usage:
  *   node scripts/resolve-release-version.js --channel=prod|dev \
@@ -238,6 +242,7 @@ let previousTag = channelLatestTag;
 let previousVersion = channelLatestVersion;
 let assetSource = CHANNEL === 'dev' ? 'channel' : 'prod';
 let promotedFromDev = 'false';
+let syncedFromProd = 'false';
 
 let version;
 let tag;
@@ -257,29 +262,20 @@ if (override) {
     previousVersion = String(PREV_FOR_ASSETS).replace(/^v/i, '');
     previousTag = toTag(previousVersion);
     assetSource = 'explicit';
+  } else if (CHANNEL === 'dev' && latestProdTag && sameXYZ(version, latestProdTag)) {
+    previousTag = latestProdTag.startsWith('v') ? latestProdTag : toTag(String(latestProdTag).replace(/^v/i, ''));
+    previousVersion = String(latestProdTag).replace(/^v/i, '');
+    assetSource = 'prod';
+    syncedFromProd = 'true';
   }
-} else if (BUMP === 'none') {
-  // Rebuild current channel tip. If dev has never released, invent first -dev from prod tip.
-  if (CHANNEL === 'dev' && !latestDevTag) {
-    const base = parseXYZ(latestProdTag || 'v0.0.0') || { major: 0, minor: 0, patch: 0 };
-    version = formatVersion(base, 'dev');
-    tag = toTag(version);
-    if (latestProdTag && !PREV_FOR_ASSETS) {
-      previousTag = latestProdTag;
-      previousVersion = String(latestProdTag).replace(/^v/i, '');
-      assetSource = 'prod';
-    }
-  } else {
-    version =
-      CHANNEL === 'dev' && !isDevVersion(channelLatestVersion)
-        ? formatVersion(parseXYZ(channelLatestVersion) || { major: 0, minor: 0, patch: 0 }, 'dev')
-        : channelLatestVersion;
-    tag = toTag(version);
-    if (PREV_FOR_ASSETS) {
-      previousVersion = String(PREV_FOR_ASSETS).replace(/^v/i, '');
-      previousTag = toTag(previousVersion);
-      assetSource = 'explicit';
-    }
+} else if (CHANNEL === 'prod' && BUMP === 'none') {
+  // Rebuild current prod tip only.
+  version = channelLatestVersion;
+  tag = toTag(version);
+  if (PREV_FOR_ASSETS) {
+    previousVersion = String(PREV_FOR_ASSETS).replace(/^v/i, '');
+    previousTag = toTag(previousVersion);
+    assetSource = 'explicit';
   }
 } else if (CHANNEL === 'prod') {
   // Conventional bump from last prod, then promote to at least stripDev(latest -dev).
@@ -318,24 +314,47 @@ if (override) {
   assetSource = chosen.assetSource;
   if (assetSource === 'dev') promotedFromDev = 'true';
 } else {
-  // Dev channel bump
+  // Dev channel: bump/rebuild tip, then sync up to at least latest prod (merge-down).
   const baseXYZ =
     parseXYZ(latestDevTag ? latestDevTag : channelLatestVersion) ||
     parseXYZ(latestProdTag || 'v0.0.0') ||
     { major: 0, minor: 0, patch: 0 };
-  const next = bumpXYZ(baseXYZ, BUMP);
-  version = formatVersion(next, 'dev');
+  let chosenXYZ = BUMP === 'none' ? { ...baseXYZ } : bumpXYZ(baseXYZ, BUMP);
+
+  if (latestProdTag) {
+    const prodXYZ = parseXYZ(latestProdTag);
+    if (prodXYZ && compareXYZ(prodXYZ, chosenXYZ) >= 0) {
+      chosenXYZ = { ...prodXYZ };
+      syncedFromProd = 'true';
+    }
+  }
+
+  const hintXYZ = parseXYZ(versionHintFromHeadSubject());
+  if (hintXYZ && compareXYZ(hintXYZ, chosenXYZ) > 0) {
+    chosenXYZ = { ...hintXYZ };
+    console.log(
+      `Dev sync: HEAD subject version hint ${formatVersion(hintXYZ, 'dev')} raises tip above tag scan`
+    );
+  }
+
+  version = formatVersion(chosenXYZ, 'dev');
   tag = toTag(version);
 
   if (PREV_FOR_ASSETS) {
     previousVersion = String(PREV_FOR_ASSETS).replace(/^v/i, '');
     previousTag = toTag(previousVersion);
     assetSource = 'explicit';
+  } else if (syncedFromProd === 'true' && latestProdTag && sameXYZ(version, latestProdTag)) {
+    previousTag = latestProdTag.startsWith('v') ? latestProdTag : toTag(String(latestProdTag).replace(/^v/i, ''));
+    previousVersion = String(latestProdTag).replace(/^v/i, '');
+    assetSource = 'prod';
+    console.log(`Dev sync: aligning ${version} to prod ${previousVersion}; assets from prod`);
   } else if (!latestDevTag && latestProdTag) {
     // First-ever -dev release: seed from latest prod
     previousTag = latestProdTag;
     previousVersion = String(latestProdTag).replace(/^v/i, '');
     assetSource = 'prod';
+    syncedFromProd = 'true';
   } else {
     previousTag = channelLatestTag;
     previousVersion = channelLatestVersion;
@@ -359,6 +378,7 @@ const lines = {
   latest_prod_tag: latestProdTag || '',
   latest_dev_tag: latestDevTag || '',
   promoted_from_dev: promotedFromDev,
+  synced_from_prod: syncedFromProd,
   asset_source: assetSource
 };
 

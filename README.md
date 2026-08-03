@@ -30,9 +30,11 @@ Floating tag is `dev-latest` (not `dev`) so it never collides with the `dev` bra
 "changelogUrl": "https://github.com/BStarRP/BStarRP_SkyMP_Data/releases/download/dev-latest/changelog.json"
 ```
 
-Pushing `Data/` changes to `dev` publishes a `-dev` patch. Merging `dev` → `main` (or pushing updates on `main`) publishes an official prod patch the same way as before.
+Pushing patch content to `dev` publishes a `-dev` patch. Merging `dev` → `main` publishes prod. Merging `main` → `dev` syncs the `-dev` channel / `dev-latest` floating tip up to the current prod tip (e.g. prod `0.67.24` → `0.67.24-dev`).
 
-**Prod version promote:** if `dev` has already shipped ahead (e.g. `0.67.19-dev`), the next prod release becomes **`0.67.19`** (not stuck at `0.67.17`). When that happens, unchanged files are copied from `patches/0.67.19-dev/` → `patches/0.67.19/` (hash-matched); only real diffs upload from `main`.
+**Prod version promote (merge-up):** if `dev` has already shipped ahead (e.g. `0.67.19-dev`), the next prod release becomes **`0.67.19`**. Unchanged files copy from `patches/0.67.19-dev/` → `patches/0.67.19/`.
+
+**Dev version sync (merge-down):** if prod is ahead of the latest `-dev` tip, the next `dev` release becomes **`{prod}-dev`** and copies assets from the prod release.
 
 **Patch notes:**
 - **`dev`:** flat `## Changes` list (no category headings). **Summary** = commit description (body). If the commit has no description, the previous `-dev` Summary is carried forward.
