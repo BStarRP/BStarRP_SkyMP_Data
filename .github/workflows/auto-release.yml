@@ -123,6 +123,33 @@ jobs:
           echo "bump=$BUMP" >> $GITHUB_OUTPUT
           echo "Bump type: $BUMP (since $LATEST_TAG, channel=$CHANNEL)"
 
+      # Merge-to-main often races the concurrent -dev release that creates vX.Y.Z-dev.
+      # Refresh tags (and briefly wait for a HEAD -dev tag) before resolving prod version.
+      - name: Refresh tags before version resolve
+        run: |
+          set -e
+          git fetch --tags --force origin || true
+          if [ "${{ steps.channel.outputs.name }}" != "prod" ]; then
+            exit 0
+          fi
+          HEAD_SHA=$(git rev-parse HEAD)
+          for i in 1 2 3 4 5 6 7 8; do
+            if git tag --points-at "$HEAD_SHA" | grep -Eq 'v[0-9]+\.[0-9]+\.[0-9]+-dev'; then
+              echo "Found -dev tag on HEAD:"
+              git tag --points-at "$HEAD_SHA"
+              exit 0
+            fi
+            if git ls-remote --tags --refs origin | grep -F "$HEAD_SHA" | grep -Eq 'refs/tags/v[0-9]+\.[0-9]+\.[0-9]+-dev'; then
+              echo "Remote has -dev tag on HEAD; refetching..."
+              git fetch --tags --force origin || true
+              exit 0
+            fi
+            echo "Waiting for -dev tag on HEAD ($i/8)..."
+            sleep 15
+            git fetch --tags --force origin || true
+          done
+          echo "No -dev tag on HEAD yet; resolve will use subject hint / latest -dev scan."
+
       - name: Get latest version and compute new version
         id: version
         run: |

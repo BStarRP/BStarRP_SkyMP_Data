@@ -53,6 +53,52 @@ function listTags() {
   }
 }
 
+/** Tags from origin (helps when a concurrent -dev release just created a tag). */
+function listRemoteTags() {
+  try {
+    return execSync('git ls-remote --tags --refs origin', { encoding: 'utf8' })
+      .split(/\r?\n/)
+      .map((line) => {
+        const m = String(line).match(/refs\/tags\/(\S+)/);
+        return m ? m[1].trim() : '';
+      })
+      .filter(Boolean);
+  } catch (_) {
+    return [];
+  }
+}
+
+function tagsPointingAtHead() {
+  try {
+    return execSync('git tag --points-at HEAD', { encoding: 'utf8' })
+      .split(/\r?\n/)
+      .map((t) => t.trim())
+      .filter(Boolean);
+  } catch (_) {
+    return [];
+  }
+}
+
+/**
+ * Commit subject often carries the intended tip version (e.g. "fix: v0.67.23").
+ * Used as a promote floor when the -dev tag races with a main merge.
+ */
+function versionHintFromHeadSubject() {
+  try {
+    const subject = execSync('git log -1 --format=%s', { encoding: 'utf8' }).trim();
+    const m = subject.match(/\bv?(\d+\.\d+\.\d+)(?:-dev(?:\.\d+)?)?\b/i);
+    return m ? m[1] : '';
+  } catch (_) {
+    return '';
+  }
+}
+
+function maxVersionTag(a, b) {
+  if (!a) return b || null;
+  if (!b) return a || null;
+  return compareXYZ(a, b) >= 0 ? a : b;
+}
+
 /** True for vX.Y.Z-dev or X.Y.Z-dev.N (channel tags). Floating "dev" is not a version tag. */
 function isDevVersion(v) {
   const s = String(v).replace(/^v/i, '');
@@ -175,9 +221,13 @@ function chooseProdPrevious(newProdVersion, latestDevTag, latestProdTag, explici
   return { previousTag, previousVersion, assetSource: 'prod' };
 }
 
-const tags = listTags();
+const tags = [...new Set([...listTags(), ...listRemoteTags()])];
 const latestProdTag = latestMatching(tags, (t) => isProdVersion(t));
-const latestDevTag = latestMatching(tags, (t) => isDevVersion(t));
+// Prefer the newest -dev overall, and never ignore a -dev tag already on HEAD
+// (merge-to-main often races the concurrent -dev release tag publish).
+let latestDevTag = latestMatching(tags, (t) => isDevVersion(t));
+const headDevTag = latestMatching(tagsPointingAtHead(), (t) => isDevVersion(t));
+latestDevTag = maxVersionTag(latestDevTag, headDevTag);
 
 const channelLatestTag =
   CHANNEL === 'dev' ? latestDevTag || latestProdTag || 'v0.0.0' : latestProdTag || 'v0.0.0';
@@ -233,6 +283,7 @@ if (override) {
   }
 } else if (CHANNEL === 'prod') {
   // Conventional bump from last prod, then promote to at least stripDev(latest -dev).
+  // Also honor a version hint in the HEAD subject (fix: v0.67.23) when the -dev tag races.
   const prodBase = parseXYZ(latestProdTag || 'v0.0.0') || { major: 0, minor: 0, patch: 0 };
   const conventional = bumpXYZ(prodBase, BUMP);
   let chosenXYZ = conventional;
@@ -243,10 +294,25 @@ if (override) {
       promotedFromDev = 'true';
     }
   }
+  const hintXYZ = parseXYZ(versionHintFromHeadSubject());
+  if (hintXYZ && compareXYZ(hintXYZ, chosenXYZ) > 0) {
+    chosenXYZ = hintXYZ;
+    promotedFromDev = 'true';
+    console.log(
+      `Prod promote: HEAD subject version hint ${formatVersion(hintXYZ, 'prod')} raises tip above tag scan`
+    );
+  }
   version = formatVersion(chosenXYZ, 'prod');
   tag = toTag(version);
 
-  const chosen = chooseProdPrevious(version, latestDevTag, latestProdTag, PREV_FOR_ASSETS);
+  // If we raised via subject hint, prefer matching -dev assets when that tag exists.
+  const promoteDevTag =
+    latestDevTag && sameXYZ(version, latestDevTag)
+      ? latestDevTag
+      : headDevTag && sameXYZ(version, headDevTag)
+        ? headDevTag
+        : latestDevTag;
+  const chosen = chooseProdPrevious(version, promoteDevTag, latestProdTag, PREV_FOR_ASSETS);
   previousTag = chosen.previousTag;
   previousVersion = chosen.previousVersion;
   assetSource = chosen.assetSource;
