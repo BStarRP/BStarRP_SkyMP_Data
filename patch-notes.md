@@ -1,6 +1,6 @@
 # Patch notes
 
 ## Changes
-- Fixed fishing so fish go in your inventory
-- Added a sound when pressing a button to interact
-- Updated armor xp now scales with tier
+- Fixed an issue with hearing activation sounds with interaction closed
+- Fixed being able to pickup world items
+- Fixed an issue with head twitching around other players
