@@ -4,11 +4,12 @@
 #
 # Channels:
 #   main → prod  (tags vX.Y.Z, CDN patches/X.Y.Z/, GitHub --latest)
-#   dev  → dev   (tags vX.Y.Z-dev, CDN patches/X.Y.Z-dev/, GitHub prerelease + floating tag "dev")
+#   dev  → dev   (tags vX.Y.Z-dev, CDN patches/X.Y.Z-dev/, GitHub prerelease + floating tag "dev-latest")
 # Prod promote: version = max(conventionalBump, stripDev(latest -dev)); when bases match,
 #   previous assets copy from patches/X.Y.Z-dev/ (else last prod).
 # Prod /releases/latest is never moved by -dev releases. Point bstarrpdev at:
-#   .../releases/download/dev/manifest.json  and  .../releases/download/dev/changelog.json
+#   .../releases/download/dev-latest/manifest.json  and  .../releases/download/dev-latest/changelog.json
+# Floating tag is "dev-latest" (not "dev") so it never collides with branch refs/heads/dev.
 #
 # Manual run (Actions → "Auto release on patch change" → Run workflow on main or dev):
 # - No version override: updates the *current channel tip* with manifest + assets (no version bump).
@@ -543,21 +544,23 @@ jobs:
           echo "Uploaded manifest.json, changelog.json, and ${#files[@]} per-file assets to GitHub (R2 assets: LFS + oversized)"
 
       # Stable URLs for bstarrpdev (does not affect /releases/latest):
-      #   .../releases/download/dev/manifest.json
-      #   .../releases/download/dev/changelog.json
+      #   .../releases/download/dev-latest/manifest.json
+      #   .../releases/download/dev-latest/changelog.json
+      # Tag must NOT be named "dev" — that collides with branch refs/heads/dev
+      # ("src refspec dev matches more than one") and breaks GitHub Desktop pushes.
       - name: Update floating dev release pointer
-        if: steps.version.outputs.channel == 'dev'
+        if: steps.version.outputs.channel == 'dev' && steps.version.outputs.floating_tag != ''
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           set -e
-          FLOAT=dev
+          FLOAT="${{ steps.version.outputs.floating_tag }}"
           VERSION="${{ steps.version.outputs.version }}"
           NOTES="Floating pointer to the latest **dev** patch (\`${VERSION}\` / \`${{ steps.version.outputs.tag }}\`).
 
           Point Mereth Roleplay DEV server settings at:
-          - \`https://github.com/${{ github.repository }}/releases/download/dev/manifest.json\`
-          - \`https://github.com/${{ github.repository }}/releases/download/dev/changelog.json\`
+          - \`https://github.com/${{ github.repository }}/releases/download/${FLOAT}/manifest.json\`
+          - \`https://github.com/${{ github.repository }}/releases/download/${FLOAT}/changelog.json\`
 
           Prod continues to use \`/releases/latest/download/...\`."
 

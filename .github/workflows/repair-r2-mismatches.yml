@@ -2,7 +2,7 @@
 # differs from manifest.json or are missing. Cheaper than "Force re-upload ALL assets".
 #
 # Actions → Repair R2 manifest mismatches → Run workflow
-# Optional: set release tag (e.g. v0.31.0, v0.31.0-dev, or floating "dev").
+# Optional: set release tag (e.g. v0.31.0, v0.31.0-dev, or floating "dev-latest").
 # Leave empty to use the latest *prod* GitHub release (/releases/latest).
 
 name: Repair R2 manifest mismatches
@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
     inputs:
       release_tag:
-        description: 'Release tag to repair (e.g. v0.31.0, v0.31.0-dev, or dev). Empty = latest prod release.'
+        description: 'Release tag to repair (e.g. v0.31.0, v0.31.0-dev, or dev-latest). Empty = latest prod release.'
         required: false
         type: string
 
@@ -32,10 +32,11 @@ jobs:
         run: |
           set -e
           if [ -z "$INPUT_TAG" ]; then
-            # Latest non-prerelease (prod). Never resolves to -dev / floating "dev".
+            # Latest non-prerelease (prod). Never resolves to -dev / floating "dev-latest".
             TAG=$(gh release view --repo "${{ github.repository }}" --json tagName -q .tagName)
-          elif [ "$INPUT_TAG" = "dev" ]; then
-            TAG=dev
+          elif [ "$INPUT_TAG" = "dev-latest" ] || [ "$INPUT_TAG" = "dev" ]; then
+            # "dev" kept as a legacy alias for the floating pointer tag name.
+            TAG=dev-latest
           else
             T="${INPUT_TAG#v}"
             TAG="v${T}"
@@ -73,7 +74,7 @@ jobs:
           gh release download "${{ steps.rel.outputs.tag }}" --repo "${{ github.repository }}" \
             --pattern "manifest.json" --dir dist-patch --clobber
           test -f dist-patch/manifest.json
-          # VERSION must match the CDN folder (manifest.version), especially for floating tag "dev"
+          # VERSION must match the CDN folder (manifest.version), especially for floating tag "dev-latest"
           VER=$(node -e "console.log(JSON.parse(require('fs').readFileSync('dist-patch/manifest.json','utf8')).version || '')")
           if [ -z "$VER" ]; then
             echo "ERROR: dist-patch/manifest.json missing version"
@@ -168,12 +169,12 @@ jobs:
         run: |
           gh release upload "${{ steps.rel.outputs.tag }}" dist-patch/manifest.json \
             --repo "${{ github.repository }}" --clobber
-          # Keep floating "dev" pointer in sync when repairing a versioned -dev release
+          # Keep floating "dev-latest" pointer in sync when repairing a versioned -dev release
           VER="${{ steps.man.outputs.version }}"
           case "$VER" in
             *-dev|*-dev.*)
-              if gh release view dev --repo "${{ github.repository }}" &>/dev/null; then
-                gh release upload dev dist-patch/manifest.json \
+              if gh release view dev-latest --repo "${{ github.repository }}" &>/dev/null; then
+                gh release upload dev-latest dist-patch/manifest.json \
                   --repo "${{ github.repository }}" --clobber || true
               fi
               ;;

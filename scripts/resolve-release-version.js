@@ -3,7 +3,8 @@
  *
  * Channels:
  *   prod (main) — tags vX.Y.Z, CDN patches/X.Y.Z/, GitHub latest
- *   dev  (dev)  — tags vX.Y.Z-dev, CDN patches/X.Y.Z-dev/, GitHub prerelease + floating "dev" tag
+ *   dev  (dev)  — tags vX.Y.Z-dev, CDN patches/X.Y.Z-dev/, GitHub prerelease + floating "dev-latest" tag
+ *                 (not "dev" — that collides with branch refs/heads/dev and breaks Desktop pushes)
  *
  * Prod alignment (#1 promote):
  *   On a real bump, version = max(conventionalBump(lastProd), stripDev(latestDevTag)).
@@ -276,7 +277,7 @@ if (override) {
   }
 }
 
-const floatingTag = CHANNEL === 'dev' ? 'dev' : '';
+const floatingTag = CHANNEL === 'dev' ? 'dev-latest' : '';
 const isPrerelease = CHANNEL === 'dev' ? 'true' : 'false';
 const makeLatest = CHANNEL === 'prod' ? 'true' : 'false';
 

@@ -12,7 +12,7 @@ Public repository for **BStarRP SkyMP Launcher** patch content (mods + SkyrimPla
 | Branch | Channel | GitHub release | CDN folder | Discord |
 |--------|---------|----------------|------------|---------|
 | `main` | **prod** | `vX.Y.Z` (Latest) | `patches/X.Y.Z/` | yes |
-| `dev` | **dev** | `vX.Y.Z-dev` (prerelease) + floating tag `dev` | `patches/X.Y.Z-dev/` | no |
+| `dev` | **dev** | `vX.Y.Z-dev` (prerelease) + floating tag `dev-latest` | `patches/X.Y.Z-dev/` | no |
 
 **Prod** (unchanged): keep using `/releases/latest/download/...` in server settings:
 
@@ -21,11 +21,13 @@ Public repository for **BStarRP SkyMP Launcher** patch content (mods + SkyrimPla
 "changelogUrl": "https://github.com/BStarRP/BStarRP_SkyMP_Data/releases/latest/download/changelog.json"
 ```
 
-**Dev** (set once on bstarrpdev / Mereth Roleplay DEV — does not affect prod latest):
+**Dev** (set once on bstarrpdev / Mereth Roleplay DEV — does not affect prod latest).
+
+Floating tag is `dev-latest` (not `dev`) so it never collides with the `dev` branch — that collision caused `src refspec dev matches more than one` and broke Desktop pushes / the floating release.
 
 ```json
-"patchManifestUrl": "https://github.com/BStarRP/BStarRP_SkyMP_Data/releases/download/dev/manifest.json",
-"changelogUrl": "https://github.com/BStarRP/BStarRP_SkyMP_Data/releases/download/dev/changelog.json"
+"patchManifestUrl": "https://github.com/BStarRP/BStarRP_SkyMP_Data/releases/download/dev-latest/manifest.json",
+"changelogUrl": "https://github.com/BStarRP/BStarRP_SkyMP_Data/releases/download/dev-latest/changelog.json"
 ```
 
 Pushing `Data/` changes to `dev` publishes a `-dev` patch. Merging `dev` → `main` (or pushing updates on `main`) publishes an official prod patch the same way as before.
@@ -120,4 +122,4 @@ node scripts/build-patch.js Data 1.0.0
 
 ## Launcher requirements
 
-The launcher uses **`manifest.json`** from the release (prod: `/releases/latest/...`, dev: `/releases/download/dev/...`). File URLs inside the manifest point at GitHub release assets and/or the R2 CDN (`patches/<version>/...`).
+The launcher uses **`manifest.json`** from the release (prod: `/releases/latest/...`, dev: `/releases/download/dev-latest/...`). File URLs inside the manifest point at GitHub release assets and/or the R2 CDN (`patches/<version>/...`).
