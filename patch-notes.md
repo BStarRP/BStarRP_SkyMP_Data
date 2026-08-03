@@ -1,10 +1,32 @@
 # Patch notes
 
 ## Changes
-- Fixed an issue with native UI showing through
-- Fixed an issue with heads being discolored / missing
-- Added rich presence so people can see your proudly playing Mereth
-- Updated admin resetcell command, now wipes all ground items
-- Improved player movement, snaps back to server position if drifts to far
-- Improved performance with many players around
-- Improved systems for spawning players and removing them
+- Fixed an issue with npc's spawning after you teleport or go through a door (time to slaughter goats)
+- Fixed an issue with raining indoors
+- Fixed an issue with sawmill not displaying the hook animation on log pile
+- Fixed hall of the dead
+- Fixed silver tag on some items
+- Fixed temper on some items
+- Fixed an issue with horses glitching out after getting on them
+- Updated so weather effects regions, snowing in the north, rain in the south
+- Added skeever, horker, rabbit pelts (placeholder model)
+- Removed & Shot 10 tanning racks
+- Removed & Shot 5 ovens
+- Added an office for the Imperial General in the Emperor's Tower
+- Added Orcstones
+- Revived the Gildergreen
+- Fixed FPS issue in dragonsreach dungeon
+- Fixed an issue with enchanting still learning things on fails
+- Fixed an issue with enchanting not having the proper skill for items not showing a fail message and still giving xp
+- Updated whiterun holdstone location
+- Updated and found some unplayable armors added by other mods, will slowly make them craftable and usable (the ones that work obviously)
+- Added an unused room in Castle Dour in anticipation for the Legion changes 
+- Added an office for the Imperial General in the Emperor's Tower
+- Removed Many Imperial items that dont have steal bind
+- Removed Ebony Ore just laying in the open
+- Removed Many Steel plate that dont have steal bind
+- Removed many thing, this is not complete, I did my first wave of deletion, I still need to do a second wave that should elimate them all.
+- Reworked weapon durability, basic hits no longer reduce as much but blocks/power attacks reduce more
+- Reworked damage mitigation, armor is 10x more effective
+- Fixed enchantment effects to work when equipped
+- Updated now bash gives xp for shields and blocking

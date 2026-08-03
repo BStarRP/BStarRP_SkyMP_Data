@@ -33,14 +33,15 @@ Pushing `Data/` changes to `dev` publishes a `-dev` patch. Merging `dev` → `ma
 **Prod version promote:** if `dev` has already shipped ahead (e.g. `0.67.19-dev`), the next prod release becomes **`0.67.19`** (not stuck at `0.67.17`). When that happens, unchanged files are copied from `patches/0.67.19-dev/` → `patches/0.67.19/` (hash-matched); only real diffs upload from `main`.
 
 **Patch notes:**
-- **`dev`:** flat `## Changes` list (no category headings). Summary from commit description.
-- **`main` (promote/direct):** rolls up Changes; if any `Added`/`Improved`/`Updated`/`Reworked`/`Fixed` prefixes exist, group those and put the rest under **Other**. If none of those prefixes exist, keep a flat list (no category headings). Summary = **final commit description before merge** (newest since last prod).
-- Prefer starting bullets with `Added` / `Improved` / `Updated` / `Reworked` / `Fixed` so prod can group them.
+- **`dev`:** flat `## Changes` list (no category headings). **Summary** = commit description (body). If the commit has no description, the previous `-dev` Summary is carried forward.
+- **`main` (promote):** rolls up Changes from all `-dev` releases since last prod; if any `Added`/`Fixed`/`Improved`/`Removed`/`Reworked`/`Updated` prefixes exist, group those alphabetically and put the rest under **Other**. If none of those prefixes exist, keep a flat list. **Summary** = last `-dev` Summary (carried to production on merge).
+- **`main` (direct):** organize Changes the same way; Summary from commit description, else carry previous prod Summary.
+- Prefer starting bullets with `Added` / `Fixed` / `Improved` / `Removed` / `Reworked` / `Updated` so prod can group them.
 - **Discord:** only on **prod** when the version actually bumps.
 
 ### Example
 
-**Commit** (Summary = body only; subject is never used — no body ⇒ no Summary section):
+**Commit** (Summary = body only; subject is never used — no body ⇒ carry previous Summary):
 ```text
 fix: hunting and report polish
 
@@ -86,15 +87,15 @@ Hunting XP fixes and /report command for tonight's test pass.
 ### Added
 - Added a /report command (or insert key) for staff reports
 
+### Fixed
+- Fixed mudcrab giving XP equivalent to giant for hunting
+
 ### Improved
 - Improved mining feedback when a node is depleted
 
 ### Updated
 - Updated hunting/taming skill, moved skeever to t1
 - Updated mining XP to scale based on tier/nodes
-
-### Fixed
-- Fixed mudcrab giving XP equivalent to giant for hunting
 ```
 
 **Option A – Automatic (recommended):**  

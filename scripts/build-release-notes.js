@@ -1,12 +1,18 @@
 /**
  * Build release-notes.md for GitHub / Discord / manifest.
  *
- * Modes:
- *   - Dev push: Summary from latest commit description; Changes as a flat list
- *     (no category headings / sorting).
- *   - Prod (promote or direct): Summary from latest -dev (promote) or commit;
- *     Changes organized Added→Improved→Updated→Reworked→Fixed→Other.
- *     Category headings only when bullets use those prefixes — otherwise flat list.
+ * Summary rules:
+ *   - Dev: commit description (body) writes the Summary. If the commit has no
+ *     description, carry forward the previous -dev Summary from changelog.
+ *   - Prod promote (dev→main merge): carry the last -dev Summary to production
+ *     (Changes still roll up / organize from all -dev entries since last prod).
+ *   - Direct prod: commit description, else carry previous prod Summary.
+ *
+ * Changes:
+ *   - Dev: flat list (no category headings / sorting).
+ *   - Prod: organized alphabetically
+ *     (Added→Fixed→Improved→Removed→Reworked→Updated→Other) when prefixes exist;
+ *     otherwise flat.
  *
  * Usage:
  *   node scripts/build-release-notes.js \
@@ -14,6 +20,7 @@
  *     --version=X.Y.Z[-dev] \
  *     --latest-prod-version=X.Y.Z \
  *     [--previous-tag=vX.Y.Z] \
+ *     [--previous-version=X.Y.Z] \
  *     [--promoted-from-dev=true] \
  *     [--dev-changelog=prev-changelog.json] \
  *     [--notes-file=patch-notes.md] \
@@ -107,7 +114,7 @@ function dedupeBullets(bullets) {
 }
 
 /** Preferred player-facing order. */
-const CHANGE_CATEGORIES = ['Added', 'Improved', 'Updated', 'Reworked', 'Fixed'];
+const CHANGE_CATEGORIES = ['Added', 'Fixed', 'Improved', 'Removed', 'Reworked', 'Updated'];
 
 /**
  * Classify a bullet: "Fixed foo" / "fixed: foo" → { category, text, display }.
@@ -115,7 +122,7 @@ const CHANGE_CATEGORIES = ['Added', 'Improved', 'Updated', 'Reworked', 'Fixed'];
  */
 function classifyBullet(raw) {
   const cleaned = String(raw || '').replace(/\s+/g, ' ').trim();
-  const m = cleaned.match(/^(Added|Improved|Updated|Reworked|Fixed)\b[:\s-]*(.*)$/i);
+  const m = cleaned.match(/^(Added|Improved|Updated|Reworked|Fixed|Removed)\b[:\s-]*(.*)$/i);
   if (m) {
     const category = CHANGE_CATEGORIES.find((c) => c.toLowerCase() === m[1].toLowerCase());
     const rest = (m[2] || '').trim();
@@ -127,17 +134,18 @@ function classifyBullet(raw) {
 }
 
 /**
- * Dedupe, group by Added → Improved → Updated → Reworked → Fixed → Other,
+ * Dedupe, group alphabetically (Added → Fixed → Improved → Removed → Reworked → Updated → Other),
  * sort alphabetically within each group.
  */
 function organizeBullets(bullets) {
   const deduped = dedupeBullets(bullets);
   const buckets = {
     Added: [],
-    Improved: [],
-    Updated: [],
-    Reworked: [],
     Fixed: [],
+    Improved: [],
+    Removed: [],
+    Reworked: [],
+    Updated: [],
     Other: []
   };
   for (const b of deduped) {
@@ -178,14 +186,15 @@ function formatNotes(summary, bullets, opts = {}) {
     return parts.join('\n');
   }
 
-  // Prod: Added → Improved → Updated → Reworked → Fixed, then Other for unprefixed.
+  // Prod: alphabetical categories, then Other for unprefixed.
   // If NOTHING has a known prefix, stay flat — no ### Other / empty category headings.
   const byCat = {
     Added: [],
-    Improved: [],
-    Updated: [],
-    Reworked: [],
     Fixed: [],
+    Improved: [],
+    Removed: [],
+    Reworked: [],
+    Updated: [],
     Other: []
   };
   for (const b of list) {
@@ -243,7 +252,7 @@ function collectDevBulletsSinceProd(changelog, latestProdVersion) {
 
 /**
  * Summary from the newest commit *description* (body) in previousTag..HEAD.
- * Never uses the subject line — if no body exists, returns '' (Summary section omitted).
+ * Never uses the subject line — if no body exists, returns ''.
  * Skips merges; prefers non-chore commits.
  */
 function extractSummaryFromCommits(previousTag) {
@@ -293,10 +302,71 @@ function extractSummaryFromCommits(previousTag) {
   return '';
 }
 
+/** Pull **Summary** text from a specific changelog.json release entry. */
+function getSummaryFromChangelogVersion(changelog, version) {
+  if (!changelog || !version) return { summary: '', version: '' };
+  const want = String(version).replace(/^v/i, '');
+  if (!want || want === '0.0.0') return { summary: '', version: '' };
+  const entry = (changelog.releases || []).find(
+    (r) => String(r.version).replace(/^v/i, '') === want
+  );
+  if (!entry?.notes) return { summary: '', version: want };
+  const summary = parsePatchNotesFile(entry.notes).summary;
+  return { summary, version: String(entry.version).replace(/^v/i, '') };
+}
+
+/**
+ * Resolve Summary with carry-forward:
+ *   1) commit description (when provided / preferred)
+ *   2) previous release Summary from changelog
+ *   3) patch-notes.md **Summary** (legacy fallback)
+ */
+function resolveSummary(opts) {
+  const {
+    commitSummary = '',
+    carriedSummary = '',
+    carriedVersion = '',
+    fileSummary = '',
+    preferCarried = false
+  } = opts;
+
+  if (preferCarried) {
+    if (carriedSummary) {
+      return {
+        summary: carriedSummary,
+        source: `carried from ${carriedVersion || 'previous release'}`
+      };
+    }
+    if (commitSummary) {
+      return { summary: commitSummary, source: 'commit description' };
+    }
+  } else {
+    if (commitSummary) {
+      return { summary: commitSummary, source: 'commit description' };
+    }
+    if (carriedSummary) {
+      return {
+        summary: carriedSummary,
+        source: `carried from ${carriedVersion || 'previous release'}`
+      };
+    }
+  }
+  if (fileSummary) {
+    return { summary: fileSummary, source: 'patch-notes.md' };
+  }
+  return { summary: '', source: 'empty' };
+}
+
 const CHANNEL = (argValue('channel') || 'prod').toLowerCase();
 const VERSION = argValue('version').replace(/^v/i, '');
 const LATEST_PROD = argValue('latest-prod-version').replace(/^v/i, '');
 const PREVIOUS_TAG = argValue('previous-tag') || process.env.PREVIOUS_TAG || '';
+const PREVIOUS_VERSION = (
+  argValue('previous-version') ||
+  process.env.PREVIOUS_VERSION ||
+  PREVIOUS_TAG ||
+  ''
+).replace(/^v/i, '');
 const PROMOTED = isTruthy(argValue('promoted-from-dev') || process.env.PROMOTED_FROM_DEV);
 const NOTES_FILE = path.resolve(process.cwd(), argValue('notes-file', 'patch-notes.md'));
 const DEV_CHANGELOG = path.resolve(
@@ -313,38 +383,39 @@ if (!VERSION) {
 const fileText = fs.existsSync(NOTES_FILE) ? fs.readFileSync(NOTES_FILE, 'utf8') : '';
 const parsedFile = parsePatchNotesFile(fileText);
 
-// On promote, look at commits since last *prod* so we pick the final tip commit before/at merge
-// (previous_tag is often the -dev asset tip, which is the wrong range for summary).
+let changelog = null;
+if (fs.existsSync(DEV_CHANGELOG)) {
+  changelog = JSON.parse(fs.readFileSync(DEV_CHANGELOG, 'utf8'));
+}
+
+// Commit description range: on promote, scan since last *prod* (previous_tag is often the -dev tip).
 const summarySinceTag =
   CHANNEL === 'prod' && PROMOTED && LATEST_PROD
     ? `v${String(LATEST_PROD).replace(/^v/i, '')}`
     : PREVIOUS_TAG;
 const commitSummary = extractSummaryFromCommits(summarySinceTag);
+const previousCarried = getSummaryFromChangelogVersion(changelog, PREVIOUS_VERSION);
 
 let outText;
 let mode;
 
 if (CHANNEL === 'prod' && PROMOTED) {
   mode = 'promote-rollup';
-  let changelog = null;
-  if (fs.existsSync(DEV_CHANGELOG)) {
-    changelog = JSON.parse(fs.readFileSync(DEV_CHANGELOG, 'utf8'));
-  }
-
   const sinceProd = LATEST_PROD || '0.0.0';
   const collected = changelog
     ? collectDevBulletsSinceProd(changelog, sinceProd)
     : { releases: [], bullets: [], latestSummary: '', latestSummaryVersion: '' };
 
-  // Summary on merge: final commit description before merge (since last prod), then last -dev summary
-  const summary = commitSummary || collected.latestSummary || parsedFile.summary;
-  const summarySource = commitSummary
-    ? 'final commit description before merge'
-    : collected.latestSummary
-      ? `latest -dev (${collected.latestSummaryVersion})`
-      : parsedFile.summary
-        ? 'patch-notes.md'
-        : 'empty';
+  // On merge: last -dev Summary wins (includes any carried-forward summaries).
+  const { summary, source: summarySource } = resolveSummary({
+    commitSummary,
+    carriedSummary: collected.latestSummary,
+    carriedVersion: collected.latestSummaryVersion
+      ? `${collected.latestSummaryVersion} (last -dev)`
+      : '',
+    fileSummary: parsedFile.summary,
+    preferCarried: true
+  });
 
   const bullets = collected.bullets.length ? collected.bullets : parsedFile.bullets;
 
@@ -363,13 +434,18 @@ if (CHANNEL === 'prod' && PROMOTED) {
   }
 } else if (CHANNEL === 'prod') {
   mode = 'prod-organize';
-  // Direct prod push (no -dev promote): organize Changes; Summary from commit
+  // Direct prod push (no -dev promote): organize Changes; Summary from commit or carry previous prod
   if (!parsedFile.bullets.length) {
     console.error('ERROR: patch-notes.md needs ## Changes bullets for', VERSION);
     process.exit(1);
   }
-  const summary = commitSummary || parsedFile.summary;
-  const summarySource = commitSummary ? 'commit description' : parsedFile.summary ? 'patch-notes.md' : 'empty';
+  const { summary, source: summarySource } = resolveSummary({
+    commitSummary,
+    carriedSummary: previousCarried.summary,
+    carriedVersion: previousCarried.version,
+    fileSummary: parsedFile.summary,
+    preferCarried: false
+  });
   outText = formatNotes(summary, parsedFile.bullets, { organize: true });
   console.log(
     `Prod organize: ${organizeBullets(parsedFile.bullets).length} change bullet(s); summary from ${summarySource}`
@@ -379,19 +455,24 @@ if (CHANNEL === 'prod' && PROMOTED) {
   }
 } else {
   mode = 'dev-flat';
-  // Dev: flat Changes list only; Summary from commit description (omitted if empty)
+  // Dev: flat Changes; Summary from commit description, else carry previous -dev Summary
   if (!parsedFile.bullets.length) {
     console.error('ERROR: patch-notes.md needs ## Changes bullets for', VERSION);
     process.exit(1);
   }
-  const summary = commitSummary || parsedFile.summary;
-  const summarySource = commitSummary ? 'commit description' : parsedFile.summary ? 'patch-notes.md' : 'empty';
+  const { summary, source: summarySource } = resolveSummary({
+    commitSummary,
+    carriedSummary: previousCarried.summary,
+    carriedVersion: previousCarried.version,
+    fileSummary: parsedFile.summary,
+    preferCarried: false
+  });
   outText = formatNotes(summary, parsedFile.bullets, { organize: false });
   console.log(
     `Dev flat list: ${dedupeBullets(parsedFile.bullets).length} change bullet(s); summary from ${summarySource}`
   );
   if (!summary) {
-    console.log('No summary found — omitting **Summary** section');
+    console.log('No summary found — omitting **Summary** section (no description and nothing to carry)');
   }
 }
 fs.writeFileSync(OUT, outText.endsWith('\n') ? outText : outText + '\n', 'utf8');

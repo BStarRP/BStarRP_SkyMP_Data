@@ -180,8 +180,8 @@ jobs:
             echo "No previous changelog.json; will use scripts/changelog-seed.json until first changelog is published"
           fi
 
-      # Normal push: patch-notes.md as-is.
-      # Prod promote: Summary from patch-notes.md (merge-time); Changes rolled up from -dev changelog.
+      # Summary: commit description on -dev (else carry previous -dev Summary).
+      # Prod promote: last -dev Summary → production; Changes rolled up from -dev changelog.
       - name: Build release notes
         id: notes
         run: |
@@ -197,6 +197,7 @@ jobs:
             --version="${{ steps.version.outputs.version }}" \
             --latest-prod-version="$PROD_VER" \
             --previous-tag="${{ steps.version.outputs.previous_tag }}" \
+            --previous-version="${{ steps.version.outputs.previous_version }}" \
             --promoted-from-dev="${{ steps.version.outputs.promoted_from_dev }}" \
             $DEV_CL_ARG \
             --out=release-notes.md
