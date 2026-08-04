@@ -6,3 +6,5 @@
 - Fixed issue with bows crashing
 - Fixed issue with equipment not showing properly
 - Fixed issue with weapon/spell damage
+- Updated eyes to move exactly with camera, so looking closesly you know where someone is looking as head moves on its own, eyes are instant
+
