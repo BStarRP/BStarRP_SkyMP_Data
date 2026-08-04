@@ -1,41 +1,9 @@
 # Patch notes
 
 ## Changes
-- Fixed eye tracking to be more natural and sync properly
-- Fixed an issue when looting a corpse it shows a naked body
-- Fixed another issue with targeting still working on invisible players
-- Fixed an issue with conjurations respawining
-- Fixed arvaks to requiring a higher horse riding tier
-- Fixed an issue with not seeing the charge casting animation
-- Fixed an issue with riding horse sporatically flying around
-- Fixed an issue with syncing horses to other players
-- Fixed npc's in caves to reset position if idle so they dont crowd the door
-- Fixed steed stone and carry weight buff
-- Fixed an issue with some dungeons not working
-- Fixed Steed stone buff and other stone buffs
-- Fixed torches unequipping
-- Fixed the sawmill state to synchronize for everyone, leaving and coming back shows log on track
-- Updated armor xp to trigger based on what your wearing on the location hit rather then what set your wearing more of
-- Updated so you can pickup Keys in a dungeon and use them (they disapear after 30 minutes)
-- Updated pickpocketing to require a range check, and close if out of range
-- Updated spell learning to only allow one spell to learn at a time
-- Updated so npc return home skips owned actors (pets)
-- Improved the saw mill interaction
-- Added full sneak attack + perk bonuses
-- Improved pet commands such as follow/stay
-- Added a pet companion frame below the buffs
-- Added full armor set piece buff handling, synces with buff bar and stats
-- Added skeever, horker, and rabbit pelts (placeholder model)
-- Removed 15 broken tanning racks and 5 broken ovens
-- Replaced the Windhelm Bloodworks entrance
-- Added balcony access to the Bloodworks from the Palace of the Kings
-- Added a second door to the Markarth main entrance so the Ard can speak from the battlements
-- Blocked the drain in the Markarth entrance
-- Fixed milk so it stays still
-- Fixed a void hole in the Palace of the Kings
-- Fixed void holes in the Whiterun Hall of the Dead
-- Relocated 7 queen bees to abandoned beehives so they can be harvested
-- Replaced brewing stations on the Markarth side with usable ones
-- Added a cooking pot to Winterhold Keep
-- Added hotkeys to animations (highlight animation press 1-0 on animation, numpad also works)
-- Updated garlic so you dont need a tool for farming
+- Fixed an issue with enchantments not applying when you first equip them
+- Fixed an issue with drawing weapons not always appearing in hand for others
+- Updated dual casting + charge casting fully synced
+- Improved head looking
+- Fixed an issue where you would freeze up going through doors
+- Optimized some server performance
