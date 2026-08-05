@@ -1,5 +1,5 @@
 # Patch notes
 
 ## Changes
-- Fixed an issue with interaction not hiding base game interactions
-- Fixed anoth issue with enchantments not landing on some specific gear at login, enchanting should be working now
+- Fixed an issue with interaction menu alowing you to interact when its no longer shown
+- Tricked skyrim into hiding arrows it did not want to hide
