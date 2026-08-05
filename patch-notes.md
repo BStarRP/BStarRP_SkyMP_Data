@@ -1,4 +1,4 @@
 # Patch notes
 
 ## Changes
-- Still Dreaming of a nice warm meal and some sleep tonight
+- Fixed an issue with enchanting items failing for double enchants
