@@ -1,4 +1,4 @@
 # Patch notes
 
 ## Changes
-- Fixed one last inventory bug, should be a clean sync now (this is all for enchanting fyi, shit is complex)
+- Dreaming of a nice warm meal and some sleep tonight
