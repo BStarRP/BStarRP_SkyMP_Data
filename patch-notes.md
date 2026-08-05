@@ -1,6 +1,6 @@
 # Patch notes
 
 ## Changes
-- Fixed pop-up for fishing supplies while fishing, should now not cancel minigame
-- Fixed an issue with getting cave text to appear
-- Fixed another issue with arrow items synchronize
+- Added a continous play for bards
+- Updated xp gain for musicianship, extra xp per person near by
+- Fixed an issue with menus not opening mouse
