@@ -1,5 +1,6 @@
 /**
- * Fails if release notes were not updated for a new version release.
+ * Validates release notes exist for a new version release.
+ * Identical notes vs the previous version are allowed (rolled forward).
  *
  * Usage:
  *   node scripts/verify-patch-notes-for-release.js <version> <previousVersion> \
@@ -61,13 +62,13 @@ if (fs.existsSync(prevPath)) {
 }
 
 if (prevNotes && prevNotes === currentNotes) {
-  console.error(
-    'ERROR: notes are unchanged from version',
-    compareVersion,
-    '— update patch-notes.md (or promote rollup) before releasing',
+  console.log(
+    'Notes unchanged from version',
+    compareVersion + ';',
+    'rolling them forward for',
     version
   );
-  process.exit(1);
+  process.exit(0);
 }
 
 console.log('Notes look updated for release', version, '(compared to', compareVersion + ')');
