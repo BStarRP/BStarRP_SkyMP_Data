@@ -2,11 +2,14 @@
  * Build release-notes.md for GitHub / Discord / manifest.
  *
  * Summary rules:
- *   - Dev: commit description (body) writes the Summary. If the commit has no
- *     description, carry forward the previous -dev Summary from changelog.
- *   - Prod promote (dev→main merge): carry the last -dev Summary to production
- *     (Changes still roll up / organize from all -dev entries since last prod).
- *   - Direct prod: commit description, else carry previous prod Summary.
+ *   - Dev / direct prod: commit description (full body, all paragraphs) writes
+ *     the Summary. Subject is never used. No body ⇒ no Summary (do not repeat
+ *     the previous release's Summary).
+ *   - If the resolved Summary text matches the previous update's Summary, omit
+ *     it and ship without a Summary section.
+ *   - Prod promote (dev→main merge): last -dev Summary goes to production when
+ *     it differs from the last prod Summary (Changes still roll up / organize
+ *     from all -dev entries since last prod).
  *
  * Changes:
  *   - Dev: flat list (no category headings / sorting).
@@ -250,9 +253,19 @@ function collectDevBulletsSinceProd(changelog, latestProdVersion) {
   };
 }
 
+/** Normalize summary text for compare / output; keep paragraph breaks. */
+function normalizeSummary(text) {
+  return String(text || '')
+    .replace(/\r\n/g, '\n')
+    .replace(/[ \t]+\n/g, '\n')
+    .replace(/\n{3,}/g, '\n\n')
+    .trim();
+}
+
 /**
  * Summary from the newest commit *description* (body) in previousTag..HEAD.
  * Never uses the subject line — if no body exists, returns ''.
+ * Keeps full body including paragraph line breaks (does not truncate at first blank line).
  * Skips merges; prefers non-chore commits.
  */
 function extractSummaryFromCommits(previousTag) {
@@ -282,11 +295,8 @@ function extractSummaryFromCommits(previousTag) {
   }
 
   function bodySummary(c) {
-    // First paragraph of the description only
-    return c.body
-      .split(/\n\s*\n/)[0]
-      .replace(/\s+/g, ' ')
-      .trim();
+    // Full commit description — preserve paragraph breaks
+    return normalizeSummary(c.body);
   }
 
   // Newest first: prefer non-chore with a body, then any commit with a body
@@ -316,10 +326,11 @@ function getSummaryFromChangelogVersion(changelog, version) {
 }
 
 /**
- * Resolve Summary with carry-forward:
+ * Resolve Summary:
  *   1) commit description (when provided / preferred)
- *   2) previous release Summary from changelog
+ *   2) on promote: last -dev Summary from changelog
  *   3) patch-notes.md **Summary** (legacy fallback)
+ * Does not reuse the previous update's Summary for ordinary releases.
  */
 function resolveSummary(opts) {
   const {
@@ -333,28 +344,36 @@ function resolveSummary(opts) {
   if (preferCarried) {
     if (carriedSummary) {
       return {
-        summary: carriedSummary,
+        summary: normalizeSummary(carriedSummary),
         source: `carried from ${carriedVersion || 'previous release'}`
       };
     }
     if (commitSummary) {
-      return { summary: commitSummary, source: 'commit description' };
+      return { summary: normalizeSummary(commitSummary), source: 'commit description' };
     }
-  } else {
-    if (commitSummary) {
-      return { summary: commitSummary, source: 'commit description' };
-    }
-    if (carriedSummary) {
-      return {
-        summary: carriedSummary,
-        source: `carried from ${carriedVersion || 'previous release'}`
-      };
-    }
+  } else if (commitSummary) {
+    return { summary: normalizeSummary(commitSummary), source: 'commit description' };
   }
   if (fileSummary) {
-    return { summary: fileSummary, source: 'patch-notes.md' };
+    return { summary: normalizeSummary(fileSummary), source: 'patch-notes.md' };
   }
   return { summary: '', source: 'empty' };
+}
+
+/**
+ * Drop Summary when it matches the previous update (avoid repeating the same blurb).
+ * @returns {{ summary: string, source: string }}
+ */
+function dropDuplicateSummary(resolved, previousSummary) {
+  const summary = normalizeSummary(resolved.summary);
+  const prev = normalizeSummary(previousSummary);
+  if (summary && prev && summary === prev) {
+    return {
+      summary: '',
+      source: `omitted (same as previous update; was ${resolved.source})`
+    };
+  }
+  return { summary, source: resolved.source };
 }
 
 const CHANNEL = (argValue('channel') || 'prod').toLowerCase();
@@ -395,6 +414,12 @@ const summarySinceTag =
     : PREVIOUS_TAG;
 const commitSummary = extractSummaryFromCommits(summarySinceTag);
 const previousCarried = getSummaryFromChangelogVersion(changelog, PREVIOUS_VERSION);
+// On promote, dedupe against last *prod* Summary (prod players may not have seen -dev).
+const lastProdSummary =
+  CHANNEL === 'prod' && PROMOTED && LATEST_PROD
+    ? getSummaryFromChangelogVersion(changelog, LATEST_PROD).summary
+    : '';
+const previousSummaryForDedupe = lastProdSummary || previousCarried.summary;
 
 let outText;
 let mode;
@@ -406,16 +431,19 @@ if (CHANNEL === 'prod' && PROMOTED) {
     ? collectDevBulletsSinceProd(changelog, sinceProd)
     : { releases: [], bullets: [], latestSummary: '', latestSummaryVersion: '' };
 
-  // On merge: last -dev Summary wins (includes any carried-forward summaries).
-  const { summary, source: summarySource } = resolveSummary({
-    commitSummary,
-    carriedSummary: collected.latestSummary,
-    carriedVersion: collected.latestSummaryVersion
-      ? `${collected.latestSummaryVersion} (last -dev)`
-      : '',
-    fileSummary: parsedFile.summary,
-    preferCarried: true
-  });
+  // On merge: last -dev Summary wins when it is new vs last prod.
+  const { summary, source: summarySource } = dropDuplicateSummary(
+    resolveSummary({
+      commitSummary,
+      carriedSummary: collected.latestSummary,
+      carriedVersion: collected.latestSummaryVersion
+        ? `${collected.latestSummaryVersion} (last -dev)`
+        : '',
+      fileSummary: parsedFile.summary,
+      preferCarried: true
+    }),
+    previousSummaryForDedupe
+  );
 
   const bullets = collected.bullets.length ? collected.bullets : parsedFile.bullets;
 
@@ -425,7 +453,7 @@ if (CHANNEL === 'prod' && PROMOTED) {
       `${organizeBullets(bullets).length} change bullet(s) organized; summary from ${summarySource}`
   );
   if (!summary) {
-    console.log('No summary found — omitting **Summary** section from prod notes');
+    console.log('No summary — omitting **Summary** section from prod notes');
   }
   if (!collected.bullets.length) {
     console.warn(
@@ -434,45 +462,47 @@ if (CHANNEL === 'prod' && PROMOTED) {
   }
 } else if (CHANNEL === 'prod') {
   mode = 'prod-organize';
-  // Direct prod push (no -dev promote): organize Changes; Summary from commit or carry previous prod
+  // Direct prod push (no -dev promote): organize Changes; Summary from commit description only
   if (!parsedFile.bullets.length) {
     console.error('ERROR: patch-notes.md needs ## Changes bullets for', VERSION);
     process.exit(1);
   }
-  const { summary, source: summarySource } = resolveSummary({
-    commitSummary,
-    carriedSummary: previousCarried.summary,
-    carriedVersion: previousCarried.version,
-    fileSummary: parsedFile.summary,
-    preferCarried: false
-  });
+  const { summary, source: summarySource } = dropDuplicateSummary(
+    resolveSummary({
+      commitSummary,
+      fileSummary: parsedFile.summary,
+      preferCarried: false
+    }),
+    previousSummaryForDedupe
+  );
   outText = formatNotes(summary, parsedFile.bullets, { organize: true });
   console.log(
     `Prod organize: ${organizeBullets(parsedFile.bullets).length} change bullet(s); summary from ${summarySource}`
   );
   if (!summary) {
-    console.log('No summary found — omitting **Summary** section');
+    console.log('No summary — omitting **Summary** section');
   }
 } else {
   mode = 'dev-flat';
-  // Dev: flat Changes; Summary from commit description, else carry previous -dev Summary
+  // Dev: flat Changes; Summary from commit description only (never repeat previous)
   if (!parsedFile.bullets.length) {
     console.error('ERROR: patch-notes.md needs ## Changes bullets for', VERSION);
     process.exit(1);
   }
-  const { summary, source: summarySource } = resolveSummary({
-    commitSummary,
-    carriedSummary: previousCarried.summary,
-    carriedVersion: previousCarried.version,
-    fileSummary: parsedFile.summary,
-    preferCarried: false
-  });
+  const { summary, source: summarySource } = dropDuplicateSummary(
+    resolveSummary({
+      commitSummary,
+      fileSummary: parsedFile.summary,
+      preferCarried: false
+    }),
+    previousSummaryForDedupe
+  );
   outText = formatNotes(summary, parsedFile.bullets, { organize: false });
   console.log(
     `Dev flat list: ${dedupeBullets(parsedFile.bullets).length} change bullet(s); summary from ${summarySource}`
   );
   if (!summary) {
-    console.log('No summary found — omitting **Summary** section (no description and nothing to carry)');
+    console.log('No summary — omitting **Summary** section');
   }
 }
 fs.writeFileSync(OUT, outText.endsWith('\n') ? outText : outText + '\n', 'utf8');
