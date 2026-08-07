@@ -1,4 +1,4 @@
 # Patch notes
 
 ## Changes
-- More optimization and cleanups
+- Fixed issues with inventory losing some specific items like bows
