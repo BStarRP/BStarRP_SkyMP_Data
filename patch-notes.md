@@ -1,7 +1,5 @@
 # Patch notes
 
 ## Changes
-- Fixed a few possible issues with inventory losing some specific items like bows
-- Fixed an issue with arrow pickups
-- Several server sided optimizations
-- Added full server sided resource monitoring (integrated with dev command to monitor)
+- Fixed an issue with once a day buffs being treated like permanent always on buffs
+- Added a server side cooldown for major racial abilities (will look into a way to allow the racials more often then 24 hours with balance)
