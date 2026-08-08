@@ -1,4 +1,4 @@
 # Patch notes
 
 ## Changes
-- More optimizations
+- Server side optimizations
