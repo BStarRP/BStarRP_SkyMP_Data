@@ -1,4 +1,4 @@
 # Patch notes
 
 ## Changes
-- More improvements
+- Fixed issue with fungible items messing counts and causing inventory to skew with phantom adds/removes
