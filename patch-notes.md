@@ -1,5 +1,4 @@
 # Patch notes
 
 ## Changes
-- Fixed an issue with inventory not syncing properly
-- Fixed a crash with bandages
+- More adjustments to how inventory tracks and handles items
