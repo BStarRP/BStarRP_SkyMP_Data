@@ -1,4 +1,4 @@
 # Patch notes
 
 ## Changes
-- More adjustments to how inventory tracks and handles items
+- Fixed an issue with npc stats leaking onto players
