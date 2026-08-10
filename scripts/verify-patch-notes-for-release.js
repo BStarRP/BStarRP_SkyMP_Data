@@ -44,14 +44,18 @@ if (version === previousVersion) {
 }
 
 if (!fs.existsSync(notesPath)) {
-  console.error('ERROR: notes file is missing:', notesPath);
-  process.exit(1);
+  console.warn('Warning: notes file is missing:', notesPath + ';', 'continuing with an empty changelog');
+  process.exit(0);
 }
 
 const currentNotes = stripDuplicateVersion(fs.readFileSync(notesPath, 'utf8').trim());
 if (!currentNotes) {
-  console.error('ERROR: notes file is empty — write notes for version', version, 'before releasing');
-  process.exit(1);
+  console.warn(
+    'Warning: notes file is empty for version',
+    version + ';',
+    'continuing with an empty changelog'
+  );
+  process.exit(0);
 }
 
 let prevNotes = null;

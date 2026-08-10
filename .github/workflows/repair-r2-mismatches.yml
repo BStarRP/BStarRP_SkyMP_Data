@@ -49,14 +49,17 @@ jobs:
       - name: Checkout default branch (scripts + package.json)
         uses: actions/checkout@v5
         with:
-          fetch-depth: 0
+          fetch-depth: 1
+          fetch-tags: false
           lfs: false
 
       - name: Restore Data/ from the release tag being repaired
         run: |
           set -e
-          git fetch origin "${{ steps.rel.outputs.tag }}" --tags
-          git checkout "${{ steps.rel.outputs.tag }}" -- Data/
+          TAG="${{ steps.rel.outputs.tag }}"
+          # One tag tip only — do not fetch full history / all tags.
+          git fetch --force --no-tags --depth=1 origin "refs/tags/${TAG}:refs/tags/${TAG}"
+          git checkout "$TAG" -- Data/
 
       - name: Setup Git LFS (no fetch)
         run: git lfs install --local

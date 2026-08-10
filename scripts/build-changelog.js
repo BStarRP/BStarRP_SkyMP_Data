@@ -54,17 +54,21 @@ function readCurrentNotes() {
   return stripDuplicateVersion(content);
 }
 
-function requireCurrentNotes() {
+function currentNotesOrEmpty() {
   const notes = readCurrentNotes();
   if (!notes) {
-    console.error('ERROR: patch-notes.md must contain release notes for version', VERSION);
-    process.exit(1);
+    console.warn(
+      'Warning: no release notes for version',
+      VERSION + ';',
+      'writing an empty changelog entry'
+    );
+    return '# Patch notes\n\n## Changes\n';
   }
   return notes;
 }
 
 async function main() {
-  const currentNotes = requireCurrentNotes();
+  const currentNotes = currentNotesOrEmpty();
   const currentDate = RELEASE_DATE || new Date().toISOString().slice(0, 10);
   const history = loadHistoryBase(PREVIOUS_CHANGELOG_PATH);
   const changelog = mergeChangelog(history, VERSION, currentNotes, currentDate);

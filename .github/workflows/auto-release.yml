@@ -47,16 +47,12 @@ jobs:
     outputs:
       release: ${{ steps.gate.outputs.release }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-          lfs: false
-
+      # No full clone: gate only needs compare + remote tag names (repo pack is multi‑GB).
       - name: Decide whether to release
         id: gate
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
         run: |
           set -e
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
@@ -76,25 +72,34 @@ jobs:
             exit 0
           fi
 
-          CHANGED=$(git diff --name-only "$BEFORE" "$AFTER" || true)
-          if echo "$CHANGED" | grep -Eq "$RELEVANT"; then
+          # GitHub compare lists at most 300 files; if we hit the cap, fail open.
+          COMPARE_JSON=$(gh api "repos/$REPO/compare/${BEFORE}...${AFTER}" 2>/dev/null) || {
+            echo "release=true" >> $GITHUB_OUTPUT
+            echo "compare API failed → release"
+            exit 0
+          }
+          CHANGED=$(printf '%s' "$COMPARE_JSON" | jq -r '.files[]?.filename // empty')
+          FILE_COUNT=$(printf '%s' "$COMPARE_JSON" | jq '.files | length')
+          if [ "${FILE_COUNT:-0}" -ge 300 ] || echo "$CHANGED" | grep -Eq "$RELEVANT"; then
             echo "release=true" >> $GITHUB_OUTPUT
             echo "Relevant path changes → release"
             exit 0
           fi
 
           # Merge commit (merge-up or merge-down)
-          if git rev-parse -q --verify "${AFTER}^2" >/dev/null; then
+          PARENTS=$(gh api "repos/$REPO/commits/$AFTER" --jq '.parents | length' 2>/dev/null) || PARENTS=0
+          if [ "${PARENTS:-0}" -ge 2 ]; then
             echo "release=true" >> $GITHUB_OUTPUT
             echo "Merge commit → release"
             exit 0
           fi
 
-          git fetch --tags --force origin || true
           # Fast-forward sync onto dev while prod tip is ahead of latest -dev
           if [ "$REF" = "dev" ]; then
-            LATEST_PROD=$(git tag -l 'v*.*.*' --sort=-v:refname | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | head -n1 || true)
-            LATEST_DEV=$(git tag -l 'v*-dev' --sort=-v:refname | head -n1 || true)
+            REMOTE_URL="https://x-access-token:${GH_TOKEN}@github.com/${REPO}.git"
+            TAGS=$(git ls-remote --tags --refs "$REMOTE_URL" 'v*' | awk '{print $2}' | sed 's#refs/tags/##')
+            LATEST_PROD=$(printf '%s\n' "$TAGS" | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sort -V | tail -n1 || true)
+            LATEST_DEV=$(printf '%s\n' "$TAGS" | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+-dev' | sort -V | tail -n1 || true)
             if [ -n "$LATEST_PROD" ]; then
               PROD_BASE="${LATEST_PROD#v}"
               DEV_BASE="${LATEST_DEV#v}"
@@ -126,10 +131,25 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v5
         with:
-          fetch-depth: 0
+          # Shallow tip only. Full history/tags come next without historical blobs.
+          fetch-depth: 1
+          fetch-tags: false
           lfs: false
-        # lfs: false = no "git lfs fetch" at checkout, so no LFS bandwidth here.
-        # We pull only changed files in "Pull LFS for changed files only" below.
+          # lfs: false = no "git lfs fetch" at checkout, so no LFS bandwidth here.
+          # We pull only changed files in "Pull LFS for changed files only" below.
+
+      - name: Fetch branch history and version tags
+        run: |
+          set -e
+          BRANCH="${{ github.ref_name }}"
+          # Current branch only (avoid +refs/heads/*), commits/trees only (avoid multi‑GB historical blobs).
+          # HEAD file blobs are already present from checkout; we only need names for git diff / git log.
+          git remote set-branches origin "$BRANCH"
+          git fetch --progress --unshallow --filter=blob:none origin "$BRANCH"
+          # Version tags only — not every tag tip as part of the initial cold pack.
+          git fetch --force --no-tags --filter=blob:none origin \
+            'refs/tags/v*:refs/tags/v*' \
+            'refs/tags/dev-latest:refs/tags/dev-latest' || true
 
       - name: Setup Git LFS (no fetch yet)
         run: git lfs install --local
@@ -192,11 +212,16 @@ jobs:
           echo "Bump type: $BUMP (since $LATEST_TAG, channel=$CHANNEL)"
 
       # Merge-to-main often races the concurrent -dev release that creates vX.Y.Z-dev.
-      # Refresh tags (and briefly wait for a HEAD -dev tag) before resolving prod version.
+      # Refresh version tags (and briefly wait for a HEAD -dev tag) before resolving prod version.
       - name: Refresh tags before version resolve
         run: |
           set -e
-          git fetch --tags --force origin || true
+          fetch_version_tags() {
+            git fetch --force --no-tags --filter=blob:none origin \
+              'refs/tags/v*:refs/tags/v*' \
+              'refs/tags/dev-latest:refs/tags/dev-latest' || true
+          }
+          fetch_version_tags
           if [ "${{ steps.channel.outputs.name }}" != "prod" ]; then
             exit 0
           fi
@@ -209,12 +234,12 @@ jobs:
             fi
             if git ls-remote --tags --refs origin | grep -F "$HEAD_SHA" | grep -Eq 'refs/tags/v[0-9]+\.[0-9]+\.[0-9]+-dev'; then
               echo "Remote has -dev tag on HEAD; refetching..."
-              git fetch --tags --force origin || true
+              fetch_version_tags
               exit 0
             fi
             echo "Waiting for -dev tag on HEAD ($i/8)..."
             sleep 15
-            git fetch --tags --force origin || true
+            fetch_version_tags
           done
           echo "No -dev tag on HEAD yet; resolve will use subject hint / latest -dev scan."
 

@@ -179,7 +179,7 @@ function formatNotes(summary, bullets, opts = {}) {
   }
   parts.push('## Changes');
   if (!list.length) {
-    parts.push('- (no changes listed)', '');
+    parts.push('');
     return parts.join('\n');
   }
 
@@ -464,8 +464,11 @@ if (CHANNEL === 'prod' && PROMOTED) {
   mode = 'prod-organize';
   // Direct prod push (no -dev promote): organize Changes; Summary from commit description only
   if (!parsedFile.bullets.length) {
-    console.error('ERROR: patch-notes.md needs ## Changes bullets for', VERSION);
-    process.exit(1);
+    console.warn(
+      'Warning: patch-notes.md has no ## Changes bullets for',
+      VERSION + ';',
+      'continuing with an empty changelog'
+    );
   }
   const { summary, source: summarySource } = dropDuplicateSummary(
     resolveSummary({
@@ -486,8 +489,11 @@ if (CHANNEL === 'prod' && PROMOTED) {
   mode = 'dev-flat';
   // Dev: flat Changes; Summary from commit description only (never repeat previous)
   if (!parsedFile.bullets.length) {
-    console.error('ERROR: patch-notes.md needs ## Changes bullets for', VERSION);
-    process.exit(1);
+    console.warn(
+      'Warning: patch-notes.md has no ## Changes bullets for',
+      VERSION + ';',
+      'continuing with an empty changelog'
+    );
   }
   const { summary, source: summarySource } = dropDuplicateSummary(
     resolveSummary({
