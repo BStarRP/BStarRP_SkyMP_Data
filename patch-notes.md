@@ -1,11 +1,18 @@
 # Patch notes
 
 ## Changes
-- Fixed an issue with bound weapons causing inventory to unequip - they were taking durability hits they shouldnt
-- Fixed an issue with bound weapons showing improper timers and durations now sync properly
-- Fixed an issue with flames and similar spell types not getting the dual cast damage bonuses
-- Fixed an issue with how buffs/debuffs stack and order, now stats should show the accurate winning results when you have multiple things working against each other
-- Fixed an issue with using keys in dungeons not working
-- Implemented a synchronized quest stage system to get the rest of the dungeons to work when adventuring through them and using keys and such should now trigger the next stages
-- Fixed an issue with item buffs not always reading and projecting the right values
-- Optimized more server code based on the last 24 hours of data, we getting there, stability is improving, voip issues are fewer and further inbetween
+- Destroyed the forge of infinite knowledge - ILDREN
+- Fixed craft/temper recipes for vigilants - ILDREN
+- Fixed name of the Legion Holdstone - ILDREN
+- Balanced breaking down weapons - TG
+- Added breaking down weapons to smelter levels - TG
+- Took a shot at REMOVING EBONY??? - TG AND ILDREN
+- Destroyed the forge of infinite knowledge - ILDREN
+- Fixed craft/temper recipes for vigilants - ILDREN
+- Fixed name of the Legion Holdstone - ILDREN
+- Balanced breaking down weapons - TG
+- Added breaking down weapons to smelter levels - TG
+- Took a shot at REMOVING EBONY??? - TG
+- Took a second shot at ebony, trying to make sure it cant spawn anywhere - Ildren
+- More server optimizations after scowering hours of data
+- Rescaled the world creature levels seperately from everything else, now they roll between lvl 1 and 12, this should provide a variety and things to hunt at all tiers (may need to wipe out the current population one more time)
