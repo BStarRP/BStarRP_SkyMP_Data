@@ -1,10 +1,8 @@
 # Patch notes
 
 ## Changes
-- Rebalanced armor stamina values to be lower
-- Fixed an issue with shooting bows and stamina
-- Fixed an issue with players turning into ghosts *OOOHHH SCARRY*
-- Fixed argonions eyes from falling out their sockets
-- Fixed an issue with notes not opening
-- Fixed an issue with people being spectral ghosts (will save that as a feature for when people die and go to the afterlife)
-- Fixed an issue with buff stats and magika regen
+- Fixed local player cc break issues causing hands to stick + courage breaks fear properly
+- Fixed an issue where players were getting wrong Health/Mana/Stamina
+- Added All backpacks/pouches added to leatherworking crafting recipes
+- Added a recipe for different lock tiers, ingredients will be adjusted in the future (prepping for a lock/key system)
+- Replaced unusable windmills with usable ones
