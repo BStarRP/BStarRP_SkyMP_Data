@@ -3360,6 +3360,9 @@ export declare class TESModPlatform extends PapyrusObject {
   static setWeaponDrawnMode(actor: Actor | null, mode: number): void
   static updateEquipment(actor: Actor | null, item: Form | null, leftHand: boolean): void
   static putRiderOnMount(rider: Actor | null, mount: Actor | null): boolean
+  static getPlayerMapMarker(): ObjectReference | null
+  static setPlayerMapMarker(world: WorldSpace | null, posX: number, posY: number, posZ: number): void
+  static clearPlayerMapMarker(): void
 }
 
 // Based on TalkingActivator.pex
