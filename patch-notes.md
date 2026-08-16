@@ -1,6 +1,10 @@
 # Patch notes
 
 ## Changes
-- Fixed an issue with entering an interior and not being able to leave (temples usually)
-- Fixed an issue with opening notes crashing 
-- Fixed argonion eyes again, brought back looking for them just clamped their range
+- Fixed local players mouth movement, sometimes it stopped or didnt pickup
+- Fixed another crash issue with npc's getting wrong data applied
+- Fixed an issue with enchanting not detecting the right soul gem
+- Fixed an issue with enchantment reject path
+- Reworked a little special thing, Titles, skills now posses unique titles and prefixes and you can combine them, so for example Mereth's Chosen Jarl of Whiterun Bruin the Worldbreaker
+- More skill xp adjustments, moving gathering & crafting skills on the easier leveling side
+- Updated how movement packets work more efficiently, to reduce load per player
