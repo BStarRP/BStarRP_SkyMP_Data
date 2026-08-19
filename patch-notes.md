@@ -1,35 +1,6 @@
 # Patch notes
 
 ## Changes
-- Fixed an issue with items and stackid's not aligning properly causing weird issues with enchantment
-- Fixed an issue with poisons not applying
-- Fixed bows can now be tempered by carpenters
-- More server improvements
-- Fixed an issue with inventory projection projecting more items then the server has
-- Fixed an issue with pets following and staying (made Animals use Meeko AI/Summons use Follower AI)
-- Fixed an issue with dungeon levers/puzzles not working (still need more data to make more advanced triggers work)
-- Fixed some bugs with enchanting, effects known not showing up, craft treating EFIDs as an extra effect, and an a few more issues
-- Fixed an issue with some craft recipes not working on benches that are showing up requiring a different skill
-- Moved Dragons and Werewolves to legendary tier taming
-- Extra enchantment perk moved to legendary tier
-- Opened Harkon's castle questline
-- Added a silence effect to the CC now stops casting/concentration
-- Gold purses nerfed, return is much less
-- Quest npc's added for dungeons, we will see what happens
-- Missive boards parceled can now give admin access to shut
-- Buffed xp gain on core economic skills crafting/gathering (mining/smithing moved to top)
-- Updated missive boards to allow admins or holds to remove notes if parceled
-- Inroductions intorduce to everyone around you
-- Fixed an issue with monster stats were falling onto the player
-- Fixed an issue with alchemy tables not working right
-- Fixed an issue with bound bows
-- Updated the note item model (FormID unchanged)
-- Fixed some recipes
-- Fixed crabs not dropping crab meat
-- Added more ladders in places where people were getting stuck
-- Added iron bolts, craftable by level 15 carpenters
-- Made lean-table markers usable
-- Tweaked Vigilant armors so they can be repaired by steel-level blacksmiths
-- Tweaked Dawnstar thane armor so it can be repaired by steel-level blacksmiths
-- Removed a building in Solitude
-- Added holdstone entries for Companions, Thieves Guild, Vigilants, Volkihar, and Thalmor (not placed in the world yet, just hooked into the system)
+- Fixed missing crafting items
+- Fixed left hand spells not equipping
+- Fixed a floating door
