@@ -1,4 +1,5 @@
 # Patch notes
 
 ## Changes
-- Improved client side performance
+- Fixed multiple notes stacking and removing each other
+- Fixed notes not openinning
