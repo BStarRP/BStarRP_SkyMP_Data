@@ -1,0 +1,13 @@
+{
+	"enabled": 1,
+	"directionalInscatteringMultiplier": 2.22,
+	"directionalInscatteringExponent": 4.1,
+	"inscatteringTint": [0.72, 0.82, 1.0, 1.05],
+	"fogDensity": 0.016,
+	"_metadata": {
+		"modName": "Custom look - default tier (repo)",
+		"version": "4.4.0",
+		"description": "Cooler inscattering tint, slightly tighter sun/moon cone, less red haze vs prior warm halo.",
+		"enabled": true
+	}
+}

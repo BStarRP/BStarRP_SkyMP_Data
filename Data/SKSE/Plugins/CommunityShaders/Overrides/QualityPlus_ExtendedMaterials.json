@@ -1,0 +1,10 @@
+{
+	"EnableShadows": 1,
+	"ExtendShadows": 1,
+	"_metadata": {
+		"modName": "Quality plus (repo preset)",
+		"version": "1.0.0",
+		"description": "Full parallax soft shadows for Quality+. Disable CustomLook_ExtendedMaterials while using this tier.",
+		"enabled": false
+	}
+}

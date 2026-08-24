@@ -1,0 +1,9 @@
+{
+	"Enable": 0,
+	"_metadata": {
+		"modName": "Low assist (repo preset)",
+		"version": "1.0.0",
+		"description": "Tier 3: disables screen-space contact shadows for FPS in busy exteriors.",
+		"enabled": false
+	}
+}

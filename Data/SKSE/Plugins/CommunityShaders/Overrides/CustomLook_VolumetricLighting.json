@@ -1,0 +1,10 @@
+{
+	"ExteriorQuality": 1,
+	"InteriorQuality": 1,
+	"_metadata": {
+		"modName": "Custom look - default tier (repo)",
+		"version": "2.0.0",
+		"description": "Default tier: Medium VL interior+exterior. QualityPlus for High.",
+		"enabled": true
+	}
+}

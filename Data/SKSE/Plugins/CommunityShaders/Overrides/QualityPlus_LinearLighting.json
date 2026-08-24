@@ -1,0 +1,24 @@
+{
+	"enableLinearLighting": 1,
+	"enableGammaCorrection": 1,
+	"colorGamma": 1.42,
+	"ambientGamma": 1.46,
+	"lightGamma": 1.72,
+	"vanillaDiffuseColorMult": 1.08,
+	"ambientMult": 0.1,
+	"pointLightMult": 1.52,
+	"directionalLightMult": 0.46,
+	"emitColorMult": 1.12,
+	"glowmapMult": 0.7,
+	"skyGamma": 1.82,
+	"waterGamma": 1.55,
+	"vlGamma": 2.02,
+	"fogGamma": 1.52,
+	"fogAlphaGamma": 1.52,
+	"_metadata": {
+		"modName": "Quality plus (repo preset)",
+		"version": "1.0.0",
+		"description": "Matches CustomLook 4.4 cooler/crisp linear lighting. Disable CustomLook_LinearLighting while using Quality+ tier.",
+		"enabled": false
+	}
+}

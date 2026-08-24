@@ -1,0 +1,9 @@
+{
+	"EnableTerrainShadow": false,
+	"_metadata": {
+		"modName": "Low assist (repo preset)",
+		"version": "1.0.0",
+		"description": "Tier 3: terrain heightmap shadow compute off (exterior GPU relief).",
+		"enabled": false
+	}
+}

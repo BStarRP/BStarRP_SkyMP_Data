@@ -1,0 +1,24 @@
+{
+	"enableLinearLighting": 1,
+	"enableGammaCorrection": 1,
+	"colorGamma": 1.42,
+	"ambientGamma": 1.46,
+	"lightGamma": 1.72,
+	"vanillaDiffuseColorMult": 1.08,
+	"ambientMult": 0.1,
+	"pointLightMult": 1.52,
+	"directionalLightMult": 0.46,
+	"emitColorMult": 1.12,
+	"glowmapMult": 0.7,
+	"skyGamma": 1.82,
+	"waterGamma": 1.55,
+	"vlGamma": 2.02,
+	"fogGamma": 1.52,
+	"fogAlphaGamma": 1.52,
+	"_metadata": {
+		"modName": "Custom look - default tier (repo)",
+		"version": "4.4.0",
+		"description": "Cooler, crisper lighting: stronger directional key, less torch dominance, tighter gammas/VL; neutral ambient lift.",
+		"enabled": true
+	}
+}

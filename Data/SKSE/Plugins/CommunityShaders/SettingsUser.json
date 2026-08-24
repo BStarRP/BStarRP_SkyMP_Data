@@ -1,0 +1,9 @@
+{
+	"Menu": {
+		"FirstTimeSetupCompleted": true,
+		"SelectedThemePreset": "Default"
+	},
+	"Upscaling": {
+		"frameGenerationMode": 0
+	}
+}

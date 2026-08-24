@@ -1,0 +1,10 @@
+{
+	"EnableIBL": 0,
+	"PreserveFogLuminance": 1,
+	"_metadata": {
+		"modName": "Custom look - default tier (repo)",
+		"version": "4.3.1",
+		"description": "Default tier: IBL off for FPS with crowds/MP. PreserveFogLuminance on for fog consistency; Quality+ also keeps IBL off.",
+		"enabled": true
+	}
+}

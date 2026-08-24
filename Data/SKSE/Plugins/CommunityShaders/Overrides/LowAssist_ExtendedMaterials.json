@@ -1,0 +1,10 @@
+{
+	"EnableShadows": 0,
+	"ExtendShadows": 0,
+	"_metadata": {
+		"modName": "Low assist (repo preset)",
+		"version": "1.0.0",
+		"description": "Same as CustomLook: parallax soft shadows off. Disable CustomLook_ExtendedMaterials when LowAssist is active.",
+		"enabled": false
+	}
+}

@@ -1,0 +1,10 @@
+{
+	"MinDiffuseVisibility": 0.024,
+	"MinSpecularVisibility": 0.03,
+	"_metadata": {
+		"modName": "Custom look - default tier (repo)",
+		"version": "4.2.0",
+		"description": "Skylight floor slightly above minimum so moon/sky adds a hint of separation in deep outdoor shade (not flat black).",
+		"enabled": true
+	}
+}
