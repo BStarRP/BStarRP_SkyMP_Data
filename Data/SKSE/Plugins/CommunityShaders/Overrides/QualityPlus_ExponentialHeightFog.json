@@ -1,13 +1,13 @@
 {
 	"enabled": 1,
-	"directionalInscatteringMultiplier": 2.22,
-	"directionalInscatteringExponent": 4.1,
-	"inscatteringTint": [0.72, 0.82, 1.0, 1.05],
-	"fogDensity": 0.016,
+	"directionalInscatteringMultiplier": 2.08,
+	"directionalInscatteringExponent": 4.15,
+	"inscatteringTint": [0.72, 0.82, 1.0, 0.94],
+	"fogDensity": 0.013,
 	"_metadata": {
 		"modName": "Quality plus (repo preset)",
-		"version": "1.0.0",
-		"description": "Matches CustomLook 4.4 cooler fog inscattering. Disable CustomLook_ExponentialHeightFog while using Quality+ tier.",
+		"version": "1.1.0",
+		"description": "Matches CustomLook 4.5 fog. Disable CustomLook_ExponentialHeightFog while using Quality+ tier.",
 		"enabled": false
 	}
 }

@@ -16,7 +16,22 @@
 
 #if defined(IBL)
 #	include "IBL/IBL.hlsli"
+#elif defined(SKYLIGHTING)
+#	include "Common/Spherical Harmonics/SphericalHarmonics.hlsli"
 #endif
+
+// Populated once per frame by Deferred::CopyShadowLightData from BSShadowDirectionalLight.
+// Column-major float4x4 projections so HLSL `mul(proj, float4(pos, 1))` matches the
+// XMMATRIX layout written by XMStoreFloat4x4 on the C++ side.
+struct DirectionalShadowLightData
+{
+	column_major float4x4 ShadowProj[2];
+	column_major float4x4 InvShadowProj[2];
+	float2 EndSplitDistances;
+	float2 StartSplitDistances;
+};
+
+StructuredBuffer<DirectionalShadowLightData> DirectionalShadowLights : register(t98);
 
 #if defined(VOLUMETRIC_SHADOWS)
 #	include "VolumetricShadows/VolumetricShadows.hlsli"
@@ -24,7 +39,16 @@
 
 namespace ShadowSampling
 {
-	float GetWorldShadow(float3 positionWS, float3 offset, uint eyeIndex)
+	static const float MinDirectionalLightMultiplier = 1e-5;
+	static const float3 LightingSampleNormal = float3(0, 0, 1);
+	static const float3 ImageBasedLightingNormal = float3(0, 0, -1);
+
+	bool HasDirectionalShadows()
+	{
+		return SharedData::HasDirectionalShadows;
+	}
+
+	float GetWorldShadow(float3 positionWS, float3 offset)
 	{
 		if (SharedData::InInterior || SharedData::HideSky || SharedData::InMapMenu)
 			return 1.0;
@@ -41,7 +65,7 @@ namespace ShadowSampling
 		return worldShadow;
 	}
 
-	float Get3DFilteredShadow(float3 positionWS, float3 viewDirection, float2 screenPosition, uint eyeIndex, out float surfaceShadow)
+	float Get3DFilteredShadow(float3 positionWS, float3 viewDirection, float2 screenPosition, out float surfaceShadow)
 	{
 #if defined(EFFECT)
 		float viewRayLength = min(Permutation::EffectRadius * 0.2, 256);
@@ -70,7 +94,7 @@ namespace ShadowSampling
 		for (uint i = 0; i < sampleCount; i++) {
 			float t = (float(i) + noise) * rcpSampleCount;
 			float3 sampledPositionWS = lerp(endPosition, startPosition, t);
-			float worldShadowSample = ShadowSampling::GetWorldShadow(sampledPositionWS, FrameBuffer::CameraPosAdjust[eyeIndex].xyz, eyeIndex);
+			float worldShadowSample = ShadowSampling::GetWorldShadow(sampledPositionWS, FrameBuffer::CameraPosAdjust.xyz);
 			surfaceShadow = worldShadowSample;
 			worldShadow += worldShadowSample;
 		}
@@ -81,19 +105,28 @@ namespace ShadowSampling
 		worldShadow *= rcpSampleCount;
 
 #if defined(VOLUMETRIC_SHADOWS)
-		float vsmSurfaceShadow;
-		float shadow = VolumetricShadows::GetVSMShadow3D(startPosition, endPosition, noise, sampleCount, eyeIndex, vsmSurfaceShadow);
-		surfaceShadow *= vsmSurfaceShadow;
-		return worldShadow * shadow;
+		if (HasDirectionalShadows()) {
+			float vsmSurfaceShadow;
+			float shadow = VolumetricShadows::GetVSMShadow3D(startPosition, endPosition, noise, sampleCount, vsmSurfaceShadow);
+			surfaceShadow *= vsmSurfaceShadow;
+			return worldShadow * shadow;
+		}
 #else
 		return worldShadow;
 #endif
+
+		return worldShadow;
 	}
 
-	float GetLightingShadow(float3 worldPosition, uint eyeIndex, out float detailedShadow)
+	float GetLightingShadow(float3 worldPosition, out float detailedShadow)
 	{
+		if (!HasDirectionalShadows()) {
+			detailedShadow = 1.0;
+			return 1.0;
+		}
+
 #if defined(VOLUMETRIC_SHADOWS)
-		float shadow = VolumetricShadows::GetVSMShadow2D(worldPosition, eyeIndex, detailedShadow);
+		float shadow = VolumetricShadows::GetVSMShadow2D(worldPosition, detailedShadow);
 		return shadow;
 #else
 		detailedShadow = 1.0;
@@ -101,29 +134,39 @@ namespace ShadowSampling
 #endif
 	}
 
-#if defined(SKYLIGHTING) && !defined(INTERIOR)
-	void ExtractLighting(float3 inputColor, out float3 dirColor, out float3 ambientColor, float skylightingDiffuse)
-#else
-	void ExtractLighting(float3 inputColor, out float3 dirColor, out float3 ambientColor)
-#endif
+	float3 GetRawAmbientLighting()
 	{
-		float3 ambientColorAmb = max(0, SharedData::GetAmbient(float3(0, 0, 1)));
+		return max(0, SharedData::GetAmbient(LightingSampleNormal));
+	}
+
+	float3 GetAmbientLighting()
+	{
+		float3 ambientColor = GetRawAmbientLighting();
 
 #if defined(IBL)
 		if (SharedData::iblSettings.EnableIBL) {
-			if (SharedData::iblSettings.DALCMode == 2) {
-				// Mode 2: keep vanilla DALC scaled by DALCAmount, add sky IBL overlay
-				ambientColorAmb = ambientColorAmb * SharedData::iblSettings.DALCAmount + Color::IrradianceToGamma(ImageBasedLighting::GetSkyIBLColor(float3(0, 0, -1)));
-			} else {
-				float3 envIBLColor = Color::IrradianceToGamma(ImageBasedLighting::GetEnvIBLColor(float3(0, 0, -1)));
-				float3 skyIBLColor = Color::IrradianceToGamma(ImageBasedLighting::GetSkyIBLColor(float3(0, 0, -1)));
-				ambientColorAmb = envIBLColor + skyIBLColor;
-			}
+			ambientColor = ImageBasedLighting::GetDiffuseIBL(ambientColor, ImageBasedLightingNormal);
 		}
 #endif
 
+		return ambientColor;
+	}
+
+	float3 GetDirectionalLighting()
+	{
 		float llDirLightMult = (SharedData::linearLightingSettings.enableLinearLighting && !SharedData::linearLightingSettings.isDirLightLinear) ? SharedData::linearLightingSettings.dirLightMult : 1.0f;
-		float3 dirLightColorDir = Color::DirectionalLight(SharedData::DirLightColor.xyz / max(llDirLightMult, 1e-5), SharedData::linearLightingSettings.isDirLightLinear) * llDirLightMult;
+		return Color::DirectionalLight(SharedData::DirLightColor.xyz / max(llDirLightMult, MinDirectionalLightMultiplier), SharedData::linearLightingSettings.isDirLightLinear) * llDirLightMult;
+	}
+
+	float3 GetSceneLightingColor()
+	{
+		return GetAmbientLighting() + GetDirectionalLighting();
+	}
+
+	void ExtractLighting(float3 inputColor, out float3 dirColor, out float3 ambientColor)
+	{
+		float3 ambientColorAmb = GetAmbientLighting();
+		float3 dirLightColorDir = GetDirectionalLighting();
 
 		float inputLuma = Color::RGBToLuminance(inputColor);
 		float ambientLuma = Color::RGBToLuminance(ambientColorAmb);
@@ -131,7 +174,6 @@ namespace ShadowSampling
 
 		float totalLuma = ambientLuma + dirLightLuma;
 
-		// Scale ambientColorAmb so total luma matches input luma
 		if (totalLuma > 0.0 && ambientLuma > 0.0)
 			ambientColorAmb *= inputLuma / totalLuma;
 

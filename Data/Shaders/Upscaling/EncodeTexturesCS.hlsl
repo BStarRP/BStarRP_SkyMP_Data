@@ -2,7 +2,7 @@
 
 cbuffer UpscalingData : register(b0)
 {
-	float2 TrueSamplingDim;  // BufferDim.xy * ResolutionScale
+	float2 TrueSamplingDim;
 	float2 pad0;
 };
 
@@ -14,9 +14,12 @@ Texture2D<float> DepthMask : register(t3);
 RWTexture2D<float> ReactiveMask : register(u0);
 RWTexture2D<float> TransparencyCompositionMask : register(u1);
 RWTexture2D<float2> MotionVectorOutput : register(u2);
+#if defined(DEPTH_OUTPUT)
+RWTexture2D<float> DepthOutput : register(u3);
+#endif
 
 [numthreads(8, 8, 1)] void main(uint3 dispatchID : SV_DispatchThreadID) {
-	// Early exit if dispatch thread is outside true sampling dimensions
+	// Bounds check
 	if (any(dispatchID.xy >= uint2(TrueSamplingDim)))
 		return;
 
@@ -38,7 +41,7 @@ RWTexture2D<float2> MotionVectorOutput : register(u2);
 		{
 			int2 samplePos = int2(dispatchID.xy) + int2(x, y);
 
-			// Skip samples outside true sampling dimensions
+			// Bounds check
 			if (any(samplePos < 0) || any(samplePos >= int2(TrueSamplingDim)))
 				continue;
 
@@ -60,6 +63,12 @@ RWTexture2D<float2> MotionVectorOutput : register(u2);
 	}
 
 	MotionVectorOutput[dispatchID.xy] = lerp(longestMotionVector, motionVector, nearFactor);
+#endif
+
+#if defined(DEPTH_OUTPUT)
+	// Copy depth as R32_FLOAT so FSR DX11 backend receives a typed format.
+	// The raw depth resource is R24G8_TYPELESS which maps to FFX_SURFACE_FORMAT_UNKNOWN.
+	DepthOutput[dispatchID.xy] = DepthMask[dispatchID.xy];
 #endif
 
 	float reactiveMask = taaMask.x * 0.1 + taaMask.y;

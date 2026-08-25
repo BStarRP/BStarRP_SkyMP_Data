@@ -7,17 +7,23 @@
 #include "Common/Shading.hlsli"
 #include "Common/SharedData.hlsli"
 #include "Common/Spherical Harmonics/SphericalHarmonics.hlsli"
-#include "Common/VR.hlsli"
-
 Texture2D<float3> SpecularTexture : register(t0);
 Texture2D<unorm float3> AlbedoTexture : register(t1);
 Texture2D<unorm float3> NormalRoughnessTexture : register(t2);
 Texture2D<float3> MasksTexture : register(t3);
+Texture2D<unorm float> Masks2Texture : register(t9);
 
 RWTexture2D<float4> MainRW : register(u0);
 RWTexture2D<float4> NormalTAAMaskSpecularMaskRW : register(u1);
 RWTexture2D<float2> MotionVectorsRW : register(u2);
+
+// 24/32-bit depth: TerrainBlending ON -> R32_FLOAT (no unorm),
+// OFF -> R24_UNORM_X8_TYPELESS game depth (unorm).
+#if defined(TERRAIN_BLENDING)
 Texture2D<float> DepthTexture : register(t4);
+#else
+Texture2D<unorm float> DepthTexture : register(t4);
+#endif
 
 #if defined(DYNAMIC_CUBEMAPS)
 Texture2D<float3> ReflectanceTexture : register(t5);
@@ -28,11 +34,8 @@ SamplerState LinearSampler : register(s0);
 #endif
 
 #if defined(SKYLIGHTING)
+#	define SKYLIGHTING_PROBE_REGISTER t8
 #	include "Skylighting/Skylighting.hlsli"
-
-Texture3D<sh2> SkylightingProbeArray : register(t8);
-Texture2DArray<float3> stbn_vec3_2Dx1D_128x128x64 : register(t9);
-
 #endif
 
 #if defined(SSGI)
@@ -91,9 +94,6 @@ void SampleSSGISpecular(uint2 pixCoord, sh2 lobe, inout float ao, out float3 il,
 	float2 uv = float2(dispatchID.xy + 0.5) * SharedData::BufferDim.zw;
 	uv *= FrameBuffer::DynamicResolutionParams2.xy;  // adjust for dynamic res
 
-	uint eyeIndex = Stereo::GetEyeIndexFromTexCoord(uv);
-	uv = Stereo::ConvertFromStereoUV(uv, eyeIndex);
-
 	float3 normalGlossiness = NormalRoughnessTexture[dispatchID.xy];
 	float3 normalVS = GBuffer::DecodeNormal(normalGlossiness.xy);
 
@@ -103,16 +103,16 @@ void SampleSSGISpecular(uint2 pixCoord, sh2 lobe, inout float ao, out float3 il,
 
 	float depth = DepthTexture[dispatchID.xy];
 	float4 positionWS = float4(2 * float2(uv.x, -uv.y + 1) - 1, depth, 1);
-	positionWS = mul(FrameBuffer::CameraViewProjInverse[eyeIndex], positionWS);
+	positionWS = mul(FrameBuffer::CameraViewProjInverse, positionWS);
 	positionWS.xyz = positionWS.xyz / positionWS.w;
 
 	if (depth == 1.0)
-		MotionVectorsRW[dispatchID.xy] = MotionBlur::GetSSMotionVector(positionWS, positionWS, eyeIndex);  // Apply sky motion vectors
+		MotionVectorsRW[dispatchID.xy] = MotionBlur::GetSSMotionVector(positionWS, positionWS);  // Apply sky motion vectors
 
 	float glossiness = normalGlossiness.z;
 
 	float3 linDiffuseColor = Color::IrradianceToLinear(diffuseColor);
-	float3 normalWS = normalize(mul(FrameBuffer::CameraViewInverse[eyeIndex], float4(normalVS, 0)).xyz);
+	float3 normalWS = normalize(mul(FrameBuffer::CameraViewInverse, float4(normalVS, 0)).xyz);
 
 #if defined(SSGI)
 
@@ -120,38 +120,62 @@ void SampleSSGISpecular(uint2 pixCoord, sh2 lobe, inout float ao, out float3 il,
 	float3 ssgiIl;
 	SampleSSGI(dispatchID.xy, normalWS, ssgiAo, ssgiIl);
 
-	float3 directionalAmbientColor = Color::Ambient(max(0, SharedData::GetAmbient(normalWS)));
-	directionalAmbientColor *= albedo;
-
-	directionalAmbientColor = Color::RGBToYCoCg(directionalAmbientColor);
-	directionalAmbientColor.x = MasksTexture[dispatchID.xy].z;
-	directionalAmbientColor = Color::YCoCgToRGB(directionalAmbientColor);
-	directionalAmbientColor = max(0, directionalAmbientColor);
-
-	float maxScale = 1.0;
-	if (directionalAmbientColor.x > 0.0)
-		maxScale = min(maxScale, diffuseColor.x / directionalAmbientColor.x);
-	if (directionalAmbientColor.y > 0.0)
-		maxScale = min(maxScale, diffuseColor.y / directionalAmbientColor.y);
-	if (directionalAmbientColor.z > 0.0)
-		maxScale = min(maxScale, diffuseColor.z / directionalAmbientColor.z);
-	directionalAmbientColor *= maxScale;
-
-	diffuseColor = max(0.0, diffuseColor - directionalAmbientColor);
-
-	linDiffuseColor = Color::IrradianceToLinear(diffuseColor);
+	// Masks2.x stores 1 - vertexAO (Lighting.hlsl only); cleared to 0 for
+	// pixels with no vertex AO contribution, so vertexAO defaults to 1.
+	float vertexAO = 1.0 - Masks2Texture[dispatchID.xy].x;
+	ssgiAo = saturate(ssgiAo / max(vertexAO, EPSILON_DIVISION));
 
 	float3 linAlbedo = Color::IrradianceToLinear(albedo / Color::PBRLightingScale);
-
 	float3 multiBounceSSGIAo = MultiBounceAO(linAlbedo, ssgiAo);
 
-	linDiffuseColor *= sqrt(multiBounceSSGIAo);
+	float3 directionalAmbientColor = 0;
 
-	diffuseColor = Color::IrradianceToGamma(linDiffuseColor);
+#	if defined(IBL)
+	if (SharedData::iblSettings.EnableIBL) {
+		float3 vanillaDALC = Color::Ambient(max(0, SharedData::GetAmbient(normalWS)));
 
-	diffuseColor += Color::IrradianceToGamma(Color::IrradianceToLinear(directionalAmbientColor) * multiBounceSSGIAo);
+#		if defined(SKYLIGHTING)
+		float3 positionMS = positionWS.xyz;
+		sh2 skylightingSH = Skylighting::Sample(positionMS.xyz, normalWS);
+		float skylightingDiffuse = Skylighting::EvaluateDiffuse(skylightingSH, normalWS);
+		directionalAmbientColor = ImageBasedLighting::GetDiffuseIBLOccluded(vanillaDALC, -normalWS, skylightingDiffuse) * albedo;
+#		else
+		directionalAmbientColor = ImageBasedLighting::GetDiffuseIBL(vanillaDALC, -normalWS) * albedo;
+#		endif
 
-	linDiffuseColor = Color::IrradianceToLinear(diffuseColor);
+		directionalAmbientColor = Color::RGBToYCoCg(directionalAmbientColor);
+		directionalAmbientColor.x = MasksTexture[dispatchID.xy].z;
+		directionalAmbientColor = Color::YCoCgToRGB(directionalAmbientColor);
+		directionalAmbientColor = max(0, directionalAmbientColor);
+	} else
+#	endif
+	{
+		directionalAmbientColor = Color::Ambient(max(0, SharedData::GetAmbient(normalWS)));
+		directionalAmbientColor *= albedo;
+
+		directionalAmbientColor = Color::RGBToYCoCg(directionalAmbientColor);
+		directionalAmbientColor.x = MasksTexture[dispatchID.xy].z;
+		directionalAmbientColor = Color::YCoCgToRGB(directionalAmbientColor);
+		directionalAmbientColor = max(0, directionalAmbientColor);
+	}
+
+	{
+		float maxScale = 1.0;
+		if (directionalAmbientColor.x > 0.0)
+			maxScale = min(maxScale, diffuseColor.x / directionalAmbientColor.x);
+		if (directionalAmbientColor.y > 0.0)
+			maxScale = min(maxScale, diffuseColor.y / directionalAmbientColor.y);
+		if (directionalAmbientColor.z > 0.0)
+			maxScale = min(maxScale, diffuseColor.z / directionalAmbientColor.z);
+		directionalAmbientColor *= maxScale;
+
+		diffuseColor = max(0.0, diffuseColor - directionalAmbientColor);
+		linDiffuseColor = Color::IrradianceToLinear(diffuseColor);
+		linDiffuseColor *= sqrt(multiBounceSSGIAo);
+		diffuseColor = Color::IrradianceToGamma(linDiffuseColor);
+		diffuseColor += Color::IrradianceToGamma(Color::IrradianceToLinear(directionalAmbientColor) * multiBounceSSGIAo);
+		linDiffuseColor = Color::IrradianceToLinear(diffuseColor);
+	}
 
 	linDiffuseColor += ssgiIl * linAlbedo;
 #endif
@@ -167,7 +191,7 @@ void SampleSSGISpecular(uint2 pixCoord, sh2 lobe, inout float ao, out float3 il,
 		float3 R = reflect(-V, normalWS);
 
 		float roughness = 1.0 - glossiness;
-		float level = roughness * 7.0;
+		float level = roughness * 8.0;
 
 		sh2 specularLobe = SphericalHarmonics::FauxSpecularLobe(normalWS, V, roughness);
 
@@ -176,17 +200,11 @@ void SampleSSGISpecular(uint2 pixCoord, sh2 lobe, inout float ao, out float3 il,
 		float directionalAmbientColorSpecular = Color::RGBToLuminance(Color::Ambient(max(0, SharedData::GetAmbient(R)))) * Color::ReflectionNormalisationScale;
 
 #	if defined(SKYLIGHTING)
-#		if defined(VR)
-		float3 positionMS = positionWS.xyz + FrameBuffer::CameraPosAdjust[eyeIndex].xyz - FrameBuffer::CameraPosAdjust[0].xyz;
-#		else
 		float3 positionMS = positionWS.xyz;
-#		endif
 
-		sh2 skylighting = Skylighting::sample(SharedData::skylightingSettings, SkylightingProbeArray, stbn_vec3_2Dx1D_128x128x64, dispatchID.xy, positionMS.xyz, R);
-
-		float skylightingSpecular = SphericalHarmonics::FuncProductIntegral(skylighting, specularLobe);
-		skylightingSpecular = saturate(skylightingSpecular);
-		skylightingSpecular = Skylighting::mixSpecular(SharedData::skylightingSettings, skylightingSpecular);
+		sh2 skylightingSH = Skylighting::Sample(positionMS.xyz, R);
+		float skylightingSpecular = Skylighting::EvaluateSpecular(skylightingSH, specularLobe);
+		float skylightingVisibility = Skylighting::EvaluateVisibility(skylightingSH);
 #	endif
 
 #	if defined(IBL)
@@ -195,15 +213,14 @@ void SampleSSGISpecular(uint2 pixCoord, sh2 lobe, inout float ao, out float3 il,
 			float3 fullSample = EnvReflectionsTexture.SampleLevel(LinearSampler, R, level);
 			float3 envSpecular, skySpecular;
 
-			if (SharedData::iblSettings.DALCMode == 2) {
-				// Mode 2: DALC-normalized env scaled by DALCAmount + sky overlay
+			if (SharedData::iblSettings.DALCMode >= 2) {
+				// Mode 2/3: DALC-normalized env scaled by DALCAmount + sky overlay
 				float envLum = Color::RGBToLuminance(EnvTexture.SampleLevel(LinearSampler, R, 15));
 				envSpecular = Color::IrradianceToLinear((envSample / max(envLum, 0.001)) * directionalAmbientColorSpecular) * SharedData::iblSettings.DALCAmount;
 				skySpecular = Color::IrradianceToLinear(max(0, fullSample - envSample)) * SharedData::iblSettings.SkyIBLScale;
 #		if defined(SKYLIGHTING)
+				envSpecular *= (SharedData::iblSettings.DALCMode == 3) ? skylightingVisibility : 1.0;
 				skySpecular *= skylightingSpecular;
-#		elif defined(INTERIOR)
-				skySpecular = 0;
 #		endif
 			} else {
 				// Mode 0/1: IBL ratio-based
@@ -212,9 +229,10 @@ void SampleSSGISpecular(uint2 pixCoord, sh2 lobe, inout float ao, out float3 il,
 				skySpecular = Color::IrradianceToLinear(max(0, fullSample - envSample)) * SharedData::iblSettings.SkyIBLScale;
 #		if defined(SKYLIGHTING)
 				skySpecular *= skylightingSpecular;
-#		elif defined(INTERIOR)
-				skySpecular = 0;
 #		endif
+			}
+			if (SharedData::InInterior) {
+				skySpecular = 0;
 			}
 
 			finalIrradiance = envSpecular + skySpecular;
@@ -259,7 +277,11 @@ void SampleSSGISpecular(uint2 pixCoord, sh2 lobe, inout float ao, out float3 il,
 		finalIrradiance = (finalIrradiance * ssgiAo);
 
 		ssgiIlSpecular = Color::RGBToYCoCg(ssgiIlSpecular);
-		ssgiIlSpecular = max(0, Color::YCoCgToRGB(float3(ssgiIlSpecular.x, lerp(ssgiIlSpecular.yz, Color::RGBToYCoCg(finalIrradiance).yz, 0.5))));
+		if (ssgiIlSpecular.x > 0.0) {
+			ssgiIlSpecular = max(0, Color::YCoCgToRGB(float3(ssgiIlSpecular.x, lerp(ssgiIlSpecular.yz, Color::RGBToYCoCg(finalIrradiance).yz, 0.5))));
+		} else {
+			ssgiIlSpecular = 0;
+		}
 
 		finalIrradiance += ssgiIlSpecular;
 #	endif
@@ -272,10 +294,6 @@ void SampleSSGISpecular(uint2 pixCoord, sh2 lobe, inout float ao, out float3 il,
 	color = Color::IrradianceToGamma(color);
 
 #if defined(DEBUG)
-
-#	if defined(VR)
-	uv.x += (eyeIndex ? 0.1 : -0.1);
-#	endif  // VR
 
 	if (uv.x < 0.5 && uv.y < 0.5) {
 		color = color;

@@ -1,6 +1,4 @@
 # Patch notes
 
 ## Changes
-- Bardic inspiration buffed to 100% at regen bonus at level 100, will consider a legendary bonus also
-- Using other animations that are similar to sit will also give you sitting regen bonus, laying in bed also counts + gives you offline regen bonus
-- Improved pet follower mechanics
+- Configured community shaders for a unified look + disabled time sync + disabled weather changing

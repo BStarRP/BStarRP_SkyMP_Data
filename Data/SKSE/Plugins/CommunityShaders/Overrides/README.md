@@ -32,10 +32,10 @@ These three prefixes are meant for **multiplayer / many actors** (default favors
 
 Use this for **normal play** (including busy towns / MP-style crowds):
 
--   **LinearLighting / Skylighting / ExponentialHeightFog** — cooler, crisper key light vs torches; blue-leaning fog inscattering; low skylight floor.
--   **ScreenSpaceGI** — **AO only** (`EnableGI`: false), **quarter res** — no SSGI bounce (keeps deep outdoor shade dark). **`QualityPlus_ScreenSpaceGI`** uses **low indirect** (`EnableGI`: true, `GIStrength` ~0.28) at **half res** plus higher slices/steps/temporal.
+-   **LinearLighting / Skylighting / ExponentialHeightFog** — **4.7** Standard look: `ambientGamma` 0.70, `colorGamma` 1.25, `effectGamma` 2.32, `effectAlphaGamma` 1.50, plus readable daytime (`ambientMult` 0.42, `directionalLightMult` 1.0, `pointLightMult` 2.4). Same Linear Lighting values in Quality+ and Performance (LowAssist).
+-   **ScreenSpaceGI** — **low bounce** (`EnableGI`: true, `GIStrength` ~0.28) at **quarter res**. **`QualityPlus_ScreenSpaceGI`** uses the same GI strength at **half res** plus higher slices/steps/temporal.
 -   **ImageBasedLighting** — **IBL off** on all shipped tiers (including Quality+); **`PreserveFogLuminance`**: **on** in `CustomLook_` / `LowAssist_` / `QualityPlus_` IBL overrides for fog consistency. **`LowAssist_ImageBasedLighting`** still useful if you enabled IBL in the menu and need to force it off.
--   **Skylighting** — low diffuse/spec floor for outdoor shade. **`QualityPlus_Skylighting`** / **`LowAssist_Skylighting`** mirror these values so switching tiers does not revert to brighter skylight defaults.
+-   **Skylighting** — diffuse min visibility **0.10** (CS default), specular **0.08**. **`QualityPlus_Skylighting`** / **`LowAssist_Skylighting`** mirror these so switching tiers does not change the shade floor.
 -   **VolumetricLighting** — **Medium** interior + exterior.
 -   **DynamicCubemaps** — **SSR off** on water.
 -   **ScreenSpaceShadows** — contact shadows **on**, **SampleCount** **1** (minimum). **`QualityPlus_ScreenSpaceShadows`** uses **2**.
@@ -46,10 +46,10 @@ Use this for **normal play** (including busy towns / MP-style crowds):
 
 Enable in **Overrides** when you want **solo / screenshots / max eye candy**. For each file you enable, **disable** the matching **`CustomLook_{SameFeature}.json`** so settings are not merged twice.
 
--   **`QualityPlus_LinearLighting.json`** / **`QualityPlus_ExponentialHeightFog.json`** — same cooler/crisp balance as CustomLook 4.4 when Quality+ is your active tier (disable matching `CustomLook_*` for those features).
+-   **`QualityPlus_LinearLighting.json`** / **`QualityPlus_ExponentialHeightFog.json`** — same 4.7 LL (including gammas) as Standard when Quality+ is your active tier (disable matching `CustomLook_*` for those features).
 -   **`QualityPlus_Skylighting.json`** — same outdoor shade floor as CustomLook (disable `CustomLook_Skylighting`).
 -   **`QualityPlus_ScreenSpaceGI.json`** — **low** indirect (`GIStrength` ~0.28), half res, higher slices/steps/temporal vs default tier.
--   **`QualityPlus_ImageBasedLighting.json`** — **IBL off** (same darkness as default tier outdoors/nights), **`PreserveFogLuminance`**: on; disable `CustomLook_ImageBasedLighting`.
+-   **`QualityPlus_ImageBasedLighting.json`** — **IBL off**, **`PreserveFogLuminance`**: on; disable `CustomLook_ImageBasedLighting`.
 -   **`QualityPlus_VolumetricLighting.json`** — **High** VL.
 -   **`QualityPlus_DynamicCubemaps.json`** — water **SSR on**.
 -   **`QualityPlus_SubsurfaceScattering.json`** — **16** Burley samples.
@@ -60,7 +60,7 @@ Enable in **Overrides** when you want **solo / screenshots / max eye candy**. Fo
 Extra cuts when Tier 1 is not enough (stutter towns, huge PvP crowds):
 
 -   **`LowAssist_Global.json`** — caps **shader compiler** threads only. **Clustered light limits** (`FORWARD_CLUSTERED_LIGHT_CAP` **16**, `DEFERRED_CLUSTERED_LIGHT_CAP` **24**) are **global defaults** in `LightLimitFix/Common.hlsli` so all preset tiers share the same cost without **Advanced → Shader Defines** or recompiles when switching profiles.
--   **`LowAssist_LinearLighting.json`** / **`LowAssist_ExponentialHeightFog.json`** — same cooler/crisp LL/fog as CustomLook when LowAssist is active (disable matching `CustomLook_*`).
+-   **`LowAssist_LinearLighting.json`** / **`LowAssist_ExponentialHeightFog.json`** — same 4.7 LL (including gammas) as Standard when Performance is active (disable matching `CustomLook_*`).
 -   **`LowAssist_Skylighting.json`** — same outdoor shade floor as CustomLook (disable `CustomLook_Skylighting`).
 -   **`LowAssist_VolumetricLighting.json`** — **VL off** interior and exterior (big cost with many lights).
 -   **`LowAssist_ScreenSpaceShadows.json`** — contact shadows **off**.
@@ -75,9 +75,11 @@ Try **VL off**, **`LowAssist_Global`** (compiler threads), **SSGI off**, then **
 
 To change light caps for everyone, edit **`FORWARD_CLUSTERED_LIGHT_CAP`** / **`DEFERRED_CLUSTERED_LIGHT_CAP`** in the shipped **`LightLimitFix/Common.hlsli`** (or set **`Shader Defines`** in **Advanced** for a one-off override, which does require a shader recompile).
 
+Directional shadow-mask PCF in **`Utility.hlsl`** uses **`UTILITY_SHADOW_PCF_TAPS`** (default **12**) and **`UTILITY_SHADOW_DPB_PCF_TAPS`** (default **10**) from **`Shaders/Common/ShadowPerf.hlsli`**; override via **Shader Defines** (recompile) or edit defaults there for a project-wide change.
+
 Weather JSON keys for EH fog use the **display names** registered in CS (for example `"Fog Density"`, `"Directional Inscattering Multiplier"`). Overrides use the feature’s **settings field names** (for example `fogDensity`, `inscatteringTint`).
 
-If **clear daytime** feels too dim, raise **`ambientMult`** / **`directionalLightMult`** in the Linear Lighting menu or add `Weathers/{EditorID}.json` (confirm IDs in the **Weather Editor**). Restart after toggling overrides.
+If daytime is still too dim or too bright, tweak **`ambientMult`** / **`directionalLightMult`** / **`pointLightMult`** in Linear Lighting, or add `Weathers/{EditorID}.json`. Restart after toggling overrides.
 
 ## File Naming Convention
 
@@ -181,7 +183,6 @@ To create feature-specific overrides, you need to use the correct feature short 
 -   `TerrainHelper` - Terrain Helper
 -   `TerrainShadows` - Terrain Shadows
 -   `VolumetricLighting` - Volumetric Lighting
--   `VR` - VR
 -   `WaterEffects` - Water Effects
 -   `PerformanceOverlay` - Performance Overlay
 -   `WetnessEffects` - Wetness Effects

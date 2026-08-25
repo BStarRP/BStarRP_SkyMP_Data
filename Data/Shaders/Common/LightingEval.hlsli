@@ -49,7 +49,7 @@ IndirectContext CreateIndirectLightingContext(float3 worldNormal, float3 vertexN
 	return context;
 }
 
-float3 VanillaSpecular(DirectContext context, float shininess, float2 uv)
+float3 VanillaSpecular(DirectContext context, float shininess, float2 uv, float2 uv_ddx, float2 uv_ddy)
 {
 	const float3 N = context.worldNormal;
 	const float3 G = context.vertexNormal;
@@ -82,9 +82,9 @@ float3 VanillaSpecular(DirectContext context, float shininess, float2 uv)
 #if defined(SPARKLE) && !defined(SNOW)
 	float3 sparkleUvScale = exp2(float3(1.3, 1.6, 1.9) * log2(abs(SparkleParams.x)).xxx);
 
-	float sparkleColor1 = TexProjDetail.Sample(SampProjDetailSampler, uv * sparkleUvScale.xx).z;
-	float sparkleColor2 = TexProjDetail.Sample(SampProjDetailSampler, uv * sparkleUvScale.yy).z;
-	float sparkleColor3 = TexProjDetail.Sample(SampProjDetailSampler, uv * sparkleUvScale.zz).z;
+	float sparkleColor1 = TexProjDetail.SampleGrad(SampProjDetailSampler, uv * sparkleUvScale.xx, uv_ddx * sparkleUvScale.x, uv_ddy * sparkleUvScale.x).z;
+	float sparkleColor2 = TexProjDetail.SampleGrad(SampProjDetailSampler, uv * sparkleUvScale.yy, uv_ddx * sparkleUvScale.y, uv_ddy * sparkleUvScale.y).z;
+	float sparkleColor3 = TexProjDetail.SampleGrad(SampProjDetailSampler, uv * sparkleUvScale.zz, uv_ddx * sparkleUvScale.z, uv_ddy * sparkleUvScale.z).z;
 	float sparkleColor = ProcessSparkleColor(sparkleColor1) + ProcessSparkleColor(sparkleColor2) + ProcessSparkleColor(sparkleColor3);
 	float VdotN = dot(V, N);
 	V += N * -(2 * VdotN);
@@ -95,7 +95,7 @@ float3 VanillaSpecular(DirectContext context, float shininess, float2 uv)
 	return lightColorMultiplier;
 }
 
-void EvaluateLighting(DirectContext context, MaterialProperties material, float3x3 tbnTr, float2 uv, out DirectLightingOutput lightingOutput)
+void EvaluateLighting(DirectContext context, MaterialProperties material, float3x3 tbnTr, float2 uv, float2 uv_ddx, float2 uv_ddy, out DirectLightingOutput lightingOutput)
 {
 	lightingOutput = (DirectLightingOutput)0;
 #if defined(TRUE_PBR)
@@ -104,6 +104,29 @@ void EvaluateLighting(DirectContext context, MaterialProperties material, float3
 #	if defined(HAIR) && defined(CS_HAIR)
 	if (SharedData::hairSpecularSettings.Enabled) {
 		Hair::GetHairDirectLight(lightingOutput, context, material, tbnTr, uv);
+		return;
+	}
+#	endif
+#	if defined(SKIN) && defined(CS_SKIN)
+	if (SharedData::skinData.skinParams.w > 0.0f) {
+		Skin::SkinDirectLightInput(lightingOutput, context, material);
+		float3 softLightColor = context.lightColor * context.softShadow;
+
+		// SSS fallback for forward skin rendering
+#		if !defined(DEFERRED)
+		const float NdotL = dot(context.worldNormal, context.lightDir);
+#			if defined(SOFT_LIGHTING)
+		lightingOutput.diffuse += softLightColor * GetSoftLightMultiplier(NdotL) * material.rimSoftLightColor;
+#			endif
+
+#			if defined(RIM_LIGHTING)
+		lightingOutput.diffuse += softLightColor * GetRimLightMultiplier(context.lightDir, context.viewDir, context.worldNormal) * material.rimSoftLightColor;
+#			endif
+
+#			if defined(BACK_LIGHTING)
+		lightingOutput.diffuse += softLightColor * saturate(-NdotL) * material.backLightColor;
+#			endif
+#		endif
 		return;
 	}
 #	endif
@@ -122,7 +145,7 @@ void EvaluateLighting(DirectContext context, MaterialProperties material, float3
 #	if defined(BACK_LIGHTING)
 	lightingOutput.diffuse += softLightColor * saturate(-NdotL) * material.backLightColor * Color::VanillaNormalization();
 #	endif
-	lightingOutput.specular = VanillaSpecular(context, material.Shininess, uv) * material.SpecularColor * material.Glossiness * diffuseLightColor * Color::VanillaNormalization();
+	lightingOutput.specular = VanillaSpecular(context, material.Shininess, uv, uv_ddx, uv_ddy) * material.SpecularColor * material.Glossiness * diffuseLightColor * Color::VanillaNormalization();
 #endif
 }
 
@@ -135,6 +158,12 @@ void GetIndirectLobeWeights(out IndirectLobeWeights lobeWeights, IndirectContext
 #	if defined(HAIR) && defined(CS_HAIR)
 	if (SharedData::hairSpecularSettings.Enabled) {
 		Hair::GetHairIndirectLobeWeights(lobeWeights, context, material, uv);
+		return;
+	}
+#	endif
+#	if defined(SKIN) && defined(CS_SKIN)
+	if (SharedData::skinData.skinParams.w > 0.0f) {
+		Skin::SkinIndirectLobeWeights(lobeWeights, material, context);
 		return;
 	}
 #	endif

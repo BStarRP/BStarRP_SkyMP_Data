@@ -2,6 +2,8 @@
 #ifndef __DISPLAY_MAPPING_DEPENDENCY_HLSL__
 #define __DISPLAY_MAPPING_DEPENDENCY_HLSL__
 
+#include "Common/Color.hlsli"
+
 namespace DisplayMapping
 {
 	// https://www.ea.com/frostbite/news/high-dynamic-range-color-grading-and-display-in-frostbite
@@ -27,6 +29,47 @@ namespace DisplayMapping
 			RangeCompress(val.z, threshold));
 	}
 
+	float RangeCompress(float val, float threshold, float maxValue)
+	{
+		if (val < threshold)
+			return val;
+		if (maxValue <= threshold)
+			return threshold;
+
+		float range = maxValue - threshold;
+		return threshold + range * RangeCompress((val - threshold) / range);
+	}
+
+	float3 RangeCompress(float3 val, float threshold, float maxValue)
+	{
+		return float3(
+			RangeCompress(val.x, threshold, maxValue),
+			RangeCompress(val.y, threshold, maxValue),
+			RangeCompress(val.z, threshold, maxValue));
+	}
+
+	float RangeCompress(float val, float threshold, float maxValue, float clip)
+	{
+		if (val < threshold)
+			return val;
+		if (maxValue <= threshold)
+			return threshold;
+
+		float range = maxValue - threshold;
+		float clipValue = 1.0 - exp((threshold - clip) / range);
+		float rolloffValue = 1.0 - exp(-(val - threshold) / range);
+
+		return threshold + range * (rolloffValue / clipValue);
+	}
+
+	float3 RangeCompress(float3 val, float threshold, float maxValue, float clip)
+	{
+		return float3(
+			RangeCompress(val.x, threshold, maxValue, clip),
+			RangeCompress(val.y, threshold, maxValue, clip),
+			RangeCompress(val.z, threshold, maxValue, clip));
+	}
+
 	static const float PQ_constant_N = (2610.0 / 4096.0 / 4.0);
 	static const float PQ_constant_M = (2523.0 / 4096.0 * 128.0);
 	static const float PQ_constant_C1 = (3424.0 / 4096.0);
@@ -38,7 +81,7 @@ namespace DisplayMapping
 	{
 		linearCol /= maxPqValue;
 
-		float3 colToPow = pow(linearCol, PQ_constant_N);
+		float3 colToPow = pow(abs(linearCol), PQ_constant_N);
 		float3 numerator = PQ_constant_C1 + PQ_constant_C2 * colToPow;
 		float3 denominator = 1.0 + PQ_constant_C3 * colToPow;
 		float3 pq = pow(numerator / denominator, PQ_constant_M);
@@ -56,6 +99,20 @@ namespace DisplayMapping
 		linearColor *= maxPqValue;
 
 		return linearColor;
+	}
+
+	float3 ConvertGameToPQ(float3 gammaColor)
+	{
+		float3 linearColor = Color::GammaToLinearSafe(gammaColor);
+		linearColor = Color::BT709ToBT2020(linearColor);
+		return LinearToPQ(linearColor, 10000.0);
+	}
+
+	float3 ConvertPQToGame(float3 pqColor)
+	{
+		float3 linearColor = PQtoLinear(pqColor, 10000.0);
+		linearColor = Color::BT2020ToBT709(linearColor);
+		return Color::LinearToGammaSafe(linearColor);
 	}
 
 	// RGB with sRGB/Rec.709 primaries to CIE XYZ
@@ -128,7 +185,8 @@ namespace DisplayMapping
 		return XYZToRGB(col);
 	}
 
-	float3 HuePreservingHejlBurgessDawson(float3 col, float3 bloomCol)
+#if defined(PSHADER) && defined(BLEND)
+	float3 HuePreservingHejlBurgessDawson(float3 col, float3 bloomCol, bool isHDR = false)
 	{
 		float3 ictcp = RGBToICtCp(col);
 
@@ -137,7 +195,7 @@ namespace DisplayMapping
 		col = ICtCpToRGB(ictcp * float3(1, saturationAmount.xx));
 
 		// Non-hue preserving mapping
-		float3 perChannelCompressed = GetTonemapFactorHejlBurgessDawson(col);
+		float3 perChannelCompressed = GetTonemapFactorHejlBurgessDawson(col, isHDR);
 		perChannelCompressed += saturate(Param.x - perChannelCompressed) * bloomCol;
 
 		col = perChannelCompressed;
@@ -156,6 +214,29 @@ namespace DisplayMapping
 
 		return col;
 	}
-}
+
+#endif
+
+	// AdvancedAutoHDR pass to generate some HDR brightness out of an SDR signal.
+	// https://github.com/Filoppi/PumboAutoHDR
+	float3 PumboAutoHDR(float3 SDRColor, float MaxPeakWhiteNits, float PaperWhiteNits, float ShoulderPow = 2.75f, float SaturationExpansionIntensity = 0.2f)
+	{
+		float SDRRatio = average(SDRColor);
+
+		float AutoHDRMaxWhite = max(min(MaxPeakWhiteNits / sRGB_WhiteLevelNits, 500 / PaperWhiteNits), 1.f);
+
+		float AutoHDRExtraRatio = pow(saturate(SDRRatio), ShoulderPow) * (AutoHDRMaxWhite - 1.f);
+		float AutoHDRTotalRatio = SDRRatio + AutoHDRExtraRatio;
+		float SingleColorScale = safeDivision(AutoHDRTotalRatio, SDRRatio, 1);
+
+		float3 SDRRatio3 = SDRColor;
+		float3 AutoHDRExtraRatio3 = pow(saturate(SDRRatio3), ShoulderPow) * (AutoHDRMaxWhite - 1.f);
+		float3 AutoHDRTotalRatio3 = SDRRatio3 + AutoHDRExtraRatio3;
+		float3 PerChannelColorScale = safeDivision(AutoHDRTotalRatio3, SDRRatio3, 1);
+
+		return SDRColor * lerp(SingleColorScale, PerChannelColorScale, SaturationExpansionIntensity);
+	}
+
+}  // namespace DisplayMapping
 
 #endif  // __DISPLAY_MAPPING_DEPENDENCY_HLSL__

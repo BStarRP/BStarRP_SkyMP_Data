@@ -1,9 +1,11 @@
+#include "Common/Game.hlsli"
+
 namespace CloudShadows
 {
 	TextureCube<float> CloudShadowsTexture : register(t25);
 
-	const static float CloudHeight = (2e3f / 1.428e-2) * 0.25;
-	const static float PlanetRadius = (6371e3f / 1.428e-2);
+	const static float CloudHeight = (2e3f / GAME_UNIT_TO_M);
+	const static float PlanetRadius = (6371e3f / GAME_UNIT_TO_M);
 	const static float RcpHPlusR = (1.0 / (CloudHeight + PlanetRadius));
 
 	float3 GetCloudShadowSampleDir(float3 rel_pos, float3 eye_to_sun)
@@ -21,6 +23,6 @@ namespace CloudShadows
 	{
 		float3 cloudSampleDir = GetCloudShadowSampleDir(worldPosition, SharedData::DirLightDirection.xyz).xyz;
 		float cloudCubeSample = CloudShadowsTexture.SampleLevel(textureSampler, cloudSampleDir, 0).x;
-		return lerp(1.0, 1.0 - cloudCubeSample, SharedData::cloudShadowsSettings.Opacity);
+		return saturate(1.0 - cloudCubeSample * SharedData::cloudShadowsSettings.Opacity);
 	}
 }

@@ -1,6 +1,8 @@
 #ifndef LIGHTING_COMMON_HLSLI
 #define LIGHTING_COMMON_HLSLI
 
+#include "PointLightFalloff.hlsli"
+
 struct DirectContext
 {
 	float3 worldNormal;
@@ -63,7 +65,7 @@ struct MaterialProperties
 	float Shininess;
 	float Glossiness;
 	float3 SpecularColor;
-#	if (defined(RIM_LIGHTING) || defined(SOFT_LIGHTING) || defined(LOAD_SOFT_LIGHTING))
+#	if (defined(RIM_LIGHTING) || defined(SOFT_LIGHTING))
 	float3 rimSoftLightColor;
 #	endif
 #	if defined(BACK_LIGHTING)
@@ -71,6 +73,17 @@ struct MaterialProperties
 #	endif
 	float Roughness;
 	float3 F0;
+#	if defined(CS_SKIN) && defined(SKIN)
+	float RoughnessSecondary;
+	float SecondarySpecIntensity;
+	float Curvature;
+	float Thickness;
+	float3 SubsurfaceColor;
+	float AO;
+	float FuzzRoughness;
+	float3 FuzzColor;
+	float FuzzWeight;
+#	endif
 #else
 	float Roughness;
 	float Metallic;
@@ -96,19 +109,5 @@ struct MaterialProperties
 float ShininessToRoughness(float shininess)
 {
 	return pow(abs(2.0 / (shininess + 2.0)), 0.25);
-}
-
-float3x3 ReconstructTBN(float3 worldPos, float3 worldNormal, float2 uv)
-{
-	float3 dFdx = ddx(worldPos);
-	float3 dFdy = ddy(worldPos);
-	float2 dUVdx = ddx(uv);
-	float2 dUVdy = ddy(uv);
-	float3 tangent = normalize(dFdx * dUVdy.y - dFdy * dUVdx.y);
-	float3 bitangent = normalize(dFdy * dUVdx.x - dFdx * dUVdy.x);
-	tangent = normalize(tangent - worldNormal * dot(worldNormal, tangent));
-	bitangent = normalize(bitangent - worldNormal * dot(worldNormal, bitangent));
-
-	return float3x3(tangent, bitangent, normalize(worldNormal));
 }
 #endif

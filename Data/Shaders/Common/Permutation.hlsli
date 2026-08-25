@@ -4,6 +4,19 @@
 namespace Permutation
 {
 
+	namespace SkyTechnique
+	{
+		static const uint SunOcclude = 0;
+		static const uint SunGlare = 1;
+		static const uint MoonAndStarsMask = 2;
+		static const uint Stars = 3;
+		static const uint Clouds = 4;
+		static const uint CloudsLerp = 5;
+		static const uint CloudsFade = 6;
+		static const uint Texture = 7;
+		static const uint Sky = 8;
+	}
+
 	namespace LightingTechnique
 	{
 		static const uint Glowmap = 2;
@@ -52,6 +65,7 @@ namespace Permutation
 		static const uint GrayscaleToColor = (1 << 19);
 		static const uint GrayscaleToAlpha = (1 << 20);
 		static const uint IgnoreTexAlpha = (1 << 21);
+		static const uint SkyObject = (1 << 24);
 	}
 
 	namespace ExtraFlags
@@ -60,6 +74,8 @@ namespace Permutation
 		static const uint InReflection = (1 << 1);
 		static const uint IsBeastRace = (1 << 2);
 		static const uint GrassSphereNormal = (1 << 3);
+		static const uint IsSun = (1 << 4);
+		static const uint SuppressExternalEmittance = (1 << 5);
 	}
 
 	namespace ExtraFeatureFlags

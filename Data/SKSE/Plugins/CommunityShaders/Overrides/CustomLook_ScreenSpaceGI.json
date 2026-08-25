@@ -1,16 +1,17 @@
 {
 	"Enabled": true,
-	"EnableGI": false,
+	"EnableGI": true,
 	"EnableExperimentalSpecularGI": false,
-	"GIStrength": 0,
+	"GIStrength": 0.28,
+	"AOPower": 1.06,
 	"ResolutionMode": 2,
 	"NumSlices": 3,
 	"NumSteps": 6,
 	"MaxAccumFrames": 8,
 	"_metadata": {
 		"modName": "Custom look - default tier (repo)",
-		"version": "4.3.0",
-		"description": "Default tier: AO-only SSGI (no bounce) at quarter res. Use QualityPlus_ScreenSpaceGI for full GI; disable this override when you do.",
+		"version": "4.6.0",
+		"description": "Low bounce GI at quarter res so porches/shade get fill without Quality+ cost. QualityPlus for half-res GI.",
 		"enabled": true
 	}
 }

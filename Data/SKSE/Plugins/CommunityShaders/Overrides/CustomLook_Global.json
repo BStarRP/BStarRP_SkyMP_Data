@@ -1,0 +1,12 @@
+{
+	"Menu": {
+		"CSEditorToggleKey": [46],
+		"WeatherEditorToggleKey": 46
+	},
+	"_metadata": {
+		"modName": "Custom look - default tier (repo)",
+		"version": "1.0.0",
+		"description": "CS Editor toggle is Delete (VK_DELETE=46). Page Up/Down stay shader-block debug.",
+		"enabled": true
+	}
+}

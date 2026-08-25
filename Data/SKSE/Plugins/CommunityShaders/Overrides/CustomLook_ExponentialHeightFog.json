@@ -1,13 +1,13 @@
 {
 	"enabled": 1,
-	"directionalInscatteringMultiplier": 2.22,
-	"directionalInscatteringExponent": 4.1,
-	"inscatteringTint": [0.72, 0.82, 1.0, 1.05],
-	"fogDensity": 0.016,
+	"directionalInscatteringMultiplier": 2.08,
+	"directionalInscatteringExponent": 4.15,
+	"inscatteringTint": [0.72, 0.82, 1.0, 0.94],
+	"fogDensity": 0.013,
 	"_metadata": {
 		"modName": "Custom look - default tier (repo)",
-		"version": "4.4.0",
-		"description": "Cooler inscattering tint, slightly tighter sun/moon cone, less red haze vs prior warm halo.",
+		"version": "4.5.0",
+		"description": "Less dense fog + slightly lower inscattering alpha so clear days stay punchy; shade less milky vs 4.4.",
 		"enabled": true
 	}
 }

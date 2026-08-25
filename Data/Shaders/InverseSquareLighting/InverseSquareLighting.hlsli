@@ -1,9 +1,10 @@
+#include "Common/Game.hlsli"
 #include "Common/SharedData.hlsli"
+#include "Common/PointLightFalloff.hlsli"
 
 namespace InverseSquareLighting
 {
 	static const float SCALE = 0.8f;
-	static const float METRES_TO_UNITS = 70.f;
 	static const float METRES_TO_UNITS_SQ = METRES_TO_UNITS * METRES_TO_UNITS;
 	static const float SCALED_UNITS_SQ = SCALE * METRES_TO_UNITS_SQ;
 
@@ -17,7 +18,7 @@ namespace InverseSquareLighting
 		float fastSmoothstep = t * t * (3.0f - 2.0f * t);
 		invSq *= fastSmoothstep;
 
-		float intensityFactor = saturate(distance * light.invRadius);
+		float intensityFactor = saturate(distance * light.invRadius / POINT_LIGHT_FALLOFF_RADIUS_SCALE);
 		float reg = 1.0f - intensityFactor * intensityFactor;
 
 		return lerp(reg, invSq, isInvSq) * isEnabled;

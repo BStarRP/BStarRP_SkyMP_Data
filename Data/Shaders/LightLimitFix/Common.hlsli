@@ -1,6 +1,8 @@
 #ifndef __LLF_COMMON_DEPENDENCY_HLSL__
 #define __LLF_COMMON_DEPENDENCY_HLSL__
 
+#include "Common/PointLightFalloff.hlsli"
+
 #define NUMTHREAD_X 16
 #define NUMTHREAD_Y 16
 #define NUMTHREAD_Z 4
@@ -51,7 +53,7 @@ struct Light
 	float invRadius;
 	float fadeZone;
 	float sizeBias;
-	float4 positionWS[2];
+	float4 positionWS;
 	uint4 roomFlags;
 	uint lightFlags;
 	uint shadowLightIndex;
