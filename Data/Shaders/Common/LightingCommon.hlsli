@@ -1,7 +1,7 @@
 #ifndef LIGHTING_COMMON_HLSLI
 #define LIGHTING_COMMON_HLSLI
 
-#include "PointLightFalloff.hlsli"
+#include "Common/PointLightFalloff.hlsli"
 
 struct DirectContext
 {
