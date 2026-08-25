@@ -11,17 +11,6 @@
 			"__enabled": true,
 			"MinDiffuseVisibility": 0.022,
 			"MinSpecularVisibility": 0.032
-		},
-		"LinearLighting": {
-			"__enabled": true,
-			"colorGamma": 1.46,
-			"ambientGamma": 1.62,
-			"ambientMult": 0.09,
-			"directionalLightMult": 0.52,
-			"pointLightMult": 1.26,
-			"vlGamma": 2.32,
-			"fogGamma": 1.7,
-			"skyGamma": 1.64
 		}
 	}
 }

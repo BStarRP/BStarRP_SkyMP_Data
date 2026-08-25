@@ -1,0 +1,976 @@
+{
+    "modName": "ValhallaCombat",
+    "displayName": "$ValhallaCombat",
+    "minMcmVersion": 9,
+    "pages": [
+        {
+            "pageDisplayName": "$Val_Stamina_Text",
+            "cursorFillMode": "topToBottom",
+            "content": [
+                {
+                    "text": "$Val_Stamina_General_Header_Text",
+                    "type": "header"
+                },
+                {
+                    "type": "hiddenToggle",
+                    "groupControl": 3,
+                    "valueOptions": {
+                        "sourceType": "GlobalValue",
+                        "sourceForm": "ValhallaCombat.esp|56A25"
+                    }
+                },
+                {
+                    "text": "$Val_TrueHUDAPI_OptionText",
+                    "type": "text",
+                    "help": "$Val_TrueHUDAPI_Obtained_InfoText",
+                    "groupCondition": 3,
+                    "groupBehavior": "skip",
+                    "valueOptions": {
+                        "value": "$Val_TrueHUDAPI_Obtained_ValueText"
+                    }
+                },
+                {
+                    "text": "$Val_TrueHUDAPI_OptionText",
+                    "type": "text",
+                    "help": "$Val_TrueHUDAPI_FailToObtain_InfoText",
+                    "groupCondition": {"NOT": 3},
+                    "groupBehavior": "skip",
+                    "valueOptions": {
+                        "value": "$Val_TrueHUDAPI_FailToObtain_ValueText"
+                    }
+                },
+                {
+                    "id": "bUIalert:Stamina",
+                    "text": "$Val_UI_Alert_Text",
+                    "type": "toggle",
+                    "help": "$Val_UI_Alert__Help",
+                    "groupCondition": 3,
+                    "valueOptions": {
+                        "sourceType": "ModSettingBool"
+                    }
+                },
+                {
+                    "id": "bStaminaDebuffToggle:Stamina",
+                    "text": "$Val_StaminaDebuff_Toggle_Text",
+                    "type": "toggle",
+                    "help": "$Val_StaminaDebuff_Help",
+                    "valueOptions": {
+                        "sourceType": "ModSettingBool"
+                    }
+                },
+                {
+                    "id": "fStaminaRegenMult:Stamina",
+                    "text" : "$Val_Stamina_Mult_Text",
+                    "help" : "$Val_Stamina_Mult_Help",
+                    "type": "slider",
+                    "valueOptions": {
+                        "min": 1,
+                        "max": 10,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fStaminaRegenLimit:Stamina",
+                    "text" : "$Val_Stamina_Limit_Text",
+                    "help" : "$Val_Stamina_Limit_Help",
+                    "type": "slider",
+                    "valueOptions": {
+                        "min": 20,
+                        "max": 200,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fStaminaRegenMin:Stamina",
+                    "text" : "$Val_Stamina_Limit_Min_Text",
+                    "help" : "$Val_Stamina_Limit_Min_Help",
+                    "type": "slider",
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 20,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fCombatStaminaRegenMult:Stamina",
+                    "text" : "$Val_Combat_Stamina_Mult_Text",
+                    "help" : "$Val_Combat_Stamina_Mult_Help",
+                    "type": "slider",
+                    "valueOptions": {
+                        "min": 1,
+                        "max": 10,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fBlockingStaminaRegenMult:Stamina",
+                    "text" : "$Val_Blocking_Stamina_Mult_Text",
+                    "help" : "$Val_Blocking_Stamina_Mult_Help",
+                    "type": "slider",
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 1,
+                        "step": 0.01,
+                        "formatString": "{2}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fStaminaRegenDelay:Stamina",
+                    "text" : "$Val_Stamina_Delay_Text",
+                    "help" : "$Val_Stamina_Delay_Help",
+                    "type": "slider",
+                    "valueOptions": {
+                        "min": 1,
+                        "max": 10,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                
+                {
+                    "text": "$Val_Atk_Header_Text",
+                    "type": "header",
+                    "position": 1
+                },
+                {
+                    "id": "bNonCombatStaminaCost:Stamina",
+                    "text": "$Val_Non_Combat_Stamina_Cost_Text",
+                    "type": "toggle",
+                    "help": "$Val_Non_Combat_Stamina_Cost_Help",
+                    "valueOptions": {
+                        "sourceType": "ModSettingBool"
+                    }
+                },
+                {
+                    "id": "bAttackStaminaToggle:Stamina",
+                    "text": "$Val_Atk_Toggle_Text",
+                    "type": "toggle",
+                    "help": "$Val_Atk_Toggle_Help",
+                    "groupControl": 1,
+                    "valueOptions": {
+                        "sourceType": "ModSettingBool"
+                    }
+                },
+                {
+                    "id": "bAttackStaminaToggle_NPC:Stamina",
+                    "text": "$Val_Atk_Toggle_NPC_Text",
+                    "type": "toggle",
+                    "help": "$Val_Atk_Toggle_NPC_Help",
+                    "groupCondition": 1,
+                    "valueOptions": {
+                        "sourceType": "ModSettingBool"
+                    }
+                },
+                {
+                    "id": "bBlockedHitRegenStamina:Stamina",
+                    "text": "$Val_Blocked_Count_As_Hit_Text",
+                    "type": "toggle",
+                    "help": "$Val_Blocked_Count_As_Hit_Help",
+                    "groupCondition": 1,
+                    "valueOptions": {
+                        "sourceType": "ModSettingBool"
+                    }
+                },
+                {
+                    "id": "fMeleeCostLightMiss_Point:Stamina",
+                    "text" : "$Val_Melee_Light_Miss_Text",
+                    "help" : "$Val_Melee_Light_Miss_Help",
+                    "type": "slider",
+                    "groupCondition": 1,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 100,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fMeleeRewardLightHit_Percent:Stamina",
+                    "text" : "$Val_Melee_Light_Hit_Text",
+                    "help" : "$Val_Melee_Light_Hit_Help",
+                    "type": "slider",
+                    "groupCondition": 1,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 1,
+                        "step": 0.01,
+                        "formatString": "{2}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "text": "$Val_Bck_Header_Text",
+                    "type": "header"
+                },
+                {
+                    "id": "bBlockStaminaToggle:Stamina",
+                    "text": "$Val_Bck_StaminaBlocking_Toggle_Text",
+                    "type": "toggle",
+                    "help": "$Val_Bck_StaminaBlocking_Toggle_Help",
+                    "groupControl": 2,
+                    "valueOptions": {
+                        "sourceType": "ModSettingBool"
+                    }
+                },
+                {
+                    "id": "bGuardBreak:Stamina",
+                    "text": "$Val_Bck_StaminaBlocking_GuardBreak_Toggle_Text",
+                    "type": "toggle",
+                    "help": "$Val_Bck_StaminaBlocking_GuardBreak_Toggle_Help",
+                    "groupCondition": 2,
+                    "valueOptions": {
+                        "sourceType": "ModSettingBool"
+                    }
+                },
+                {
+                    "text": "$Val_Bck_StaminaBlocking_Shd_Mult_Header_Text",
+                    "help": "$Val_Bck_StaminaBlocking_Shd_Mult_Header_Help",
+                    "type": "header"
+                },
+                {
+                    "id": "fBckShdStaminaMult_PC_Block_NPC:Stamina",
+                    "text" : "$Val_Bck_StaminaBlocking_Player_NPC_Text",
+                    "type": "slider",
+                    "groupCondition": 2,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 10,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fBckShdStaminaMult_NPC_Block_PC:Stamina",
+                    "text" : "$Val_Bck_StaminaBlocking_NPC_Player_Text",
+                    "type": "slider",
+                    "groupCondition": 2,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 10,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fBckShdStaminaMult_NPC_Block_NPC:Stamina",
+                    "text" : "$Val_Bck_StaminaBlocking_NPC_NPC_Text",
+                    "type": "slider",
+                    "groupCondition": 2,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 10,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "text": "$Val_Bck_StaminaBlocking_Wpn_Mult_Header_Text",
+                    "help": "$Val_Bck_StaminaBlocking_Wpn_Mult_Header_Help",
+                    "type": "header"
+                },
+                {
+                    "id": "fBckWpnStaminaMult_PC_Block_NPC:Stamina",
+                    "text" : "$Val_Bck_StaminaBlocking_Player_NPC_Text",
+                    "type": "slider",
+                    "groupCondition": 2,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 10,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fBckWpnStaminaMult_NPC_Block_PC:Stamina",
+                    "text" : "$Val_Bck_StaminaBlocking_NPC_Player_Text",
+                    "type": "slider",
+                    "groupCondition": 2,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 10,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fBckWpnStaminaMult_NPC_Block_NPC:Stamina",
+                    "text" : "$Val_Bck_StaminaBlocking_NPC_NPC_Text",
+                    "type": "slider",
+                    "groupCondition": 2,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 10,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                }
+                
+            ]
+        },
+        {
+            "pageDisplayName": "$Val_TimedBlocking_Page_Text",
+            "cursorFillMode": "topToBottom",
+            "content": [
+                {
+                    "text": "$Val_General_Header_Text",
+                    "type": "header"
+                },
+                {
+                    "id": "bTimedBlockToggle:TimedBlocking",
+                    "text": "$Val_TimedBlocking_Toggle_Text",
+                    "type": "toggle",
+                    "groupControl": 3,
+                    "help": "$Val_TimedBlocking_Toggle_Help",
+                    "valueOptions": {
+                        "sourceType": "ModSettingBool"
+                    }
+                },
+                {
+                    "id": "bBlockProjectileToggle:TimedBlocking",
+                    "text": "$Val_TimedBlocking_Projectile_Text",
+                    "help": "$Val_TimedBlocking_Projectile_Help",
+                    "type": "toggle",
+                    "valueOptions": {
+                        "sourceType": "ModSettingBool"
+                    }
+                },
+                {
+                    "id": "bTimedBlockProjectileToggle:TimedBlocking",
+                    "text": "$Val_TimedBlocking_Projectile_Timed_Toggle_Text",
+                    "help": "$Val_TimedBlocking_Projectile_Timed_Toggle_Help",
+                    "type": "toggle",
+                    "groupControl": 4,
+                    "valueOptions": {
+                        "sourceType": "ModSettingBool"
+                    }
+                },
+                {
+                    "id": "fTimedBlockWindow:TimedBlocking",
+                    "text" : "$Val_TimedBlocking_Time_Text",
+                    "help" : "$Val_TimedBlocking_Time_Help",
+                    "type": "slider",
+                    "groupCondition": {"OR": [3, 4]},
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 1,
+                        "step": 0.01,
+                        "formatString": "{2}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fPerfectBlockWindow:TimedBlocking",
+                    "text" : "$Val_TimedBlocking_PerfectTime_Text",
+                    "help" : "$Val_TimedBlocking_PerfectTime_Help",
+                    "type": "slider",
+                    "groupCondition": {"OR": [3, 4]},
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 1,
+                        "step": 0.01,
+                        "formatString": "{2}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fTimedBlockCooldownTime:TimedBlocking",
+                    "text" : "$Val_TimedBlocking_Cooldown_Text",
+                    "help" : "$Val_TimedBlocking_Cooldown_Help",
+                    "type": "slider",
+                    "groupCondition": {"OR": [3, 4]},
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 10,
+                        "step": 0.01,
+                        "formatString": "{2}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fTimedBlockStaminaCostMult:TimedBlocking",
+                    "text" : "$Val_TimedBlocking_StaminaCostMult_Text",
+                    "help" : "$Val_TimedBlocking_StaminaCostMult_Help",
+                    "type": "slider",
+                    "groupCondition": 3,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 2,
+                        "step": 0.01,
+                        "formatString": "{2}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "text": "$Val_TimedBlocking_Commitment_Text",
+                    "type": "header"
+                },
+                {
+                    "id": "bBlockCommitmentToggle:TimedBlocking",
+                    "text": "$Val_TimedBlocking_Commitment_Toggle_Text",
+                    "help": "$Val_TimedBlocking_Commitment_Toggle_Help",
+                    "type": "toggle",
+                    "groupControl": 5,
+                    "valueOptions": {
+                        "sourceType": "ModSettingBool"
+                    }
+                },
+                {
+                    "id": "fBlockCommitmentTime:TimedBlocking",
+                    "text" : "$Val_TimedBlocking_Commitment_Time_Text",
+                    "help" : "$Val_TimedBlocking_Commitment_Time_Help",
+                    "type": "slider",
+                    "groupCondition": 5,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 1,
+                        "step": 0.01,
+                        "formatString": "{2}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "text": "$Val_Tackle_Header_Text",
+                    "type": "header"
+                },
+                {
+                    "id": "bTackleToggle:TimedBlocking",
+                    "text": "$Val_TimedBlocking_Tackle_Toggle_Text",
+                    "help": "$Val_TimedBlocking_Tackle_Toggle_Help",
+                    "type": "toggle",
+                    "valueOptions": {
+                        "sourceType": "ModSettingBool"
+                    }
+                },
+                {
+                    "text": "$Val_TimedBlocking_Effect_Header_Text",
+                    "type": "header",
+                    "position": 1
+                },
+                {
+                    "id": "uTimedBlockSparkType:TimedBlocking",
+                    "text": "$Val_TimedBlocking_TimedBlockSparkType_Text",
+                    "help": "$Val_TimedBlocking_TimedBlockSparkType_Help",
+                    "type": "enum",
+                    "groupCondition": {"OR": [3, 4]},
+                    "valueOptions": {
+                        "options": [
+                            "$Val_TimedBlocking_TimedBlockSparkType_Fantasy_Text",
+                             "$Val_TimedBlocking_TimedBlockSparkType_Realism_Text", 
+                             "$Val_TimedBlocking_TimedBlockSparkType_Off_Text"],
+                        "sourceType": "ModSettingInt"
+                    }
+                },
+                {
+                    "id": "bTimedBlockScreenShake:TimedBlocking",
+                    "text": "$Val_TimedBlocking_ScreenShake_Text",
+                    "type": "toggle",
+                    "help": "",
+                    "groupCondition": {"OR": [3, 4]},
+                    "valueOptions": {
+                        "sourceType": "ModSettingBool"
+                    }
+                },
+                {
+                    "id": "bTimeBlockSFX:TimedBlocking",
+                    "text": "$Val_TimedBlocking_SFX_Text",
+                    "help": "$Val_TimedBlocking_SFX_Help",
+                    "type": "toggle",
+                    "groupControl": 6,
+                    "groupCondition": {"OR": [3, 4]},
+                    "valueOptions": {
+                        "sourceType": "ModSettingBool"
+                    }
+                },
+                {
+                    "id": "fTimedBlockSFXVolume:TimedBlocking",
+                    "text" : "$Val_TimedBlocking_SFX_Volume_Text",
+                    "help" : "$Val_TimedBlocking_SFX_Volume_Help",
+                    "type": "slider",
+                    "groupCondition": {"OR": [3, 4], "AND":[6]},
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 1,
+                        "step": 0.01,
+                        "formatString": "{2}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "bTimedBlockSlowTime:TimedBlocking",
+                    "type": "toggle",
+                    "text": "$Val_TimedBlocking_SlowTime_Text",
+                    "help": "$Val_TimedBlocking_SlowTime_Help",
+                    "groupCondition": {"OR": [3, 4]},
+                    "groupControl": 5,
+                    "valueOptions": {
+                        "sourceType": "ModSettingBool"
+                    }
+                },
+                {
+                    "id": "fTimedBlockSlowTime_Timed:TimedBlocking",
+                    "text" : "$Val_TimedBlocking_SlowTime_Timed_Text",
+                    "help" : "$Val_TimedBlocking_SlowTime_Timed_Help",
+                    "type": "slider",
+                    "groupCondition": {"OR": [3, 4], "AND":[5]},
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 1,
+                        "step": 0.01,
+                        "formatString": "{2}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fTimedBlockSlowTime_Perfect:TimedBlocking",
+                    "text" : "$Val_TimedBlocking_SlowTime_Perfect_Text",
+                    "help" : "$Val_TimedBlocking_SlowTime_Perfect_Help",
+                    "type": "slider",
+                    "groupCondition": {"OR": [3, 4], "AND":[5]},
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 1,
+                        "step": 0.01,
+                        "formatString": "{2}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                }
+            ]
+        },
+        {
+            "pageDisplayName": "$Val_Stun_Page_Text",
+            "cursorFillMode": "topToBottom",
+            "content": [
+                {
+                    "text": "$Val_General_Header_Text",
+                    "type": "header"
+                },
+                {
+                    "id": "bStunToggle:Stun",
+                    "text": "$Val_Stun_Toggle_Text",
+                    "type": "toggle",
+                    "help": "$Val_Stun_Toggle_Help",
+                    "groupControl": 1,
+                    "valueOptions": {
+                        "sourceType": "ModSettingBool"
+                    }
+                },
+                {
+                    "id": "bStunMeterToggle:Stun",
+                    "text": "$Val_Stun_UI_Toggle_Text",
+                    "help": "$Val_Stun_UI_Toggle_Help",
+                    "type": "toggle",
+                    "groupCondition": 1,
+                    "valueOptions": {
+                        "sourceType": "ModSettingBool"
+                    }
+                },
+                {
+                    "id": "bFriendlyStunToggle:Stun",
+                    "text": "$Val_Stun_Friendly_Toggle_Text",
+                    "type": "toggle",
+                    "groupCondition": 1,
+                    "help": "$Val_Stun_Friendly_Toggle_Help",
+                    "valueOptions": {
+                        "sourceType": "ModSettingBool"
+                    }
+                },
+                {
+                    "id": "bDownedStateToggle:Stun",
+                    "text": "$Val_Stun_DownedState_Toggle_Text",
+                    "help": "$Val_Stun_DownedState_Toggle_Help",
+                    "type": "toggle",
+                    "groupCondition": 1,
+                    "valueOptions": {
+                        "sourceType": "ModSettingBool"
+                    }
+                },
+                {
+                    "id": "bAutoExecution:Stun",
+                    "text": "$Val_Stun_AutoExecution_Text",
+                    "type": "toggle",
+                    "help": "$Val_Stun_AutoExecution_Help",
+                    "groupCondition": 1,
+                    "groupControl": 2,
+                    "valueOptions": {
+                        "sourceType": "ModSettingBool"
+                    }
+                },
+                {
+                    "id": "iExecutionKey:Stun",
+                    "text": "$Val_Stun_ExecutionKey_Text",
+                    "type": "keymap",
+                    "help": "$Val_Stun_ExecutionKey_Help",
+                    "ignoreConflicts": false,
+                    "groupCondition": {"NOT": 2},
+                    "valueOptions": {
+                      "sourceType": "ModSettingInt"
+                    }
+                },
+                {
+                    "text": "$Val_Stun_DmgMult_Text",
+                    "help": "$Val_Stun_DmgMult_Help",
+                    "type": "header",
+                    "position": 1
+                },
+                {
+                    "id": "fStunTimedBlockMult:Stun",
+                    "text" : "$Val_Stun_TimedBlock_Text",
+                    "type": "slider",
+                    "groupCondition": 1,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 10,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fStunParryMult:Stun",
+                    "text" : "$Val_Stun_Parry_Text",
+                    "help" : "$Val_Stun_Parry_Help",
+                    "type": "slider",
+                    "groupCondition": 1,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 10,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fStunBashMult:Stun",
+                    "text" : "$Val_Stun_Bash_Text",
+                    "type": "slider",
+                    "groupCondition": 1,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 10,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fStunPowerBashMult:Stun",
+                    "text" : "$Val_Stun_PowerBash_Text",
+                    "type": "slider",
+                    "groupCondition": 1,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 10,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fStunNormalAttackMult:Stun",
+                    "text" : "$Val_Stun_NormalAttack_Text",
+                    "type": "slider",
+                    "groupCondition": 1,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 10,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fStunPowerAttackMult:Stun",
+                    "text" : "$Val_Stun_PowerAttack_Text",
+                    "type": "slider",
+                    "groupCondition": 1,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 10,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fStunCounterAttackMult:Stun",
+                    "text" : "$Val_Stun_CounterAttack_Text",
+                    "type": "slider",
+                    "groupCondition": 1,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 10,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fStunUnarmedMult:Stun",
+                    "text" : "$Val_Stun_Unarmed_Text",
+                    "type": "slider",
+                    "groupCondition": 1,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 10,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fStunDaggerMult:Stun",
+                    "text" : "$Val_Stun_Dagger_Text",
+                    "type": "slider",
+                    "groupCondition": 1,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 10,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fStunSwordMult:Stun",
+                    "text" : "$Val_Stun_Sword_Text",
+                    "type": "slider",
+                    "groupCondition": 1,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 10,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fStunWarAxeMult:Stun",
+                    "text" : "$Val_Stun_WarAxe_Text",
+                    "type": "slider",
+                    "groupCondition": 1,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 10,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fStunMaceMult:Stun",
+                    "text" : "$Val_Stun_Mace_Text",
+                    "type": "slider",
+                    "groupCondition": 1,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 10,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fStunGreatSwordMult:Stun",
+                    "text" : "$Val_Stun_GreatSword_Text",
+                    "type": "slider",
+                    "groupCondition": 1,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 10,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                },
+                {
+                    "id": "fStun2HBluntMult:Stun",
+                    "text" : "$Val_Stun_2HW_Text",
+                    "type": "slider",
+                    "groupCondition": 1,
+                    "valueOptions": {
+                        "min": 0,
+                        "max": 10,
+                        "step": 0.1,
+                        "formatString": "{1}",
+                        "sourceType": "ModSettingFloat"
+                    }
+                }
+            ]
+        },
+        {
+            "pageDisplayName": "$Val_Compatibility_Text",
+            "cursorFillMode": "topToBottom",
+            "content": [
+                {
+                    "id": "bPoiseCompatibility:Compatibility",
+                    "text": "$Val_Poise_Text",
+                    "type": "toggle",
+                    "help": "$Val_Compatibility_Poise_Help",
+                    "valueOptions": {
+                        "sourceType": "ModSettingBool"
+                    }
+                },
+                {
+                    "text": "$Val_TrueHudAPI_Text",
+                    "type": "header",
+                    "position": 1
+                },
+                {
+                    "type": "hiddenToggle",
+                    "groupControl": 1,
+                    "valueOptions": {
+                        "sourceType": "GlobalValue",
+                        "sourceForm": "ValhallaCombat.esp|56A25"
+                    }
+                },
+                {
+                    "type": "hiddenToggle",
+                    "groupControl": 2,
+                    "valueOptions": {
+                        "sourceType": "GlobalValue",
+                        "sourceForm": "ValhallaCombat.esp|56A26"
+                    }
+                },
+                {
+                    "text": "$Val_TrueHUDAPI_OptionText",
+                    "type": "text",
+                    "help": "$Val_TrueHUDAPI_Obtained_InfoText",
+                    "groupCondition": 1,
+                    "groupBehavior": "skip",
+                    "valueOptions": {
+                        "value": "$Val_TrueHUDAPI_Obtained_ValueText"
+                    }
+                },
+                {
+                    "text": "$Val_TrueHUDAPI_OptionText",
+                    "type": "text",
+                    "help": "$Val_TrueHUDAPI_FailToObtain_InfoText",
+                    "groupCondition": {"NOT": 1},
+                    "groupBehavior": "skip",
+                    "valueOptions": {
+                        "value": "$Val_TrueHUDAPI_FailToObtain_ValueText"
+                    }
+                },
+                {
+                    "text": "$Val_TrueHUDAPI_SpecialMeter_OptionText",
+                    "type": "text",
+                    "help": "$Val_TrueHUDAPI_SpecialMeter_Obtained_InfoText",
+                    "groupCondition": 2,
+                    "groupBehavior": "skip",
+                    "valueOptions": {
+                        "value": "$Val_TrueHUDAPI_SpecialMeter_Obtained_ValueText"
+                    }
+                },
+                {
+                    "text": "$Val_TrueHUDAPI_SpecialMeter_OptionText",
+                    "type": "text",
+                    "help": "$Val_TrueHUDAPI_SpecialMeter_FailedToObtain_InfoText",
+                    "groupCondition": {"NOT": 2},
+                    "groupBehavior": "skip",
+                    "valueOptions": {
+                        "value": "$Val_TrueHUDAPI_SpecialMeter_FailedToObtain_ValueText"
+                    }
+                },
+                {
+                    "text": "$Val_EC_Text",
+                    "type": "header"
+                },
+                {
+                    "type": "hiddenToggle",
+                    "groupControl": 3,
+                    "valueOptions": {
+                        "sourceType": "GlobalValue",
+                        "sourceForm": "ValhallaCombat.esp|56A23"
+                    }
+                },
+                {
+                    "type": "hiddenToggle",
+                    "groupControl": 4,
+                    "valueOptions": {
+                        "sourceType": "GlobalValue",
+                        "sourceForm": "ValhallaCombat.esp|56A24"
+                    }
+                },
+                {
+                    "text": "$Val_EC_Damage_OptionText",
+                    "type": "text",
+                    "help": "$Val_EC_Damage_Installed_InfoText",
+                    "groupCondition": 3,
+                    "groupBehavior": "skip",
+                    "valueOptions": {
+                        "value": "$Val_EC_Damage_Installed_ValueText"
+                    }
+                },
+                {
+                    "text": "$Val_EC_Damage_OptionText",
+                    "type": "text",
+                    "help": "$Val_EC_Damage_UnInstalled_InfoText",
+                    "groupCondition": {"NOT": 3},
+                    "groupBehavior": "skip",
+                    "valueOptions": {
+                        "value": "$Val_EC_Damage_UnInstalled_ValueText"
+                    }
+                },
+                {
+                    "text": "$Val_EC_NPC_OptionText",
+                    "type": "text",
+                    "help": "$Val_EC_NPC_Installed_InfoText",
+                    "groupCondition": 4,
+                    "groupBehavior": "skip",
+                    "valueOptions": {
+                        "value": "$Val_EC_NPC_Installed_ValueText"
+                    }
+                },
+                {
+                    "text": "$Val_EC_NPC_OptionText",
+                    "type": "text",
+                    "help": "$Val_EC_NPC_UnInstalled_InfoText",
+                    "groupCondition": {"NOT": 4},
+                    "groupBehavior": "skip",
+                    "valueOptions": {
+                        "value": "$Val_EC_NPC_UnInstalled_ValueText"
+                    }
+                },
+                {
+                    "text": "$Val_DwTimedBlocking_Text",
+                    "type": "header"
+                },
+                {
+                    "id": "iAltBlockKey:TimedBlocking",
+                    "text": "$Val_DwTimedBlocking_Key_text",
+                    "type": "keymap",
+                    "help": "$Val_DwTimedBlocking_Key_help",
+                    "ignoreConflicts": false,
+                    "valueOptions": {
+                      "sourceType": "ModSettingInt"
+                    }
+                }
+            ]
+        }
+    ],
+    "customContent": {
+        "source": "ValhallaCombat/ValhallaCombat_Cover.dds",
+        "x": -264,
+        "y": -120
+    }
+
+}
+
+

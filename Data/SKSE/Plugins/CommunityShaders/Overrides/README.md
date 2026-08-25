@@ -16,11 +16,11 @@ Data\SKSE\Plugins\CommunityShaders\Overrides\
 Data\SKSE\Plugins\CommunityShaders\Weathers\
 ```
 
-Each file is named `{EditorID}.json` (for example `SkyrimStormRain.json`) and uses a `featureSettings` object. Features must expose weather variables (for example **LinearLighting**, **Skylighting**, **ExponentialHeightFog**, **ImageBasedLighting**). Enable a block with `"__enabled": true`. Use the in-game **Weather Editor** to confirm Editor IDs and to tune values.
+Each file is named `{EditorID}.json` (for example `SkyrimStormRain.json`) and uses a `featureSettings` object. Features must expose weather variables (for example **Skylighting**, **ExponentialHeightFog**, **ImageBasedLighting**). Enable a block with `"__enabled": true`. Use the in-game **CS Editor** to confirm Editor IDs and to tune values.
 
 ### Interior-only tuning (`SceneSettings/InteriorOnly/`)
 
-Shipped overwrite JSON files apply **only while you are in an interior cell**. Each file sets **one** feature field (Community Shaders merges them at load). Filenames end with `_{FeatureShortName}.json` (for example `WarmInt01_LinearLighting.json`). The repo includes a **WarmInt\*** set aimed at warm, localized lights and **dark corners** (lower ambient, stronger point lights and VL, reduced GI strength and IBL sky fill). Adjust or remove individual files to taste.
+Shipped overwrite JSON files apply **only while you are in an interior cell**. Each file sets **one** feature field (Community Shaders merges them at load). Filenames end with `_{FeatureShortName}.json`. The repo includes a **WarmInt\*** set aimed at warm, localized lights and **dark corners** (reduced GI strength and IBL sky fill). Adjust or remove individual files to taste.
 
 ### Repo preset tiers: `CustomLook_*`, `QualityPlus_*`, `LowAssist_*`
 
@@ -32,7 +32,6 @@ These three prefixes are meant for **multiplayer / many actors** (default favors
 
 Use this for **normal play** (including busy towns / MP-style crowds):
 
--   **LinearLighting / Skylighting / ExponentialHeightFog** — **4.7** Standard look: `ambientGamma` 0.70, `colorGamma` 1.25, `effectGamma` 2.32, `effectAlphaGamma` 1.50, plus readable daytime (`ambientMult` 0.42, `directionalLightMult` 1.0, `pointLightMult` 2.4). Same Linear Lighting values in Quality+ and Performance (LowAssist).
 -   **ScreenSpaceGI** — **low bounce** (`EnableGI`: true, `GIStrength` ~0.28) at **quarter res**. **`QualityPlus_ScreenSpaceGI`** uses the same GI strength at **half res** plus higher slices/steps/temporal.
 -   **ImageBasedLighting** — **IBL off** on all shipped tiers (including Quality+); **`PreserveFogLuminance`**: **on** in `CustomLook_` / `LowAssist_` / `QualityPlus_` IBL overrides for fog consistency. **`LowAssist_ImageBasedLighting`** still useful if you enabled IBL in the menu and need to force it off.
 -   **Skylighting** — diffuse min visibility **0.10** (CS default), specular **0.08**. **`QualityPlus_Skylighting`** / **`LowAssist_Skylighting`** mirror these so switching tiers does not change the shade floor.
@@ -46,7 +45,7 @@ Use this for **normal play** (including busy towns / MP-style crowds):
 
 Enable in **Overrides** when you want **solo / screenshots / max eye candy**. For each file you enable, **disable** the matching **`CustomLook_{SameFeature}.json`** so settings are not merged twice.
 
--   **`QualityPlus_LinearLighting.json`** / **`QualityPlus_ExponentialHeightFog.json`** — same 4.7 LL (including gammas) as Standard when Quality+ is your active tier (disable matching `CustomLook_*` for those features).
+-   **`QualityPlus_ExponentialHeightFog.json`** — same fog as Standard when Quality+ is your active tier (disable matching `CustomLook_*` for that feature).
 -   **`QualityPlus_Skylighting.json`** — same outdoor shade floor as CustomLook (disable `CustomLook_Skylighting`).
 -   **`QualityPlus_ScreenSpaceGI.json`** — **low** indirect (`GIStrength` ~0.28), half res, higher slices/steps/temporal vs default tier.
 -   **`QualityPlus_ImageBasedLighting.json`** — **IBL off**, **`PreserveFogLuminance`**: on; disable `CustomLook_ImageBasedLighting`.
@@ -60,7 +59,7 @@ Enable in **Overrides** when you want **solo / screenshots / max eye candy**. Fo
 Extra cuts when Tier 1 is not enough (stutter towns, huge PvP crowds):
 
 -   **`LowAssist_Global.json`** — caps **shader compiler** threads only. **Clustered light limits** (`FORWARD_CLUSTERED_LIGHT_CAP` **16**, `DEFERRED_CLUSTERED_LIGHT_CAP` **24**) are **global defaults** in `LightLimitFix/Common.hlsli` so all preset tiers share the same cost without **Advanced → Shader Defines** or recompiles when switching profiles.
--   **`LowAssist_LinearLighting.json`** / **`LowAssist_ExponentialHeightFog.json`** — same 4.7 LL (including gammas) as Standard when Performance is active (disable matching `CustomLook_*`).
+-   **`LowAssist_ExponentialHeightFog.json`** — same fog as Standard when Performance is active (disable matching `CustomLook_*`).
 -   **`LowAssist_Skylighting.json`** — same outdoor shade floor as CustomLook (disable `CustomLook_Skylighting`).
 -   **`LowAssist_VolumetricLighting.json`** — **VL off** interior and exterior (big cost with many lights).
 -   **`LowAssist_ScreenSpaceShadows.json`** — contact shadows **off**.
@@ -79,7 +78,7 @@ Directional shadow-mask PCF in **`Utility.hlsl`** uses **`UTILITY_SHADOW_PCF_TAP
 
 Weather JSON keys for EH fog use the **display names** registered in CS (for example `"Fog Density"`, `"Directional Inscattering Multiplier"`). Overrides use the feature’s **settings field names** (for example `fogDensity`, `inscatteringTint`).
 
-If daytime is still too dim or too bright, tweak **`ambientMult`** / **`directionalLightMult`** / **`pointLightMult`** in Linear Lighting, or add `Weathers/{EditorID}.json`. Restart after toggling overrides.
+If daytime is still too dim or too bright, add `Weathers/{EditorID}.json` for that weather. Restart after toggling overrides.
 
 ## File Naming Convention
 

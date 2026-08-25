@@ -1696,6 +1696,9 @@ export declare function dispelEffectsByCaster(casterFormId: number, targetFormId
  * so BuffSync / server AME remain authoritative.
  */
 export declare function applySpellHud(targetFormId: number, spellFormId: number, durationSec?: number): void;
+export declare function setPlayerStaminaExhausted(exhausted: boolean): void;
+export declare function flashActorValue(formId: number, actorValue: string, longFlash?: boolean): void;
+export declare function setActorStun(formId: number, current: number, max: number): void;
 export declare function getAnimationVariablesFromActor(actorFormId: number): ActorAnimationVariables;
 export declare function applyAnimationVariablesToActor(actorFormId: number, animationVariables: ActorAnimationVariables): boolean;
 
