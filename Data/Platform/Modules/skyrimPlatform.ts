@@ -187,6 +187,7 @@ export declare let getContainer: (baseId: number) => InventoryEntry[]
  * immediately.
  */
 export declare let updateExtrasOnEquipped: (refrId: number, baseId: number, newHealth: number, newName: string, matchKind?: number, ordinal?: number) => boolean
+export declare let equipBoundExtra: (refrId: number, baseId: number, enchantmentId: number, leftHand?: boolean) => boolean
 
 /** One-time login repair: prune legacy ghost ECC rows (count<=0, extra-less dupes). */
 export interface PruneLegacyGhostBaseResult {
