@@ -1,6 +1,6 @@
 # Patch notes
 
 ## Changes
-- Added textures and meshes for materials
-- Mead recipe changes
-- Placed holdstones for the Companions, Thieves Guild, and Vigilants in the world 
+- Added body system in first person camera with 3rd person animations 
+- Placed holdstones for the companions, thieves guild, and vigilants in the wrold (next update will have them wired in)
+- Made sentinel armors craftable
