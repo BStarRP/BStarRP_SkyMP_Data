@@ -1,4 +1,6 @@
 # Patch notes
 
 ## Changes
-- Improved how spells synchronize
+- Added textures and meshes for materials
+- Mead recipe changes
+- Placed holdstones for the Companions, Thieves Guild, and Vigilants in the world 
