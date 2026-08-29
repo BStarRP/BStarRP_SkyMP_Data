@@ -1,8 +1,11 @@
 # Patch notes
 
 ## Changes
-- Fixed warrior stone, now applies xp bonus to our skills (one-handed / two-handed / weapon specs, unarmed, block, shields, heavy armor, weaponsmithing, armoursmithing, smelting, and mining)
-- Fixed an issue with stamina drain failing over time in long combat scenarios
-- Updated parceled locks, can only be picked if players are online attached to the locks, this counts groups
-- Improved packet draining on voice data
-- Improved server handling on holdstones/skills/combat on the back end to improve server performance
+- Fixed an issue with horse riding stamina
+- Fixed an issue with soul trap
+- Fixed an issue with stamina regen during combat
+- Fixed an issue with food/eating drinking sounds not playing
+- Fixed harvesting butterflys/bugs not going into inventory, also tied to skill
+- Updated target lock, it now stays on target unless you middle mouse wheel off a target, it switches target points on target based on mouse drift left/right/up/down and snaps back to center
+- Improved handling of holstone data, checking player names across all the holds was causing hitches
+- Improved client side handling with large groups of people, will work on this over the days more as I get more data
