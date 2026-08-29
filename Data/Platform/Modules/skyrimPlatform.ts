@@ -1702,6 +1702,7 @@ export declare function applySpellHud(targetFormId: number, spellFormId: number,
 export declare function setPlayerStaminaExhausted(exhausted: boolean): void;
 export declare function flashActorValue(formId: number, actorValue: string, longFlash?: boolean): void;
 export declare function setActorStun(formId: number, current: number, max: number): void;
+export declare function setPlayerNeeds(hunger: number, thirst: number, energy: number, vampire: boolean, recovering: boolean): boolean;
 export declare function getAnimationVariablesFromActor(actorFormId: number): ActorAnimationVariables;
 export declare function applyAnimationVariablesToActor(actorFormId: number, animationVariables: ActorAnimationVariables): boolean;
 
