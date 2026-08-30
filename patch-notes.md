@@ -1,4 +1,4 @@
 # Patch notes
 
 ## Changes
-- Improvements to true hud behavior
+- Fixed an issue with stamina drain not always being calculated
