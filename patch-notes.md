@@ -1,5 +1,5 @@
 # Patch notes
 
 ## Changes
-- Buffed night eye spell to work better, also certain special people now unlock it + buffed other special night visions
-- Fixed TrueHUD to work with our new food/drink/energy bar
+- Fixed an issue caused from latest voice optimizations that allowed you to hear yourself
+- Updated the inside cave voice echo so you can hear yourself localy, the bug gave me an idea
