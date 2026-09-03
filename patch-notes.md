@@ -1,8 +1,7 @@
 # Patch notes
 
 ## Changes
-- Fixed getting hunting xp from killing summons
-- Improved voice handling with many users in a single location
-- Improved summons / pet AI and commands
-- Opening notes no longer require it to be in hand first
-- Synced dungeon traps visually and damage
+- Added immersive college of winterhold
+- Added working features within college of winterhold
+- Added new loading system, faster and cleaner looking when going thru doors (will work on a loading screen showing community pictures at login)
+- Fixed Dwenmer spider crash
