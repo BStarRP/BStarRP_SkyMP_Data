@@ -1,4 +1,4 @@
 # Patch notes
 
 ## Changes
-- Fixed small adjustment to jewelry crafting recipes
+- One more small adjustment =P
