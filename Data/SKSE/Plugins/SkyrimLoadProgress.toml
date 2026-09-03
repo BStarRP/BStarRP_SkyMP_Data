@@ -51,7 +51,7 @@ x_percent = 50.0
 
 # y_percent = 0 places the meter against the top edge. y_percent = 100 places
 # its bottom edge against the bottom edge.
-y_percent = 100.0
+y_percent = 92.0
 
 # Width is a percentage of the progress meter's authored width. The center
 # stretches while the decorative end caps keep their original size. A value
@@ -67,7 +67,7 @@ enabled = true
 
 # Shader sample radius in render-target pixels. Larger values produce a stronger
 # blur. Valid values are 0.0 through 20.0. Setting this to 0.0 also disables blur.
-amount = 1.5
+amount = 1.75
 
 [warm]
 # A warm cell is already resident in memory. Warm loads always use the seamless
