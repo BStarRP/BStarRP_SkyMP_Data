@@ -4,6 +4,8 @@
 		"SelectedThemePreset": "Default"
 	},
 	"Upscaling": {
-		"frameGenerationMode": 0
+		"frameGenerationMode": 0,
+		"reflexUseFPSLimit": true,
+		"reflexFPSLimit": 60.0
 	}
 }
