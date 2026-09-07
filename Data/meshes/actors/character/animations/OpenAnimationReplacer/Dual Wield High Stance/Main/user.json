@@ -2,11 +2,15 @@
     "priority": 68200,
     "conditions": [
         {
-            "condition": "HasPerk",
+            "condition": "CompareValues",
             "requiredVersion": "1.0.0.0",
-            "Perk": {
-                "pluginName": "Core.esp",
-                "formID": "215BA5"
+            "Value A": {
+                "actorValue": 76,
+                "actorValueType": "Value"
+            },
+            "Comparison": "==",
+            "Value B": {
+                "value": 3.0
             }
         },
         {
