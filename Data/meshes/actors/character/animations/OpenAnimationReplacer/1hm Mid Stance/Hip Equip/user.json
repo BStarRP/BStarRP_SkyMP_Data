@@ -1,0 +1,13 @@
+{
+    "priority": 5,
+    "conditions": [
+        {
+            "condition": "HasPerk",
+            "requiredVersion": "1.0.0.0",
+            "Perk": {
+                "pluginName": "Core.esp",
+                "formID": "215BA4"
+            }
+        }
+    ]
+}

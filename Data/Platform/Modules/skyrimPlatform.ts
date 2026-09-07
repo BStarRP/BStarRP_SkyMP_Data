@@ -60,6 +60,7 @@ export interface ChangeFormNpc {
   name?: string
   face?: Face
   isFemale?: boolean
+  level?: number
   bakeInventory?: { entries: ChangeFormBakeEntry[] }
 }
 
