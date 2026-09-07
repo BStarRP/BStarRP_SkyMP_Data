@@ -1,6 +1,6 @@
 # Patch notes
 
 ## Changes
-- Agility now increases attack speed of weapons + wired in perks like Dual Flurry
-- Added Dual wield block, press X
-- Fixed an issue with UI menu's shwoing their seems
+- Added played time stat for each character
+- Adjusted spell learning times to 5, 10, 15, 25, 35 days per tier
+- Added a Haste spell that increases windows attack speed, adept level alteration
