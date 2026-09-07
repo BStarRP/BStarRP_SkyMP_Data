@@ -13842,8 +13842,8 @@ __webpack_require__.r(__webpack_exports__);
 /** Baked at webpack build: local date:time stamp (YYYY.MM.DD:HH:mm:ss) unless SKYMP_CLIENT_VERSION is set. */
 var skympClientVersion = function () {
     try {
-        if ( true && "2026.09.07:15:34:53".length > 0) {
-            return "2026.09.07:15:34:53";
+        if ( true && "2026.09.07:15:48:20".length > 0) {
+            return "2026.09.07:15:48:20";
         }
     }
     catch (_a) {
@@ -15301,7 +15301,7 @@ __webpack_require__.r(__webpack_exports__);
 /** One-line bundle identity for loginTrace / ops headers. */
 var tsBundleIdentityString = function () {
     try {
-        var built = "2026-09-07T22:34:53.414Z";
+        var built = "2026-09-07T22:48:20.517Z";
         var hash = "05bbec38+c8a336d1";
         if (!built || !hash) {
             return "tsBundle=UNAVAILABLE";
