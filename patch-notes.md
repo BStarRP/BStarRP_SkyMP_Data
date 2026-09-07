@@ -1,4 +1,5 @@
 # Patch notes
 
 ## Changes
-- Added stance switching and extra animations
+- Reworked racial skill bonuses
+- Added dual wield block key
