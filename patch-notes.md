@@ -1,6 +1,7 @@
 # Patch notes
 
 ## Changes
-- Added played time stat for each character
-- Adjusted spell learning times to 5, 10, 15, 25, 35 days per tier
-- Added a Haste spell that increases windows attack speed, adept level alteration
+- Fixed an issue with skill tiers not registering on the 20th level, you now will become apprentice at lvl 20 again regardless of your cap
+- Reworked how attributes apply to skill, instead of +1 to skill levels it modifies hidden moddifiers
+- Capped holdstone buffs, none of them will boost a player over expert, this allows lower level buffs while not pushing people to high.
+- 
