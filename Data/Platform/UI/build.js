@@ -1776,7 +1776,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"5a127a8d342257292217e4fde407d1d9.svg\");\n\n//# sourceURL=webpack://ui_webpack/./src/components/SkyrimFrame/img/Header_left-2.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"29359f1c6135098e82121dce53128a35.svg\");\n\n//# sourceURL=webpack://ui_webpack/./src/components/SkyrimFrame/img/Header_left-2.svg?");
 
 /***/ }),
 
@@ -1787,7 +1787,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"2b21b1bf21a73511f5e8674b50e855b7.svg\");\n\n//# sourceURL=webpack://ui_webpack/./src/components/SkyrimFrame/img/Header_left.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"70828fb0d81d34baf7216b141e84512a.svg\");\n\n//# sourceURL=webpack://ui_webpack/./src/components/SkyrimFrame/img/Header_left.svg?");
 
 /***/ }),
 
@@ -1798,7 +1798,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"2092900da4cce6672f03284420fe8095.svg\");\n\n//# sourceURL=webpack://ui_webpack/./src/components/SkyrimFrame/img/Header_right-2.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"5c2874217cce8f12078a4c478c7760a8.svg\");\n\n//# sourceURL=webpack://ui_webpack/./src/components/SkyrimFrame/img/Header_right-2.svg?");
 
 /***/ }),
 
@@ -1809,7 +1809,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"a4ca23c2dedf42f3e3f2fc5973eb50b6.svg\");\n\n//# sourceURL=webpack://ui_webpack/./src/components/SkyrimFrame/img/Header_right.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"9daf4db75b4c8a2bb5a817f052e4d7a9.svg\");\n\n//# sourceURL=webpack://ui_webpack/./src/components/SkyrimFrame/img/Header_right.svg?");
 
 /***/ }),
 
@@ -1820,7 +1820,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"22880713cd75df949a0cd6f5baab83e7.svg\");\n\n//# sourceURL=webpack://ui_webpack/./src/components/SkyrimFrame/img/Header_top_3_1.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"434474aac1ca25361cc7f9fadc87043a.svg\");\n\n//# sourceURL=webpack://ui_webpack/./src/components/SkyrimFrame/img/Header_top_3_1.svg?");
 
 /***/ }),
 
@@ -1831,7 +1831,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"947d89b080ada6412258ce3d552c2971.svg\");\n\n//# sourceURL=webpack://ui_webpack/./src/components/SkyrimFrame/img/Header_top.svg?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (__webpack_require__.p + \"fb344395b65fad4dc9b2b4dbecaaf9ae.svg\");\n\n//# sourceURL=webpack://ui_webpack/./src/components/SkyrimFrame/img/Header_top.svg?");
 
 /***/ }),
 
@@ -3820,7 +3820,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   UI_BASE_H: () => (/* binding */ UI_BASE_H),\n/* harmony export */   UI_BASE_W: () => (/* binding */ UI_BASE_W),\n/* harmony export */   fitMenuScale: () => (/* binding */ fitMenuScale),\n/* harmony export */   scalePx: () => (/* binding */ scalePx),\n/* harmony export */   snapMenuScale: () => (/* binding */ snapMenuScale),\n/* harmony export */   syncUiScale: () => (/* binding */ syncUiScale),\n/* harmony export */   uiScaleFactor: () => (/* binding */ uiScaleFactor),\n/* harmony export */   useUiScale: () => (/* binding */ useUiScale)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/** 1080p design baseline — CEF viewport tracks the game framebuffer. */\r\n\r\nconst UI_BASE_W = 1920;\r\nconst UI_BASE_H = 1080;\r\nfunction uiScaleFactor(width = typeof window !== 'undefined' ? window.innerWidth : UI_BASE_W, height = typeof window !== 'undefined' ? window.innerHeight : UI_BASE_H) {\r\n    if (width <= 0 || height <= 0)\r\n        return 1;\r\n    return Math.min(width / UI_BASE_W, height / UI_BASE_H);\r\n}\r\nfunction scalePx(px, scale = uiScaleFactor()) {\r\n    return px * scale;\r\n}\r\nfunction syncUiScale() {\r\n    const scale = uiScaleFactor();\r\n    if (typeof document !== 'undefined') {\r\n        document.documentElement.style.setProperty('--ui-scale', String(scale));\r\n    }\r\n    return scale;\r\n}\r\nconst FRAME_TILE = 64;\r\n/** Snap scale so 64px frame tiles land on whole pixels after CSS scale. */\r\nfunction snapMenuScale(scale) {\r\n    if (scale <= 0)\r\n        return 1;\r\n    return Math.round(scale * FRAME_TILE) / FRAME_TILE;\r\n}\r\n/** Fit a fixed-size menu panel to the viewport and auto resolution scale. */\r\nfunction fitMenuScale(designW, designH, margin = 0.98) {\r\n    if (typeof window === 'undefined')\r\n        return 1;\r\n    const auto = uiScaleFactor();\r\n    const fitW = (window.innerWidth / designW) * margin;\r\n    const fitH = (window.innerHeight / designH) * margin;\r\n    return snapMenuScale(Math.min(auto, fitW, fitH));\r\n}\r\n/** Subscribe to resolution changes (updates --ui-scale and re-renders). */\r\nfunction useUiScale() {\r\n    const [scale, setScale] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(() => uiScaleFactor());\r\n    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {\r\n        const sync = () => {\r\n            syncUiScale();\r\n            setScale(uiScaleFactor());\r\n        };\r\n        sync();\r\n        window.addEventListener('resize', sync);\r\n        return () => window.removeEventListener('resize', sync);\r\n    }, []);\r\n    return scale;\r\n}\r\n\n\n//# sourceURL=webpack://ui_webpack/./src/utils/uiScale.ts?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   UI_BASE_H: () => (/* binding */ UI_BASE_H),\n/* harmony export */   UI_BASE_W: () => (/* binding */ UI_BASE_W),\n/* harmony export */   fitMenuScale: () => (/* binding */ fitMenuScale),\n/* harmony export */   scalePx: () => (/* binding */ scalePx),\n/* harmony export */   syncUiScale: () => (/* binding */ syncUiScale),\n/* harmony export */   uiScaleFactor: () => (/* binding */ uiScaleFactor),\n/* harmony export */   useUiScale: () => (/* binding */ useUiScale)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);\n/** 1080p design baseline — CEF viewport tracks the game framebuffer. */\r\n\r\nconst UI_BASE_W = 1920;\r\nconst UI_BASE_H = 1080;\r\nfunction uiScaleFactor(width = typeof window !== 'undefined' ? window.innerWidth : UI_BASE_W, height = typeof window !== 'undefined' ? window.innerHeight : UI_BASE_H) {\r\n    if (width <= 0 || height <= 0)\r\n        return 1;\r\n    return Math.min(width / UI_BASE_W, height / UI_BASE_H);\r\n}\r\nfunction scalePx(px, scale = uiScaleFactor()) {\r\n    return px * scale;\r\n}\r\nfunction syncUiScale() {\r\n    const scale = uiScaleFactor();\r\n    if (typeof document !== 'undefined') {\r\n        document.documentElement.style.setProperty('--ui-scale', String(scale));\r\n    }\r\n    return scale;\r\n}\r\n/** Fit a fixed-size menu panel to the viewport and auto resolution scale. */\r\nfunction fitMenuScale(designW, designH, margin = 0.98) {\r\n    if (typeof window === 'undefined')\r\n        return 1;\r\n    const auto = uiScaleFactor();\r\n    const fitW = (window.innerWidth / designW) * margin;\r\n    const fitH = (window.innerHeight / designH) * margin;\r\n    return Math.min(auto, fitW, fitH);\r\n}\r\n/** Subscribe to resolution changes (updates --ui-scale and re-renders). */\r\nfunction useUiScale() {\r\n    const [scale, setScale] = (0,react__WEBPACK_IMPORTED_MODULE_0__.useState)(() => uiScaleFactor());\r\n    (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(() => {\r\n        const sync = () => {\r\n            syncUiScale();\r\n            setScale(uiScaleFactor());\r\n        };\r\n        sync();\r\n        window.addEventListener('resize', sync);\r\n        return () => window.removeEventListener('resize', sync);\r\n    }, []);\r\n    return scale;\r\n}\r\n\n\n//# sourceURL=webpack://ui_webpack/./src/utils/uiScale.ts?");
 
 /***/ }),
 
