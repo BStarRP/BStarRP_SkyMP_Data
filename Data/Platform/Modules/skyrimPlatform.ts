@@ -1708,6 +1708,7 @@ export declare function getAnimationVariablesFromActor(actorFormId: number): Act
 export declare function applyAnimationVariablesToActor(actorFormId: number, animationVariables: ActorAnimationVariables): boolean;
 
 export declare function setCollision(refrFormId: number, collision: boolean): void;
+export declare function setLockKey(refrFormId: number, keyFormId: number): void;
 
 
 // Based on Form.pex
