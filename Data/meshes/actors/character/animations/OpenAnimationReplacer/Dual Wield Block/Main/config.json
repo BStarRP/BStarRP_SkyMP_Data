@@ -7,6 +7,10 @@
             "requiredVersion": "1.0.0.0"
         },
         {
+            "condition": "IsBlocking",
+            "requiredVersion": "1.0.0.0"
+        },
+        {
             "condition": "OR",
             "requiredVersion": "1.0.0.0",
             "Conditions": [
