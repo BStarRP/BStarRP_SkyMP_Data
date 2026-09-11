@@ -1,0 +1,19 @@
+{
+  "name": "Beast Races",
+  "description": "Claw Attack Animations for Beast Races.",
+  "priority": 60000020,
+  "overrideAnimationsFolder": "ClawAttacks",
+  "conditions": [
+    {
+      "Keyword": {
+        "form": {
+          "pluginName": "Skyrim.esm",
+          "formID": "D61D1"
+        }
+      },
+      "condition": "HasKeyword",
+      "requiredVersion": "1.0.0.0",
+      "negated": false
+    }
+  ]
+}

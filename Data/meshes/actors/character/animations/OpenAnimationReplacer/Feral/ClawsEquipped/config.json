@@ -1,0 +1,17 @@
+{
+    "name": "Claws Equipped",
+    "description": "Claw Attack Animations when Claws are equipped.",
+    "priority": 60000024,
+    "overrideAnimationsFolder": "ClawAttacks",
+    "conditions": [
+        {
+            "condition": "IsEquipped",
+            "requiredVersion": "1.0.0.0",
+            "Form": {
+                "pluginName": "Feral.esp",
+                "formID": "809"
+            },
+            "Left hand": false
+        }
+    ]
+}

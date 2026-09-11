@@ -1,4 +1,5 @@
 # Patch notes
 
 ## Changes
-- Updated stats/skills menu to look a little nicer and provide more hover info
+- Fixed an issue with typing in chat box opening menus
+- Fixed an issue where feral beast animations were getting overwrote

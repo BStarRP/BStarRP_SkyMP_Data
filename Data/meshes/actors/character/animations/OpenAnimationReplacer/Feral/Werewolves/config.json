@@ -1,0 +1,17 @@
+{
+  "name": "Werewolves",
+  "description": "Claw Attack Animations for Werewolves.",
+  "priority": 60000022,
+  "overrideAnimationsFolder": "ClawAttacks",
+  "conditions": [
+    {
+      "Spell": {
+        "pluginName": "Skyrim.esm",
+        "formID": "F5BA0 1"
+      },
+      "condition": "HasSpell",
+      "requiredVersion": "1.0.0.0",
+      "negated": false
+    }
+  ]
+}

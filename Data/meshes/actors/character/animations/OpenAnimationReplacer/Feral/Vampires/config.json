@@ -1,0 +1,19 @@
+{
+  "name": "Vampires",
+  "description": "Claw Attack Animations for Vampires.",
+  "priority": 60000021,
+  "overrideAnimationsFolder": "ClawAttacks",
+  "conditions": [
+    {
+      "Keyword": {
+        "form": {
+          "pluginName": "Skyrim.esm",
+          "formID": "A82BB"
+        }
+      },
+      "condition": "HasKeyword",
+      "requiredVersion": "1.0.0.0",
+      "negated": false
+    }
+  ]
+}
