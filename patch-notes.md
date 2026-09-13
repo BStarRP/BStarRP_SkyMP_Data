@@ -1,6 +1,4 @@
 # Patch notes
 
 ## Changes
-- Added lower leather tier crafts from adept/apprentice tier
-- Improved syncing of more dungeons and levers
-- Improved syncing when shifting to beast form/vampire lord/or admin screatures
+- Fixed hawks so you can atleast farm them and not die (feel like their nests would make a great place to send messages)
