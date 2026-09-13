@@ -1,5 +1,6 @@
 # Patch notes
 
 ## Changes
-- Fixed a crash removing npc's on the world cleanup system
-- Improved cleaning up world npc's that arnt supposed to be there, shouldnt randomly see npc's when you zone into a new area
+- Added lower leather tier crafts from adept/apprentice tier
+- Improved syncing of more dungeons and levers
+- Improved syncing when shifting to beast form/vampire lord/or admin screatures
