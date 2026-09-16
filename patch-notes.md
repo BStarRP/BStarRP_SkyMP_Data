@@ -1,5 +1,5 @@
 # Patch notes
 
 ## Changes
-- Fixed server crash
-- Improved aggro system + animal fleeing
+- Fixed aggro from animals that shouldnt (like horses)
+- Fixed interactions not showing with weapons put away
