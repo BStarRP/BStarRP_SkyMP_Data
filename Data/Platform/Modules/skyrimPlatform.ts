@@ -980,7 +980,7 @@ export const enum MarkerType {
 }
 
 export const enum ActorValue {
-  Aggresion = 0,
+  Aggression = 0,
   Confidence = 1,
   Energy = 2,
   Morality = 3,
