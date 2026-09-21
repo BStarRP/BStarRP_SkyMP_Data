@@ -147,6 +147,26 @@ dragonborn.esm;0001FF66;DLC2TreeFloraHangingMoss03,False
 dragonborn.esm;000206E8;DLC2TreeFloraAshYam01,False
 dragonborn.esm;0003383C;DLC2TreePineShortHeavySnow01
 dragonborn.esm;0003383D;DLC2TreePineShortHeavySnow
+fabled forests.esp;0000080C;TreeAspen04Spring
+fabled forests.esp;0000080D;TreeAspen01Spring
+fabled forests.esp;0000080E;TreeAspen03Spring
+fabled forests.esp;0000080F;TreeAspen02Spring
+fabled forests.esp;00000810;TreeAspen06Spring
+fabled forests.esp;00000811;TreeAspen05Spring
+fabled forests.esp;00000812;TreeAspen01Summer
+fabled forests.esp;00000813;TreeAspen02Summer
+fabled forests.esp;00000814;TreeAspen03Summer
+fabled forests.esp;00000815;TreeAspen04Summer
+fabled forests.esp;00000816;TreeAspen05Summer
+fabled forests.esp;00000817;TreeAspen06Summer
+fabled forests.esp;00000818;TreeReachCliffTree01Autumn
+fabled forests.esp;00000819;TreeReachCliffTree02Autumn
+fabled forests.esp;0000081A;TreeReachTree01Autumn
+fabled forests.esp;0000081B;TreeReachTree02Autumn
+fabled forests.esp;0000081C;TreeReachTree01Spring
+fabled forests.esp;0000081D;TreeReachTree02Spring
+fabled forests.esp;0000081E;TreeReachCliffTree01Spring
+fabled forests.esp;0000081F;TreeReachCliffTree02Spring
 hearthfires.esm;0001045E;BYOHHouseFloraCabbage01,False
 hearthfires.esm;0001045F;BYOHHouseFloraGourd01,False
 hearthfires.esm;00010460;BYOHHouseFloraLeek01,False

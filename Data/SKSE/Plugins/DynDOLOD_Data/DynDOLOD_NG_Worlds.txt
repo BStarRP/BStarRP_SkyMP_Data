@@ -1,0 +1,674 @@
+[Config]
+bunchofnumbers=0N5O3S0E7H7S43O5T82T2I3M6B7U8S0
+esmplugin=dyndolod.esm
+espplugin=dyndolod.esp
+glowmultiple=1.75
+neargrid=11
+fargrid=21
+debug=false
+[Worlds]
+tamriel
+[Bases]
+78417,Skyrim.esm
+79872,Skyrim.esm
+80691,Skyrim.esm
+96950,Skyrim.esm
+98073,Skyrim.esm
+98074,Skyrim.esm
+99459,Skyrim.esm
+118687,Skyrim.esm
+126779,Skyrim.esm
+126809,Skyrim.esm
+126810,Skyrim.esm
+126828,Skyrim.esm
+126829,Skyrim.esm
+126958,Skyrim.esm
+128725,Skyrim.esm
+132815,Skyrim.esm
+140272,Skyrim.esm
+140274,Skyrim.esm
+140384,Skyrim.esm
+140392,Skyrim.esm
+140904,Skyrim.esm
+140911,Skyrim.esm
+150469,Skyrim.esm
+151973,Skyrim.esm
+151984,Skyrim.esm
+151995,Skyrim.esm
+152034,Skyrim.esm
+152075,Skyrim.esm
+152077,Skyrim.esm
+152090,Skyrim.esm
+152091,Skyrim.esm
+152092,Skyrim.esm
+152094,Skyrim.esm
+152095,Skyrim.esm
+152096,Skyrim.esm
+152165,Skyrim.esm
+153667,Skyrim.esm
+153668,Skyrim.esm
+153669,Skyrim.esm
+153670,Skyrim.esm
+153673,Skyrim.esm
+153674,Skyrim.esm
+178432,Skyrim.esm
+178872,Skyrim.esm
+178875,Skyrim.esm
+179777,Skyrim.esm
+191859,Skyrim.esm
+191862,Skyrim.esm
+191866,Skyrim.esm
+192134,Skyrim.esm
+192136,Skyrim.esm
+192148,Skyrim.esm
+193313,Skyrim.esm
+193918,Skyrim.esm
+195035,Skyrim.esm
+195361,Skyrim.esm
+195362,Skyrim.esm
+196443,Skyrim.esm
+197124,Skyrim.esm
+199424,Skyrim.esm
+200827,Skyrim.esm
+200871,Skyrim.esm
+202524,Skyrim.esm
+211982,Skyrim.esm
+212378,Skyrim.esm
+212426,Skyrim.esm
+212428,Skyrim.esm
+234018,Skyrim.esm
+234020,Skyrim.esm
+234033,Skyrim.esm
+234076,Skyrim.esm
+234077,Skyrim.esm
+234078,Skyrim.esm
+234079,Skyrim.esm
+236388,Skyrim.esm
+236671,Skyrim.esm
+240487,Skyrim.esm
+240843,Skyrim.esm
+240845,Skyrim.esm
+242905,Skyrim.esm
+249315,Skyrim.esm
+255150,Skyrim.esm
+256652,Skyrim.esm
+260390,Skyrim.esm
+260440,Skyrim.esm
+260442,Skyrim.esm
+260443,Skyrim.esm
+260444,Skyrim.esm
+264522,Skyrim.esm
+268637,Skyrim.esm
+276801,Skyrim.esm
+279674,Skyrim.esm
+279677,Skyrim.esm
+279678,Skyrim.esm
+279679,Skyrim.esm
+279680,Skyrim.esm
+279681,Skyrim.esm
+281474,Skyrim.esm
+281493,Skyrim.esm
+281503,Skyrim.esm
+290513,Skyrim.esm
+290515,Skyrim.esm
+290519,Skyrim.esm
+296423,Skyrim.esm
+299917,Skyrim.esm
+314583,Skyrim.esm
+314584,Skyrim.esm
+317352,Skyrim.esm
+317354,Skyrim.esm
+318551,Skyrim.esm
+319777,Skyrim.esm
+321118,Skyrim.esm
+330080,Skyrim.esm
+338822,Skyrim.esm
+339825,Skyrim.esm
+340404,Skyrim.esm
+340414,Skyrim.esm
+340943,Skyrim.esm
+346467,Skyrim.esm
+347186,Skyrim.esm
+347282,Skyrim.esm
+362882,Skyrim.esm
+362944,Skyrim.esm
+363171,Skyrim.esm
+363174,Skyrim.esm
+368860,Skyrim.esm
+374081,Skyrim.esm
+374751,Skyrim.esm
+376983,Skyrim.esm
+377100,Skyrim.esm
+380401,Skyrim.esm
+380993,Skyrim.esm
+382227,Skyrim.esm
+384868,Skyrim.esm
+386035,Skyrim.esm
+387134,Skyrim.esm
+387710,Skyrim.esm
+387872,Skyrim.esm
+391557,Skyrim.esm
+391558,Skyrim.esm
+392429,Skyrim.esm
+392534,Skyrim.esm
+395740,Skyrim.esm
+395742,Skyrim.esm
+395744,Skyrim.esm
+397322,Skyrim.esm
+398499,Skyrim.esm
+398540,Skyrim.esm
+403796,Skyrim.esm
+415213,Skyrim.esm
+415215,Skyrim.esm
+415267,Skyrim.esm
+416044,Skyrim.esm
+416929,Skyrim.esm
+416930,Skyrim.esm
+416931,Skyrim.esm
+416932,Skyrim.esm
+416933,Skyrim.esm
+417791,Skyrim.esm
+417792,Skyrim.esm
+417796,Skyrim.esm
+417799,Skyrim.esm
+417801,Skyrim.esm
+419650,Skyrim.esm
+423114,Skyrim.esm
+429672,Skyrim.esm
+436423,Skyrim.esm
+436452,Skyrim.esm
+439595,Skyrim.esm
+442601,Skyrim.esm
+442853,Skyrim.esm
+450733,Skyrim.esm
+450954,Skyrim.esm
+451052,Skyrim.esm
+456489,Skyrim.esm
+456510,Skyrim.esm
+456511,Skyrim.esm
+456512,Skyrim.esm
+456514,Skyrim.esm
+463810,Skyrim.esm
+463814,Skyrim.esm
+464967,Skyrim.esm
+471785,Skyrim.esm
+476362,Skyrim.esm
+478906,Skyrim.esm
+479302,Skyrim.esm
+479598,Skyrim.esm
+485666,Skyrim.esm
+488063,Skyrim.esm
+488636,Skyrim.esm
+499584,Skyrim.esm
+499843,Skyrim.esm
+502489,Skyrim.esm
+502891,Skyrim.esm
+503282,Skyrim.esm
+511121,Skyrim.esm
+513103,Skyrim.esm
+517622,Skyrim.esm
+517625,Skyrim.esm
+517626,Skyrim.esm
+517628,Skyrim.esm
+517638,Skyrim.esm
+517670,Skyrim.esm
+523339,Skyrim.esm
+524895,Skyrim.esm
+531837,Skyrim.esm
+534968,Skyrim.esm
+541683,Skyrim.esm
+546462,Skyrim.esm
+549263,Skyrim.esm
+551980,Skyrim.esm
+558656,Skyrim.esm
+563044,Skyrim.esm
+563049,Skyrim.esm
+563050,Skyrim.esm
+563051,Skyrim.esm
+564523,Skyrim.esm
+573217,Skyrim.esm
+573218,Skyrim.esm
+574010,Skyrim.esm
+574011,Skyrim.esm
+574129,Skyrim.esm
+588867,Skyrim.esm
+593086,Skyrim.esm
+598403,Skyrim.esm
+599335,Skyrim.esm
+601513,Skyrim.esm
+602303,Skyrim.esm
+605896,Skyrim.esm
+610709,Skyrim.esm
+614275,Skyrim.esm
+618169,Skyrim.esm
+623766,Skyrim.esm
+623767,Skyrim.esm
+623768,Skyrim.esm
+628040,Skyrim.esm
+628939,Skyrim.esm
+631551,Skyrim.esm
+647613,Skyrim.esm
+651896,Skyrim.esm
+651901,Skyrim.esm
+658555,Skyrim.esm
+682122,Skyrim.esm
+684361,Skyrim.esm
+689469,Skyrim.esm
+692897,Skyrim.esm
+693466,Skyrim.esm
+707332,Skyrim.esm
+707333,Skyrim.esm
+709198,Skyrim.esm
+709204,Skyrim.esm
+717218,Skyrim.esm
+724846,Skyrim.esm
+724849,Skyrim.esm
+725440,Skyrim.esm
+730050,Skyrim.esm
+730051,Skyrim.esm
+730052,Skyrim.esm
+731054,Skyrim.esm
+731058,Skyrim.esm
+732582,Skyrim.esm
+734949,Skyrim.esm
+738182,Skyrim.esm
+739966,Skyrim.esm
+744721,Skyrim.esm
+745488,Skyrim.esm
+746086,Skyrim.esm
+747418,Skyrim.esm
+751552,Skyrim.esm
+751947,Skyrim.esm
+758361,Skyrim.esm
+760868,Skyrim.esm
+760871,Skyrim.esm
+765101,Skyrim.esm
+767923,Skyrim.esm
+771383,Skyrim.esm
+771414,Skyrim.esm
+775334,Skyrim.esm
+793307,Skyrim.esm
+793309,Skyrim.esm
+793310,Skyrim.esm
+794984,Skyrim.esm
+797213,Skyrim.esm
+797457,Skyrim.esm
+797459,Skyrim.esm
+798319,Skyrim.esm
+801107,Skyrim.esm
+809054,Skyrim.esm
+809055,Skyrim.esm
+809056,Skyrim.esm
+809058,Skyrim.esm
+809369,Skyrim.esm
+813339,Skyrim.esm
+826805,Skyrim.esm
+836894,Skyrim.esm
+836896,Skyrim.esm
+837475,Skyrim.esm
+857608,Skyrim.esm
+858636,Skyrim.esm
+873816,Skyrim.esm
+886256,Skyrim.esm
+890857,Skyrim.esm
+896737,Skyrim.esm
+896738,Skyrim.esm
+896927,Skyrim.esm
+896928,Skyrim.esm
+913154,Skyrim.esm
+913632,Skyrim.esm
+913635,Skyrim.esm
+915818,Skyrim.esm
+917576,Skyrim.esm
+920485,Skyrim.esm
+921444,Skyrim.esm
+928716,Skyrim.esm
+928777,Skyrim.esm
+937587,Skyrim.esm
+943218,Skyrim.esm
+943224,Skyrim.esm
+947107,Skyrim.esm
+947109,Skyrim.esm
+947223,Skyrim.esm
+947943,Skyrim.esm
+958106,Skyrim.esm
+964495,Skyrim.esm
+971092,Skyrim.esm
+971098,Skyrim.esm
+975658,Skyrim.esm
+979677,Skyrim.esm
+979700,Skyrim.esm
+979705,Skyrim.esm
+998978,Skyrim.esm
+998979,Skyrim.esm
+1002734,Skyrim.esm
+1011513,Skyrim.esm
+1039165,Skyrim.esm
+1050597,Skyrim.esm
+1081390,Skyrim.esm
+1086435,Skyrim.esm
+1093944,Skyrim.esm
+61371,Dawnguard.esm
+61372,Dawnguard.esm
+12618,HearthFires.esm
+12619,HearthFires.esm
+12622,HearthFires.esm
+12623,HearthFires.esm
+12625,HearthFires.esm
+12626,HearthFires.esm
+12627,HearthFires.esm
+12629,HearthFires.esm
+12630,HearthFires.esm
+12788,HearthFires.esm
+12795,HearthFires.esm
+12797,HearthFires.esm
+12799,HearthFires.esm
+12805,HearthFires.esm
+12806,HearthFires.esm
+12817,HearthFires.esm
+15548,HearthFires.esm
+3561,Lux Via.esp
+128823,Lux Via.esp
+22784,Another Riverwood.esp
+22785,Another Riverwood.esp
+22786,Another Riverwood.esp
+22787,Another Riverwood.esp
+22788,Another Riverwood.esp
+22789,Another Riverwood.esp
+22793,Another Riverwood.esp
+23139,Another Riverwood.esp
+23143,Another Riverwood.esp
+106256,Another Riverwood.esp
+106268,Another Riverwood.esp
+106280,Another Riverwood.esp
+106281,Another Riverwood.esp
+106298,Another Riverwood.esp
+106299,Another Riverwood.esp
+148089,Another Riverwood.esp
+148708,Another Riverwood.esp
+148713,Another Riverwood.esp
+148719,Another Riverwood.esp
+148734,Another Riverwood.esp
+190538,Another Riverwood.esp
+876058,Another Riverwood.esp
+1460663,Minor Cities Dawnstar.esp
+1460670,Minor Cities Dawnstar.esp
+1460691,Minor Cities Dawnstar.esp
+4906,The Great City of Solitude.esp
+7825,The Great City of Solitude.esp
+7831,The Great City of Solitude.esp
+121503,The Great City of Solitude.esp
+231055,JK's Whiterun's Outskirts.esp
+1169342,JK's Whiterun's Outskirts.esp
+1273331,JK's Whiterun's Outskirts.esp
+1294131,JK's Whiterun's Outskirts.esp
+1502095,JK's Whiterun's Outskirts.esp
+1502103,JK's Whiterun's Outskirts.esp
+1543686,JK's Whiterun's Outskirts.esp
+1564563,JK's Whiterun's Outskirts.esp
+1564688,JK's Whiterun's Outskirts.esp
+1606687,JK's Whiterun's Outskirts.esp
+1648576,JK's Whiterun's Outskirts.esp
+2520176,JK's Whiterun's Outskirts.esp
+44946,WindhelmSSE.esp
+44966,WindhelmSSE.esp
+107515,WindhelmSSE.esp
+211690,WindhelmSSE.esp
+527435,WindhelmSSE.esp
+569318,WindhelmSSE.esp
+569500,WindhelmSSE.esp
+590381,WindhelmSSE.esp
+674139,WindhelmSSE.esp
+736552,WindhelmSSE.esp
+778319,WindhelmSSE.esp
+778337,WindhelmSSE.esp
+2546682,WindhelmSSE.esp
+2332811,PalaceofTheKings.esp
+1128568,Riften Docks Overhaul.esp
+1128569,Riften Docks Overhaul.esp
+1128570,Riften Docks Overhaul.esp
+1128571,Riften Docks Overhaul.esp
+1128572,Riften Docks Overhaul.esp
+1128573,Riften Docks Overhaul.esp
+1149310,Riften Docks Overhaul.esp
+1149311,Riften Docks Overhaul.esp
+1149312,Riften Docks Overhaul.esp
+1149313,Riften Docks Overhaul.esp
+81291,The Great City of Winterhold v4.esp
+81305,The Great City of Winterhold v4.esp
+402928,The Great City of Winterhold v4.esp
+1093827,The Great City of Winterhold v4.esp
+1093828,The Great City of Winterhold v4.esp
+1093840,The Great City of Winterhold v4.esp
+1093875,The Great City of Winterhold v4.esp
+34241,The Great City of Dragon Bridge.esp
+22817,Stendarr Rising.esp
+86698,Stendarr Rising.esp
+86699,Stendarr Rising.esp
+86734,Stendarr Rising.esp
+574266,Helgen Reborn.esp
+3441,ClefJ's Morthal.esp
+24371,ClefJ's Morthal.esp
+24374,ClefJ's Morthal.esp
+45514,ClefJ's Morthal.esp
+941128,ClefJ's Morthal.esp
+135223,North Keep.esp
+135225,North Keep.esp
+135230,North Keep.esp
+135258,North Keep.esp
+135288,North Keep.esp
+135316,North Keep.esp
+135317,North Keep.esp
+135629,North Keep.esp
+135632,North Keep.esp
+135805,North Keep.esp
+135975,North Keep.esp
+177575,North Keep.esp
+23259,Falkhurst.esp
+44456,Falkhurst.esp
+22791,VikingShipPlayerHome.esp
+22840,Iggath.esp
+2049,Granitehall.esp
+2076,Granitehall.esp
+2092,Granitehall.esp
+2104,Granitehall.esp
+2123,Granitehall.esp
+2142,Granitehall.esp
+2168,Granitehall.esp
+2178,Granitehall.esp
+2197,Granitehall.esp
+2199,Granitehall.esp
+2200,Granitehall.esp
+2217,Granitehall.esp
+2233,Granitehall.esp
+2249,Granitehall.esp
+2255,Granitehall.esp
+2314,Granitehall.esp
+2320,Granitehall.esp
+2399,Granitehall.esp
+2428,Granitehall.esp
+2755,Granitehall.esp
+2972,Granitehall.esp
+22789,Laintar Dale.esp
+22790,Laintar Dale.esp
+22791,Laintar Dale.esp
+22810,Laintar Dale.esp
+22812,Laintar Dale.esp
+22868,Laintar Dale.esp
+22942,Laintar Dale.esp
+22950,Laintar Dale.esp
+23037,Laintar Dale.esp
+23069,Laintar Dale.esp
+23110,Laintar Dale.esp
+23143,Laintar Dale.esp
+23299,Laintar Dale.esp
+64988,Laintar Dale.esp
+64995,Laintar Dale.esp
+65002,Laintar Dale.esp
+65030,Laintar Dale.esp
+65042,Laintar Dale.esp
+65047,Laintar Dale.esp
+65048,Laintar Dale.esp
+65060,Laintar Dale.esp
+65071,Laintar Dale.esp
+65103,Laintar Dale.esp
+65106,Laintar Dale.esp
+65123,Laintar Dale.esp
+65131,Laintar Dale.esp
+65134,Laintar Dale.esp
+65150,Laintar Dale.esp
+65163,Laintar Dale.esp
+65199,Laintar Dale.esp
+65214,Laintar Dale.esp
+65230,Laintar Dale.esp
+65292,Laintar Dale.esp
+65297,Laintar Dale.esp
+65392,Laintar Dale.esp
+86298,Laintar Dale.esp
+86317,Laintar Dale.esp
+86320,Laintar Dale.esp
+86332,Laintar Dale.esp
+107129,Laintar Dale.esp
+607963,Laintar Dale.esp
+22785,The Great Village of Kynesgrove.esp
+43530,The Great Village of Kynesgrove.esp
+85077,The Great Village of Kynesgrove.esp
+85094,The Great Village of Kynesgrove.esp
+646490,The Great Village of Kynesgrove.esp
+792793,The Great Village of Kynesgrove.esp
+792794,The Great Village of Kynesgrove.esp
+813568,The Great Village of Kynesgrove.esp
+855086,The Great Village of Kynesgrove.esp
+268375,Amber Guard.esp
+461555,Amber Guard.esp
+497576,Amber Guard.esp
+1188729,Amber Guard.esp
+1313382,Amber Guard.esp
+1396899,Amber Guard.esp
+1396937,Amber Guard.esp
+1522106,Amber Guard.esp
+1626289,Amber Guard.esp
+1626298,Amber Guard.esp
+1626308,Amber Guard.esp
+1688778,Amber Guard.esp
+1751275,Amber Guard.esp
+1751290,Amber Guard.esp
+1918078,Amber Guard.esp
+14024,Dunpar Wall.esp
+14025,Dunpar Wall.esp
+14100,Dunpar Wall.esp
+14146,Dunpar Wall.esp
+26130,Dunpar Wall.esp
+26135,Dunpar Wall.esp
+26168,Dunpar Wall.esp
+38314,Dunpar Wall.esp
+38525,Dunpar Wall.esp
+50590,Dunpar Wall.esp
+50597,Dunpar Wall.esp
+62692,Dunpar Wall.esp
+86861,Dunpar Wall.esp
+135321,Dunpar Wall.esp
+135333,Dunpar Wall.esp
+135357,Dunpar Wall.esp
+231470,Dunpar Wall.esp
+3437,Granite Hill.esp
+3448,Granite Hill.esp
+3449,Granite Hill.esp
+3470,Granite Hill.esp
+3489,Granite Hill.esp
+3497,Granite Hill.esp
+3498,Granite Hill.esp
+3580,Granite Hill.esp
+3601,Granite Hill.esp
+3657,Granite Hill.esp
+3740,Granite Hill.esp
+3742,Granite Hill.esp
+5148,Granite Hill.esp
+5181,Granite Hill.esp
+5206,Granite Hill.esp
+5207,Granite Hill.esp
+5208,Granite Hill.esp
+5214,Granite Hill.esp
+6716,Granite Hill.esp
+17077,Granite Hill.esp
+28661,Granite Hill.esp
+28691,Granite Hill.esp
+28807,Granite Hill.esp
+28812,Granite Hill.esp
+28897,Granite Hill.esp
+28906,Granite Hill.esp
+30397,Granite Hill.esp
+30436,Granite Hill.esp
+305327,Granite Hill.esp
+12232,Reich Corigate.esp
+12379,Reich Corigate.esp
+12382,Reich Corigate.esp
+22554,Reich Corigate.esp
+22571,Reich Corigate.esp
+32801,Reich Corigate.esp
+32808,Reich Corigate.esp
+32810,Reich Corigate.esp
+32817,Reich Corigate.esp
+32844,Reich Corigate.esp
+43162,Reich Corigate.esp
+43163,Reich Corigate.esp
+43176,Reich Corigate.esp
+43212,Reich Corigate.esp
+43283,Reich Corigate.esp
+43284,Reich Corigate.esp
+53540,Reich Corigate.esp
+84106,Reich Corigate.esp
+84152,Reich Corigate.esp
+84158,Reich Corigate.esp
+84261,Reich Corigate.esp
+135114,Reich Corigate.esp
+145315,Reich Corigate.esp
+145437,Reich Corigate.esp
+165844,Reich Corigate.esp
+176111,Reich Corigate.esp
+176113,Reich Corigate.esp
+186329,Reich Corigate.esp
+247571,Reich Corigate.esp
+257975,Reich Corigate.esp
+3316999,CollegeOfWinterholdImmersive.esp
+2076,COTN - Dawnstar.esp
+2078,JK's Windhelm's Outskirts.esp
+2081,JK's Windhelm's Outskirts.esp
+2083,JK's Windhelm's Outskirts.esp
+2084,JK's Windhelm's Outskirts.esp
+2097,JK's Windhelm's Outskirts.esp
+2112,JK's Windhelm's Outskirts.esp
+2113,JK's Windhelm's Outskirts.esp
+2114,JK's Windhelm's Outskirts.esp
+2115,JK's Windhelm's Outskirts.esp
+2120,JK's Windhelm's Outskirts.esp
+2127,JK's Windhelm's Outskirts.esp
+2166,JK's Windhelm's Outskirts.esp
+2199,JK's Windhelm's Outskirts.esp
+2335,JK's Windhelm's Outskirts.esp
+2492,JK's Windhelm's Outskirts.esp
+2494,JK's Windhelm's Outskirts.esp
+2590,JK's Windhelm's Outskirts.esp
+2593,JK's Windhelm's Outskirts.esp
+2594,JK's Windhelm's Outskirts.esp
+2602,JK's Windhelm's Outskirts.esp
+2611,JK's Windhelm's Outskirts.esp
+2712,JK's Windhelm's Outskirts.esp
+2741,JK's Windhelm's Outskirts.esp
+2760,JK's Windhelm's Outskirts.esp
+2806,JK's Windhelm's Outskirts.esp
+3094,JK's Windhelm's Outskirts.esp
+3208,JK's Windhelm's Outskirts.esp
+3210,JK's Windhelm's Outskirts.esp
+3213,JK's Windhelm's Outskirts.esp
+3225,JK's Windhelm's Outskirts.esp
+3228,JK's Windhelm's Outskirts.esp
+414,JK's Markarth Outskirts.esp
+674,JK's Markarth Outskirts.esp
+1156,JK's Markarth Outskirts.esp
+1496,JK's Markarth Outskirts.esp
+1714,JK's Markarth Outskirts.esp
+28,JS Order of Aetherius.esp
+89,JS Order of Aetherius.esp
+200,JS Order of Aetherius.esp
+46,Lillemyr.esp

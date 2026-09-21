@@ -1,0 +1,20 @@
+[LOD]
+Width=404.843750
+Depth=424.122040
+Height=616.904785
+ShiftX=0.000000
+ShiftY=0.000000
+ShiftZ=-21.601152
+Scale=1.000000
+CRC32=81216011
+Model=Meshes\jelidity\trees\treeaspen05summer.nif
+ModelCRC32=EA0D305D
+Texture_1=textures\jelidity\trees\northern hemispheres\aspenbranchsummer.dds
+TextureCRC32_1=54370D67
+Texture_2=textures\landscape\trees\northern hemispheres\aspenbranch_n.dds
+TextureCRC32_2=A6E6B3AC
+Texture_3=textures\landscape\trees\northern hemispheres\aspenbark.dds
+TextureCRC32_3=89CA35FB
+Texture_4=textures\landscape\trees\northern hemispheres\aspenbark_n.dds
+TextureCRC32_4=9E62EA8F
+

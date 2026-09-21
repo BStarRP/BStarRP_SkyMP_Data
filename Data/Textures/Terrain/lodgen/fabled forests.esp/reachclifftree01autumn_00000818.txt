@@ -1,0 +1,20 @@
+[LOD]
+Width=512.737549
+Depth=512.737549
+Height=656.304077
+ShiftX=0.000000
+ShiftY=0.000000
+ShiftZ=-113.239082
+Scale=1.000000
+CRC32=68D956BC
+Model=Meshes\jelidity\trees\reachclifftree01autumn.nif
+ModelCRC32=E22672EE
+Texture_1=textures\landscape\trees\northern hemispheres\reachbark.dds
+TextureCRC32_1=17E262C6
+Texture_2=textures\landscape\trees\northern hemispheres\reachbark_n.dds
+TextureCRC32_2=5351ED30
+Texture_3=textures\landscape\trees\northern hemispheres\reachtree.dds
+TextureCRC32_3=EA512F60
+Texture_4=textures\landscape\trees\northern hemispheres\reachtree_n.dds
+TextureCRC32_4=AA7146B4
+
