@@ -1,0 +1,16 @@
+[LOD]
+Width=665.833679
+Depth=475.595459
+Height=760.952759
+ShiftX=0.000000
+ShiftY=0.000000
+ShiftZ=-154.013641
+Scale=1.000000
+CRC32=3DD04E50
+Model=Meshes\dlc01\landscape\plants\soulcairntreegroup01_l1.nif
+ModelCRC32=0DCC5E0F
+Texture_1=textures\dlc01\plants\SoulCairnTreebark01_n.dds
+TextureCRC32_1=AC8A640A
+Texture_2=textures\dlc01\plants\SoulCairnTreebark01.dds
+TextureCRC32_2=7846C58B
+

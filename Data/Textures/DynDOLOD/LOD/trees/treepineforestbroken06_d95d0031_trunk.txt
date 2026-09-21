@@ -1,0 +1,27 @@
+[LOD]
+Width=398.538879
+Depth=416.199432
+Height=1417.027100
+ShiftX=0.000000
+ShiftY=0.000000
+ShiftZ=-69.637642
+Scale=1.000000
+Width_1=387.753510
+Height_1=1417.027100
+Adjust_1=-2.383561
+CRC32_1=D27BBDA5
+Width_2=356.077667
+Height_2=1417.027100
+Adjust_2=10.378496
+CRC32_2=D5A8C256
+Model=dyndolod\render\billboards\dyndolod\lod\trees\treepineforestbroken06_d95d0031_trunk.nif
+ModelCRC32=D2C16F40
+Texture_1=textures\dlc02\architecture\edgetrim\WoodEdgeTrim01.dds
+TextureCRC32_1=B4722C46
+Texture_2=textures\dlc02\architecture\edgetrim\WoodEdgeTrim01_n.dds
+TextureCRC32_2=C54C8FF1
+Texture_3=textures\landscape\trees\northern hemispheres\ashbark_atlas.dds
+TextureCRC32_3=34FB01B9
+Texture_4=textures\landscape\trees\northern hemispheres\ashbark_atlas_n.dds
+TextureCRC32_4=999B1826
+

@@ -1,0 +1,23 @@
+[LOD]
+Width=260.349243
+Depth=334.982361
+Height=833.117615
+ShiftX=0.000000
+ShiftY=0.000000
+ShiftZ=-74.541260
+Scale=1.000000
+Width_1=250.690002
+Height_1=833.117615
+Adjust_1=-42.417328
+CRC32_1=337F0F4C
+Width_2=299.591034
+Height_2=829.703186
+Adjust_2=38.818695
+CRC32_2=F1C2C7D4
+Model=dyndolod\render\billboards\dyndolod\lod\trees\marshtree02_751fa76b_trunk.nif
+ModelCRC32=082EACF5
+Texture_1=textures\landscape\trees\northern hemispheres\tundrabark_n.dds
+TextureCRC32_1=E419A7A2
+Texture_2=textures\landscape\trees\northern hemispheres\tundrabark.dds
+TextureCRC32_2=35622F8D
+

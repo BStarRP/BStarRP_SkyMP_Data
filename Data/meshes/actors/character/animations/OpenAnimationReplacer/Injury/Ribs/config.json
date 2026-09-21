@@ -1,0 +1,15 @@
+{
+    "name": "Ribs",
+    "description": "Wounds _BrokenRibsSoft idle/loco. Variable07 7.",
+    "author": "Wounds animations",
+    "priority": 6100100,
+    "conditions": [
+        {
+            "condition": "CompareValues",
+            "requiredVersion": "1.0.0.0",
+            "Value A": { "actorValue": 74, "actorValueType": "Value" },
+            "Comparison": "==",
+            "Value B": { "value": 7.0 }
+        }
+    ]
+}

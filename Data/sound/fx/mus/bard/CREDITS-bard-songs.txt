@@ -1,0 +1,49 @@
+Bard song charge phrases
+========================
+
+Sound\FX\mus\bard\songs\*.wav
+  3-second opening phrases sliced from Skyrim Special Edition
+  Skyrim - Sounds.bsa  sound\fx\mus\bard\{lute,flute,drum}\mus_bard*.wav
+  Bethesda Softworks / Zenimax. Vanilla tavern tracks only.
+
+meshes\weapons\bard\{lute,flute,drum}.nif
+  Copied from Skyrim - Meshes0.bsa
+  meshes\clutter\common\{lute01,flute01,drum01}.nif
+  Bethesda Softworks / Zenimax.
+
+Sound\FX\mus\bard\tavern\{Lute,Flute,Drum}\*\*.xwm
+  Tavern instrumentals from Skyrim's Got Talent - Improve As a Bard
+  (Nexus 50357, 1.76). Rank folders Beginner / Half-Decent / TrueBard|BardLevel / Pro.
+  Clueless / duo / voice files were not copied. Do not install SGT.esp.
+
+Sound\FX\mus\bard\tavern\BA\{Lute,Flute,Drum}\*.xwm
+  Extra player tavern clips from BA Bard Songs (Nexus 47202, 1.3).
+  Split by instrument slot into Adept / Expert / Master pools. Do not install BA Bard Songs.esp.
+
+Sound\FX\mus\bard\tavern\SGT\Duos\{FluteLute,FluteDrum,LuteDrum}\*.xwm
+  Mixed SGT duet stems. Both nearby bards play the same mix. Do not install SGT.esp.
+
+Sound\FX\mus\bard\tones\lute-*.wav
+  Notes sliced from Bard Magic Overhaul lute melody tracks
+  (mus_fstbardlute / mus_nmbardlute). Loop until charge release.
+  Do not install BardMagicOverhaul.esp.
+
+Sound\FX\mus\bard\tones\flute-*.wav
+  Notes sliced from vanilla mus_bardflute_* plus Dragon Bard
+  MagicPanFlute / PanFluteSong01 (Nexus 151231). Loop until release.
+  Do not install DragonBardUltimate.esp.
+
+Sound\FX\mus\bard\tones\drum-*.wav
+  Notes sliced from vanilla mus_barddrum_* plus Dragon Bard
+  HandpanSong01-03. Loop until release. Do not install those plugins.
+
+meshes\actors\character\animations\OpenAnimationReplacer\Bard\{Lute,Flute,Drum}
+  OAR pack gated on Core.esp staff WEAPs 21ACE2 / 21ACE3 / 21ACE4.
+  Lute idle/charge/release from DwemerCore DCGuitar (Nexus 158409).
+  Flute loop NpcFluteAnim, release PanFluteShortAnim; drum HandpanAnim
+  from Dragon Bard Ultimate (Nexus 151231). Staff walkarm/runarm/sprint
+  from SGT Free Movement (Nexus 50357 optional, 1.60) drink-tray loco
+  remaps. Stand idle stays the play loops. Do not install DwemerCore.esp,
+  DragonBardUltimate.esp, SGT, or Free Movement.esp.
+
+Do not copy these files into Steam Skyrim Data. Launcher patch only.

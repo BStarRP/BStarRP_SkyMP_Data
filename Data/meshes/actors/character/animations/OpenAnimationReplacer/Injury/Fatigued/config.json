@@ -1,0 +1,54 @@
+{
+    "name": "Fatigued",
+    "description": "EVG Fatigued 2 idle + Injured tired loco. Variable07 11. Driven by staminaExhausted (grey bar), not stam %.",
+    "author": "Everglaid",
+    "priority": 6100050,
+    "interruptible": true,
+    "hasCustomBlendTimeOnInterrupt": true,
+    "blendTimeOnInterrupt": 0.35,
+    "hasCustomBlendTimeOnLoop": true,
+    "blendTimeOnLoop": 0.75,
+    "replacementAnimDatas": [
+        {
+            "projectName": "DefaultFemale",
+            "path": "data\\meshes\\actors\\character\\animations\\OpenAnimationReplacer\\Injury\\Fatigued\\female\\_variants_mt_runforward",
+            "variantMode": 1,
+            "variantStateScope": 1,
+            "blendBetweenVariants": false,
+            "resetRandomOnLoopOrEcho": true,
+            "sharePlayedHistory": false,
+            "variants": [
+                { "filename": "inj1.hkx" },
+                { "filename": "inj2.hkx" },
+                { "filename": "inj3.hkx" },
+                { "filename": "inj4.hkx" },
+                { "filename": "orig.hkx", "disabled": true }
+            ]
+        },
+        {
+            "projectName": "DefaultMale",
+            "path": "data\\meshes\\actors\\character\\animations\\OpenAnimationReplacer\\Injury\\Fatigued\\male\\_variants_mt_runforward",
+            "variantMode": 1,
+            "variantStateScope": 1,
+            "blendBetweenVariants": false,
+            "resetRandomOnLoopOrEcho": true,
+            "sharePlayedHistory": false,
+            "variants": [
+                { "filename": "inj1.hkx" },
+                { "filename": "inj2.hkx" },
+                { "filename": "inj3.hkx" },
+                { "filename": "inj4.hkx" },
+                { "filename": "orig.hkx", "disabled": true }
+            ]
+        }
+    ],
+    "conditions": [
+        {
+            "condition": "CompareValues",
+            "requiredVersion": "1.0.0.0",
+            "Value A": { "actorValue": 74, "actorValueType": "Value" },
+            "Comparison": "==",
+            "Value B": { "value": 11.0 }
+        }
+    ]
+}

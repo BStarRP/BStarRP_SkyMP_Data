@@ -1,0 +1,20 @@
+[LOD]
+Width=531.112610
+Depth=531.112610
+Height=472.100098
+ShiftX=0.000000
+ShiftY=0.000000
+ShiftZ=-16.959312
+Scale=1.000000
+CRC32=66E9A3F1
+Model=Meshes\landscape\trees\ahappylittletreemod\reachtree01.nif
+ModelCRC32=6FF04C1F
+Texture_1=textures\landscape\trees\northern hemispheres\reachbark.dds
+TextureCRC32_1=17E262C6
+Texture_2=textures\landscape\trees\northern hemispheres\reachbark_n.dds
+TextureCRC32_2=5351ED30
+Texture_3=textures\landscape\trees\northern hemispheres\reachtree.dds
+TextureCRC32_3=EA512F60
+Texture_4=textures\landscape\trees\northern hemispheres\reachtree_n.dds
+TextureCRC32_4=AA7146B4
+

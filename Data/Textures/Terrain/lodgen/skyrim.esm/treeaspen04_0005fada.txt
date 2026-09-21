@@ -1,0 +1,20 @@
+[LOD]
+Width=253.702103
+Depth=282.975433
+Height=312.248749
+ShiftX=0.000000
+ShiftY=0.000000
+ShiftZ=-4.673737
+Scale=1.000000
+CRC32=7B595F24
+Model=Meshes\landscape\trees\treeaspen04.nif
+ModelCRC32=1B17F71A
+Texture_1=textures\landscape\trees\northern hemispheres\aspenbranch.dds
+TextureCRC32_1=D50AFC32
+Texture_2=textures\landscape\trees\northern hemispheres\aspenbranch_n.dds
+TextureCRC32_2=A6E6B3AC
+Texture_3=textures\landscape\trees\northern hemispheres\aspenbark.dds
+TextureCRC32_3=89CA35FB
+Texture_4=textures\landscape\trees\northern hemispheres\aspenbark_n.dds
+TextureCRC32_4=9E62EA8F
+

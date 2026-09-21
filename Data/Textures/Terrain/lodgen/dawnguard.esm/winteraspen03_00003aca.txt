@@ -1,0 +1,20 @@
+[LOD]
+Width=568.467407
+Depth=490.058075
+Height=1254.548706
+ShiftX=0.000000
+ShiftY=0.000000
+ShiftZ=-72.999443
+Scale=1.000000
+CRC32=C9D5E559
+Model=Meshes\dlc01\landscape\trees\winteraspen03.nif
+ModelCRC32=A1217773
+Texture_1=textures\landscape\trees\northern hemispheres\tundradriftwood_n.dds
+TextureCRC32_1=812998F7
+Texture_2=textures\landscape\trees\northern hemispheres\tundradriftwood.dds
+TextureCRC32_2=0BAB083E
+Texture_3=textures\landscape\trees\northern hemispheres\aspenbark.dds
+TextureCRC32_3=89CA35FB
+Texture_4=textures\landscape\trees\northern hemispheres\aspenbark_n.dds
+TextureCRC32_4=9E62EA8F
+

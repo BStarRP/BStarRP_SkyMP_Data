@@ -1,0 +1,23 @@
+[LOD]
+Width=876.481689
+Depth=1235.454590
+Height=1019.905945
+ShiftX=0.000000
+ShiftY=0.000000
+ShiftZ=-240.158569
+Scale=1.000000
+Width_1=869.603333
+Height_1=1019.905945
+Adjust_1=-58.241542
+CRC32_1=B5567E4B
+Width_2=774.384460
+Height_2=1019.905945
+Adjust_2=-192.216143
+CRC32_2=F86CDBAB
+Model=dyndolod\render\billboards\dyndolod\lod\trees\reachclifftree02_1ad939d8_trunk.nif
+ModelCRC32=C2B87DA9
+Texture_1=textures\landscape\trees\northern hemispheres\reachbark.dds
+TextureCRC32_1=17E262C6
+Texture_2=textures\landscape\trees\northern hemispheres\reachbark_n.dds
+TextureCRC32_2=5351ED30
+

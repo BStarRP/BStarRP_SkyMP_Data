@@ -1,0 +1,59 @@
+{
+    "name": "Concussion",
+    "description": "Wounds BrokenSkull loco + concussion idle, EVG Headache idle variants. Variable07 6 concussion / 10 limp+concussion.",
+    "author": "Wounds animations / Everglaid",
+    "priority": 6100120,
+    "interruptible": true,
+    "hasCustomBlendTimeOnLoop": true,
+    "blendTimeOnLoop": 0.4,
+    "replacementAnimDatas": [
+        {
+            "projectName": "DefaultFemale",
+            "path": "data\\meshes\\actors\\character\\animations\\OpenAnimationReplacer\\Injury\\Concussion\\female\\_variants_mt_idle",
+            "variantMode": 1,
+            "variantStateScope": 1,
+            "blendBetweenVariants": false,
+            "resetRandomOnLoopOrEcho": true,
+            "sharePlayedHistory": false,
+            "variants": [
+                { "filename": "1.hkx" },
+                { "filename": "alt.hkx" }
+            ]
+        },
+        {
+            "projectName": "DefaultMale",
+            "path": "data\\meshes\\actors\\character\\animations\\OpenAnimationReplacer\\Injury\\Concussion\\male\\_variants_mt_idle",
+            "variantMode": 1,
+            "variantStateScope": 1,
+            "blendBetweenVariants": false,
+            "resetRandomOnLoopOrEcho": true,
+            "sharePlayedHistory": false,
+            "variants": [
+                { "filename": "1.hkx" },
+                { "filename": "alt.hkx" }
+            ]
+        }
+    ],
+    "conditions": [
+        {
+            "condition": "OR",
+            "requiredVersion": "1.0.0.0",
+            "Conditions": [
+                {
+                    "condition": "CompareValues",
+                    "requiredVersion": "1.0.0.0",
+                    "Value A": { "actorValue": 74, "actorValueType": "Value" },
+                    "Comparison": "==",
+                    "Value B": { "value": 6.0 }
+                },
+                {
+                    "condition": "CompareValues",
+                    "requiredVersion": "1.0.0.0",
+                    "Value A": { "actorValue": 74, "actorValueType": "Value" },
+                    "Comparison": "==",
+                    "Value B": { "value": 10.0 }
+                }
+            ]
+        }
+    ]
+}

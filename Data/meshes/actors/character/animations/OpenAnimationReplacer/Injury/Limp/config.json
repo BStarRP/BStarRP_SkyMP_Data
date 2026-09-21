@@ -1,0 +1,74 @@
+{
+    "name": "Limp",
+    "description": "EVG Injured walk/run. Variable07 1 limpL / 2 limpR / 3 limpBoth. Wounds wounded-leg folders shipped empty.",
+    "author": "Everglaid",
+    "priority": 6100200,
+    "interruptible": true,
+    "hasCustomBlendTimeOnInterrupt": true,
+    "blendTimeOnInterrupt": 0.35,
+    "hasCustomBlendTimeOnLoop": true,
+    "blendTimeOnLoop": 0.35,
+    "replacementAnimDatas": [
+        {
+            "projectName": "DefaultFemale",
+            "path": "data\\meshes\\actors\\character\\animations\\OpenAnimationReplacer\\Injury\\Limp\\female\\_variants_mt_runforward",
+            "variantMode": 1,
+            "variantStateScope": 1,
+            "blendBetweenVariants": false,
+            "resetRandomOnLoopOrEcho": true,
+            "sharePlayedHistory": false,
+            "variants": [
+                { "filename": "inj1.hkx" },
+                { "filename": "inj2.hkx" },
+                { "filename": "inj3.hkx" },
+                { "filename": "inj4.hkx" },
+                { "filename": "orig.hkx", "disabled": true }
+            ]
+        },
+        {
+            "projectName": "DefaultMale",
+            "path": "data\\meshes\\actors\\character\\animations\\OpenAnimationReplacer\\Injury\\Limp\\male\\_variants_mt_runforward",
+            "variantMode": 1,
+            "variantStateScope": 1,
+            "blendBetweenVariants": false,
+            "resetRandomOnLoopOrEcho": true,
+            "sharePlayedHistory": false,
+            "variants": [
+                { "filename": "inj1.hkx" },
+                { "filename": "inj2.hkx" },
+                { "filename": "inj3.hkx" },
+                { "filename": "inj4.hkx" },
+                { "filename": "orig.hkx", "disabled": true }
+            ]
+        }
+    ],
+    "conditions": [
+        {
+            "condition": "OR",
+            "requiredVersion": "1.0.0.0",
+            "Conditions": [
+                {
+                    "condition": "CompareValues",
+                    "requiredVersion": "1.0.0.0",
+                    "Value A": { "actorValue": 74, "actorValueType": "Value" },
+                    "Comparison": "==",
+                    "Value B": { "value": 1.0 }
+                },
+                {
+                    "condition": "CompareValues",
+                    "requiredVersion": "1.0.0.0",
+                    "Value A": { "actorValue": 74, "actorValueType": "Value" },
+                    "Comparison": "==",
+                    "Value B": { "value": 2.0 }
+                },
+                {
+                    "condition": "CompareValues",
+                    "requiredVersion": "1.0.0.0",
+                    "Value A": { "actorValue": 74, "actorValueType": "Value" },
+                    "Comparison": "==",
+                    "Value B": { "value": 3.0 }
+                }
+            ]
+        }
+    ]
+}

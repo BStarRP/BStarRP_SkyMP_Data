@@ -1,0 +1,20 @@
+[LOD]
+Width=806.326355
+Depth=766.993347
+Height=2517.311523
+ShiftX=0.000000
+ShiftY=0.000000
+ShiftZ=-136.419037
+Scale=1.000000
+CRC32=5DD820CA
+Model=Meshes\dlc02\landscape\trees\treepineforestashl02.nif
+ModelCRC32=1FDBF3AD
+Texture_1=textures\landscape\trees\northern hemispheres\ashbark_atlas_n.dds
+TextureCRC32_1=999B1826
+Texture_2=textures\landscape\trees\northern hemispheres\ashbark_atlas.dds
+TextureCRC32_2=34FB01B9
+Texture_3=textures\landscape\trees\northern hemispheres\ashpineatlas.dds
+TextureCRC32_3=A9998117
+Texture_4=textures\landscape\trees\northern hemispheres\ashpineatlas_n.dds
+TextureCRC32_4=1398F495
+

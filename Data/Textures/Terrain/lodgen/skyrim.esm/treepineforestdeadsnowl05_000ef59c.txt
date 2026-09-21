@@ -1,0 +1,20 @@
+[LOD]
+Width=569.918640
+Depth=641.158447
+Height=2279.674561
+ShiftX=0.000000
+ShiftY=0.000000
+ShiftZ=-113.997078
+Scale=1.000000
+CRC32=698443E7
+Model=Meshes\landscape\trees\treepineforestdeadsnowl05.nif
+ModelCRC32=F26A64EA
+Texture_1=textures\landscape\trees\northern hemispheres\deadatlas.dds
+TextureCRC32_1=6F08A704
+Texture_2=textures\landscape\trees\northern hemispheres\deadatlas_n.dds
+TextureCRC32_2=F47F3ECC
+Texture_3=textures\landscape\trees\northern hemispheres\snowbark_atlas.dds
+TextureCRC32_3=B566BDE3
+Texture_4=textures\landscape\trees\northern hemispheres\snowbark_atlas_n.dds
+TextureCRC32_4=1F1F136D
+

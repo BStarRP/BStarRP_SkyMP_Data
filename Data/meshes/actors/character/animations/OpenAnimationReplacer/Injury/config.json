@@ -1,0 +1,5 @@
+{
+    "name": "Injury",
+    "author": "Everglaid / Wounds animations (remapped)",
+    "description": "Injury/fatigue on Variable07 (actorValue 74). Ambient EVG (cold / headache / modesty) uses weather, magicka %, worn keywords — not Variable07.\n1 limpL  2 limpR  3 limpBoth  4 armL  5 armR  6 concussion  7 ribs  8 limp+armL  9 limp+armR  10 limp+concussion  11 fatigued"
+}

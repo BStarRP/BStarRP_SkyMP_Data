@@ -1,0 +1,23 @@
+[LOD]
+Width=259.859589
+Depth=240.379639
+Height=1750.633057
+ShiftX=0.000000
+ShiftY=0.000000
+ShiftZ=-119.546280
+Scale=1.000000
+Width_1=251.677155
+Height_1=1750.633057
+Adjust_1=-5.656939
+CRC32_1=359165C6
+Width_2=229.033035
+Height_2=1743.781250
+Adjust_2=7.209665
+CRC32_2=C3CDCA91
+Model=dyndolod\render\billboards\dyndolod\lod\trees\treepineforestdead05_7b6546e1_trunk.nif
+ModelCRC32=B3C93C71
+Texture_1=textures\landscape\trees\northern hemispheres\pinebark.dds
+TextureCRC32_1=807E7570
+Texture_2=textures\landscape\trees\northern hemispheres\pinebark_n.dds
+TextureCRC32_2=B9D5DB56
+

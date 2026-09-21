@@ -1,0 +1,20 @@
+[LOD]
+Width=531.143372
+Depth=637.372009
+Height=2266.211670
+ShiftX=0.000000
+ShiftY=0.000000
+ShiftZ=-113.997078
+Scale=1.000000
+CRC32=9CD72D34
+Model=Meshes\landscape\trees\treepineforestdead05.nif
+ModelCRC32=7B6546E1
+Texture_1=textures\landscape\trees\northern hemispheres\pineatlas_n.dds
+TextureCRC32_1=7A51A465
+Texture_2=textures\landscape\trees\northern hemispheres\pinebark.dds
+TextureCRC32_2=807E7570
+Texture_3=textures\landscape\trees\northern hemispheres\pineatlas.dds
+TextureCRC32_3=34049204
+Texture_4=textures\landscape\trees\northern hemispheres\pinebark_n.dds
+TextureCRC32_4=B9D5DB56
+

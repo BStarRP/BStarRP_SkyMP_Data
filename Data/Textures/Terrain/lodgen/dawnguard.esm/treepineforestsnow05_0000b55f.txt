@@ -1,0 +1,20 @@
+[LOD]
+Width=639.896423
+Depth=639.896423
+Height=2275.187256
+ShiftX=0.000000
+ShiftY=0.000000
+ShiftZ=-153.997070
+Scale=1.000000
+CRC32=C4083DBD
+Model=Meshes\landscape\trees\treepineforestsnow05.nif
+ModelCRC32=CC62DDFC
+Texture_1=textures\landscape\trees\northern hemispheres\pineatlas_n.dds
+TextureCRC32_1=7A51A465
+Texture_2=textures\landscape\trees\northern hemispheres\snowbark_atlas.dds
+TextureCRC32_2=B566BDE3
+Texture_3=textures\landscape\trees\northern hemispheres\snowbark_atlas_n.dds
+TextureCRC32_3=1F1F136D
+Texture_4=textures\landscape\trees\northern hemispheres\pineatlas.dds
+TextureCRC32_4=34049204
+

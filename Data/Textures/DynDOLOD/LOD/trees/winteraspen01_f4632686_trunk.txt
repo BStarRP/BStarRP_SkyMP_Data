@@ -1,0 +1,23 @@
+[LOD]
+Width=552.359436
+Depth=319.341766
+Height=1262.535889
+ShiftX=0.000000
+ShiftY=0.000000
+ShiftZ=-81.899963
+Scale=1.000000
+Width_1=537.559692
+Height_1=1262.535889
+Adjust_1=5.643889
+CRC32_1=314A5A51
+Width_2=315.451172
+Height_2=1257.382690
+Adjust_2=6.300214
+CRC32_2=3C98E11B
+Model=dyndolod\render\billboards\dyndolod\lod\trees\winteraspen01_f4632686_trunk.nif
+ModelCRC32=F9BF7985
+Texture_1=textures\landscape\trees\northern hemispheres\aspenbark.dds
+TextureCRC32_1=89CA35FB
+Texture_2=textures\landscape\trees\northern hemispheres\aspenbark_n.dds
+TextureCRC32_2=9E62EA8F
+

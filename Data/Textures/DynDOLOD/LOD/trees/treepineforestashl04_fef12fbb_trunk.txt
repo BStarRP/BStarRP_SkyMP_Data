@@ -1,0 +1,23 @@
+[LOD]
+Width=212.949371
+Depth=245.098892
+Height=2477.956299
+ShiftX=0.000000
+ShiftY=0.000000
+ShiftZ=-164.273499
+Scale=1.000000
+Width_1=208.004608
+Height_1=2477.956299
+Adjust_1=-2.660559
+CRC32_1=28B87595
+Width_2=236.901672
+Height_2=2458.597412
+Adjust_2=2.931606
+CRC32_2=B4C57791
+Model=dyndolod\render\billboards\dyndolod\lod\trees\treepineforestashl04_fef12fbb_trunk.nif
+ModelCRC32=2655CB3B
+Texture_1=textures\landscape\trees\northern hemispheres\ashbark_atlas.dds
+TextureCRC32_1=34FB01B9
+Texture_2=textures\landscape\trees\northern hemispheres\ashbark_atlas_n.dds
+TextureCRC32_2=999B1826
+

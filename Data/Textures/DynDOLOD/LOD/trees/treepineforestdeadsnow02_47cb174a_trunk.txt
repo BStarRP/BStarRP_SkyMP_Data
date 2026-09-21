@@ -1,0 +1,23 @@
+[LOD]
+Width=175.612610
+Depth=255.476547
+Height=2247.841309
+ShiftX=0.000000
+ShiftY=0.000000
+ShiftZ=-137.069427
+Scale=1.000000
+Width_1=172.576843
+Height_1=2247.841309
+Adjust_1=3.718783
+CRC32_1=6FE60651
+Width_2=203.313232
+Height_2=2230.280029
+Adjust_2=0.991943
+CRC32_2=2A3F158E
+Model=dyndolod\render\billboards\dyndolod\lod\trees\treepineforestdeadsnow02_47cb174a_trunk.nif
+ModelCRC32=6F631895
+Texture_1=textures\landscape\trees\northern hemispheres\snowbark_atlas.dds
+TextureCRC32_1=B566BDE3
+Texture_2=textures\landscape\trees\northern hemispheres\snowbark_atlas_n.dds
+TextureCRC32_2=1F1F136D
+

@@ -1,0 +1,17 @@
+{
+    "name": "Serpent Kick",
+    "author": "Verolevi / BStar",
+    "description": "Vanargand push-kick clip for CALLWindKick only. Priority above Feral so beasts keep claws on other swings.",
+    "priority": 60000030,
+    "conditions": [
+        {
+            "condition": "HasSpell",
+            "requiredVersion": "1.0.0.0",
+            "Spell": {
+                "pluginName": "Core.esp",
+                "formID": "215C8E"
+            },
+            "negated": false
+        }
+    ]
+}

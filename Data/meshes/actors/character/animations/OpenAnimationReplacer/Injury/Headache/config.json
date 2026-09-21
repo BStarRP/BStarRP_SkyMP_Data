@@ -1,0 +1,52 @@
+{
+    "name": "Headache",
+    "description": "EVG head-hold idle when magicka is under 10%. Hardcoded %, no EVG.esp. Not Variable07.",
+    "author": "Everglaid",
+    "priority": 6003121,
+    "interruptible": true,
+    "replacementAnimDatas": [
+        {
+            "projectName": "DefaultFemale",
+            "path": "data\\meshes\\actors\\character\\animations\\OpenAnimationReplacer\\Injury\\Headache\\female\\_variants_mt_idle",
+            "variantMode": 1,
+            "variantStateScope": 1,
+            "blendBetweenVariants": false,
+            "resetRandomOnLoopOrEcho": true,
+            "sharePlayedHistory": false,
+            "variants": [
+                { "filename": "1.hkx" },
+                { "filename": "alt.hkx" }
+            ]
+        },
+        {
+            "projectName": "DefaultMale",
+            "path": "data\\meshes\\actors\\character\\animations\\OpenAnimationReplacer\\Injury\\Headache\\male\\_variants_mt_idle",
+            "variantMode": 1,
+            "variantStateScope": 1,
+            "blendBetweenVariants": false,
+            "resetRandomOnLoopOrEcho": true,
+            "sharePlayedHistory": false,
+            "variants": [
+                { "filename": "1.hkx" },
+                { "filename": "alt.hkx" }
+            ]
+        }
+    ],
+    "conditions": [
+        {
+            "condition": "CompareValues",
+            "requiredVersion": "1.0.0.0",
+            "Value A": { "actorValue": 25, "actorValueType": "Percentage" },
+            "Comparison": "<",
+            "Value B": { "value": 0.1 }
+        },
+        {
+            "condition": "CompareValues",
+            "requiredVersion": "1.0.0.0",
+            "negated": true,
+            "Value A": { "actorValue": 25, "actorValueType": "Max" },
+            "Comparison": "==",
+            "Value B": { "value": 0.0 }
+        }
+    ]
+}
