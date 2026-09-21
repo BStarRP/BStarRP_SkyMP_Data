@@ -147,16 +147,18 @@ let stillPointers = lfsPaths.filter((p) => {
 });
 
 if (stillPointers.length > 0) {
-  console.log('Retrying', stillPointers.length, 'path(s) (smudge or lfs pull)');
+  // Prefer smudge-by-OID: works when path casing does not match .gitattributes on
+  // Linux (e.g. DynDOLOD.DLL vs *.dll) and git lfs fetch/checkout skipped the object.
+  console.log('Retrying', stillPointers.length, 'path(s) (smudge-by-oid, then lfs pull)');
   const retry = stillPointers;
   stillPointers = [];
   for (let i = 0; i < retry.length; i++) {
     const p = retry[i];
     try {
-      if (hasBracketPath(p)) {
-        console.log('git lfs smudge (retry)', gitPath(p));
-        smudgePointerFile(p);
-      } else {
+      console.log('git lfs smudge (retry)', gitPath(p));
+      smudgePointerFile(p);
+      const fullAfter = path.join(process.cwd(), p);
+      if (fs.existsSync(fullAfter) && isLfsPointer(fullAfter) && !hasBracketPath(p)) {
         pullOnePath(p);
       }
     } catch (e) {
