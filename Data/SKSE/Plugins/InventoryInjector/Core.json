@@ -1,0 +1,23 @@
+{
+  "$schema": "https://raw.githubusercontent.com/Exit-9B/InventoryInjector/main/docs/InventoryInjector.schema.json",
+  "rules": [
+    {
+      "match": {
+        "formType": "Weapon",
+        "formId": {
+          "anyOf": [
+            "Core.esp|21ACE2",
+            "Core.esp|21ACE3",
+            "Core.esp|21ACE4"
+          ]
+        }
+      },
+      "assign": {
+        "subTypeDisplay": "$Instrument",
+        "iconSource": "I4IconAddon/icons.swf",
+        "iconLabel": "misc_instrument",
+        "iconColor": "#FFFFFF"
+      }
+    }
+  ]
+}

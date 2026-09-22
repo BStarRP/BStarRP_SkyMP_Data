@@ -24,18 +24,17 @@ Sound\FX\mus\bard\tavern\SGT\Duos\{FluteLute,FluteDrum,LuteDrum}\*.xwm
   Mixed SGT duet stems. Both nearby bards play the same mix. Do not install SGT.esp.
 
 Sound\FX\mus\bard\tones\lute-*.wav
-  Notes sliced from Bard Magic Overhaul lute melody tracks
-  (mus_fstbardlute / mus_nmbardlute). Loop until charge release.
+  Eight 3-second sections, in order, of Bard Magic Overhaul
+  mus_nmbardlute_01. A short join only, so a repeat does not tick.
   Do not install BardMagicOverhaul.esp.
 
 Sound\FX\mus\bard\tones\flute-*.wav
-  Notes sliced from vanilla mus_bardflute_* plus Dragon Bard
-  MagicPanFlute / PanFluteSong01 (Nexus 151231). Loop until release.
-  Do not install DragonBardUltimate.esp.
+  Eight 3-second sections, in order, of vanilla mus_bardflute_01_sarba
+  (Skyrim - Sounds.bsa). Short loop join only.
 
 Sound\FX\mus\bard\tones\drum-*.wav
-  Notes sliced from vanilla mus_barddrum_* plus Dragon Bard
-  HandpanSong01-03. Loop until release. Do not install those plugins.
+  Eight 3-second sections, in order, of vanilla mus_barddrum_01.
+  Short loop join only.
 
 meshes\actors\character\animations\OpenAnimationReplacer\Bard\{Lute,Flute,Drum}
   OAR pack gated on Core.esp staff WEAPs 21ACE2 / 21ACE3 / 21ACE4.
