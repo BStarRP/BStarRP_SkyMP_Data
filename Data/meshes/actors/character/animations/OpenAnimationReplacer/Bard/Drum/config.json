@@ -1,18 +1,78 @@
 {
     "name": "Drum",
-    "description": "drum staff drawn: Handpan idle/charge, SGT FM move",
+    "description": "drum drawn, or a drum song in hand",
     "priority": 2000000,
     "interruptible": true,
     "replaceOnLoop": false,
     "conditions": [
         {
-            "condition": "IsEquipped",
+            "condition": "OR",
             "requiredVersion": "1.0.0.0",
-            "Form": {
-                "pluginName": "Core.esp",
-                "formID": "21ACE4"
-            },
-            "Left hand": false
+            "Conditions": [
+                {
+                    "condition": "IsEquipped",
+                    "requiredVersion": "1.0.0.0",
+                    "Form": {
+                        "pluginName": "Core.esp",
+                        "formID": "21ACE4"
+                    },
+                    "Left hand": false
+                },
+                {
+                    "condition": "IsEquipped",
+                    "requiredVersion": "1.0.0.0",
+                    "Form": {
+                        "pluginName": "Core.esp",
+                        "formID": "21ACEF"
+                    },
+                    "Left hand": false
+                },
+                {
+                    "condition": "IsEquipped",
+                    "requiredVersion": "1.0.0.0",
+                    "Form": {
+                        "pluginName": "Core.esp",
+                        "formID": "21ACEF"
+                    },
+                    "Left hand": true
+                },
+                {
+                    "condition": "IsEquipped",
+                    "requiredVersion": "1.0.0.0",
+                    "Form": {
+                        "pluginName": "Core.esp",
+                        "formID": "21ACF5"
+                    },
+                    "Left hand": false
+                },
+                {
+                    "condition": "IsEquipped",
+                    "requiredVersion": "1.0.0.0",
+                    "Form": {
+                        "pluginName": "Core.esp",
+                        "formID": "21ACF5"
+                    },
+                    "Left hand": true
+                },
+                {
+                    "condition": "IsEquipped",
+                    "requiredVersion": "1.0.0.0",
+                    "Form": {
+                        "pluginName": "Core.esp",
+                        "formID": "21ACFE"
+                    },
+                    "Left hand": false
+                },
+                {
+                    "condition": "IsEquipped",
+                    "requiredVersion": "1.0.0.0",
+                    "Form": {
+                        "pluginName": "Core.esp",
+                        "formID": "21ACFE"
+                    },
+                    "Left hand": true
+                }
+            ]
         }
     ]
 }

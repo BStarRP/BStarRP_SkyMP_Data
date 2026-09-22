@@ -40,9 +40,8 @@ meshes\actors\character\animations\OpenAnimationReplacer\Bard\{Lute,Flute,Drum}
   OAR pack gated on Core.esp staff WEAPs 21ACE2 / 21ACE3 / 21ACE4.
   Lute idle/charge/release from DwemerCore DCGuitar (Nexus 158409).
   Flute loop NpcFluteAnim, release PanFluteShortAnim; drum HandpanAnim
-  from Dragon Bard Ultimate (Nexus 151231). Staff walkarm/runarm/sprint
-  from SGT Free Movement (Nexus 50357 optional, 1.60) drink-tray loco
-  remaps. Stand idle stays the play loops. Do not install DwemerCore.esp,
-  DragonBardUltimate.esp, SGT, or Free Movement.esp.
+  from Dragon Bard Ultimate (Nexus 151231). Walk, run, and sprint keep
+  that performance on the arms and the staff step on the legs. Do not install
+  DwemerCore.esp, DragonBardUltimate.esp, SGT, or Free Movement.esp.
 
 Do not copy these files into Steam Skyrim Data. Launcher patch only.
