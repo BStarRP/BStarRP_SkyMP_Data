@@ -1,4 +1,4 @@
 # Patch notes
 
 ## Changes
-- Fixed dispall's to work properly
+- Improved bard instruments, animations, and sounds for bard casting
