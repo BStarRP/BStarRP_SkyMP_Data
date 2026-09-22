@@ -1724,6 +1724,8 @@ PS_OUTPUT main(PS_INPUT input, bool frontFace : SV_IsFrontFace)
 #		if defined(LANDSCAPE)
 	if (SharedData::lodBlendingSettings.DisableTerrainVertexColors)
 		pbrVertexColorSrc = 1;
+#		elif defined(TREE_ANIM)
+	pbrVertexColorSrc = 1;
 #		endif
 	float3 pbrVertexColor = Color::SrgbToLinear(pbrVertexColorSrc);
 	float pbrVertexAO = max(max(pbrVertexColor.x, pbrVertexColor.y), pbrVertexColor.z);
@@ -2514,6 +2516,8 @@ PS_OUTPUT main(PS_INPUT input, bool frontFace : SV_IsFrontFace)
 		input.Color.xyz = 1;
 	else
 		input.Color.xyz /= max(max(max(input.Color.x, input.Color.y), input.Color.z), EPSILON_DIVISION);
+#	elif defined(TREE_ANIM)
+	input.Color.xyz = 1;
 #	endif
 
 #	if defined(HAIR)
@@ -2727,6 +2731,12 @@ PS_OUTPUT main(PS_INPUT input, bool frontFace : SV_IsFrontFace)
 		fogFactor = exponentialHeightFog.w;
 	}
 #		endif
+	if ((Permutation::ExtraShaderDescriptor & Permutation::ExtraFlags::AdditiveLighting) != 0) {
+#		if defined(EXP_HEIGHT_FOG)
+		vanillaFogColor = 0.0;
+#		endif
+		fogColor = 0.0;
+	}
 	if ((FrameBuffer::FrameParams.y && FrameBuffer::FrameParams.z) || inReflection) {
 #		if defined(EXP_HEIGHT_FOG)
 		if (SharedData::exponentialHeightFogSettings.enabled) {
