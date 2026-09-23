@@ -1,34 +1,5 @@
 # Patch notes
 
 ## Changes
-- Fixed parcel to not force pickpocketing if your rank has access or its open access
-- Fixed dual casting to work with hands together
-- Fixed teaching spells to other players
-- Fixed gaining xp for successfull pickpockets from players, npcs, and chests
-- Fixed quick cast hot keys to work with left hand or both
-- Fixed community shaders to support linux users with unsupported shaders
-- Fixed an issue that caused mounted horse riders to be invisible
-- Fixed slowfall spell to help with fall damage and work properly
-- Fixed items in fishing that didnt go into bag
-- Fixed dispel to work on relog
-- Fixed first aid xp plus bonus for helping others
-- Fixed an issue with applying a poison
-- Fixed npc's not getting proper stats like mana from server
-- Fixed vampire blood bar with blood potions and blood magic
-- Fixed an issue with tamed animals losing interaction options
-- Fixed missing leather recipes for hunting
-- Fixed the new crops in the new towns
-- Fixed npc healing rates
-- Fixed repairing of enchanted items
-- Added seasonal return bonus's on farms and plants based on current season may yeild more
-- Updated several keys to be bindable in F9, keyboard & controller pad options
-- Updated community shaders to toggle them off on first boot and to re-bind the toggle button
-- Updated latest community shaders changes + fix for the room brightness when first logging in
-- Reworked taming animals now requires a specific food for the animal your taming, all animals have a favorite food, its up to you to figre it out, when feeding an animal it becomees dossile for 10 seconds and doesnt run away
-- Improved helping others with medical needs or potions to get people up
-- Updated when learning a new spell you can now cast it, but its only as effective as the percentage done learned, also other people casting the spell near you helps learn it faster (masters casting near by credit even more)
-- Reworked Dodge now works if blocking and then spacebar is pressed, you roll in direction you are pressing at same time
-- Updated Dual Wield Parry key to have a bindable hotkey, so you can chose a better key for blocking to dodge roll
-- Update Deep Wounds perk to work properly with new wounding system
-- Execute moved to 8 seconds, you start a weapon cleaning animation before it finishes then does the final kill
-- Removed all book / note text that had anything to do with after 4E 185, now all the lore in game is more accurate and some current =)
+- Added a warmth rating to dictate the cold animation
+- Fixed a crash opening mirror or appearance editor
