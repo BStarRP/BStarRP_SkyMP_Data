@@ -1,0 +1,19 @@
+{
+  "rules": [
+    {
+      "friendlyName": "Adds waterskins to general goods vendors",
+      "conditions": {
+        "containers": [ "0x078C0C|Skyrim.esm", "0x09CAF8|Skyrim.esm", "0x0A6C06|Skyrim.esm", "0x0A29AD|Skyrim.esm", "0x0A31B4|Skyrim.esm", "0x09E0D9|Skyrim.esm", "0x0A6BFC|Skyrim.esm", "0x07434B|Skyrim.esm", "0x07434D|Skyrim.esm", "0x07434E|Skyrim.esm", "0x0A3F05|Skyrim.esm", "0x09DA63|Skyrim.esm", "0x01F88D|Dragonborn.esm", "0x025020|Dragonborn.esm"],
+        "onlyVendors": true,
+        "allowVendors": true,
+        "bypassUnsafeContainers": true
+      },
+      "changes": [
+        {
+          "add": [ "0x80C|Waterskin.esp" ],
+          "count": 3
+        }
+      ]
+    }
+  ]
+}
