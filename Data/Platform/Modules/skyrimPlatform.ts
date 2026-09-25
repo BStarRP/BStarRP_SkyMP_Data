@@ -1696,10 +1696,12 @@ export declare function finishChannelCast(actorFormId: number, castingSource: Sp
 /** Dispel engine ActiveEffects cast by casterFormId. targetFormId omitted = player + parent-cell actors; set to limit to one target. Returns dispel count. */
 export declare function dispelEffectsByCaster(casterFormId: number, targetFormId?: number): number;
 /**
- * Apply a SPEL's ActiveEffects for vanilla compass icons, then zero magnitudes
- * so BuffSync / server AME remain authoritative.
+ * Apply a SPEL's ActiveEffects for vanilla compass icons. Leaves a live
+ * local cast alone. Zeros AV magnitudes; keeps Detect Life / Script mag.
  */
 export declare function applySpellHud(targetFormId: number, spellFormId: number, durationSec?: number): void;
+export declare function getFavoritedMagic(): number[];
+export declare function setObjectFavorited(formId: number, favorited: boolean): boolean;
 export declare function setPlayerStaminaExhausted(exhausted: boolean): void;
 export declare function flashActorValue(formId: number, actorValue: string, longFlash?: boolean): void;
 export declare function setActorStun(formId: number, current: number, max: number): void;

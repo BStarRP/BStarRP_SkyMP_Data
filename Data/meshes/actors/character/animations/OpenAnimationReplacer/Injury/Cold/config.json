@@ -1,6 +1,6 @@
 {
     "name": "Cold",
-    "description": "EVG shiver idle/loco. Snow weather, exterior only, no torch. Not Variable07.",
+    "description": "EVG shiver idle/loco. Variable07 12 = cold (snow + warmth below need + exterior + no torch). Client stamps from worn Survival warmth.",
     "author": "Everglaid",
     "priority": 6003125,
     "interruptible": true,
@@ -10,28 +10,11 @@
     "blendTimeOnLoop": 0.5,
     "conditions": [
         {
-            "condition": "CurrentWeatherHasFlag",
-            "requiredVersion": "1.2.0.0",
-            "Flag": { "value": 3.0 }
-        },
-        {
-            "condition": "IsInInterior",
+            "condition": "CompareValues",
             "requiredVersion": "1.0.0.0",
-            "negated": true
-        },
-        {
-            "condition": "IsEquippedType",
-            "requiredVersion": "1.0.0.0",
-            "Type": { "value": 11.0 },
-            "Left hand": true,
-            "negated": true
-        },
-        {
-            "condition": "IsEquippedType",
-            "requiredVersion": "1.0.0.0",
-            "Type": { "value": 11.0 },
-            "Left hand": false,
-            "negated": true
+            "Value A": { "actorValue": 74, "actorValueType": "Value" },
+            "Comparison": "==",
+            "Value B": { "value": 12.0 }
         }
     ]
 }

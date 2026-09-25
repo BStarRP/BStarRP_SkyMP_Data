@@ -1,0 +1,37 @@
+# Global Variable Framework config:Waterskin - Stay Hydrated in Tamriel
+
+enabled = true
+
+[[globals]]
+
+# If you don't want to set the value in menu in each game,
+# Set default_value to whatever you wish.
+default_value = 0.0
+set_on_new_game = true
+set_on_load_game = false
+
+form = "WaterskinDisableInnkeeperDialogue"
+label = "Disable Innkeeper Refill Dialogue"
+description = "Hide the option to ask Innkeepers to refill you waterskin."
+category = "Waterskin"
+show_in_menu = true
+visual_type = "checkbox"
+
+[[globals]]
+
+# If you don't want to set the value in menu in each game,
+# Set default_value to whatever you wish.
+default_value = 0.0
+set_on_new_game = true
+set_on_load_game = false
+
+form = "WaterskinDegradationChance"
+label = "Waterskin Degradation Chance"
+description = "Percent chance for your waterskin to deteriorate after each use. Once deteriorated, the waterskin is lost."
+category = "Waterskin"
+show_in_menu = true
+visual_type = "slider"
+min_value = 0.0
+max_value = 100.0
+step_value = 1.0
+value_fmt = "%.0f%%"
