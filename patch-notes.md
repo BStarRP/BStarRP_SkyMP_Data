@@ -25,4 +25,3 @@
 - Fixed the Windows server build
 - Improved server performance by skipping timers and script waits for objects that no longer exist
 - Improved server performance by caching perk and race lookups and trimming extra stat updates
-- Fixed fishing so caught items persist and award XP once, with a force-stop for characters still carrying the removed Fish Anywhere quest
