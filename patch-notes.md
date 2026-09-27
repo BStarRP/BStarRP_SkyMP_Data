@@ -23,3 +23,5 @@
 - Improved server performance by reading save records without copying them
 - Improved server performance by skipping equipment sync when stamina, health, or magicka changes
 - Fixed the Windows server build
+- Improved server performance by skipping timers and script waits for objects that no longer exist
+- Improved server performance by caching perk and race lookups and trimming extra stat updates
