@@ -1,46 +1,22 @@
 # Patch notes
 
 ## Changes
-- Fixed armor rating throwing an error when a weapon was worn
-- Fixed Magelight orb replacement and cleanup
-- Fixed effect and poison timers not being cleaned up, targeting the recent server crash
-- Fixed the master-server heartbeat waiting on the network and stalling the server
-- Removed the non-dawnstart lyngi teleports
-- Fixed void hole in lilemyr
-- Added winterhold guard gloves and boots
-- Added writs for divines (again)
-- Fixed entrances to Lyngwi
-- Added orc strongholds onto the map
-- Added server-side temperature. Your warmth comes from the armor you wear in each slot plus Fortify Warmth, and the server applies the Cold effect when you are too cold. The cold shiver follows how cold the server says you are, and NPCs no longer shiver in snow. Rain and storms turn to snow in the north and high in the mountains (about 376 m above sea level) without flipping back and forth at the edge, and the missing snow in the north is back
-- Added Penitus Oculatus and East Empire Company ranks
-- Updated hold rank bonuses so they only raise a skill up to the bonus
-- Fixed people and creatures appearing. They now show up as you get close instead of all at once when you enter a new area, appear where they belong (and get moved there again if they miss), and no longer get stuck or turn invisible when they appear
-- Fixed food and drink taking effect before you finish eating or drinking
-- Fixed Wolfskull enemies freezing when they appear
-- Fixed Skooma withdrawal ending too early. It now lasts until the addiction ends, and old stuck withdrawals clear when you log in
-- Fixed items and locations after a mod update. Your items are kept, removed-mod items are dropped, and you are sent to the Temple of Kynareth if your location is gone
-- Fixed fire, frost, and shock on weapons. Armor does not block that damage. Resistance does. A perfect parry blocks it
-- Fixed enchanting at the arcane enchanter doing nothing after selecting a soul gem
-- Fixed a login repair that could overwrite your saved items
-- Fixed Argonian claw damage while wearing heavy armor
-- Added Disarm. It stops you from immediately pulling your weapon back out
-- Added icons in the trade window, on your stats and attributes, and as badges on fortify, restore, damage, and drain effects
-- Added pet dismissal that makes pets, summons, and thralls walk away for 5 seconds before despawning, plus compass markers as four colored orbs with no labels: yellow for pets and thralls, blue for summons, green for allies and group mates, and red for hostiles and ranger marks
-- Fixed stuck script waits piling up on the server. They now clear after 15 seconds, with at most 64 waiting at once
-- Improved server performance by loading the plugin file list once at startup, reading save records without copying them, skipping equipment sync when stamina, health, or magicka changes, skipping timers and script waits for objects that no longer exist, and caching perk and race lookups while trimming extra stat updates
-- Fixed fishing so caught items persist and award XP once, with a force-stop for characters still carrying the removed Fish Anywhere quest
-- Fixed menus turning black when HDR is on
-- Fixed dying while down leaving you stuck in the air after you respawn, and logging out while down keeps you down when you come back
-- Updated success notices to a short quest chime, and info notices to a soft menu click
-- Updated surrender so you stand with your hands bound in front, shackles drop you to your knees, and cuffed people walk with their arms held in front. Being naked no longer changes how you walk
-- Updated Challenge so it marks the foe you are looking at. Challenge, Mesmerize, Discord, and Summon Focus reach a shorter distance, Track finds beasts much farther away, and Killing Flask throws at the person you look at
-- Fixed Serpent Kick so the push-kick animation is in the patch and plays when the kick lands
-- Updated eyes so they look at the camera when you turn it around to face your character
-- Improved performance in crowds. Injury and cold animations on distant players update less often the farther away they are
-- Reworked keys so they belong to the installed lock. Use Cut Key to make a key for it and Change Lock to install a new lock so old keys stop working, both at the normal interaction range. Cut keys stack on their own, named "Cut Key: <parcel>, Door" or "Cut Key: <parcel>, Chest". Opening a chest or door you are allowed to use (on the access list, with a cut key for that lock, or with the original key) no longer counts as stealing or trespassing, and an unlocked lock alone no longer counts as permission
-- Fixed Spellcasting so it lowers the magicka cost of your spells. Higher skill makes every school cheaper to cast
-- Fixed other players half-turning and snapping back when they only move a little
-- Added public parcel chests. Anyone can take, deposit, or move items in a public parcel's tagged containers with no theft flag, key, or access check. Chests default to off when unset, and owners can still lock a public chest
-- Removed the rented parcel mode and its deposit ledger entirely. Parcels are now off or public only
-- Fixed applying poison so it uses one flask and plays a short sword-cleaning animation
-- Fixed other players jittering at the chest while they walk. They still lean the way they are aiming
+- Fixed Beekeeping XP from putting bees in and out of a hive
+- Improved spawing of npcs/players within a distance, so they dont randomly snap infront of you crossing a grid
+- Fixed Sunday night showing the next day
+- Improved group, pet, and summon compass marks so they are smaller and clip off as they leave
+- Fixed trade icons matching inventory colors instead of a black square
+- Fixed cancelling a meal or drink so the item comes back
+- Fixed food, drink, and potions showing in your hand while you use them
+- Fixed poison wiping the blade with your weapon still out
+- Fixed enchanted weapons hitting twice and shield bashes doing no damage
+- Updated poise so power attacks, shield bashes, and power shots cost extra and are the only hits that stagger you
+- Added a Fahrenheit temperature reading on your stats
+- Fixed wiping the blade during an execution so it no longer cancels the kill
+- Fixed conjured swords showing in your own hands
+- Fixed vampire eyes when you transform
+- Fixed logging in as a vampire so you keep your own head
+- Updated surrender so you stand with your arms out until you are cuffed
+- Updated blocking so raising your guard costs stamina, and a perfect parry refills it
+- Fixed other players snapping at the chest when they stop
+- Updated fist fighting so light gauntlets keep your racial & innate claw dmg if you have them
