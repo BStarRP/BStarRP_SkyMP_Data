@@ -1,30 +1,25 @@
 # Patch notes
 
 ## Changes
-- Fixed Beekeeping XP from putting bees in and out of a hive
-- Fixed people and creatures popping in after you step forward, even when you can already see where they are standing
-- Improved spawing of npcs/players within a distance, so they dont randomly snap infront of you crossing a grid
-- Fixed Sunday night showing the next day
-- Improved group, pet, and summon compass marks so they are smaller and clip off as they leave
-- Fixed trade icons matching inventory colors instead of a black square
-- Fixed cancelling a meal or drink so the item comes back
-- Fixed food, drink, and potions showing in your hand while you use them
-- Fixed poison wiping the blade with your weapon still out
-- Fixed enchanted weapons hitting twice and shield bashes doing no damage
-- Updated poise so power attacks, shield bashes, and power shots cost extra and are the only hits that stagger you
-- Added a Fahrenheit temperature reading on your stats
-- Fixed wiping the blade during an execution so it no longer cancels the kill
-- Fixed conjured swords showing in your own hands
-- Fixed vampire eyes when you transform
-- Fixed logging in as a vampire so you keep your own head
-- Updated surrender so you stand with your arms out until you are cuffed
-- Updated blocking so raising your guard costs stamina, and a perfect parry refills it
-- Fixed other players snapping at the chest when they stop
-- Updated fist fighting so light gauntlets keep your racial & innate claw dmg if you have them
-- Fixed poise so it starts refilling when you get back up from a stagger.
-- Fixed getting up from death with your weapon still out and the camera stuck.
-- Improved doors so the room you enter appears before the place you left disappears.
-- Improved the stats page so level, time played, and temperature share one line, and the icons no longer sit in black boxes.
-- Updated temperature so fire, frost, and standing by a campfire change how warm or cold you feel.
-- Updated mesmerize so you and other people stand entranced while it holds.
-- Fixed calling powers so they stay on your spell list while they rest and come back ready.
+- Fixes in the college of winterhold, added one of the breweries's drinks
+- Removed Dragon skull from jarl of falkreath armor
+- Locked down Blackreach
+- Removed ebony from orc strongholds
+- Created escape door in deepwood redoubt 
+- Removed Dawnguard and vampires from spawning in one specific spot
+- Fixed recipe for bugged imperial armors
+- Fixed other players staying where they got on a horse while the horse kept moving. You can no longer get on a horse someone is already riding.
+- Fixed enchanting so the item keeps the name you gave it and the strength you picked, without a second copy.
+- Updated temperature so night, season, height, and traveling north or south change how cold you feel, and you shiver when it gets cold enough.
+- Improved doors so the place you enter shows up before the place you left is cleared away.
+- Improved people and creatures so they appear as you walk up to them, while you can already see the ground they are standing on.
+- Fixed elemental resistance on armor so it matches the enchant, and putting on the plain piece takes the enchanted one off.
+- Fixed executions so finishing the action sends them to the Soul Cairn even if the last swing misses, and hits no longer knock a downed person out of their wounded pose.
+- Fixed powers so they come back ready to use after their rest, and stay equipped if you already had them selected.
+- Fixed armor penetration so maces, axes, and warhammers ignore a share of armor, including a helmet.
+- Fixed /heal so it no longer snaps you out of what you are doing. Bleeding out, you get up on your own. Dead, you get up where you fell.
+- Fixed the camera after you get up from death, a tackle, or a knockdown so it returns to first or third person.
+- Improved the icons on stats, effects, and trade so the color is the mark itself, with no black square behind it.
+- Fixed bandits so they leave horses alone. A tamed horse still follows you.
+- Updated Blood Frenzy so putting another player into a bleed-out feeds the rage the same as a kill.
+- Updated deeper dungeons so the creatures hit harder and take more to bring down, and the boss is tougher than the rest of the room. Blackreach and the Root Dungeon are the hardest.
