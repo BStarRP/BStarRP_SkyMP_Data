@@ -1,0 +1,18 @@
+{
+  "name": "legofgoatroast",
+  "author": "Taberu",
+  "description": "Standing eat clip while this food effect is active.",
+  "priority": 42002059,
+  "conditions": [
+    {
+      "condition": "HasMagicEffect",
+      "requiredVersion": "1.0.0.0",
+      "Magic effect": {
+        "pluginName": "TaberuAnimation.esp",
+        "formID": "006E5E"
+      },
+      "Active effects only": true,
+      "negated": false
+    }
+  ]
+}

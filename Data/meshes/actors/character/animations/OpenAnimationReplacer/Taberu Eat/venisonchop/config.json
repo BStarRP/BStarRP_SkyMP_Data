@@ -1,0 +1,18 @@
+{
+  "name": "venisonchop",
+  "author": "Taberu",
+  "description": "Standing eat clip while this food effect is active.",
+  "priority": 42002089,
+  "conditions": [
+    {
+      "condition": "HasMagicEffect",
+      "requiredVersion": "1.0.0.0",
+      "Magic effect": {
+        "pluginName": "TaberuAnimation.esp",
+        "formID": "0083EE"
+      },
+      "Active effects only": true,
+      "negated": false
+    }
+  ]
+}

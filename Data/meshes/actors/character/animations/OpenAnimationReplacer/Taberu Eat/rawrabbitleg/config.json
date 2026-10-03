@@ -1,0 +1,18 @@
+{
+  "name": "rawrabbitleg",
+  "author": "Taberu",
+  "description": "Standing eat clip while this food effect is active.",
+  "priority": 42002068,
+  "conditions": [
+    {
+      "condition": "HasMagicEffect",
+      "requiredVersion": "1.0.0.0",
+      "Magic effect": {
+        "pluginName": "TaberuAnimation.esp",
+        "formID": "16E253"
+      },
+      "Active effects only": true,
+      "negated": false
+    }
+  ]
+}
