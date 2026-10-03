@@ -1,13 +1,10 @@
 # Patch notes
 
 ## Changes
-- Fixed looting a dead horse. Hunting opens the corpse. Horse Riding is only for mounting a living horse.
-- Updated the report menu so the target line shows their title, not an id.
-- Fixed getting stuck after a workbench, a chair, or trading with someone.
-- Fixed Soul Trap on weapons so it keeps working unless the target resists.
-- Fixed Abecean Longfin, Spadetail, Silverside Perch, and other pond fish staying in your bag when you catch them, and catching free-swimming ones with Fishing instead of Herbalism.
-- Added the Morthal camp meals to every cooking pot and spit, including hot soups and stews, cooked fish, crab dishes, and salted silverside perch, listed by your cooking skill.
-- Fixed enchanted copies of the same weapon turning plain, losing their name, or showing up as extras.
-- Fixed items you drop or move so they stay the same item, including when you only take some of a stack.
-- Fixed enchantment strengths so the item, the skills menu, and the enchanting table show the same number, including your Enchanting skill.
-- Fixed rings, packs, and other gear staying stuck in a chest you can open.
+
+- Updated animal feeding so wild animals calm less often while you feed them, and a higher Animal Taming level makes that calm more likely and longer.
+- Fixed lockpicking so pressing E on a locked door or chest starts the minigame, and a successful pick unlocks it so you can go through afterward.
+- Fixed dual-wield power attacks draining most of your stamina when they hit someone. Landing the hits gives a little of that swing back.
+- Fixed the game freezing or crashing when you load in or walk into an area, with sound still playing.
+- Updated combat, spell, and armor experience so harder enemies pay more, and gear or spells above your skill pay much less.
+- Added a small experience bonus when you and your group do the same activity nearby, including fighting, gathering, crafting, lockpicking, and pickpocketing.
