@@ -1,5 +1,5 @@
 # Patch notes
 
 ## Changes
-- Improved creatures and people in the open world so higher-level ones hit harder.
-- Fixed powers so a missed cast leaves them alone, and they come back ready to use when their rest ends.
+- Updated each calling power to display their rest time (cooldown) in the description
+- Improved the character stats sheet so level, time played, and temperature line up with health, magicka, and stamina, and buff arrows are easier to see.
