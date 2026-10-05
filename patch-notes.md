@@ -1,8 +1,5 @@
 # Patch notes
 
 ## Changes
-- Fixed creatures restarting a fight every moment, so combat no longer stutters.
-- Fixed the first aim with a summoned bow so other people see you draw it.
-- Fixed other players' spells and staves so you see the hand stay raised and the cast keep going until they stop.
-- Fixed dying in Morthal so you wake up in town.
-- Fixed jumping down a road so a small hop no longer knocks you down.
+- Fixed dual casting so other people see both hands come together.
+- Fixed other players staying on their feet after they die. They fall and stay down until they are healed.
