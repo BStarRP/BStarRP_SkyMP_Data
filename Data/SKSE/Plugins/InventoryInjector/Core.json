@@ -18,6 +18,4761 @@
         "iconLabel": "misc_instrument",
         "iconColor": "#FFFFFF"
       }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorClothing"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Novice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialHide"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Novice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialHide"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialHide"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialIron"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Novice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialIron"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialIron"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialIronBanded"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Novice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialIronBanded"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialIronBanded"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialLeather"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Novice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialLeather"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialLeather"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ClothingBody"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Novice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ClothingFeet"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Novice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ClothingHands"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Novice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ClothingHead"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Novice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialIron"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Novice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialIron"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialIron"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialLeather"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Novice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialLeather"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialLeather"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "MCE_ArmorMaterialExecutioner"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Novice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "MCE_ArmorMaterialGiant"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Novice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "MCE_ArmorMaterialThievesGuildAlt"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Novice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "MCE_ArmorMaterialThievesGuildKarliah"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Novice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "MCE_ArmorMaterialTsun"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Novice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "TH_MaterialCommon"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Novice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "TH_MaterialFur"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Novice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "TH_MaterialFur"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "TH_MaterialFur"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "VendorItemClothing"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Novice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialIron"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Novice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialIron"
+        ],
+        "weaponType": "OneHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Swords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialIron"
+        ],
+        "weaponType": "OneHandDagger"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Daggers"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialIron"
+        ],
+        "weaponType": "OneHandAxe"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "War Axes"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialIron"
+        ],
+        "weaponType": "OneHandMace"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Maces"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialIron"
+        ],
+        "weaponType": "TwoHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Greatswords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialIron"
+        ],
+        "weaponType": "Bow"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Bows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialIron"
+        ],
+        "weaponType": "Crossbow"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Crossbows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialIron"
+        ],
+        "weaponType": "Staff"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Staves"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialWood"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Novice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialWood"
+        ],
+        "weaponType": "OneHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Swords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialWood"
+        ],
+        "weaponType": "OneHandDagger"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Daggers"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialWood"
+        ],
+        "weaponType": "OneHandAxe"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "War Axes"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialWood"
+        ],
+        "weaponType": "OneHandMace"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Maces"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialWood"
+        ],
+        "weaponType": "TwoHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Greatswords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialWood"
+        ],
+        "weaponType": "Bow"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Bows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialWood"
+        ],
+        "weaponType": "Crossbow"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Crossbows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialWood"
+        ],
+        "weaponType": "Staff"
+      },
+      "assign": {
+        "infoCastLevel": "Novice",
+        "infoSchoolName": "Staves"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialBearStormcloak"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialBearStormcloak"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialBearStormcloak"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialForsworn"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialForsworn"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialForsworn"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialImperialHeavy"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialImperialHeavy"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialImperialHeavy"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialImperialLight"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialImperialLight"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialImperialLight"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialImperialStudded"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialImperialStudded"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialImperialStudded"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialMS02Forsworn"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialMS02Forsworn"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialMS02Forsworn"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialPenitus"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialPenitus"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialPenitus"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialSteel"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialSteel"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialSteel"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialStormcloak"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialStormcloak"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialStormcloak"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialStudded"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialStudded"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialStudded"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialThievesGuild"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialThievesGuild"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialThievesGuild"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC1ArmorMaterialHunter"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC1ArmorMaterialHunter"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC1ArmorMaterialHunter"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC1ArmorMaterialVampire"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC1ArmorMaterialVampire"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC1ArmorMaterialVampire"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialBonemoldHeavy"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialBonemoldHeavy"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialBonemoldHeavy"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialBonemoldLight"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialBonemoldLight"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialBonemoldLight"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialSteel"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialSteel"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialSteel"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialSteelChain"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialSteelChain"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialSteelChain"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "MCE_ArmorMaterialWolf"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "MCE_ArmorMaterialWolf"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "MCE_ArmorMaterialWolf"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "TH_MaterialGuard"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "TH_MaterialGuard"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "TH_MaterialGuard"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "TH_MaterialKhajiit"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "TH_MaterialKhajiit"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "TH_MaterialKhajiit"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDraugr"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDraugr"
+        ],
+        "weaponType": "OneHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Swords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDraugr"
+        ],
+        "weaponType": "OneHandDagger"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Daggers"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDraugr"
+        ],
+        "weaponType": "OneHandAxe"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "War Axes"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDraugr"
+        ],
+        "weaponType": "OneHandMace"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Maces"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDraugr"
+        ],
+        "weaponType": "TwoHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Greatswords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDraugr"
+        ],
+        "weaponType": "Bow"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Bows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDraugr"
+        ],
+        "weaponType": "Crossbow"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Crossbows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDraugr"
+        ],
+        "weaponType": "Staff"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Staves"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialImperial"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialImperial"
+        ],
+        "weaponType": "OneHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Swords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialImperial"
+        ],
+        "weaponType": "OneHandDagger"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Daggers"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialImperial"
+        ],
+        "weaponType": "OneHandAxe"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "War Axes"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialImperial"
+        ],
+        "weaponType": "OneHandMace"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Maces"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialImperial"
+        ],
+        "weaponType": "TwoHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Greatswords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialImperial"
+        ],
+        "weaponType": "Bow"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Bows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialImperial"
+        ],
+        "weaponType": "Crossbow"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Crossbows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialImperial"
+        ],
+        "weaponType": "Staff"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Staves"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialSteel"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialSteel"
+        ],
+        "weaponType": "OneHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Swords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialSteel"
+        ],
+        "weaponType": "OneHandDagger"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Daggers"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialSteel"
+        ],
+        "weaponType": "OneHandAxe"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "War Axes"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialSteel"
+        ],
+        "weaponType": "OneHandMace"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Maces"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialSteel"
+        ],
+        "weaponType": "TwoHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Greatswords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialSteel"
+        ],
+        "weaponType": "Bow"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Bows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialSteel"
+        ],
+        "weaponType": "Crossbow"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Crossbows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialSteel"
+        ],
+        "weaponType": "Staff"
+      },
+      "assign": {
+        "infoCastLevel": "Apprentice",
+        "infoSchoolName": "Staves"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialBlades"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Adept"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialBlades"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialBlades"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialDwarven"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Adept"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialDwarven"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialDwarven"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialElven"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Adept"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialElven"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialElven"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialFalmer"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Adept"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialFalmer"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialFalmer"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialScaled"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Adept"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialScaled"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialScaled"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialThievesGuildLeader"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Adept"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialThievesGuildLeader"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialThievesGuildLeader"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC1ArmorMaterialDawnguard"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Adept"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC1ArmorMaterialDawnguard"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC1ArmorMaterialDawnguard"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialChitinHeavy"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Adept"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialChitinHeavy"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialChitinHeavy"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialChitinLight"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Adept"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialChitinLight"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialChitinLight"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialAdvancedScale"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Adept"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialAdvancedScale"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialAdvancedScale"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialDwarven"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Adept"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialDwarven"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialDwarven"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialElven"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Adept"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialElven"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialElven"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "TH_MaterialAltmer"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Adept"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "TH_MaterialAltmer"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "TH_MaterialAltmer"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "TH_MaterialBosmer"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Adept"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "TH_MaterialBosmer"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "TH_MaterialBosmer"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "TH_MaterialDunmer"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Adept"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "TH_MaterialDunmer"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "TH_MaterialDunmer"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "TH_MaterialThalmor"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Adept"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "TH_MaterialThalmor"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "TH_MaterialThalmor"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "WAF_ArmorMaterialThalmor"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Adept"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "WAF_ArmorMaterialThalmor"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "WAF_ArmorMaterialThalmor"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDraugrHoned"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Adept"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDraugrHoned"
+        ],
+        "weaponType": "OneHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Swords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDraugrHoned"
+        ],
+        "weaponType": "OneHandDagger"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Daggers"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDraugrHoned"
+        ],
+        "weaponType": "OneHandAxe"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "War Axes"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDraugrHoned"
+        ],
+        "weaponType": "OneHandMace"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Maces"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDraugrHoned"
+        ],
+        "weaponType": "TwoHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Greatswords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDraugrHoned"
+        ],
+        "weaponType": "Bow"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Bows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDraugrHoned"
+        ],
+        "weaponType": "Crossbow"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Crossbows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDraugrHoned"
+        ],
+        "weaponType": "Staff"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Staves"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDwarven"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Adept"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDwarven"
+        ],
+        "weaponType": "OneHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Swords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDwarven"
+        ],
+        "weaponType": "OneHandDagger"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Daggers"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDwarven"
+        ],
+        "weaponType": "OneHandAxe"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "War Axes"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDwarven"
+        ],
+        "weaponType": "OneHandMace"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Maces"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDwarven"
+        ],
+        "weaponType": "TwoHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Greatswords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDwarven"
+        ],
+        "weaponType": "Bow"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Bows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDwarven"
+        ],
+        "weaponType": "Crossbow"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Crossbows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDwarven"
+        ],
+        "weaponType": "Staff"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Staves"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialElven"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Adept"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialElven"
+        ],
+        "weaponType": "OneHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Swords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialElven"
+        ],
+        "weaponType": "OneHandDagger"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Daggers"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialElven"
+        ],
+        "weaponType": "OneHandAxe"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "War Axes"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialElven"
+        ],
+        "weaponType": "OneHandMace"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Maces"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialElven"
+        ],
+        "weaponType": "TwoHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Greatswords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialElven"
+        ],
+        "weaponType": "Bow"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Bows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialElven"
+        ],
+        "weaponType": "Crossbow"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Crossbows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialElven"
+        ],
+        "weaponType": "Staff"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Staves"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialFalmer"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Adept"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialFalmer"
+        ],
+        "weaponType": "OneHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Swords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialFalmer"
+        ],
+        "weaponType": "OneHandDagger"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Daggers"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialFalmer"
+        ],
+        "weaponType": "OneHandAxe"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "War Axes"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialFalmer"
+        ],
+        "weaponType": "OneHandMace"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Maces"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialFalmer"
+        ],
+        "weaponType": "TwoHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Greatswords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialFalmer"
+        ],
+        "weaponType": "Bow"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Bows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialFalmer"
+        ],
+        "weaponType": "Crossbow"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Crossbows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialFalmer"
+        ],
+        "weaponType": "Staff"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Staves"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialSilver"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Adept"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialSilver"
+        ],
+        "weaponType": "OneHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Swords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialSilver"
+        ],
+        "weaponType": "OneHandDagger"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Daggers"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialSilver"
+        ],
+        "weaponType": "OneHandAxe"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "War Axes"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialSilver"
+        ],
+        "weaponType": "OneHandMace"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Maces"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialSilver"
+        ],
+        "weaponType": "TwoHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Greatswords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialSilver"
+        ],
+        "weaponType": "Bow"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Bows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialSilver"
+        ],
+        "weaponType": "Crossbow"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Crossbows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialSilver"
+        ],
+        "weaponType": "Staff"
+      },
+      "assign": {
+        "infoCastLevel": "Adept",
+        "infoSchoolName": "Staves"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialElvenGilded"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Expert"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialElvenGilded"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialElvenGilded"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialFalmerHard"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Expert"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialFalmerHard"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialFalmerHard"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialOrcish"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Expert"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialOrcish"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialOrcish"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialSteelPlate"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Expert"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialSteelPlate"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialSteelPlate"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC1ArmorMaterialFalmerHardened"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Expert"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC1ArmorMaterialFalmerHardened"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC1ArmorMaterialFalmerHardened"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialAdvancedPlate"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Expert"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialAdvancedPlate"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialAdvancedPlate"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialOrcish"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Expert"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialOrcish"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialOrcish"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "WAF_ArmorMaterialAdvanced"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Expert"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "WAF_ArmorMaterialAdvanced"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "WAF_ArmorMaterialAdvanced"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialFalmerHoned"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Expert"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialFalmerHoned"
+        ],
+        "weaponType": "OneHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Swords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialFalmerHoned"
+        ],
+        "weaponType": "OneHandDagger"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Daggers"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialFalmerHoned"
+        ],
+        "weaponType": "OneHandAxe"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "War Axes"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialFalmerHoned"
+        ],
+        "weaponType": "OneHandMace"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Maces"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialFalmerHoned"
+        ],
+        "weaponType": "TwoHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Greatswords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialFalmerHoned"
+        ],
+        "weaponType": "Bow"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Bows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialFalmerHoned"
+        ],
+        "weaponType": "Crossbow"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Crossbows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialFalmerHoned"
+        ],
+        "weaponType": "Staff"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Staves"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialOrcish"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Expert"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialOrcish"
+        ],
+        "weaponType": "OneHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Swords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialOrcish"
+        ],
+        "weaponType": "OneHandDagger"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Daggers"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialOrcish"
+        ],
+        "weaponType": "OneHandAxe"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "War Axes"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialOrcish"
+        ],
+        "weaponType": "OneHandMace"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Maces"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialOrcish"
+        ],
+        "weaponType": "TwoHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Greatswords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialOrcish"
+        ],
+        "weaponType": "Bow"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Bows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialOrcish"
+        ],
+        "weaponType": "Crossbow"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Crossbows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialOrcish"
+        ],
+        "weaponType": "Staff"
+      },
+      "assign": {
+        "infoCastLevel": "Expert",
+        "infoSchoolName": "Staves"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialEbony"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Master"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialEbony"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialEbony"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialGlass"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Master"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialGlass"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialGlass"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialNordicHeavy"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Master"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialNordicHeavy"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialNordicHeavy"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialNordicHeavy"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Master"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialNordicHeavy"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialNordicHeavy"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialNordicLight"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Master"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialNordicLight"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialNordicLight"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialEbony"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Master"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialEbony"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialEbony"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialGlass"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Master"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialGlass"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialGlass"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialEbony"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Master"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialEbony"
+        ],
+        "weaponType": "OneHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Swords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialEbony"
+        ],
+        "weaponType": "OneHandDagger"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Daggers"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialEbony"
+        ],
+        "weaponType": "OneHandAxe"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "War Axes"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialEbony"
+        ],
+        "weaponType": "OneHandMace"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Maces"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialEbony"
+        ],
+        "weaponType": "TwoHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Greatswords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialEbony"
+        ],
+        "weaponType": "Bow"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Bows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialEbony"
+        ],
+        "weaponType": "Crossbow"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Crossbows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialEbony"
+        ],
+        "weaponType": "Staff"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Staves"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialGlass"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Master"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialGlass"
+        ],
+        "weaponType": "OneHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Swords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialGlass"
+        ],
+        "weaponType": "OneHandDagger"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Daggers"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialGlass"
+        ],
+        "weaponType": "OneHandAxe"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "War Axes"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialGlass"
+        ],
+        "weaponType": "OneHandMace"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Maces"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialGlass"
+        ],
+        "weaponType": "TwoHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Greatswords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialGlass"
+        ],
+        "weaponType": "Bow"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Bows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialGlass"
+        ],
+        "weaponType": "Crossbow"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Crossbows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialGlass"
+        ],
+        "weaponType": "Staff"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Staves"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialNordic"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Master"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialNordic"
+        ],
+        "weaponType": "OneHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Swords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialNordic"
+        ],
+        "weaponType": "OneHandDagger"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Daggers"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialNordic"
+        ],
+        "weaponType": "OneHandAxe"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "War Axes"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialNordic"
+        ],
+        "weaponType": "OneHandMace"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Maces"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialNordic"
+        ],
+        "weaponType": "TwoHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Greatswords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialNordic"
+        ],
+        "weaponType": "Bow"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Bows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialNordic"
+        ],
+        "weaponType": "Crossbow"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Crossbows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialNordic"
+        ],
+        "weaponType": "Staff"
+      },
+      "assign": {
+        "infoCastLevel": "Master",
+        "infoSchoolName": "Staves"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialDaedric"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Legendary"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialDaedric"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialDaedric"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialDragonplate"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Legendary"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialDragonplate"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialDragonplate"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialDragonscale"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Legendary"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialDragonscale"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialDragonscale"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialStalhrim"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Legendary"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialStalhrim"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "ArmorMaterialStalhrim"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC1LD_CraftingMaterialAetherium"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Legendary"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC1LD_CraftingMaterialAetherium"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC1LD_CraftingMaterialAetherium"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialStalhrimHeavy"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Legendary"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialStalhrimHeavy"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialStalhrimHeavy"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialStalhrimLight"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Legendary"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialStalhrimLight"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "DLC2ArmorMaterialStalhrimLight"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialDaedric"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Legendary"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialDaedric"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialDaedric"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialDragonPlate"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Legendary"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialDragonPlate"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialDragonPlate"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialDragonScale"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Legendary"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialDragonScale"
+        ],
+        "weightClass": "Light"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Light Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Armor",
+        "keywords": [
+          "IAKMaterialDragonScale"
+        ],
+        "weightClass": "Heavy"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Heavy Armor"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDaedric"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Legendary"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDaedric"
+        ],
+        "weaponType": "OneHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Swords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDaedric"
+        ],
+        "weaponType": "OneHandDagger"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Daggers"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDaedric"
+        ],
+        "weaponType": "OneHandAxe"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "War Axes"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDaedric"
+        ],
+        "weaponType": "OneHandMace"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Maces"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDaedric"
+        ],
+        "weaponType": "TwoHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Greatswords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDaedric"
+        ],
+        "weaponType": "Bow"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Bows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDaedric"
+        ],
+        "weaponType": "Crossbow"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Crossbows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDaedric"
+        ],
+        "weaponType": "Staff"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Staves"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDragonbone"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Legendary"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDragonbone"
+        ],
+        "weaponType": "OneHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Swords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDragonbone"
+        ],
+        "weaponType": "OneHandDagger"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Daggers"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDragonbone"
+        ],
+        "weaponType": "OneHandAxe"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "War Axes"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDragonbone"
+        ],
+        "weaponType": "OneHandMace"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Maces"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDragonbone"
+        ],
+        "weaponType": "TwoHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Greatswords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDragonbone"
+        ],
+        "weaponType": "Bow"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Bows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDragonbone"
+        ],
+        "weaponType": "Crossbow"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Crossbows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialDragonbone"
+        ],
+        "weaponType": "Staff"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Staves"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialStalhrim"
+        ]
+      },
+      "assign": {
+        "infoCastLevel": "Legendary"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialStalhrim"
+        ],
+        "weaponType": "OneHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Swords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialStalhrim"
+        ],
+        "weaponType": "OneHandDagger"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Daggers"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialStalhrim"
+        ],
+        "weaponType": "OneHandAxe"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "War Axes"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialStalhrim"
+        ],
+        "weaponType": "OneHandMace"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Maces"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialStalhrim"
+        ],
+        "weaponType": "TwoHandSword"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Greatswords"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialStalhrim"
+        ],
+        "weaponType": "Bow"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Bows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialStalhrim"
+        ],
+        "weaponType": "Crossbow"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Crossbows"
+      }
+    },
+    {
+      "match": {
+        "formType": "Weapon",
+        "keywords": [
+          "WeapMaterialStalhrim"
+        ],
+        "weaponType": "Staff"
+      },
+      "assign": {
+        "infoCastLevel": "Legendary",
+        "infoSchoolName": "Staves"
+      }
     }
   ]
 }
