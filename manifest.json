@@ -1,6 +1,7 @@
 {
   "files": [
     "Data/Interface/CombatAlertOverlayMenu.swf",
+    "Data/Interface/skyui/config.txt",
     "Data/MoreCraftableEquipment.bsa",
     "Data/MoreCraftableEquipment.esp",
     "Data/Platform/Distribution/CEF/chrome_100_percent.pak",
@@ -185,6 +186,7 @@
     "Data/SKSE/Plugins/EngineFixes.toml",
     "Data/SKSE/Plugins/EngineFixes_preload.txt",
     "Data/SKSE/Plugins/EngineFixes_SNCT.ini",
+    "Data/SKSE/Plugins/InventoryInjector/Core.json",
     "Data/SKSE/Plugins/InventoryInjector/MoreCraftableEquipment.json",
     "Data/SKSE/Plugins/MCMHelper.dll",
     "Data/SKSE/Plugins/MCMHelper.pdb",
