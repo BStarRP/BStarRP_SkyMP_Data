@@ -186,7 +186,6 @@
     "Data/SKSE/Plugins/EngineFixes.toml",
     "Data/SKSE/Plugins/EngineFixes_preload.txt",
     "Data/SKSE/Plugins/EngineFixes_SNCT.ini",
-    "Data/SKSE/Plugins/InventoryInjector.dll",
     "Data/SKSE/Plugins/InventoryInjector/Core.json",
     "Data/SKSE/Plugins/InventoryInjector/MoreCraftableEquipment.json",
     "Data/SKSE/Plugins/MCMHelper.dll",

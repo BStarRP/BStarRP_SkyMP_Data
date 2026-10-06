@@ -519,6 +519,7 @@ columns.tierColumn.type = TEXT
 columns.tierColumn.name = 'Tier'
 columns.tierColumn.states = 1
 columns.tierColumn.width = 0.15
+columns.tierColumn.indent = 18
 columns.tierColumn.border = a_textBorder
 columns.tierColumn.label.textFormat.color = 0xe5d188
 columns.tierColumn.label.textFormat.align = left
