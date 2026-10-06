@@ -44,7 +44,7 @@ icons.item.showStolen = true
 colors.text.enabled = 0xffffff
 colors.stolen.enabled = 0xffffff
 colors.negative.enabled = 0xe07a7a
-colors.text.disabled = 0x9d9e9e
+colors.text.disabled = 0x6e6e6e
 colors.stolen.disabled = 0x9d9e9e
 colors.negative.disabled = 0x8a4a4a
 
@@ -518,7 +518,7 @@ columns.levelColumn.state2.sortOptions = <{DESCENDING | NUMERIC}, {ASCENDING | C
 columns.tierColumn.type = TEXT
 columns.tierColumn.name = 'Tier'
 columns.tierColumn.states = 1
-columns.tierColumn.width = 0.15
+columns.tierColumn.width = 0.12
 columns.tierColumn.indent = 18
 columns.tierColumn.border = a_textBorder
 columns.tierColumn.label.textFormat.color = 0xe5d188
