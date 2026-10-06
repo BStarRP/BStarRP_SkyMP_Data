@@ -3948,7 +3948,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialNordic"
+          "DLC2WeaponMaterialNordic"
         ]
       },
       "assign": {
@@ -3959,7 +3959,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialNordic"
+          "DLC2WeaponMaterialNordic"
         ],
         "weaponType": "OneHandSword"
       },
@@ -3972,7 +3972,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialNordic"
+          "DLC2WeaponMaterialNordic"
         ],
         "weaponType": "OneHandDagger"
       },
@@ -3985,7 +3985,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialNordic"
+          "DLC2WeaponMaterialNordic"
         ],
         "weaponType": "OneHandAxe"
       },
@@ -3998,7 +3998,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialNordic"
+          "DLC2WeaponMaterialNordic"
         ],
         "weaponType": "OneHandMace"
       },
@@ -4011,7 +4011,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialNordic"
+          "DLC2WeaponMaterialNordic"
         ],
         "weaponType": "TwoHandSword"
       },
@@ -4024,7 +4024,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialNordic"
+          "DLC2WeaponMaterialNordic"
         ],
         "weaponType": "Bow"
       },
@@ -4037,7 +4037,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialNordic"
+          "DLC2WeaponMaterialNordic"
         ],
         "weaponType": "Crossbow"
       },
@@ -4050,7 +4050,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialNordic"
+          "DLC2WeaponMaterialNordic"
         ],
         "weaponType": "Staff"
       },
@@ -4548,7 +4548,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialDragonbone"
+          "DLC1WeapMaterialDragonbone"
         ]
       },
       "assign": {
@@ -4559,7 +4559,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialDragonbone"
+          "DLC1WeapMaterialDragonbone"
         ],
         "weaponType": "OneHandSword"
       },
@@ -4572,7 +4572,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialDragonbone"
+          "DLC1WeapMaterialDragonbone"
         ],
         "weaponType": "OneHandDagger"
       },
@@ -4585,7 +4585,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialDragonbone"
+          "DLC1WeapMaterialDragonbone"
         ],
         "weaponType": "OneHandAxe"
       },
@@ -4598,7 +4598,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialDragonbone"
+          "DLC1WeapMaterialDragonbone"
         ],
         "weaponType": "OneHandMace"
       },
@@ -4611,7 +4611,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialDragonbone"
+          "DLC1WeapMaterialDragonbone"
         ],
         "weaponType": "TwoHandSword"
       },
@@ -4624,7 +4624,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialDragonbone"
+          "DLC1WeapMaterialDragonbone"
         ],
         "weaponType": "Bow"
       },
@@ -4637,7 +4637,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialDragonbone"
+          "DLC1WeapMaterialDragonbone"
         ],
         "weaponType": "Crossbow"
       },
@@ -4650,7 +4650,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialDragonbone"
+          "DLC1WeapMaterialDragonbone"
         ],
         "weaponType": "Staff"
       },
@@ -4663,7 +4663,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialStalhrim"
+          "DLC2WeaponMaterialStalhrim"
         ]
       },
       "assign": {
@@ -4674,7 +4674,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialStalhrim"
+          "DLC2WeaponMaterialStalhrim"
         ],
         "weaponType": "OneHandSword"
       },
@@ -4687,7 +4687,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialStalhrim"
+          "DLC2WeaponMaterialStalhrim"
         ],
         "weaponType": "OneHandDagger"
       },
@@ -4700,7 +4700,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialStalhrim"
+          "DLC2WeaponMaterialStalhrim"
         ],
         "weaponType": "OneHandAxe"
       },
@@ -4713,7 +4713,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialStalhrim"
+          "DLC2WeaponMaterialStalhrim"
         ],
         "weaponType": "OneHandMace"
       },
@@ -4726,7 +4726,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialStalhrim"
+          "DLC2WeaponMaterialStalhrim"
         ],
         "weaponType": "TwoHandSword"
       },
@@ -4739,7 +4739,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialStalhrim"
+          "DLC2WeaponMaterialStalhrim"
         ],
         "weaponType": "Bow"
       },
@@ -4752,7 +4752,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialStalhrim"
+          "DLC2WeaponMaterialStalhrim"
         ],
         "weaponType": "Crossbow"
       },
@@ -4765,7 +4765,7 @@
       "match": {
         "formType": "Weapon",
         "keywords": [
-          "WeapMaterialStalhrim"
+          "DLC2WeaponMaterialStalhrim"
         ],
         "weaponType": "Staff"
       },
