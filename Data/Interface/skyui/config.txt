@@ -44,7 +44,7 @@ icons.item.showStolen = true
 colors.text.enabled = 0xffffff
 colors.stolen.enabled = 0xffffff
 colors.negative.enabled = 0xe07a7a
-colors.text.disabled = 0x6e6e6e
+colors.text.disabled = 0x9d9e9e
 colors.stolen.disabled = 0x9d9e9e
 colors.negative.disabled = 0x8a4a4a
 
