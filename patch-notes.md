@@ -1,4 +1,4 @@
 # Patch notes
 
 ## Changes
-- Fixed NPCs being placed into cells that were still loading. NPCs now wait, hidden, until their cell has finished loading before they appear. This targets the freezes right after logging in, loading screens, and walking into new areas.
+- Fixed NPCs being deleted and respawned over and over when their model was slow to load. They now wait for the model instead, which removes another possible cause of the freezes.
