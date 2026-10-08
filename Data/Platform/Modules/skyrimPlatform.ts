@@ -3358,6 +3358,7 @@ export declare class TESModPlatform extends PapyrusObject {
   static getBodyTintColor(base: ActorBase | null): ColorForm | null
   static isPlayerRunningEnabled(): boolean
   static moveRefrToPosition(refr: ObjectReference | null, cell: Cell | null, world: WorldSpace | null, posX: number, posY: number, posZ: number, rotX: number, rotY: number, rotZ: number): void
+  static isExteriorCellAttachedAt(world: WorldSpace | null, x: number, y: number, z: number): boolean
   static pushTintMask(targetActor: Actor | null, type: number, argb: number, texturePath: string): void
   static pushWornState(worn: boolean, wornLeft: boolean): void
   static resetContainer(container: Form | null): void
