@@ -1,5 +1,5 @@
 # Patch notes
 
 ## Changes
-- Fixed fighters restarting their swing while they were already on you, which bent their bodies.
-- Removed words like (Fair) and (Damaged) from item names. Condition now shows in a Durability column, yellow when damaged and red when broken.
+- Fixed a freeze when walking through a door into a dungeon.
+- Fixed enemies that chased you far from home, stopped fighting when you went down, or switched onto people you ran them past.
