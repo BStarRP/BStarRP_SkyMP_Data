@@ -11,3 +11,6 @@
 - Added item condition to the trade window. Full-condition gear now says Pristine there and in your inventory.
 - Updated towns and the wilderness so nearby people appear as you approach and stay visible a little longer after you walk past them.
 - Fixed creatures getting stuck in the world, and a crash when draugr or nearby animals were removed.
+- Fixed item condition missing when you loot a corpse or container.
+- Fixed creatures that kept stopping and restarting while walking back home.
+- Fixed city guards that never finished appearing.
