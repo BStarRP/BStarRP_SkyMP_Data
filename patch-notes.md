@@ -1,5 +1,6 @@
 # Patch notes
 
 ## Changes
-- Fixed the Critical Strike notice so it only appears when you actually land a critical hit.
-- Fixed summons and pets attacking you, and you can look at them again, including mounting a summoned horse.
+- Fixed parcels so doors and chests stay linked after an update.
+- Fixed creatures that kept fighting after the fight was over and froze anyone who walked up to them.
+- Fixed creatures pulled far from home so they stop fighting, recover, and return once everyone nearby has left.
