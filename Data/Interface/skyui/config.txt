@@ -714,7 +714,8 @@ columns.durabilityColumn.label.textFormat.color = 0xe5d188
 columns.durabilityColumn.label.textFormat.align = left
 columns.durabilityColumn.entry.textFormat.color = 0xffffff
 columns.durabilityColumn.entry.textFormat.align = left
-columns.durabilityColumn.entry.textFormat.size = 10
+columns.durabilityColumn.entry.textFormat.letterSpacing = 0
+columns.durabilityColumn.entry.textFormat.size = 12
 
 columns.durabilityColumn.state1.label.text = 'DUR'
 columns.durabilityColumn.state1.entry.text = @durabilityDisplay
