@@ -43,3 +43,6 @@
 - Added a boss banner for Mzark, the Aethernaut Commandant, Kadahk Mezalf, Mthancel Fareyes, Zel-mzbhain, Orchestrator Irgktchil, and Boilerman Bthund.
 - Added Mzark in the Tower of Mzark and Mthancel Fareyes in Reachwind Eyrie.
 - Added new enemies + boss's into the world
+- Fixed holdstones, notice boards, and notes so the page shows when HDR is on
+- Updated Legion holdstone.
+- Updated the new beasts and Dwemer bosses so thick hides turn cuts and clubs, and shells and Dwemer metal turn cuts and arrows.
