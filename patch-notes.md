@@ -1,12 +1,45 @@
 # Patch notes
 
 ## Changes
-- Removed red roofs outside a few buildings outside of Solitude
-- Added wooden practice weapons
-- Added banners for all holds and some factions
-- Updated how far people and creatures appear, so you see them from farther away and they stay in view a little longer
-- Fixed issues that caused some crashing when npc's where removed from world
-- Leftover people and animals from the normal game are cleared faster when you enter a place.
-- A speech bubble no longer drops early while someone nearby is typing.
-- The corner clock shows the time above the place name.
-- Monk palm strikes no longer land on things that are not a person or a creature.
+- Fixed people and creatures appearing next to you before moving to where they actually are.
+- Made milk non-alcoholic
+- Removed daedric item spawns from the world
+- Removed Black soul gems from Granite Hill
+- Renamed Granite Hill to Wolf's Crossing
+- Fixed waterskin recipe
+- Added a speech bubble above people while they type, and outlined overhead chat and scene text so it stays easy to read.
+- Updated the corner so buffs and followers sit below the clock.
+- Improved people and creatures so someone nearby takes over when the person moving them stops.
+- Improved large groups of people so the game keeps up better when many of them are nearby.
+- Updated Nord Hero weapons so they count as apprentice steel. They craft and fight at the same level as steel.
+- Improved other people so their eyes stop tracking before their head does, and a drawn weapon turns the chest more smoothly.
+- Fixed vampires so energy refills with a full blood bar, sunlight burns slowly instead of in chunks, Power of the Grave raises health, magicka, and stamina, and the veil hides and shows eyes and claws.
+- Fixed other players so their hands push out when they cast a bolt, and stay up when they cast on themselves.
+- Fixed training dummies so hitting them wears your weapon.
+- Fixed channeled spells so the beam stops when you let go of the cast.
+- Fixed Close Wounds, Close Greater Wounds, and Breath of Life so the health they restore stays, and Breath of Life can get a downed person up.
+- Fixed sneak attacks so the blow that kills still grants Sneak and your weapon skill, and shield bashes grant Block experience.
+- Fixed weapons and armor so a tempered or enchanted copy keeps its quality and enchantment, and a filled weapon keeps its charge.
+- Fixed other riders so they sit on the horse and stay with it.
+- Fixed doors that drop you inside the doorway so you appear a few steps further in and the game does not freeze.
+- Improved Strength and Agility so melee and bow hits at 100 are half again as strong as at 50.
+- Fixed bandages so a hit does not leave you stuck kneeling, and applying poison to a weapon that already has poison no longer uses up more flasks.
+- Added slashing, bludgeoning, and piercing resistance from the armor you wear, and armor past a full suit protects less for each extra point.
+- Fixed Prospector so corundum, silver, gold, moonstone, and quicksilver veins drop gems instead of books and notes.
+- Fixed the jeweler's Dust Catch so it keeps a garnet.
+- Fixed one-handed swings so hitting several enemies no longer returns more stamina than the swing cost.
+- Fixed stamina food so stopping a sprint no longer fills the bar all at once.
+- Fixed Soul Stealer so bound weapons can trap souls at Conjuration 30.
+- Fixed giving a pet so it no longer replaces the other person's companion.
+- Fixed the wounded sit and wounded lie emotes so the labels match the poses.
+- Fixed arrows and spells so they land where they land for the person who fired them.
+- Fixed trolls and other creatures so health they regain in a fight stays, and the next hit starts from that health.
+- Fixed creature spells that were not yours so they leave your spellbook.
+- Fixed group heals and buffs so each person keeps one glow and the game does not freeze.
+- Fixed health, magicka, and stamina buffs so they add a flat amount, and rune and wall spells now stay where you aimed them.
+- Updated ruins to their written difficulty, named bosses fight at their own level, and the new beasts can be hunted.
+- Updated a fight so stamina comes back faster, power attacks cost less stamina, and a perfect parry returns half its stamina and refills your poise instead of your whole bar.
+- Updated crowd control so repeating a freeze, stagger, fear, slow, or silence makes the next one shorter, and a hit breaks calm and fear.
+- Added a boss banner for Mzark, the Aethernaut Commandant, Kadahk Mezalf, Mthancel Fareyes, Zel-mzbhain, Orchestrator Irgktchil, and Boilerman Bthund.
+- Added Mzark in the Tower of Mzark and Mthancel Fareyes in Reachwind Eyrie.
+- Added new enemies + boss's into the world
