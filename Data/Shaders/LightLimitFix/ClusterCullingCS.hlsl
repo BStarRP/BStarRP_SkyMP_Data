@@ -53,7 +53,6 @@ bool LightIntersectsCluster(float3 position, float radiusSquared, ClusterAABB cl
 	for (uint i = 0; i < LightCount; i++) {
 		Light light = lights[i];
 
-		// Same fade radius as the pixel shader, or cluster tiles clip the pool as a staircase.
 		float cullRadius = light.radius * POINT_LIGHT_FALLOFF_RADIUS_SCALE;
 		float radiusSquared = cullRadius * cullRadius;
 

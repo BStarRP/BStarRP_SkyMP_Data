@@ -359,8 +359,8 @@ if (SharedData::enbSettings.EnableRain) {
 		if (LightLimitFix::GetClusterIndex(screenUV, viewPosition.z, clusterIndex)) {
 			lightCount = LightLimitFix::lightGrid[clusterIndex].lightCount;
 			uint lightOffset = LightLimitFix::lightGrid[clusterIndex].offset;
-			uint acceptedLights = 0;
-			[loop] for (uint i = 0; i < lightCount && acceptedLights < FORWARD_CLUSTERED_LIGHT_CAP; i++) {
+			[loop] for (uint i = 0; i < lightCount; i++)
+			{
 				uint clusteredLightIndex = LightLimitFix::lightList[lightOffset + i];
 				LightLimitFix::Light light = LightLimitFix::lights[clusteredLightIndex];
 				if (LightLimitFix::IsLightIgnored(light) || light.lightFlags & LightLimitFix::LightFlags::Shadow) {
@@ -378,7 +378,6 @@ if (SharedData::enbSettings.EnableRain) {
 
 				float3 lightColor = light.color.xyz * intensityMultiplier;
 				propertyColor += lightColor;
-				acceptedLights++;
 			}
 		}
 	}

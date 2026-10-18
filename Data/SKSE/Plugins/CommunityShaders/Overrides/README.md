@@ -58,7 +58,7 @@ Enable in **Overrides** when you want **solo / screenshots / max eye candy**. Fo
 
 Extra cuts when Tier 1 is not enough (stutter towns, huge PvP crowds):
 
--   **`LowAssist_Global.json`** — caps **shader compiler** threads only. **Clustered light limits** (`FORWARD_CLUSTERED_LIGHT_CAP` **16**, `DEFERRED_CLUSTERED_LIGHT_CAP` **24**) are **global defaults** in `LightLimitFix/Common.hlsli` so all preset tiers share the same cost without **Advanced → Shader Defines** or recompiles when switching profiles.
+-   **`LowAssist_Global.json`** — caps **shader compiler** threads only. Clustered light counts stay on the Community Shaders default.
 -   **`LowAssist_ExponentialHeightFog.json`** — same fog as Standard when Performance is active (disable matching `CustomLook_*`).
 -   **`LowAssist_Skylighting.json`** — same outdoor shade floor as CustomLook (disable `CustomLook_Skylighting`).
 -   **`LowAssist_VolumetricLighting.json`** — **VL off** interior and exterior (big cost with many lights).
@@ -71,10 +71,6 @@ Extra cuts when Tier 1 is not enough (stutter towns, huge PvP crowds):
 -   **`LowAssist_DynamicCubemaps.json`** — SSR off.
 
 Try **VL off**, **`LowAssist_Global`** (compiler threads), **SSGI off**, then **contact shadows**, then **SSS**, then **`LowAssist_ImageBasedLighting`** if still GPU-bound.
-
-To change light caps for everyone, edit **`FORWARD_CLUSTERED_LIGHT_CAP`** / **`DEFERRED_CLUSTERED_LIGHT_CAP`** in the shipped **`LightLimitFix/Common.hlsli`** (or set **`Shader Defines`** in **Advanced** for a one-off override, which does require a shader recompile).
-
-Directional shadow-mask PCF in **`Utility.hlsl`** uses **`UTILITY_SHADOW_PCF_TAPS`** (default **12**) and **`UTILITY_SHADOW_DPB_PCF_TAPS`** (default **10**) from **`Shaders/Common/ShadowPerf.hlsli`**; override via **Shader Defines** (recompile) or edit defaults there for a project-wide change.
 
 Weather JSON keys for EH fog use the **display names** registered in CS (for example `"Fog Density"`, `"Directional Inscattering Multiplier"`). Overrides use the feature’s **settings field names** (for example `fogDensity`, `inscatteringTint`).
 

@@ -1,6 +1,5 @@
 #include "Common/Game.hlsli"
 #include "Common/SharedData.hlsli"
-#include "Common/PointLightFalloff.hlsli"
 
 namespace InverseSquareLighting
 {

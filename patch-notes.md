@@ -1,5 +1,7 @@
 # Patch notes
 
 ## Changes
-- Fixed connecting so the game no longer freezes on a black screen.
-- Fixed parcel doors and containers so they stay connected after an update instead of showing unresolved.
+- Fixed character load so the game no longer freezes while the world appears.
+- Fixed named people in fortified ruins so they show up.
+- Added Skyrim Immersive Creatures to the mods the server expects.
+- Updated community shaders to latest version + added grass optimizations
