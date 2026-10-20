@@ -1,12 +1,12 @@
 # Patch notes
 
 ## Changes
-- Fixed other players' hold-to-cast streams so you see one beam toward where they aim, not a second body-forward spray.
-- Improved armor type resists up to 30% from gear and 20% from shields, with thicker hides on rhinos, ore guardians, and other tough creatures.
-- Added Immersive Creatures hides and parts to hunting loot, with rhinos as Expert game that tans into Reinforced leather.
-- Fixed nearby creatures and NPCs rubberbanding in place instead of moving or fighting.
-- Added Immersive Creatures animals you can tame, each with its own food.
-- Fixed other players' hands staying stuck in a cast pose after they finish a spell.
-- Fixed race abilities so leftover creature attacks clear without wiping spellbooks you learned.
-- Fixed venison and mammoth snout counting as hunting products again.
-- Fixed other players drawing and sheathing weapons so they show up right away instead of lagging or flickering.
+- Added a way to tie an interior room to a parcel, from inside the room or by aiming at its door.
+- Reworked armor resistances so larger pieces and better materials protect more, and each material is strong against some weapons and elements and weak to others.
+- Added a progress bar and scoop animation when filling a waterskin. Cancelling leaves it empty.
+- Improved places you have left so they settle down when nobody is there. Plants, doors, chests, and locks stay as you left them when you come back.
+- Improved punches so they train One-Handed or Dual Wield, and a two-weapon attack counts each blade that lands.
+- Added the Juggernaut calling for two weapons in heavy armor.
+- Updated Hewer calling to work with heavy or light armor
+- Fixed mounting a horse so people nearby no longer crash, and the rider stays on the horse when it moves.
+- Fixed Open Lock spells so they cannot open a parcel lock while its owners are away.
