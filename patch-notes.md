@@ -10,3 +10,4 @@
 - Updated Hewer calling to work with heavy or light armor
 - Fixed mounting a horse so people nearby no longer crash, and the rider stays on the horse when it moves.
 - Fixed Open Lock spells so they cannot open a parcel lock while its owners are away.
+- Added a settings toggle for the gold typing and voice icons above other players. It stays on until you turn it off, and those icons hide with the rest of the HUD.

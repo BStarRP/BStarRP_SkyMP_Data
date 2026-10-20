@@ -1,0 +1,10 @@
+﻿Read the Room animation clips
+Author: istayzoomin
+Source: https://www.nexusmods.com/skyrimspecialedition/mods/77605 (version 2.2.1)
+Permission: assets may be used with credit. Not for files sold for money.
+
+Events:
+  RTREquip        helmetequip.hkx
+  RTRUnequip      helmetunequip.hkx
+  RTREquipHood    hoodequip.hkx
+  RTRUnequipHood  hoodunequip.hkx
