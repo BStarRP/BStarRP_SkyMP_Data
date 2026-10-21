@@ -1,0 +1,15 @@
+{
+  "name": "Unequip Helmet",
+  "description": "Variable09 is 22.",
+  "priority": 900222,
+  "interruptible": true,
+  "conditions": [
+    {
+      "condition": "CompareValues",
+      "requiredVersion": "1.0.0.0",
+      "Value A": { "actorValue": 76, "actorValueType": "Value" },
+      "Comparison": "==",
+      "Value B": { "value": 22.0 }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "Equip Helmet",
+  "description": "Variable09 is 23.",
+  "priority": 900223,
+  "interruptible": true,
+  "conditions": [
+    {
+      "condition": "CompareValues",
+      "requiredVersion": "1.0.0.0",
+      "Value A": { "actorValue": 76, "actorValueType": "Value" },
+      "Comparison": "==",
+      "Value B": { "value": 23.0 }
+    }
+  ]
+}
