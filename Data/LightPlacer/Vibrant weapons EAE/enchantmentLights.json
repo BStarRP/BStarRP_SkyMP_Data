@@ -1,0 +1,140 @@
+[
+  {
+    "visualEffects": [
+      "_JGFX_FireBattleaxeFX",
+      "_JGFX_FireCurvedSwordRFX",
+      "_JGFX_FireDaggerRFX",
+      "_JGFX_FireGreatswordFX",
+      "_JGFX_FireMaceRFX",
+      "_JGFX_FireSwordRFX",
+      "_JGFX_FireWaraxeRFX",
+      "_JGFX_FireWarhammerFX"
+    ],
+    "lights": [
+      {
+        "points": [
+          [0,0,0]
+        ],
+        "data": {
+          "light": "_JGFX_FireLight"
+        }
+      }
+    ]
+  },
+  {
+    "visualEffects": [
+      "_JGFX_ChaosBattleaxeFX",
+      "_JGFX_ChaosCurvedSwordRFX",
+      "_JGFX_ChaosDaggerRFX",
+      "_JGFX_ChaosGreatswordFX",
+      "_JGFX_ChaosMaceRFX",
+      "_JGFX_ChaosSwordRFX",
+      "_JGFX_ChaosWarAxeRFX",
+      "_JGFX_ChaosWarhammerFX"
+    ],
+    "lights": [
+      {
+        "points": [
+          [0,0,0]
+        ],
+        "data": {
+          "light": "_JGFX_ChaosLight"
+        }
+      }
+    ]
+  },
+  {
+    "visualEffects": [
+      "_JGFX_FireShockBattleaxeFX",
+      "_JGFX_FireShockCurvedSwordRFX",
+      "_JGFX_FireShockDaggerRFX",
+      "_JGFX_FireShockGreatswordFX",
+      "_JGFX_FireShockMaceRFX",
+      "_JGFX_FireShockSwordRFX",
+      "_JGFX_FireShockWarAxeRFX"
+    ],
+    "lights": [
+      {
+        "points": [
+          [0,0,0]
+        ],
+        "data": {
+          "light": "_JGFX_FireShockLight"
+        }
+      }
+    ]
+  },
+  {
+    "visualEffects": [
+      "_JGFX_FrostShockBattleaxeFX",
+      "_JGFX_FrostShockCurvedSwordRFX",
+      "_JGFX_FrostShockDaggerRFX",
+      "_JGFX_FrostShockGreatswordFX",
+      "_JGFX_FrostShockMaceRFX",
+      "_JGFX_FrostShockSwordRFX",
+      "_JGFX_FrostShockWarAxeRFX"
+    ],
+    "lights": [
+      {
+        "points": [
+          [0,0,0]
+        ],
+        "data": {
+          "light": "_JGFX_FrostShockLight"
+        }
+      }
+    ]
+  },
+  {
+    "visualEffects": [
+      "_JGFX_FrostFireBattleaxeFX",
+      "_JGFX_FrostFireCurvedSwordRFX",
+      "_JGFX_FrostFireDaggerRFX",
+      "_JGFX_FrostFireGreatswordFX",
+      "_JGFX_FrostFireMaceRFX",
+      "_JGFX_FrostFireSwordRFX",
+      "_JGFX_FrostFireWarAxeRFX",
+      "_JGFX_FrostFireWarhammerFX"
+    ],
+    "lights": [
+      {
+        "points": [
+          [0,0,0]
+        ],
+        "data": {
+          "light": "_JGFX_FrostFireLight"
+        }
+      }
+    ]
+  },
+  {
+    "visualEffects": [
+      "_JGFX_ShockBattleaxeFX",
+      "_JGFX_ShockCurvedSwordRFX",
+      "_JGFX_ShockDaggerRFX",
+      "_JGFX_ShockGreatswordFX",
+      "_JGFX_ShockMaceRFX",
+      "_JGFX_ShockSwordRFX",
+      "_JGFX_ShockWarAxeRFX",
+      "_JGFX_ShockWarhammerFX",
+      "_JGFX_FrostBattleaxeFX",
+      "_JGFX_FrostCurvedSwordRFX",
+      "_JGFX_FrostDaggerRFX",
+      "_JGFX_FrostGreatswordFX",
+      "_JGFX_FrostMaceRFX",
+      "_JGFX_FrostSwordRFX",
+      "_JGFX_FrostWarAxeRFX",
+      "_JGFX_FrostWarhammerFX"
+    ],
+    "lights": [
+      {
+        "points": [
+          [0,0,0]
+        ],
+        "data": {
+          "light": "_JGFX_ShockLight"
+        }
+      }
+    ]
+  }
+]

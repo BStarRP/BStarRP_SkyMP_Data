@@ -1,0 +1,1100 @@
+[
+  {
+    "WeaponArt": "EnchantGlow.esl|0x800",
+    "EnchantmentKeywords": [
+      "MagicVampireDrain"
+    ],
+    "!EnchantmentKeywords": [
+      "MagicDamageFire"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBattleaxe"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x801",
+    "EnchantmentKeywords": [
+      "MagicVampireDrain"
+    ],
+    "!EnchantmentKeywords": [
+      "MagicDamageFire"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeDagger"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x802",
+    "EnchantmentKeywords": [
+      "MagicVampireDrain"
+    ],
+    "!EnchantmentKeywords": [
+      "MagicDamageFire"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeGreatsword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x803",
+    "EnchantmentKeywords": [
+      "MagicVampireDrain"
+    ],
+    "!EnchantmentKeywords": [
+      "MagicDamageFire"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeMace"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x804",
+    "EnchantmentKeywords": [
+      "MagicVampireDrain"
+    ],
+    "!EnchantmentKeywords": [
+      "MagicDamageFire"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCurved",
+      "WeapTypeSword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x805",
+    "EnchantmentKeywords": [
+      "MagicVampireDrain"
+    ],
+    "!EnchantmentKeywords": [
+      "MagicDamageFire"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeSword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x806",
+    "EnchantmentKeywords": [
+      "MagicVampireDrain"
+    ],
+    "!EnchantmentKeywords": [
+      "MagicDamageFire"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeWarAxe"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x807",
+    "EnchantmentKeywords": [
+      "MagicVampireDrain"
+    ],
+    "!EnchantmentKeywords": [
+      "MagicDamageFire"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeWarhammer"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x808",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchAbsorbMagicka"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBattleaxe"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x809",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchAbsorbMagicka"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeDagger"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x80A",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchAbsorbMagicka"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeGreatsword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x80B",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchAbsorbMagicka"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeMace"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x80C",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchAbsorbMagicka"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCurved",
+      "WeapTypeSword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x80D",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchAbsorbMagicka"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeSword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x80E",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchAbsorbMagicka"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeWarAxe"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x80F",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchAbsorbMagicka"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeWarhammer"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x810",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchAbsorbStamina"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBattleaxe"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x811",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchAbsorbStamina"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeDagger"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x812",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchAbsorbStamina"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeGreatsword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x813",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchAbsorbStamina"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeMace"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x814",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchAbsorbStamina"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCurved",
+      "WeapTypeSword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x815",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchAbsorbStamina"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeSword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x816",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchAbsorbStamina"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeWarAxe"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x817",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchAbsorbStamina"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeWarhammer"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x818",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchDamageMagicka"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBattleaxe"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x819",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchDamageMagicka"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeDagger"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x81A",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchDamageMagicka"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeGreatsword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x81B",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchDamageMagicka"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeMace"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x81C",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchDamageMagicka"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCurved",
+      "WeapTypeSword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x81D",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchDamageMagicka"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeSword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x81E",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchDamageMagicka"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeWarAxe"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x81F",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchDamageMagicka"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeWarhammer"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x820",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchDamageStamina",
+      "MagicDamageFire"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBattleaxe"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x821",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchDamageStamina",
+      "MagicDamageFire"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeDagger"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x822",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchDamageStamina",
+      "MagicDamageFire"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeGreatsword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x823",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchDamageStamina",
+      "MagicDamageFire"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeMace"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x824",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchDamageStamina",
+      "MagicDamageFire"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCurved",
+      "WeapTypeSword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x825",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchDamageStamina",
+      "MagicDamageFire"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeSword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x826",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchDamageStamina",
+      "MagicDamageFire"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeWarAxe"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x827",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchDamageStamina",
+      "MagicDamageFire"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeWarhammer"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x828",
+    "EnchantmentKeywords": [
+      "MAG_MagicBanishDaedra"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBattleaxe"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x829",
+    "EnchantmentKeywords": [
+      "MAG_MagicBanishDaedra"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeDagger"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x82A",
+    "EnchantmentKeywords": [
+      "MAG_MagicBanishDaedra"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeGreatsword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x82B",
+    "EnchantmentKeywords": [
+      "MAG_MagicBanishDaedra"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeMace"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x82C",
+    "EnchantmentKeywords": [
+      "MAG_MagicBanishDaedra"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCurved",
+      "WeapTypeSword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x82D",
+    "EnchantmentKeywords": [
+      "MAG_MagicBanishDaedra"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeSword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x82E",
+    "EnchantmentKeywords": [
+      "MAG_MagicBanishDaedra"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeWarAxe"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x82F",
+    "EnchantmentKeywords": [
+      "MAG_MagicBanishDaedra"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeWarhammer"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x830",
+    "EnchantmentKeywords": [
+      "MagicParalysis"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBattleaxe"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x831",
+    "EnchantmentKeywords": [
+      "MagicParalysis"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeDagger"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x832",
+    "EnchantmentKeywords": [
+      "MagicParalysis"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeGreatsword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x833",
+    "EnchantmentKeywords": [
+      "MagicParalysis"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeMace"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x834",
+    "EnchantmentKeywords": [
+      "MagicParalysis"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCurved",
+      "WeapTypeSword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x835",
+    "EnchantmentKeywords": [
+      "MagicParalysis"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeSword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x836",
+    "EnchantmentKeywords": [
+      "MagicParalysis"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeWarAxe"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x837",
+    "EnchantmentKeywords": [
+      "MagicParalysis"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeWarhammer"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x838",
+    "EnchantmentKeywords": [
+      "MagicTurnUndead"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBattleaxe"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x839",
+    "EnchantmentKeywords": [
+      "MagicTurnUndead"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeDagger"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x83A",
+    "EnchantmentKeywords": [
+      "MagicTurnUndead"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeGreatsword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x83B",
+    "EnchantmentKeywords": [
+      "MagicTurnUndead"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeMace"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x83C",
+    "EnchantmentKeywords": [
+      "MagicTurnUndead"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCurved",
+      "WeapTypeSword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x83D",
+    "EnchantmentKeywords": [
+      "MagicTurnUndead"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeSword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x83E",
+    "EnchantmentKeywords": [
+      "MagicTurnUndead"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeWarAxe"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x83F",
+    "EnchantmentKeywords": [
+      "MagicTurnUndead"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeWarhammer"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x840",
+    "Enchantments": [
+      "Skyrim.esm|0x5B45F",
+      "Skyrim.esm|0x5B460",
+      "Skyrim.esm|0x5B461",
+      "Skyrim.esm|0x5B462",
+      "Skyrim.esm|0x5B463",
+      "Skyrim.esm|0x5B464",
+      "Skyrim.esm|0x10FB9A"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBattleaxe"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x841",
+    "Enchantments": [
+      "Skyrim.esm|0x5B45F",
+      "Skyrim.esm|0x5B460",
+      "Skyrim.esm|0x5B461",
+      "Skyrim.esm|0x5B462",
+      "Skyrim.esm|0x5B463",
+      "Skyrim.esm|0x5B464",
+      "Skyrim.esm|0x10FB9A"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeDagger"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x842",
+    "Enchantments": [
+      "Skyrim.esm|0x5B45F",
+      "Skyrim.esm|0x5B460",
+      "Skyrim.esm|0x5B461",
+      "Skyrim.esm|0x5B462",
+      "Skyrim.esm|0x5B463",
+      "Skyrim.esm|0x5B464",
+      "Skyrim.esm|0x10FB9A"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeGreatsword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x843",
+    "Enchantments": [
+      "Skyrim.esm|0x5B45F",
+      "Skyrim.esm|0x5B460",
+      "Skyrim.esm|0x5B461",
+      "Skyrim.esm|0x5B462",
+      "Skyrim.esm|0x5B463",
+      "Skyrim.esm|0x5B464",
+      "Skyrim.esm|0x10FB9A"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeMace"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x844",
+    "Enchantments": [
+      "Skyrim.esm|0x5B45F",
+      "Skyrim.esm|0x5B460",
+      "Skyrim.esm|0x5B461",
+      "Skyrim.esm|0x5B462",
+      "Skyrim.esm|0x5B463",
+      "Skyrim.esm|0x5B464",
+      "Skyrim.esm|0x10FB9A"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCurved",
+      "WeapTypeSword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x845",
+    "Enchantments": [
+      "Skyrim.esm|0x5B45F",
+      "Skyrim.esm|0x5B460",
+      "Skyrim.esm|0x5B461",
+      "Skyrim.esm|0x5B462",
+      "Skyrim.esm|0x5B463",
+      "Skyrim.esm|0x5B464",
+      "Skyrim.esm|0x10FB9A"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeSword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x846",
+    "Enchantments": [
+      "Skyrim.esm|0x5B45F",
+      "Skyrim.esm|0x5B460",
+      "Skyrim.esm|0x5B461",
+      "Skyrim.esm|0x5B462",
+      "Skyrim.esm|0x5B463",
+      "Skyrim.esm|0x5B464",
+      "Skyrim.esm|0x10FB9A"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeWarAxe"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x847",
+    "Enchantments": [
+      "Skyrim.esm|0x5B45F",
+      "Skyrim.esm|0x5B460",
+      "Skyrim.esm|0x5B461",
+      "Skyrim.esm|0x5B462",
+      "Skyrim.esm|0x5B463",
+      "Skyrim.esm|0x5B464",
+      "Skyrim.esm|0x10FB9A"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeWarhammer"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x848",
+    "Enchantments": [
+      "Skyrim.esm|0xFBFF7",
+      "Skyrim.esm|0x5B466",
+      "Skyrim.esm|0x5B467",
+      "Skyrim.esm|0x5B468",
+      "Skyrim.esm|0x5B469",
+      "Skyrim.esm|0x5B46A",
+      "Skyrim.esm|0x10FB94"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBattleaxe"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x849",
+    "Enchantments": [
+      "Skyrim.esm|0xFBFF7",
+      "Skyrim.esm|0x5B466",
+      "Skyrim.esm|0x5B467",
+      "Skyrim.esm|0x5B468",
+      "Skyrim.esm|0x5B469",
+      "Skyrim.esm|0x5B46A",
+      "Skyrim.esm|0x10FB94"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeDagger"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x84A",
+    "Enchantments": [
+      "Skyrim.esm|0xFBFF7",
+      "Skyrim.esm|0x5B466",
+      "Skyrim.esm|0x5B467",
+      "Skyrim.esm|0x5B468",
+      "Skyrim.esm|0x5B469",
+      "Skyrim.esm|0x5B46A",
+      "Skyrim.esm|0x10FB94"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeGreatsword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x84B",
+    "Enchantments": [
+      "Skyrim.esm|0xFBFF7",
+      "Skyrim.esm|0x5B466",
+      "Skyrim.esm|0x5B467",
+      "Skyrim.esm|0x5B468",
+      "Skyrim.esm|0x5B469",
+      "Skyrim.esm|0x5B46A",
+      "Skyrim.esm|0x10FB94"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeMace"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x84C",
+    "Enchantments": [
+      "Skyrim.esm|0xFBFF7",
+      "Skyrim.esm|0x5B466",
+      "Skyrim.esm|0x5B467",
+      "Skyrim.esm|0x5B468",
+      "Skyrim.esm|0x5B469",
+      "Skyrim.esm|0x5B46A",
+      "Skyrim.esm|0x10FB94"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCurved",
+      "WeapTypeSword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x84D",
+    "Enchantments": [
+      "Skyrim.esm|0xFBFF7",
+      "Skyrim.esm|0x5B466",
+      "Skyrim.esm|0x5B467",
+      "Skyrim.esm|0x5B468",
+      "Skyrim.esm|0x5B469",
+      "Skyrim.esm|0x5B46A",
+      "Skyrim.esm|0x10FB94"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeSword"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x84E",
+    "Enchantments": [
+      "Skyrim.esm|0xFBFF7",
+      "Skyrim.esm|0x5B466",
+      "Skyrim.esm|0x5B467",
+      "Skyrim.esm|0x5B468",
+      "Skyrim.esm|0x5B469",
+      "Skyrim.esm|0x5B46A",
+      "Skyrim.esm|0x10FB94"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeWarAxe"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x84F",
+    "Enchantments": [
+      "Skyrim.esm|0xFBFF7",
+      "Skyrim.esm|0x5B466",
+      "Skyrim.esm|0x5B467",
+      "Skyrim.esm|0x5B468",
+      "Skyrim.esm|0x5B469",
+      "Skyrim.esm|0x5B46A",
+      "Skyrim.esm|0x10FB94"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeWarhammer"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  }
+]
