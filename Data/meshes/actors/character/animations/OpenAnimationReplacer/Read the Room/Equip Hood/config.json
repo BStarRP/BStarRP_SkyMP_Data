@@ -1,0 +1,15 @@
+{
+  "name": "Equip Hood",
+  "description": "Hood on. Variable09 is 12.",
+  "priority": 900013,
+  "interruptible": true,
+  "conditions": [
+    {
+      "condition": "CompareValues",
+      "requiredVersion": "1.0.0.0",
+      "Value A": { "actorValue": 76, "actorValueType": "Value" },
+      "Comparison": "==",
+      "Value B": { "value": 12.0 }
+    }
+  ]
+}

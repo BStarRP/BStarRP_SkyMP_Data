@@ -1,0 +1,15 @@
+{
+  "name": "Equip",
+  "description": "Helmet on. Variable09 is 10.",
+  "priority": 900011,
+  "interruptible": true,
+  "conditions": [
+    {
+      "condition": "CompareValues",
+      "requiredVersion": "1.0.0.0",
+      "Value A": { "actorValue": 76, "actorValueType": "Value" },
+      "Comparison": "==",
+      "Value B": { "value": 10.0 }
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "name": "Unequip Hood",
+  "description": "Hood off. Variable09 is 11.",
+  "priority": 900012,
+  "interruptible": true,
+  "conditions": [
+    {
+      "condition": "CompareValues",
+      "requiredVersion": "1.0.0.0",
+      "Value A": { "actorValue": 76, "actorValueType": "Value" },
+      "Comparison": "==",
+      "Value B": { "value": 11.0 }
+    }
+  ]
+}
