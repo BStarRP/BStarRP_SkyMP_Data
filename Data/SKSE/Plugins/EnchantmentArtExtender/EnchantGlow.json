@@ -1096,5 +1096,455 @@
     "!WeaponKeywords": [
       "VWDisableFX"
     ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x860",
+    "EnchantmentKeywords": [
+      "MagicVampireDrain"
+    ],
+    "!EnchantmentKeywords": [
+      "MagicDamageFire"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x861",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchAbsorbMagicka"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x862",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchAbsorbStamina"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x863",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchDamageMagicka"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x864",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchDamageStamina",
+      "MagicDamageFire"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x865",
+    "EnchantmentKeywords": [
+      "MAG_MagicBanishDaedra"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x866",
+    "EnchantmentKeywords": [
+      "MagicParalysis"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x867",
+    "EnchantmentKeywords": [
+      "MagicTurnUndead"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x868",
+    "Enchantments": [
+      "Skyrim.esm|0x5B45F",
+      "Skyrim.esm|0x5B460",
+      "Skyrim.esm|0x5B461",
+      "Skyrim.esm|0x5B462",
+      "Skyrim.esm|0x5B463",
+      "Skyrim.esm|0x5B464",
+      "Skyrim.esm|0x10FB9A"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x869",
+    "Enchantments": [
+      "Skyrim.esm|0xFBFF7",
+      "Skyrim.esm|0x5B466",
+      "Skyrim.esm|0x5B467",
+      "Skyrim.esm|0x5B468",
+      "Skyrim.esm|0x5B469",
+      "Skyrim.esm|0x5B46A",
+      "Skyrim.esm|0x10FB94"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x853",
+    "EnchantmentKeywords": [
+      "MagicDamageFire",
+      "MagicDamageFrost",
+      "MagicDamageShock"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x850",
+    "EnchantmentKeywords": [
+      "MagicDamageFire"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x854",
+    "EnchantmentKeywords": [
+      "MagicDamageFire",
+      "MagicDamageShock"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x851",
+    "EnchantmentKeywords": [
+      "MagicDamageFrost"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x855",
+    "EnchantmentKeywords": [
+      "MagicDamageFire",
+      "MagicDamageFrost"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x856",
+    "EnchantmentKeywords": [
+      "MagicDamageShock",
+      "MagicDamageFrost"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x852",
+    "EnchantmentKeywords": [
+      "MagicDamageShock"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeBow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x86A",
+    "EnchantmentKeywords": [
+      "MagicVampireDrain"
+    ],
+    "!EnchantmentKeywords": [
+      "MagicDamageFire"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCrossbow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x86B",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchAbsorbMagicka"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCrossbow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x86C",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchAbsorbStamina"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCrossbow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x86D",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchDamageMagicka"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCrossbow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x86E",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchDamageStamina",
+      "MagicDamageFire"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCrossbow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x86F",
+    "EnchantmentKeywords": [
+      "MAG_MagicBanishDaedra"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCrossbow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x870",
+    "EnchantmentKeywords": [
+      "MagicParalysis"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCrossbow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x871",
+    "EnchantmentKeywords": [
+      "MagicTurnUndead"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCrossbow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x872",
+    "Enchantments": [
+      "Skyrim.esm|0x5B45F",
+      "Skyrim.esm|0x5B460",
+      "Skyrim.esm|0x5B461",
+      "Skyrim.esm|0x5B462",
+      "Skyrim.esm|0x5B463",
+      "Skyrim.esm|0x5B464",
+      "Skyrim.esm|0x10FB9A"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCrossbow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x873",
+    "Enchantments": [
+      "Skyrim.esm|0xFBFF7",
+      "Skyrim.esm|0x5B466",
+      "Skyrim.esm|0x5B467",
+      "Skyrim.esm|0x5B468",
+      "Skyrim.esm|0x5B469",
+      "Skyrim.esm|0x5B46A",
+      "Skyrim.esm|0x10FB94"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCrossbow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x85A",
+    "EnchantmentKeywords": [
+      "MagicDamageFire",
+      "MagicDamageFrost",
+      "MagicDamageShock"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCrossbow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x857",
+    "EnchantmentKeywords": [
+      "MagicDamageFire"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCrossbow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x85B",
+    "EnchantmentKeywords": [
+      "MagicDamageFire",
+      "MagicDamageShock"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCrossbow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x858",
+    "EnchantmentKeywords": [
+      "MagicDamageFrost"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCrossbow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x85C",
+    "EnchantmentKeywords": [
+      "MagicDamageFire",
+      "MagicDamageFrost"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCrossbow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x85D",
+    "EnchantmentKeywords": [
+      "MagicDamageShock",
+      "MagicDamageFrost"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCrossbow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x859",
+    "EnchantmentKeywords": [
+      "MagicDamageShock"
+    ],
+    "WeaponKeywords": [
+      "WeapTypeCrossbow"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
   }
 ]
