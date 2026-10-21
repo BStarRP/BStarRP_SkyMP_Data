@@ -1,0 +1,16 @@
+{
+  "name": "Unequip Cuirass",
+  "description": "Variable09 is 14.",
+  "priority": 900214,
+  "interruptible": true,
+  "conditions": [
+    {
+      "condition": "CompareValues",
+      "requiredVersion": "1.0.0.0",
+      "Value A": { "actorValue": 76, "actorValueType": "Value" },
+      "Comparison": "==",
+      "Value B": { "value": 14.0 }
+    }
+  ]
+}
+

@@ -1,0 +1,16 @@
+{
+  "name": "Equip Cuirass",
+  "description": "Variable09 is 13.",
+  "priority": 900213,
+  "interruptible": true,
+  "conditions": [
+    {
+      "condition": "CompareValues",
+      "requiredVersion": "1.0.0.0",
+      "Value A": { "actorValue": 76, "actorValueType": "Value" },
+      "Comparison": "==",
+      "Value B": { "value": 13.0 }
+    }
+  ]
+}
+

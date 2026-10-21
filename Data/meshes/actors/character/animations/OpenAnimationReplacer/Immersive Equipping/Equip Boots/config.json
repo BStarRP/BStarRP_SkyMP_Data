@@ -1,0 +1,16 @@
+{
+  "name": "Equip Boots",
+  "description": "Variable09 is 17.",
+  "priority": 900217,
+  "interruptible": true,
+  "conditions": [
+    {
+      "condition": "CompareValues",
+      "requiredVersion": "1.0.0.0",
+      "Value A": { "actorValue": 76, "actorValueType": "Value" },
+      "Comparison": "==",
+      "Value B": { "value": 17.0 }
+    }
+  ]
+}
+

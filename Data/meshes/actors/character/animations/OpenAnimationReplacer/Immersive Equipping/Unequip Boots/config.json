@@ -1,0 +1,16 @@
+{
+  "name": "Unequip Boots",
+  "description": "Variable09 is 18.",
+  "priority": 900218,
+  "interruptible": true,
+  "conditions": [
+    {
+      "condition": "CompareValues",
+      "requiredVersion": "1.0.0.0",
+      "Value A": { "actorValue": 76, "actorValueType": "Value" },
+      "Comparison": "==",
+      "Value B": { "value": 18.0 }
+    }
+  ]
+}
+

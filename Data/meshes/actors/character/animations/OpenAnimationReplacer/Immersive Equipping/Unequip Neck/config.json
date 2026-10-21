@@ -1,0 +1,16 @@
+{
+  "name": "Unequip Neck",
+  "description": "Variable09 is 20.",
+  "priority": 900220,
+  "interruptible": true,
+  "conditions": [
+    {
+      "condition": "CompareValues",
+      "requiredVersion": "1.0.0.0",
+      "Value A": { "actorValue": 76, "actorValueType": "Value" },
+      "Comparison": "==",
+      "Value B": { "value": 20.0 }
+    }
+  ]
+}
+

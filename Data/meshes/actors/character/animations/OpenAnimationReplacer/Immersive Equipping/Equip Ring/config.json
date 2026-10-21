@@ -1,0 +1,16 @@
+{
+  "name": "Equip Ring",
+  "description": "Variable09 is 21.",
+  "priority": 900221,
+  "interruptible": true,
+  "conditions": [
+    {
+      "condition": "CompareValues",
+      "requiredVersion": "1.0.0.0",
+      "Value A": { "actorValue": 76, "actorValueType": "Value" },
+      "Comparison": "==",
+      "Value B": { "value": 21.0 }
+    }
+  ]
+}
+
