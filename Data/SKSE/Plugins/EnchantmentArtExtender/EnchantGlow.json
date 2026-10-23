@@ -1321,5 +1321,587 @@
     "!WeaponKeywords": [
       "VWDisableFX"
     ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x804",
+    "EnchantmentKeywords": [
+      "MagicVampireDrain"
+    ],
+    "!EnchantmentKeywords": [
+      "MagicDamageFire"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ],
+    "Weapons": [
+      "Immersive Weapons.esp|0x2334",
+      "Immersive Weapons.esp|0x2330",
+      "Immersive Weapons.esp|0x12F3",
+      "Immersive Weapons.esp|0xD6D",
+      "Immersive Weapons.esp|0x1859",
+      "Immersive Weapons.esp|0x289B",
+      "Immersive Weapons.esp|0xD6A",
+      "Immersive Weapons.esp|0x80D63",
+      "Immersive Weapons.esp|0x20D63",
+      "Immersive Weapons.esp|0x42D62",
+      "Immersive Weapons.esp|0x35012",
+      "Immersive Weapons.esp|0x747C5",
+      "Immersive Weapons.esp|0x747C6",
+      "Immersive Weapons.esp|0x747C8",
+      "Immersive Weapons.esp|0x747C9",
+      "Immersive Weapons.esp|0x747CA",
+      "Immersive Weapons.esp|0x747DA",
+      "Immersive Weapons.esp|0x747DB",
+      "Immersive Weapons.esp|0x747E1",
+      "Immersive Weapons.esp|0x929",
+      "Immersive Weapons.esp|0x701007",
+      "Apex_Khajiit.esp|0x80A"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x80C",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchAbsorbMagicka"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ],
+    "Weapons": [
+      "Immersive Weapons.esp|0x2334",
+      "Immersive Weapons.esp|0x2330",
+      "Immersive Weapons.esp|0x12F3",
+      "Immersive Weapons.esp|0xD6D",
+      "Immersive Weapons.esp|0x1859",
+      "Immersive Weapons.esp|0x289B",
+      "Immersive Weapons.esp|0xD6A",
+      "Immersive Weapons.esp|0x80D63",
+      "Immersive Weapons.esp|0x20D63",
+      "Immersive Weapons.esp|0x42D62",
+      "Immersive Weapons.esp|0x35012",
+      "Immersive Weapons.esp|0x747C5",
+      "Immersive Weapons.esp|0x747C6",
+      "Immersive Weapons.esp|0x747C8",
+      "Immersive Weapons.esp|0x747C9",
+      "Immersive Weapons.esp|0x747CA",
+      "Immersive Weapons.esp|0x747DA",
+      "Immersive Weapons.esp|0x747DB",
+      "Immersive Weapons.esp|0x747E1",
+      "Immersive Weapons.esp|0x929",
+      "Immersive Weapons.esp|0x701007",
+      "Apex_Khajiit.esp|0x80A"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x814",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchAbsorbStamina"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ],
+    "Weapons": [
+      "Immersive Weapons.esp|0x2334",
+      "Immersive Weapons.esp|0x2330",
+      "Immersive Weapons.esp|0x12F3",
+      "Immersive Weapons.esp|0xD6D",
+      "Immersive Weapons.esp|0x1859",
+      "Immersive Weapons.esp|0x289B",
+      "Immersive Weapons.esp|0xD6A",
+      "Immersive Weapons.esp|0x80D63",
+      "Immersive Weapons.esp|0x20D63",
+      "Immersive Weapons.esp|0x42D62",
+      "Immersive Weapons.esp|0x35012",
+      "Immersive Weapons.esp|0x747C5",
+      "Immersive Weapons.esp|0x747C6",
+      "Immersive Weapons.esp|0x747C8",
+      "Immersive Weapons.esp|0x747C9",
+      "Immersive Weapons.esp|0x747CA",
+      "Immersive Weapons.esp|0x747DA",
+      "Immersive Weapons.esp|0x747DB",
+      "Immersive Weapons.esp|0x747E1",
+      "Immersive Weapons.esp|0x929",
+      "Immersive Weapons.esp|0x701007",
+      "Apex_Khajiit.esp|0x80A"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x81C",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchDamageMagicka"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ],
+    "Weapons": [
+      "Immersive Weapons.esp|0x2334",
+      "Immersive Weapons.esp|0x2330",
+      "Immersive Weapons.esp|0x12F3",
+      "Immersive Weapons.esp|0xD6D",
+      "Immersive Weapons.esp|0x1859",
+      "Immersive Weapons.esp|0x289B",
+      "Immersive Weapons.esp|0xD6A",
+      "Immersive Weapons.esp|0x80D63",
+      "Immersive Weapons.esp|0x20D63",
+      "Immersive Weapons.esp|0x42D62",
+      "Immersive Weapons.esp|0x35012",
+      "Immersive Weapons.esp|0x747C5",
+      "Immersive Weapons.esp|0x747C6",
+      "Immersive Weapons.esp|0x747C8",
+      "Immersive Weapons.esp|0x747C9",
+      "Immersive Weapons.esp|0x747CA",
+      "Immersive Weapons.esp|0x747DA",
+      "Immersive Weapons.esp|0x747DB",
+      "Immersive Weapons.esp|0x747E1",
+      "Immersive Weapons.esp|0x929",
+      "Immersive Weapons.esp|0x701007",
+      "Apex_Khajiit.esp|0x80A"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x824",
+    "EnchantmentKeywords": [
+      "MAG_MagicEnchDamageStamina",
+      "MagicDamageFire"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ],
+    "Weapons": [
+      "Immersive Weapons.esp|0x2334",
+      "Immersive Weapons.esp|0x2330",
+      "Immersive Weapons.esp|0x12F3",
+      "Immersive Weapons.esp|0xD6D",
+      "Immersive Weapons.esp|0x1859",
+      "Immersive Weapons.esp|0x289B",
+      "Immersive Weapons.esp|0xD6A",
+      "Immersive Weapons.esp|0x80D63",
+      "Immersive Weapons.esp|0x20D63",
+      "Immersive Weapons.esp|0x42D62",
+      "Immersive Weapons.esp|0x35012",
+      "Immersive Weapons.esp|0x747C5",
+      "Immersive Weapons.esp|0x747C6",
+      "Immersive Weapons.esp|0x747C8",
+      "Immersive Weapons.esp|0x747C9",
+      "Immersive Weapons.esp|0x747CA",
+      "Immersive Weapons.esp|0x747DA",
+      "Immersive Weapons.esp|0x747DB",
+      "Immersive Weapons.esp|0x747E1",
+      "Immersive Weapons.esp|0x929",
+      "Immersive Weapons.esp|0x701007",
+      "Apex_Khajiit.esp|0x80A"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x82C",
+    "EnchantmentKeywords": [
+      "MAG_MagicBanishDaedra"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ],
+    "Weapons": [
+      "Immersive Weapons.esp|0x2334",
+      "Immersive Weapons.esp|0x2330",
+      "Immersive Weapons.esp|0x12F3",
+      "Immersive Weapons.esp|0xD6D",
+      "Immersive Weapons.esp|0x1859",
+      "Immersive Weapons.esp|0x289B",
+      "Immersive Weapons.esp|0xD6A",
+      "Immersive Weapons.esp|0x80D63",
+      "Immersive Weapons.esp|0x20D63",
+      "Immersive Weapons.esp|0x42D62",
+      "Immersive Weapons.esp|0x35012",
+      "Immersive Weapons.esp|0x747C5",
+      "Immersive Weapons.esp|0x747C6",
+      "Immersive Weapons.esp|0x747C8",
+      "Immersive Weapons.esp|0x747C9",
+      "Immersive Weapons.esp|0x747CA",
+      "Immersive Weapons.esp|0x747DA",
+      "Immersive Weapons.esp|0x747DB",
+      "Immersive Weapons.esp|0x747E1",
+      "Immersive Weapons.esp|0x929",
+      "Immersive Weapons.esp|0x701007",
+      "Apex_Khajiit.esp|0x80A"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x834",
+    "EnchantmentKeywords": [
+      "MagicParalysis"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ],
+    "Weapons": [
+      "Immersive Weapons.esp|0x2334",
+      "Immersive Weapons.esp|0x2330",
+      "Immersive Weapons.esp|0x12F3",
+      "Immersive Weapons.esp|0xD6D",
+      "Immersive Weapons.esp|0x1859",
+      "Immersive Weapons.esp|0x289B",
+      "Immersive Weapons.esp|0xD6A",
+      "Immersive Weapons.esp|0x80D63",
+      "Immersive Weapons.esp|0x20D63",
+      "Immersive Weapons.esp|0x42D62",
+      "Immersive Weapons.esp|0x35012",
+      "Immersive Weapons.esp|0x747C5",
+      "Immersive Weapons.esp|0x747C6",
+      "Immersive Weapons.esp|0x747C8",
+      "Immersive Weapons.esp|0x747C9",
+      "Immersive Weapons.esp|0x747CA",
+      "Immersive Weapons.esp|0x747DA",
+      "Immersive Weapons.esp|0x747DB",
+      "Immersive Weapons.esp|0x747E1",
+      "Immersive Weapons.esp|0x929",
+      "Immersive Weapons.esp|0x701007",
+      "Apex_Khajiit.esp|0x80A"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x83C",
+    "EnchantmentKeywords": [
+      "MagicTurnUndead"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ],
+    "Weapons": [
+      "Immersive Weapons.esp|0x2334",
+      "Immersive Weapons.esp|0x2330",
+      "Immersive Weapons.esp|0x12F3",
+      "Immersive Weapons.esp|0xD6D",
+      "Immersive Weapons.esp|0x1859",
+      "Immersive Weapons.esp|0x289B",
+      "Immersive Weapons.esp|0xD6A",
+      "Immersive Weapons.esp|0x80D63",
+      "Immersive Weapons.esp|0x20D63",
+      "Immersive Weapons.esp|0x42D62",
+      "Immersive Weapons.esp|0x35012",
+      "Immersive Weapons.esp|0x747C5",
+      "Immersive Weapons.esp|0x747C6",
+      "Immersive Weapons.esp|0x747C8",
+      "Immersive Weapons.esp|0x747C9",
+      "Immersive Weapons.esp|0x747CA",
+      "Immersive Weapons.esp|0x747DA",
+      "Immersive Weapons.esp|0x747DB",
+      "Immersive Weapons.esp|0x747E1",
+      "Immersive Weapons.esp|0x929",
+      "Immersive Weapons.esp|0x701007",
+      "Apex_Khajiit.esp|0x80A"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x844",
+    "Enchantments": [
+      "Skyrim.esm|0x5B45F",
+      "Skyrim.esm|0x5B460",
+      "Skyrim.esm|0x5B461",
+      "Skyrim.esm|0x5B462",
+      "Skyrim.esm|0x5B463",
+      "Skyrim.esm|0x5B464",
+      "Skyrim.esm|0x10FB9A"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ],
+    "Weapons": [
+      "Immersive Weapons.esp|0x2334",
+      "Immersive Weapons.esp|0x2330",
+      "Immersive Weapons.esp|0x12F3",
+      "Immersive Weapons.esp|0xD6D",
+      "Immersive Weapons.esp|0x1859",
+      "Immersive Weapons.esp|0x289B",
+      "Immersive Weapons.esp|0xD6A",
+      "Immersive Weapons.esp|0x80D63",
+      "Immersive Weapons.esp|0x20D63",
+      "Immersive Weapons.esp|0x42D62",
+      "Immersive Weapons.esp|0x35012",
+      "Immersive Weapons.esp|0x747C5",
+      "Immersive Weapons.esp|0x747C6",
+      "Immersive Weapons.esp|0x747C8",
+      "Immersive Weapons.esp|0x747C9",
+      "Immersive Weapons.esp|0x747CA",
+      "Immersive Weapons.esp|0x747DA",
+      "Immersive Weapons.esp|0x747DB",
+      "Immersive Weapons.esp|0x747E1",
+      "Immersive Weapons.esp|0x929",
+      "Immersive Weapons.esp|0x701007",
+      "Apex_Khajiit.esp|0x80A"
+    ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x84C",
+    "Enchantments": [
+      "Skyrim.esm|0xFBFF7",
+      "Skyrim.esm|0x5B466",
+      "Skyrim.esm|0x5B467",
+      "Skyrim.esm|0x5B468",
+      "Skyrim.esm|0x5B469",
+      "Skyrim.esm|0x5B46A",
+      "Skyrim.esm|0x10FB94"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ],
+    "Weapons": [
+      "Immersive Weapons.esp|0x2334",
+      "Immersive Weapons.esp|0x2330",
+      "Immersive Weapons.esp|0x12F3",
+      "Immersive Weapons.esp|0xD6D",
+      "Immersive Weapons.esp|0x1859",
+      "Immersive Weapons.esp|0x289B",
+      "Immersive Weapons.esp|0xD6A",
+      "Immersive Weapons.esp|0x80D63",
+      "Immersive Weapons.esp|0x20D63",
+      "Immersive Weapons.esp|0x42D62",
+      "Immersive Weapons.esp|0x35012",
+      "Immersive Weapons.esp|0x747C5",
+      "Immersive Weapons.esp|0x747C6",
+      "Immersive Weapons.esp|0x747C8",
+      "Immersive Weapons.esp|0x747C9",
+      "Immersive Weapons.esp|0x747CA",
+      "Immersive Weapons.esp|0x747DA",
+      "Immersive Weapons.esp|0x747DB",
+      "Immersive Weapons.esp|0x747E1",
+      "Immersive Weapons.esp|0x929",
+      "Immersive Weapons.esp|0x701007",
+      "Apex_Khajiit.esp|0x80A"
+    ]
+  },
+  {
+    "WeaponArt": "Vibrant Weapons EAE.esp|0x90E",
+    "EnchantmentKeywords": [
+      "MagicDamageFire"
+    ],
+    "Weapons": [
+      "Immersive Weapons.esp|0x2334",
+      "Immersive Weapons.esp|0x2330",
+      "Immersive Weapons.esp|0x12F3",
+      "Immersive Weapons.esp|0xD6D",
+      "Immersive Weapons.esp|0x1859",
+      "Immersive Weapons.esp|0x289B",
+      "Immersive Weapons.esp|0xD6A",
+      "Immersive Weapons.esp|0x80D63",
+      "Immersive Weapons.esp|0x20D63",
+      "Immersive Weapons.esp|0x42D62",
+      "Immersive Weapons.esp|0x35012",
+      "Immersive Weapons.esp|0x747C5",
+      "Immersive Weapons.esp|0x747C6",
+      "Immersive Weapons.esp|0x747C8",
+      "Immersive Weapons.esp|0x747C9",
+      "Immersive Weapons.esp|0x747CA",
+      "Immersive Weapons.esp|0x747DA",
+      "Immersive Weapons.esp|0x747DB",
+      "Immersive Weapons.esp|0x747E1",
+      "Immersive Weapons.esp|0x929",
+      "Immersive Weapons.esp|0x701007",
+      "Apex_Khajiit.esp|0x80A"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "Vibrant Weapons EAE.esp|0x809",
+    "EnchantmentKeywords": [
+      "MagicDamageFrost"
+    ],
+    "Weapons": [
+      "Immersive Weapons.esp|0x2334",
+      "Immersive Weapons.esp|0x2330",
+      "Immersive Weapons.esp|0x12F3",
+      "Immersive Weapons.esp|0xD6D",
+      "Immersive Weapons.esp|0x1859",
+      "Immersive Weapons.esp|0x289B",
+      "Immersive Weapons.esp|0xD6A",
+      "Immersive Weapons.esp|0x80D63",
+      "Immersive Weapons.esp|0x20D63",
+      "Immersive Weapons.esp|0x42D62",
+      "Immersive Weapons.esp|0x35012",
+      "Immersive Weapons.esp|0x747C5",
+      "Immersive Weapons.esp|0x747C6",
+      "Immersive Weapons.esp|0x747C8",
+      "Immersive Weapons.esp|0x747C9",
+      "Immersive Weapons.esp|0x747CA",
+      "Immersive Weapons.esp|0x747DA",
+      "Immersive Weapons.esp|0x747DB",
+      "Immersive Weapons.esp|0x747E1",
+      "Immersive Weapons.esp|0x929",
+      "Immersive Weapons.esp|0x701007",
+      "Apex_Khajiit.esp|0x80A"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "Vibrant Weapons EAE.esp|0x80B",
+    "EnchantmentKeywords": [
+      "MagicDamageShock"
+    ],
+    "Weapons": [
+      "Immersive Weapons.esp|0x2334",
+      "Immersive Weapons.esp|0x2330",
+      "Immersive Weapons.esp|0x12F3",
+      "Immersive Weapons.esp|0xD6D",
+      "Immersive Weapons.esp|0x1859",
+      "Immersive Weapons.esp|0x289B",
+      "Immersive Weapons.esp|0xD6A",
+      "Immersive Weapons.esp|0x80D63",
+      "Immersive Weapons.esp|0x20D63",
+      "Immersive Weapons.esp|0x42D62",
+      "Immersive Weapons.esp|0x35012",
+      "Immersive Weapons.esp|0x747C5",
+      "Immersive Weapons.esp|0x747C6",
+      "Immersive Weapons.esp|0x747C8",
+      "Immersive Weapons.esp|0x747C9",
+      "Immersive Weapons.esp|0x747CA",
+      "Immersive Weapons.esp|0x747DA",
+      "Immersive Weapons.esp|0x747DB",
+      "Immersive Weapons.esp|0x747E1",
+      "Immersive Weapons.esp|0x929",
+      "Immersive Weapons.esp|0x701007",
+      "Apex_Khajiit.esp|0x80A"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "Vibrant Weapons EAE.esp|0x801",
+    "EnchantmentKeywords": [
+      "MagicDamageFire",
+      "MagicDamageFrost",
+      "MagicDamageShock"
+    ],
+    "Weapons": [
+      "Immersive Weapons.esp|0x2334",
+      "Immersive Weapons.esp|0x2330",
+      "Immersive Weapons.esp|0x12F3",
+      "Immersive Weapons.esp|0xD6D",
+      "Immersive Weapons.esp|0x1859",
+      "Immersive Weapons.esp|0x289B",
+      "Immersive Weapons.esp|0xD6A",
+      "Immersive Weapons.esp|0x80D63",
+      "Immersive Weapons.esp|0x20D63",
+      "Immersive Weapons.esp|0x42D62",
+      "Immersive Weapons.esp|0x35012",
+      "Immersive Weapons.esp|0x747C5",
+      "Immersive Weapons.esp|0x747C6",
+      "Immersive Weapons.esp|0x747C8",
+      "Immersive Weapons.esp|0x747C9",
+      "Immersive Weapons.esp|0x747CA",
+      "Immersive Weapons.esp|0x747DA",
+      "Immersive Weapons.esp|0x747DB",
+      "Immersive Weapons.esp|0x747E1",
+      "Immersive Weapons.esp|0x929",
+      "Immersive Weapons.esp|0x701007",
+      "Apex_Khajiit.esp|0x80A"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "Vibrant Weapons EAE.esp|0x803",
+    "EnchantmentKeywords": [
+      "MagicDamageFire",
+      "MagicDamageShock"
+    ],
+    "Weapons": [
+      "Immersive Weapons.esp|0x2334",
+      "Immersive Weapons.esp|0x2330",
+      "Immersive Weapons.esp|0x12F3",
+      "Immersive Weapons.esp|0xD6D",
+      "Immersive Weapons.esp|0x1859",
+      "Immersive Weapons.esp|0x289B",
+      "Immersive Weapons.esp|0xD6A",
+      "Immersive Weapons.esp|0x80D63",
+      "Immersive Weapons.esp|0x20D63",
+      "Immersive Weapons.esp|0x42D62",
+      "Immersive Weapons.esp|0x35012",
+      "Immersive Weapons.esp|0x747C5",
+      "Immersive Weapons.esp|0x747C6",
+      "Immersive Weapons.esp|0x747C8",
+      "Immersive Weapons.esp|0x747C9",
+      "Immersive Weapons.esp|0x747CA",
+      "Immersive Weapons.esp|0x747DA",
+      "Immersive Weapons.esp|0x747DB",
+      "Immersive Weapons.esp|0x747E1",
+      "Immersive Weapons.esp|0x929",
+      "Immersive Weapons.esp|0x701007",
+      "Apex_Khajiit.esp|0x80A"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "Vibrant Weapons EAE.esp|0x805",
+    "EnchantmentKeywords": [
+      "MagicDamageFire",
+      "MagicDamageFrost"
+    ],
+    "Weapons": [
+      "Immersive Weapons.esp|0x2334",
+      "Immersive Weapons.esp|0x2330",
+      "Immersive Weapons.esp|0x12F3",
+      "Immersive Weapons.esp|0xD6D",
+      "Immersive Weapons.esp|0x1859",
+      "Immersive Weapons.esp|0x289B",
+      "Immersive Weapons.esp|0xD6A",
+      "Immersive Weapons.esp|0x80D63",
+      "Immersive Weapons.esp|0x20D63",
+      "Immersive Weapons.esp|0x42D62",
+      "Immersive Weapons.esp|0x35012",
+      "Immersive Weapons.esp|0x747C5",
+      "Immersive Weapons.esp|0x747C6",
+      "Immersive Weapons.esp|0x747C8",
+      "Immersive Weapons.esp|0x747C9",
+      "Immersive Weapons.esp|0x747CA",
+      "Immersive Weapons.esp|0x747DA",
+      "Immersive Weapons.esp|0x747DB",
+      "Immersive Weapons.esp|0x747E1",
+      "Immersive Weapons.esp|0x929",
+      "Immersive Weapons.esp|0x701007",
+      "Apex_Khajiit.esp|0x80A"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
+  },
+  {
+    "WeaponArt": "Vibrant Weapons EAE.esp|0x807",
+    "EnchantmentKeywords": [
+      "MagicDamageShock",
+      "MagicDamageFrost"
+    ],
+    "Weapons": [
+      "Immersive Weapons.esp|0x2334",
+      "Immersive Weapons.esp|0x2330",
+      "Immersive Weapons.esp|0x12F3",
+      "Immersive Weapons.esp|0xD6D",
+      "Immersive Weapons.esp|0x1859",
+      "Immersive Weapons.esp|0x289B",
+      "Immersive Weapons.esp|0xD6A",
+      "Immersive Weapons.esp|0x80D63",
+      "Immersive Weapons.esp|0x20D63",
+      "Immersive Weapons.esp|0x42D62",
+      "Immersive Weapons.esp|0x35012",
+      "Immersive Weapons.esp|0x747C5",
+      "Immersive Weapons.esp|0x747C6",
+      "Immersive Weapons.esp|0x747C8",
+      "Immersive Weapons.esp|0x747C9",
+      "Immersive Weapons.esp|0x747CA",
+      "Immersive Weapons.esp|0x747DA",
+      "Immersive Weapons.esp|0x747DB",
+      "Immersive Weapons.esp|0x747E1",
+      "Immersive Weapons.esp|0x929",
+      "Immersive Weapons.esp|0x701007",
+      "Apex_Khajiit.esp|0x80A"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
   }
 ]
