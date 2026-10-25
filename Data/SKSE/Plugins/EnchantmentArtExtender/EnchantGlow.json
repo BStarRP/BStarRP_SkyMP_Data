@@ -1323,7 +1323,7 @@
     ]
   },
   {
-    "WeaponArt": "EnchantGlow.esl|0x804",
+    "WeaponArt": "EnchantGlow.esl|0x874",
     "EnchantmentKeywords": [
       "MagicVampireDrain"
     ],
@@ -1359,7 +1359,7 @@
     ]
   },
   {
-    "WeaponArt": "EnchantGlow.esl|0x80C",
+    "WeaponArt": "EnchantGlow.esl|0x875",
     "EnchantmentKeywords": [
       "MAG_MagicEnchAbsorbMagicka"
     ],
@@ -1392,7 +1392,7 @@
     ]
   },
   {
-    "WeaponArt": "EnchantGlow.esl|0x814",
+    "WeaponArt": "EnchantGlow.esl|0x876",
     "EnchantmentKeywords": [
       "MAG_MagicEnchAbsorbStamina"
     ],
@@ -1425,7 +1425,7 @@
     ]
   },
   {
-    "WeaponArt": "EnchantGlow.esl|0x81C",
+    "WeaponArt": "EnchantGlow.esl|0x877",
     "EnchantmentKeywords": [
       "MAG_MagicEnchDamageMagicka"
     ],
@@ -1458,7 +1458,7 @@
     ]
   },
   {
-    "WeaponArt": "EnchantGlow.esl|0x824",
+    "WeaponArt": "EnchantGlow.esl|0x878",
     "EnchantmentKeywords": [
       "MAG_MagicEnchDamageStamina",
       "MagicDamageFire"
@@ -1492,7 +1492,7 @@
     ]
   },
   {
-    "WeaponArt": "EnchantGlow.esl|0x82C",
+    "WeaponArt": "EnchantGlow.esl|0x879",
     "EnchantmentKeywords": [
       "MAG_MagicBanishDaedra"
     ],
@@ -1525,7 +1525,7 @@
     ]
   },
   {
-    "WeaponArt": "EnchantGlow.esl|0x834",
+    "WeaponArt": "EnchantGlow.esl|0x87A",
     "EnchantmentKeywords": [
       "MagicParalysis"
     ],
@@ -1558,7 +1558,7 @@
     ]
   },
   {
-    "WeaponArt": "EnchantGlow.esl|0x83C",
+    "WeaponArt": "EnchantGlow.esl|0x87B",
     "EnchantmentKeywords": [
       "MagicTurnUndead"
     ],
@@ -1591,7 +1591,7 @@
     ]
   },
   {
-    "WeaponArt": "EnchantGlow.esl|0x844",
+    "WeaponArt": "EnchantGlow.esl|0x87C",
     "Enchantments": [
       "Skyrim.esm|0x5B45F",
       "Skyrim.esm|0x5B460",
@@ -1630,7 +1630,7 @@
     ]
   },
   {
-    "WeaponArt": "EnchantGlow.esl|0x84C",
+    "WeaponArt": "EnchantGlow.esl|0x87D",
     "Enchantments": [
       "Skyrim.esm|0xFBFF7",
       "Skyrim.esm|0x5B466",
@@ -1669,7 +1669,7 @@
     ]
   },
   {
-    "WeaponArt": "Vibrant Weapons EAE.esp|0x90E",
+    "WeaponArt": "EnchantGlow.esl|0x87E",
     "EnchantmentKeywords": [
       "MagicDamageFire"
     ],
@@ -1702,7 +1702,7 @@
     ]
   },
   {
-    "WeaponArt": "Vibrant Weapons EAE.esp|0x809",
+    "WeaponArt": "EnchantGlow.esl|0x87F",
     "EnchantmentKeywords": [
       "MagicDamageFrost"
     ],
@@ -1735,7 +1735,7 @@
     ]
   },
   {
-    "WeaponArt": "Vibrant Weapons EAE.esp|0x80B",
+    "WeaponArt": "EnchantGlow.esl|0x880",
     "EnchantmentKeywords": [
       "MagicDamageShock"
     ],
@@ -1768,7 +1768,7 @@
     ]
   },
   {
-    "WeaponArt": "Vibrant Weapons EAE.esp|0x801",
+    "WeaponArt": "EnchantGlow.esl|0x881",
     "EnchantmentKeywords": [
       "MagicDamageFire",
       "MagicDamageFrost",
@@ -1803,7 +1803,7 @@
     ]
   },
   {
-    "WeaponArt": "Vibrant Weapons EAE.esp|0x803",
+    "WeaponArt": "EnchantGlow.esl|0x882",
     "EnchantmentKeywords": [
       "MagicDamageFire",
       "MagicDamageShock"
@@ -1837,7 +1837,7 @@
     ]
   },
   {
-    "WeaponArt": "Vibrant Weapons EAE.esp|0x805",
+    "WeaponArt": "EnchantGlow.esl|0x883",
     "EnchantmentKeywords": [
       "MagicDamageFire",
       "MagicDamageFrost"
@@ -1871,7 +1871,7 @@
     ]
   },
   {
-    "WeaponArt": "Vibrant Weapons EAE.esp|0x807",
+    "WeaponArt": "EnchantGlow.esl|0x884",
     "EnchantmentKeywords": [
       "MagicDamageShock",
       "MagicDamageFrost"
