@@ -1903,5 +1903,21 @@
     "!WeaponKeywords": [
       "VWDisableFX"
     ]
+  },
+  {
+    "WeaponArt": "EnchantGlow.esl|0x87E",
+    "Enchantments": [
+      "Dragonborn.esm|0x39FAF",
+      "Dragonborn.esm|0x397F3",
+      "Dragonborn.esm|0x39FB3"
+    ],
+    "Weapons": [
+      "Dragonborn.esm|0x397F6",
+      "Dragonborn.esm|0x39FB1",
+      "Dragonborn.esm|0x39FB4"
+    ],
+    "!WeaponKeywords": [
+      "VWDisableFX"
+    ]
   }
 ]
