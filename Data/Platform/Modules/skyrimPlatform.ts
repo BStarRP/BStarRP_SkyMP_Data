@@ -188,6 +188,8 @@ export declare let getContainer: (baseId: number) => InventoryEntry[]
  * immediately.
  */
 export declare let updateExtrasOnEquipped: (refrId: number, baseId: number, newHealth: number, newName: string, matchKind?: number, ordinal?: number) => boolean
+/** In-place ExtraCharge on a worn or bag stack. matchKind matches updateExtrasOnEquipped. */
+export declare let setWornItemCharge: (refrId: number, baseId: number, charge: number, matchKind?: number) => boolean
 export declare let equipBoundExtra: (refrId: number, baseId: number, enchantmentId: number, leftHand?: boolean) => boolean
 /** Next addItemEx clones ExtraEnchantment magnitudes. 1 / omit = plugin mag. */
 export declare let pushEnchantMagScale: (scale: number) => void
