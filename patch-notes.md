@@ -1,7 +1,6 @@
 # Patch notes
 
 ## Changes
-- Fixed chests and your inventory taking several seconds to open when they hold a large stack of the same item.
-- Removed more malachite spawns
-- Fixed recipe that allowed infinite crafting
-- Added special event items
+- Updated the default dual wield block to the forward side mouse button. Saved keybinds stay until you reset them.
+- Fixed the slash key so it opens the skill menu on the stats screen.
+- Improved the game master dungeon list so you can search it, filter it, and open the people inside.
