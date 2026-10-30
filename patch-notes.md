@@ -1,4 +1,4 @@
 # Patch notes
 
 ## Changes
-- Added village stones for Amber Guard, Dunpar Wall, Falkhurst, Granite Hall, Kynesgrove, Laintar Dale, Lyngwi, March's End, Northkeep, Reich Corigate, and Wolf's Crossing.
+- Added shop ledgers for wages and sales, and hold tax that stays in the stone until a treasury chest is tagged.
