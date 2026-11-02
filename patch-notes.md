@@ -1,4 +1,4 @@
 # Patch notes
 
 ## Changes
-- Fixed broken sound file causing crashes around giant skeletons
+- Fixed a crash on boot-up reading records
