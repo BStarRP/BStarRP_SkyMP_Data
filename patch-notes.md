@@ -1,7 +1,60 @@
 # Patch notes
 
 ## Changes
+- Updated pine woods. A spriggan there can be a matron, a patron, an earth mother, or an ancient.
+- Fixed a crash in a fight when someone is already gone.
+- Fixed a helmet or hood coming back on after you take it off.
+- Updated towns. Wild animals no longer appear there. Chickens, cows, goats, horses, and dogs still do.
+- Updated mountains, werewolf dens, and giant camps. Those places are much more dangerous, and a beast boss still stands where it was placed.
+- Updated forests. Pine woods can hold a minotaur. The Rift is rougher than an ordinary wood, and an ordinary forest is still bears.
+- Updated canyons and marshes. A canyon can hold a welwa, and a marsh can hold a swamp troll.
+- Fixed armor coming off while you loot.
+- Fixed a temper landing on the wrong item.
+- Fixed leaving a workbench. Your materials stay if you did not craft.
+- Fixed stamina emptying as soon as you sprint.
+- Fixed pressing Esc after a finished trade. The items stay with you.
+- Reworked poise. Running out of poise leaves you standing, a bash staggers you once the bar is empty, and Bull Rush is what puts someone on the ground.
+- Reworked a tackle. Plate and a planted guard can hold, and you go down if you bounce off.
+- Improved town notice boards. Notices and Contracts sit on the same parchment as the notes.
+- Fixed the server stopping while loading a creature. A shutdown still saves, then exits.
+- Added jobs on town notice boards. Post a funded job or one on your word, and someone else in town can take it.
+- Updated chests and bodies. What you find in them has changed.
+- Updated the blessings of Dibella, Mara, and Stendarr.
+- Updated the Amulet of Talos. Wearing it helps your energy recover.
+- Improved a long fight. Swinging the same weapon stays smoother.
+- Improved a crowded fight. Hits still deal the same damage and still grant experience.
+- Improved a busy world. The short pause every few seconds is gone.
+- Added gifts. Some stones grant one to every member, and the stone tells you what it does.
+- Fixed water walking and water breathing on animals. A wolf, a horse, or a pet with the spell runs across the water, and can breathe under it.
+- Fixed swimming. Someone in the water keeps paddling, and a jump there stays a swim.
+- Reworked bleeding. A bleeding wound keeps taking health until you go down.
+- Improved axes and battleaxes. Hack and Slash and Limbsplitter make a bleeding cut drain you faster.
+- Fixed percent enchants on armor and jewelry. Health, magicka, and stamina regen, spell cost, and armor rating change when you wear them.
+- Fixed Take All. A large stack, such as a pile of gold, all comes out of the container.
+- Improved a duet. Bardic Inspiration is 25 points higher, from the better of the two bards, and the effect says Duet.
+- Fixed bard instrumentals. The progress bar ends with the tune, and a set with different lengths shows the short and the long.
+- Improved Challenge. In heavy armor, staggers are shorter and the marked foe cannot knock you down.
+- Updated tempering. Each skill rank stops at its own quality, and Legendary waits until the skill is 100.
+- Fixed arrows stuck in the world. Sheathe and take the arrow, and other people can take it too.
+- Added feeding for an Alpha in beast form. They can feed on a living person.
+- Improved Lycanthropy and Vampirism. Fighting in beast form trains Lycanthropy, and vampire spells and powers train Vampirism, at the same pace as other skills.
+- Updated an Alpha. Their beast form is a larger werewolf king.
+- Fixed creature sounds. Armored skeletons use ordinary footsteps, and a minotaur makes its sound again.
+- Added a pet for a character. An admin can give one tameable animal, and that pet shows on the player page and in inspect.
+- Added a rename for an item in someone's bag. The name can be cleared back to the item itself.
+- Improved axes and battleaxes. Their cuts bleed more often than a sword, and the axe perks push that further.
+- Fixed soul gems. An empty enchanted weapon or staff takes a gem and fills again.
+- Updated skills. Point at a perk and its effect shows above the list.
+- Improved heavy armour. Braced can shrug off a stagger.
+- Improved blocking. A block puts some poise back, a timed block puts more back, and a perfect block fills the bar.
+- Reworked a stagger. The lock is shorter. A heavy weapon holds you a little longer, a bow a little less, and a dagger does not lock you.
+- Reworked poise. It stays where a hit left it until a short wait after you get back up, and another hit stops it coming back.
+- Fixed a crash after spectating another player.
+- Improved a crowded place. Nearby people and objects show up without the world hitching on one step.
 - Fixed staffs. A held staff shows its beam, and a shot throws the bolt.
 - Fixed the Game Master Players tab. The number beside it is everyone online.
 - Fixed animals on a hill. They step with their legs, and a deer plays a turn when it stops and turns.
 - Removed the coin purse that grew on your hip as you carried more gold then your nuggets
+- Fixed the server shutting down when one connection sent a bad packet.
+- Improved hunting. Arrows, bolts, and daggers punch through fur and hide.
+- Improved a chase. Stronger animals and people run a little faster, and a boss runs faster still.
