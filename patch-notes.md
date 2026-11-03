@@ -1,63 +1,9 @@
 # Patch notes
 
 ## Changes
-- Fixed putting armor on when the bar never appears, so the piece still changes and you can change another piece after it.
-- Fixed clicking armor again while the first piece is still going on, so later pieces still change.
-- Fixed staff bolts so they fly where you aim, and other players see them land there.
-- Fixed helmets and armor so putting a piece on or taking it off shows for everyone right away.
-- Improved characters spawning in so they fade in once they look right.
-- Fixed admins hidden with invisibility briefly showing when they come into view.
-- Fixed the skills menu warning that you lose experience when a lower rank keeps all of it.
-- Updated Perfect Parry's description to say it fills your poise.
-- Fixed sneaking so a high Sneaking skill, Stealth, and Muffled Movement still hide you from enemies when another player is near them.
-- Fixed invisibility so those enemies cannot see you while you are invisible.
-- Fixed Quiet Casting so a silent spell stays quiet to those enemies.
-- Fixed cowardly enemies so they judge your level, not the level of the player near them.
-- Fixed Master Level so lowering a skill cap leaves it alone unless you lose experience.
-- Improved Find the Gap so daggers ignore more armor. The first rank ignores a quarter, and each higher rank ignores more.
-- Fixed worn weapons and armor so wear no longer lowers their damage or armor. A temper still raises both.
-- Updated Agility so a high Agility loses less poise from a blow, and a low Agility loses more.
-- Updated the stat window so Agility says a blow wears less poise.
-- Fixed a normal hit so it no longer staggers you once your poise is already gone. A stagger still does.
-- Updated poise so it starts coming back shortly after a stagger or knockdown ends, and after a quiet stretch with no hits when you were not stunned.
-- Fixed a stagger and a knockdown so both can land. A second stagger while you are already staggered does nothing, and a second knockdown while you are already down does nothing.
-- Improved Speed so higher Speed makes stamina return faster.
-- Updated the stat window so Willpower says magicka returns faster and Speed says stamina returns faster.
-- Fixed people staying stuck in place after they are knocked down.
-- Added a perk ladder on each gathering and crafting skill, so the work costs less, fails less, or yields a little more.
-- Added 180 combo perks. Pair Athletics, Acrobatics, or Sneaking with another skill and that work costs less stamina or energy, or gives a little more back.
-- Updated the wilderness so each place has its own creatures. Roads and the ground outside towns stay low level, while mountains, pine woods, the Rift, and giant camps stay high.
-- Fixed wild animals spawning inside towns. Farm animals still wander there.
-- Updated dragons so a mound in the mountains, the Reach, or the pine woods is a stronger dragon than one by the road.
-- Updated Solstheim and ash spawn so those lands are more dangerous than the mainland road.
-- Updated Apocrypha so the seekers and lurkers there are the stronger kinds.
-- Updated hagraven circles so giant spiders and frost trolls stand with the hag.
-- Added a Command mode setting so pet orders can be hold or toggle. Hold is the default.
-- Fixed pet orders and the look prompt showing at the same time. The look prompt hides while you are giving orders.
-- Fixed the pet order bar so its background matches voice and other notices.
-- Fixed bard songs so the music plays again.
-- Improved bard songs so people standing nearby hear them closer to how loud they are for the player.
-- Improved spell casting and combat hits so a busy server lags less.
-- Fixed the Perform menu making the server stutter when it opens or updates.
-- Fixed a server crash when a player's connection sends a broken large message.
-- Fixed a server crash when a player stands on a trap or pressure plate that the world unloads.
-- Fixed the server freezing at startup.
-- Improved server speed so it no longer slows down on errors it already handles.
-- Fixed pets and summons standing in the world while their owner is offline.
-- Removed leftover pets and summons that no longer belong to anyone.
-- Updated the skills menu so each perk lists what it does.
-- Updated the skills menu so a perk that needs another skill names that skill.
-- Fixed the skills menu so a rank's color matches that rank.
-- Improved the skills menu so skill details sit above the buttons, and Unlock lines up with Lock In.
-- Updated the skills menu so Line, Grid, or Circle stays the next time you open it.
-- Updated the skills menu so highlighting a rank shows how much memory it costs.
-- Fixed staff restoring a deleted character so it comes back right away instead of after a server restart.
-- Fixed the lock cooldown so dungeon locks and other locks can still be picked.
-- Fixed owned locks so you can pick them while the owners are away.
-- Improved movement so a crowded server does not slow everyone down.
-- Fixed soul gems so an empty enchanted weapon or staff can be recharged again.
-- Fixed armor and headwear taking themselves off or putting themselves back on.
-- Fixed containers showing another character's name.
-- Fixed candlelight and other light enchantments so they light the area.
-- Updated snowy wilds so wolves show up instead of frost giants, with fewer ice bears. Those areas stay high level.
-- Fixed a crash when the world removes a nearby animal or bandit.
+- Fixed the admin world list so the people and creatures already in the world show, with a count.
+- Updated that list so Placed shows every actor, chest, and object an admin put down.
+- Fixed Control in the admin menu so the menu closes and you can walk that actor.
+- Updated spectate so your view stays on you while you follow someone.
+- Fixed getting thrown out of a sealed cave so you face away from the door.
+- Fixed getting thrown out of a sealed cave so you land far enough from the door that it does not pull you back in.
