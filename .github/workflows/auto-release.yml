@@ -525,6 +525,7 @@ jobs:
           R2_LOG_EACH_COPIED_ASSET: '0'
           R2_CONNECTION_TIMEOUT_MS: 120000
           R2_REQUEST_TIMEOUT_MS: 600000
+          # Cap only; actual CopyObject deadline is 60s + 1s/MB, then falls back to PutObject from the repo.
           R2_COPY_DEADLINE_MS: 900000
           R2_MAX_ATTEMPTS: 4
         run: |

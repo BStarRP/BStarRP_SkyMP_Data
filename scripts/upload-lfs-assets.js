@@ -30,8 +30,9 @@
  * Optional: R2_PUT_BUFFER_MAX_BYTES — files up to this size use an in-memory buffer for PutObject (default 33554432).
  * Optional: R2_VERIFY_PUT_HEAD=0 — skip HeadObject after each PutObject (halves R2 calls; use verify-r2-vs-manifest.js / repair if needed).
  * Optional: R2_PUT_DEADLINE_MS, R2_HEAD_DEADLINE_MS, R2_LIST_DEADLINE_MS — hard abort per operation (0 = auto from size).
- * Optional: R2_COPY_DEADLINE_MS — CopyObject abort deadline (default 900000). Under load R2 can queue copies; keep
- *   R2_REQUEST_TIMEOUT_MS >= this or you will see @smithy/node-http-handler requestTimeout warnings / stalled copies.
+ * Optional: R2_COPY_DEADLINE_MS — upper cap on the CopyObject abort deadline (default 900000). The actual deadline is
+ *   R2_COPY_DEADLINE_BASE_MS (default 60000) + R2_COPY_DEADLINE_PER_MB_MS (default 1000) per MB, capped by this; on
+ *   expiry the asset is uploaded from the repo instead.
  * Optional: R2_CONCURRENCY — parallel S3 operations (default 48). Copy-from-previous scales with this: ~15k copies at
  *   concurrency 8 can take ~12–15 min; 32–48 usually cuts that sharply (keep R2_MAX_SOCKETS >= concurrency; try 64 if stable).
  * Optional: R2_MAX_SOCKETS — https agent maxSockets (default 128) to reduce connection pile-up with high concurrency.
@@ -322,8 +323,16 @@ function deadlineListMs() {
   return Math.max(60_000, parseInt(process.env.R2_LIST_DEADLINE_MS || String(5 * 60 * 1000), 10) || 5 * 60 * 1000);
 }
 
-function deadlineCopyMs() {
-  return Math.max(120_000, parseInt(process.env.R2_COPY_DEADLINE_MS || String(15 * 60 * 1000), 10) || 15 * 60 * 1000);
+/**
+ * Server-side copies of patch-sized objects finish in seconds; a request R2 never answers should fall back to
+ * PutObject quickly instead of holding the release for the full cap.
+ */
+function deadlineCopyMs(sizeBytes) {
+  const cap = Math.max(30_000, parseInt(process.env.R2_COPY_DEADLINE_MS || String(15 * 60 * 1000), 10) || 15 * 60 * 1000);
+  const base = Math.max(15_000, parseInt(process.env.R2_COPY_DEADLINE_BASE_MS || '60000', 10) || 60000);
+  const perMb = Math.max(0, parseInt(process.env.R2_COPY_DEADLINE_PER_MB_MS || '1000', 10) || 1000);
+  const mb = Math.max(1, Math.ceil(Number(sizeBytes || 0) / (1024 * 1024)));
+  return Math.min(cap, base + mb * perMb);
 }
 
 /**
@@ -642,7 +651,7 @@ async function run() {
     );
   }
 
-  const tasks = r2Files.map((entry) => async () => {
+  const processAsset = async (entry) => {
     const pathEntry = typeof entry === 'string' ? entry : entry.path;
     const hash = typeof entry === 'object' && entry.hash != null ? entry.hash : null;
     const relative = pathEntry.slice(prefix.length + 1).replace(/\//g, path.sep);
@@ -713,7 +722,7 @@ async function run() {
           }),
           pathEntry,
           'CopyObject',
-          deadlineCopyMs()
+          deadlineCopyMs(sourceLen || expectedSize)
         );
       } catch (copyErr) {
         if (shouldFallbackCopyToUpload(copyErr)) {
@@ -762,6 +771,18 @@ async function run() {
       return 'copied';
     }
     return await uploadFromLocal(pathEntry, src, destKey, entry, '');
+  };
+
+  /** pathEntry -> start time, so a stalled progress line can name the stuck asset(s). */
+  const inFlight = new Map();
+  const tasks = r2Files.map((entry) => async () => {
+    const pathEntry = typeof entry === 'string' ? entry : entry.path;
+    inFlight.set(pathEntry, Date.now());
+    try {
+      return await processAsset(entry);
+    } finally {
+      inFlight.delete(pathEntry);
+    }
   });
 
   const concurrency = Math.max(1, parseInt(process.env.R2_CONCURRENCY || '48', 10) || 48);
@@ -792,6 +813,12 @@ async function run() {
         '(' + pct + '%), elapsed',
         Math.round((Date.now() - tPhase) / 1000) + 's'
       );
+      if (inFlight.size > 0 && inFlight.size <= 10) {
+        const now = Date.now();
+        for (const [p, t] of inFlight) {
+          console.log('  R2: in flight', Math.round((now - t) / 1000) + 's:', p);
+        }
+      }
     }, progressIntervalMs);
   }
 
