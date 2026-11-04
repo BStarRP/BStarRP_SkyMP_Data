@@ -1,4 +1,45 @@
 # Patch notes
 
 ## Changes
-- Small crash fix
+- Added a Shops page in the admin menu. Staff can open, close, and unlink a business.
+- Added an anticheat list in the admin menu, and a Flagged mark on people who recently triggered one.
+- Updated staff control so the person or creature you drive stops acting on their own.
+- Fixed a body so it stops fighting before it falls.
+- Fixed stray creatures being removed while they are still loading.
+- Fixed a sawmill so it waits until its log stack has loaded.
+- Added a staff warning for a large pile of gold or very fast running before a ban.
+- Improved temperature, songs, and animal abilities so they do less work when many people are online.
+- Updated staff logs so a warn, ban, unban, or kick posts in the bans channel.
+- Added the hold's civil jobs to a thanedom. Clearing the town's allegiance leaves those jobs in place.
+- Updated the help call so you can yell again after a short wait.
+- Added a Seal forever button so staff can keep a cave closed until they open it again.
+- Improved spectate so you stand against their back and stay behind them when they turn.
+- Added a count for each staff tag on the admin player list. Click one to see only those people.
+- Fixed your weapon staying in your hand when you take off a helmet or other armor.
+- Fixed a helmet, hood, or necklace coming back on for other people after you take it off and change gear.
+- Fixed a freeze when you cast Courage, a heal, or a spell on several people, including while you are eating.
+- Fixed a crash when you log in near a fight.
+- Added warnings and bans. A ban covers that address and the ones next to it, a warning stays on screen, and an unban can leave a message.
+- Fixed kicks so the person is removed from the world.
+- Fixed wolf, Stormcloak, Imperial, Silver Hand, hold guard, and Dawnguard armor so an armorsmith can repair them at the armor table.
+- Updated the legions stone with requests
+- Fixed the server stuttering every few seconds while it clears out empty parts of the world.
+- Fixed the server freezing for a few seconds when staff open the admin menu.
+- Improved server speed with many players online.
+- Fixed a cave bear's claw so it hits about as hard as a weapon. The bear stays as tough.
+- Updated bare-hand hits so Argonian and Khajiit claws cut, fists bruise, and an equipped claw weapon cuts.
+- Updated bard songs so they fill the room and can still be heard down the street.
+- Fixed an enemy hitting you through a door after you walked away from it.
+- Improved Luck so a high score makes pickpocketing a little easier and a victim less likely to notice, while a low score does the opposite.
+- Improved Luck so rare fish and rare salt turn up more often when it is high, and less often when it is low.
+- Improved Luck so your hits wound more often when it is high, and blows against you wound less often.
+- Improved Luck so weapon crits and on-hit enchantments land more often when it is high, and less often when it is low.
+- Updated Nordic weapons, bows, and arrows to Expert.
+- Updated Nordic carved armor so it forges and protects in full at 70.
+- Updated Nordic carved armor to forge from steel and quicksilver.
+- Fixed Nordic carved armor wearing out faster than orcish and ebony plate.
+- Updated creatures on the road and next to a town so they stop at level 14, while the woods farther out stay harder.
+- Added First Aid perks. A bandage heals more, a bleed waits while you wrap, and Chirurgeon is what lets you treat a concussion.
+- Added First Aid perks shared with Athletics, Alchemy, Restoration, armor, and shields. A wrap can be quicker and heal more, a later bleed drains less, and armor and a raised shield soften breaks and bleeding.
+- Fixed a crash while fighting bandits, wolves, and mudcrabs.
+- Updated wild creatures and rebalanced their resistances, all creature type shave weaknesses
