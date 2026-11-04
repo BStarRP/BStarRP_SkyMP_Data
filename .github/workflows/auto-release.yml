@@ -5,8 +5,10 @@
 # Channels:
 #   main → prod  (tags vX.Y.Z, CDN patches/X.Y.Z/, GitHub --latest)
 #   dev  → dev   (tags vX.Y.Z-dev, CDN patches/X.Y.Z-dev/, GitHub prerelease + floating tag "dev-latest")
-# Prod promote (merge-up): version = max(conventionalBump, stripDev(latest -dev)); when bases match,
-#   previous assets copy from patches/X.Y.Z-dev/ (else last prod).
+# Prod promote (merge-up): version = max(conventionalBump(lastProd), stripDev(latest -dev),
+#   bump(latest -dev) when HEAD is ahead of that -dev tag). Same SHA on main+dev shares one
+#   X.Y.Z so Discord/GitHub latest get vX.Y.Z, not only vX.Y.Z-dev.
+#   When bases match, previous assets copy from patches/X.Y.Z-dev/ (else last prod).
 # Dev sync (merge-down): version = max(devBumpOrTip, latestProd as -dev); when catching up,
 #   previous assets copy from patches/X.Y.Z/ → patches/X.Y.Z-dev/.
 # Prod /releases/latest is never moved by -dev releases. Point bstarrpdev at:

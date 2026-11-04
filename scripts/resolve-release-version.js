@@ -7,7 +7,14 @@
  *                 (not "dev" — that collides with branch refs/heads/dev and breaks Desktop pushes)
  *
  * Prod alignment (merge-up / promote):
- *   On a real bump, version = max(conventionalBump(lastProd), stripDev(latestDevTag)).
+ *   version = max(
+ *     conventionalBump(lastProd),
+ *     stripDev(latestDevTag),
+ *     bump(latestDevTag) when HEAD has fix/feat/breaking since that -dev tag
+ *   ).
+ *   Same SHA on main+dev therefore shares one X.Y.Z (prod vX.Y.Z, -dev vX.Y.Z-dev).
+ *   Without bumping the -dev base, a concurrent -dev job can land one patch ahead
+ *   (prod v0.78.12 vs v0.78.13-dev) and Discord never sees a matching prod tag.
  *   When the new prod version matches that -dev base, previous assets/manifest come from
  *   the latest -dev release (R2 copy patches/X.Y.Z-dev/ → patches/X.Y.Z/). Otherwise
  *   previous stays at last prod.
@@ -193,6 +200,56 @@ function bumpXYZ(xyz, bump) {
   }
 }
 
+/** Same rules as auto-release.yml "Determine version bump from commits". */
+function conventionalBumpFromRange(fromRef) {
+  const ref = String(fromRef || '').trim();
+  if (!ref) return 'none';
+  let log = '';
+  try {
+    log = execSync(`git log --format=%s%n%b ${ref}..HEAD`, {
+      encoding: 'utf8',
+      stdio: ['ignore', 'pipe', 'ignore']
+    });
+  } catch (_) {
+    return 'none';
+  }
+  let bump = 'none';
+  if (/^fix(\([^)]*\))?:/m.test(log)) bump = 'patch';
+  if (/^feat(\([^)]*\))?:/m.test(log)) bump = 'minor';
+  if (/BREAKING CHANGE/i.test(log)) bump = 'major';
+  else if (/^[a-z]+!.*:/m.test(log)) bump = 'major';
+  return bump;
+}
+
+/** Raise chosenXYZ to the -dev tip, then one more bump if HEAD is ahead of that tag. */
+function alignToDevChannel(chosenXYZ, latestDevTag) {
+  if (!latestDevTag) {
+    return { xyz: chosenXYZ, promoted: false };
+  }
+  const devBase = parseXYZ(latestDevTag);
+  if (!devBase) {
+    return { xyz: chosenXYZ, promoted: false };
+  }
+  let xyz = chosenXYZ;
+  let promoted = false;
+  if (compareXYZ(devBase, xyz) >= 0) {
+    xyz = { ...devBase };
+    promoted = true;
+  }
+  const devRangeBump = conventionalBumpFromRange(latestDevTag);
+  if (devRangeBump !== 'none') {
+    const bumpedDev = bumpXYZ(devBase, devRangeBump);
+    if (compareXYZ(bumpedDev, xyz) > 0) {
+      xyz = bumpedDev;
+      promoted = true;
+      console.log(
+        `Prod promote: HEAD is ahead of ${latestDevTag}; raising to ${formatVersion(bumpedDev, 'prod')} so prod matches concurrent -dev`
+      );
+    }
+  }
+  return { xyz, promoted };
+}
+
 function latestMatching(tags, predicate) {
   const matched = tags.filter(predicate);
   matched.sort((a, b) => compareXYZ(b.replace(/^v/i, ''), a.replace(/^v/i, '')));
@@ -268,28 +325,15 @@ if (override) {
     assetSource = 'prod';
     syncedFromProd = 'true';
   }
-} else if (CHANNEL === 'prod' && BUMP === 'none') {
-  // Rebuild current prod tip only.
-  version = channelLatestVersion;
-  tag = toTag(version);
-  if (PREV_FOR_ASSETS) {
-    previousVersion = String(PREV_FOR_ASSETS).replace(/^v/i, '');
-    previousTag = toTag(previousVersion);
-    assetSource = 'explicit';
-  }
 } else if (CHANNEL === 'prod') {
-  // Conventional bump from last prod, then promote to at least stripDev(latest -dev).
-  // Also honor a version hint in the HEAD subject (fix: v0.67.23) when the -dev tag races.
+  // Conventional bump from last prod, then promote to at least stripDev(latest -dev),
+  // including a further bump when HEAD is ahead of that -dev tag (same-SHA race).
+  // bump=none still promotes when -dev is already ahead of last prod.
   const prodBase = parseXYZ(latestProdTag || 'v0.0.0') || { major: 0, minor: 0, patch: 0 };
-  const conventional = bumpXYZ(prodBase, BUMP);
-  let chosenXYZ = conventional;
-  if (latestDevTag) {
-    const devBase = parseXYZ(latestDevTag);
-    if (devBase && compareXYZ(devBase, conventional) >= 0) {
-      chosenXYZ = devBase;
-      promotedFromDev = 'true';
-    }
-  }
+  let chosenXYZ = BUMP === 'none' ? { ...prodBase } : bumpXYZ(prodBase, BUMP);
+  const aligned = alignToDevChannel(chosenXYZ, latestDevTag);
+  chosenXYZ = aligned.xyz;
+  if (aligned.promoted) promotedFromDev = 'true';
   const hintXYZ = parseXYZ(versionHintFromHeadSubject());
   if (hintXYZ && compareXYZ(hintXYZ, chosenXYZ) > 0) {
     chosenXYZ = hintXYZ;
@@ -298,21 +342,30 @@ if (override) {
       `Prod promote: HEAD subject version hint ${formatVersion(hintXYZ, 'prod')} raises tip above tag scan`
     );
   }
+  const raisedAboveProd = compareXYZ(chosenXYZ, prodBase) > 0;
   version = formatVersion(chosenXYZ, 'prod');
   tag = toTag(version);
 
-  // If we raised via subject hint, prefer matching -dev assets when that tag exists.
-  const promoteDevTag =
-    latestDevTag && sameXYZ(version, latestDevTag)
-      ? latestDevTag
-      : headDevTag && sameXYZ(version, headDevTag)
-        ? headDevTag
-        : latestDevTag;
-  const chosen = chooseProdPrevious(version, promoteDevTag, latestProdTag, PREV_FOR_ASSETS);
-  previousTag = chosen.previousTag;
-  previousVersion = chosen.previousVersion;
-  assetSource = chosen.assetSource;
-  if (assetSource === 'dev') promotedFromDev = 'true';
+  if (!raisedAboveProd && BUMP === 'none') {
+    // True rebuild of the current prod tip — keep previous at last prod so Discord does not re-post.
+    if (PREV_FOR_ASSETS) {
+      previousVersion = String(PREV_FOR_ASSETS).replace(/^v/i, '');
+      previousTag = toTag(previousVersion);
+      assetSource = 'explicit';
+    }
+  } else {
+    const promoteDevTag =
+      latestDevTag && sameXYZ(version, latestDevTag)
+        ? latestDevTag
+        : headDevTag && sameXYZ(version, headDevTag)
+          ? headDevTag
+          : latestDevTag;
+    const chosen = chooseProdPrevious(version, promoteDevTag, latestProdTag, PREV_FOR_ASSETS);
+    previousTag = chosen.previousTag;
+    previousVersion = chosen.previousVersion;
+    assetSource = chosen.assetSource;
+    if (assetSource === 'dev') promotedFromDev = 'true';
+  }
 } else {
   // Dev channel: bump/rebuild tip, then sync up to at least latest prod (merge-down).
   const baseXYZ =

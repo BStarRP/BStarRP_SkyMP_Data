@@ -1,6 +1,8 @@
 # Patch notes
 
 ## Changes
+- Fixed giants and other people chasing you far from camp. They turn around and walk home once the fight ends. Animals can still follow.
+- Fixed yelling for help so the prompt comes back after the wait.
 - Added a Shops page in the admin menu. Staff can open, close, and unlink a business.
 - Added an anticheat list in the admin menu, and a Flagged mark on people who recently triggered one.
 - Updated staff control so the person or creature you drive stops acting on their own.
