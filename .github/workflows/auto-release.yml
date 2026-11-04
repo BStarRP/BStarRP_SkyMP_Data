@@ -14,7 +14,8 @@
 # Floating tag is "dev-latest" (not "dev") so it never collides with branch refs/heads/dev.
 #
 # Manual run (Actions → "Auto release on patch change" → Run workflow on main or dev):
-# - No version override: updates the *current channel tip* with manifest + assets (no version bump).
+# - No version override: fail. Rebuilding the current tag in place ships a second build
+#   under the same version (launchers keep the old manifest for up to 7 days).
 # - With "Create release version" set (e.g. 0.22.0): creates that release (dev auto-appends -dev) and publishes.
 # - Merge or push to main with Data/ changes: ships an official prod patch as before.
 # - Merge main → dev: syncs the -dev channel / floating tip to the prod tip.
@@ -28,7 +29,7 @@ on:
   workflow_dispatch:
     inputs:
       create_release_version:
-        description: 'Create new release at this version (e.g. 0.22.0). On dev, -dev is appended if missing. Leave empty to just update current channel tip.'
+        description: 'Required. New release version (e.g. 0.78.11). On dev, -dev is appended if missing. A manual run with this empty fails instead of rebuilding the current version.'
         required: false
         type: string
       use_previous_version_for_assets:
@@ -56,8 +57,14 @@ jobs:
         run: |
           set -e
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            OVERRIDE="${{ github.event.inputs.create_release_version }}"
+            OVERRIDE="$(printf '%s' "$OVERRIDE" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+            if [ -z "$OVERRIDE" ]; then
+              echo "::error::Manual run requires Create release version. Rebuilding the current version in place publishes a second build under the same tag, and launchers keep the old manifest for up to 7 days."
+              exit 1
+            fi
             echo "release=true" >> $GITHUB_OUTPUT
-            echo "workflow_dispatch → release"
+            echo "workflow_dispatch → release $OVERRIDE"
             exit 0
           fi
 
@@ -256,20 +263,17 @@ jobs:
 
           if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
             OVERRIDE="${{ inputs.create_release_version }}"
-            if [ -n "$OVERRIDE" ]; then
-              echo "Manual run with version override: $OVERRIDE (channel=$CHANNEL)"
-              node scripts/resolve-release-version.js \
-                --channel="$CHANNEL" \
-                --bump=none \
-                --override="$OVERRIDE" \
-                "${PREV_ARGS[@]}"
-            else
-              echo "Manual run: rebuild current channel tip (channel=$CHANNEL)"
-              node scripts/resolve-release-version.js \
-                --channel="$CHANNEL" \
-                --bump=none \
-                "${PREV_ARGS[@]}"
+            OVERRIDE="$(printf '%s' "$OVERRIDE" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+            if [ -z "$OVERRIDE" ]; then
+              echo "::error::Manual run requires Create release version. Refusing to rebuild the current channel tip in place."
+              exit 1
             fi
+            echo "Manual run with version override: $OVERRIDE (channel=$CHANNEL)"
+            node scripts/resolve-release-version.js \
+              --channel="$CHANNEL" \
+              --bump=none \
+              --override="$OVERRIDE" \
+              "${PREV_ARGS[@]}"
           else
             echo "Push run: bump=${{ steps.bump.outputs.bump }} channel=$CHANNEL"
             node scripts/resolve-release-version.js \
