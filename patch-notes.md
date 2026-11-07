@@ -1,47 +1,50 @@
 # Patch notes
 
 ## Changes
-- Fixed giants and other people chasing you far from camp. They turn around and walk home once the fight ends. Animals can still follow.
-- Fixed yelling for help so the prompt comes back after the wait.
-- Added a Shops page in the admin menu. Staff can open, close, and unlink a business.
-- Added an anticheat list in the admin menu, and a Flagged mark on people who recently triggered one.
-- Updated staff control so the person or creature you drive stops acting on their own.
-- Fixed a body so it stops fighting before it falls.
-- Fixed stray creatures being removed while they are still loading.
-- Fixed a sawmill so it waits until its log stack has loaded.
-- Added a staff warning for a large pile of gold or very fast running before a ban.
-- Improved temperature, songs, and animal abilities so they do less work when many people are online.
-- Updated staff logs so a warn, ban, unban, or kick posts in the bans channel.
-- Added the hold's civil jobs to a thanedom. Clearing the town's allegiance leaves those jobs in place.
-- Updated the help call so you can yell again after a short wait.
-- Added a Seal forever button so staff can keep a cave closed until they open it again.
-- Improved spectate so you stand against their back and stay behind them when they turn.
-- Added a count for each staff tag on the admin player list. Click one to see only those people.
-- Fixed your weapon staying in your hand when you take off a helmet or other armor.
-- Fixed a helmet, hood, or necklace coming back on for other people after you take it off and change gear.
-- Fixed a freeze when you cast Courage, a heal, or a spell on several people, including while you are eating.
-- Fixed a crash when you log in near a fight.
-- Added warnings and bans. A ban covers that address and the ones next to it, a warning stays on screen, and an unban can leave a message.
-- Fixed kicks so the person is removed from the world.
-- Fixed wolf, Stormcloak, Imperial, Silver Hand, hold guard, and Dawnguard armor so an armorsmith can repair them at the armor table.
-- Updated the legions stone with requests
-- Fixed the server stuttering every few seconds while it clears out empty parts of the world.
-- Fixed the server freezing for a few seconds when staff open the admin menu.
-- Improved server speed with many players online.
-- Fixed a cave bear's claw so it hits about as hard as a weapon. The bear stays as tough.
-- Updated bare-hand hits so Argonian and Khajiit claws cut, fists bruise, and an equipped claw weapon cuts.
-- Updated bard songs so they fill the room and can still be heard down the street.
-- Fixed an enemy hitting you through a door after you walked away from it.
-- Improved Luck so a high score makes pickpocketing a little easier and a victim less likely to notice, while a low score does the opposite.
-- Improved Luck so rare fish and rare salt turn up more often when it is high, and less often when it is low.
-- Improved Luck so your hits wound more often when it is high, and blows against you wound less often.
-- Improved Luck so weapon crits and on-hit enchantments land more often when it is high, and less often when it is low.
-- Updated Nordic weapons, bows, and arrows to Expert.
-- Updated Nordic carved armor so it forges and protects in full at 70.
-- Updated Nordic carved armor to forge from steel and quicksilver.
-- Fixed Nordic carved armor wearing out faster than orcish and ebony plate.
-- Updated creatures on the road and next to a town so they stop at level 14, while the woods farther out stay harder.
-- Added First Aid perks. A bandage heals more, a bleed waits while you wrap, and Chirurgeon is what lets you treat a concussion.
-- Added First Aid perks shared with Athletics, Alchemy, Restoration, armor, and shields. A wrap can be quicker and heal more, a later bleed drains less, and armor and a raised shield soften breaks and bleeding.
-- Fixed a crash while fighting bandits, wolves, and mudcrabs.
-- Updated wild creatures and rebalanced their resistances, all creature type shave weaknesses
+- Fixed fear so you and other people run away instead of cowering. A creature no longer falls over when the fear ends.
+- Fixed chance weapon enchantments, such as paralysis, so they trigger as often as they should.
+- Added favorites menu keys 1 through 8. They stay with the character after you log in again.
+- Fixed a torch so it stays in the left hand. A worn light shows for other people.
+- Fixed other people swimming in place while moving, now shows proper animation
+- Fixed a creature staying on your screen after it was gone.
+- Fixed sprint turning back on while you are eating, drinking, or using a potion.
+- Fixed an invisible staff member showing a talking mark.
+- Fixed the server dropping when a script ran on something that was already gone.
+- Fixed a beastmaster command staying after the rank is gone.
+- Updated armor so it blocks less of each hit. A strong heavy set reaches about 80% protection, and armor past that adds only a little.
+- Updated agile defender perk, light armor ranks adds more armor to close the gap between light and Heavy
+- Fixed a matched set so the bonus applies to the armor pieces. Enchantments and flesh spells keep their own armor. All were over applying creating to high armor values
+- Fixed heavy armor ranks so they no longer bonus off a shield.
+- Fixed the material names with immersive creatures so set piece buff triggers with any armor in the material band
+- Fixed being disarmed so your weapon stays away until the effect ends, and other people see it when you draw it again.
+- Fixed Oakflesh and the other flesh spells so Mage Armor adds its armor once, and light or heavy armor keeps only the base, numbers where way off
+- Fixed other people so their swings and movement match their weapon speed and speed buffs. (this made combat feel desycned)
+- Removed the admin menu for Testers and Leaders. Their commands still work.
+- Fixed an emote so someone who walks in still sees the person holding it.
+- Fixed the surrender key so it ends an emote from the animation menu or a hotkey. With no emote playing, it still cowers.
+- Fixed puzzle stones so one click turns them once, and the door opens on the right face.
+- Fixed resting at the hearth in custom inns, including Reich Corigate.
+- Fixed pet commands so they close and do nothing while you are down or bleeding out.
+- Fixed a creature so it leaves someone who is bleeding out and fights the next person.
+- Updated noble trim so any tailor who has the chest can sew the pelt on.
+- Updated Nordic carved trim so it needs Expert Tailoring at 70.
+- Updated Wild Hunt armor so it needs leatherworking 99, plus dragon bone and dragon scales.
+- Fixed cutting a key or changing the lock on a wide door or chest. It works when the prompt is showing.
+- Fixed a cut key in trade showing as a blank key. It shows the name stored on that key.
+- Fixed bows, axes, staves, and other weapons all showing as a sword in trade and shops.
+- Fixed shields, armor, and clothes all showing as the same armor picture.
+- Fixed drinks, ore, ingots, gems, hides, firewood, lockpicks, spell tomes, bolts, and alchemy tools so each has its own picture in trade/shop menus
+- Updated eating, drinking, and potions so you can walk during the bar. Sprint stays off until it ends. (animation may still lock you)
+- Fixed a crash when you look at a bandit or a wolf. (found it this time!)
+- Fixed pet commands so Follow and Stay each show as their own popup.
+- Fixed drinking a potion so the bar ends with the sip.
+- Added the potion in your hand while you drink it. Other people see it too.
+- Fixed nirnroot and crimson nirnroot so they disappear for other people after someone picks them.
+- Fixed people standing in chairs and on beds. Walking in on someone already sitting or lying puts them in it, and sitting or lying down while you watch does too.
+- Added a search box at the top of the animation menu.
+- Added Alt plus a key as another way to set an animation hotkey. Shift still plays it.
+- Fixed buff icons so the circle empties as the timer runs, while effects that do not expire stay full.
+- Fixed pet commands so Follow and Stay use the same popup as when you bleed out, without a big shadow around them.
+- Fixed noble chest pieces so a smith or leatherworker repairs them the same way as the plain armor. A tailor still sews the pelt on at the loom.
+- Fixed spectating someone who is walking so you keep moving with them.
+- Fixed several enchantment glow effects + added more
