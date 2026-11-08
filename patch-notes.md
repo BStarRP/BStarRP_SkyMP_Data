@@ -1,31 +1,13 @@
 # Patch notes
 
 ## Changes
-- Added favorited trinkets hanging from your belt. Other people see them too.
-- Updated Crusader Staggering Blow so it breaks the spell your target is holding and staggers them even with poise left. At Expert it also removes their spell buffs.
-- Updated trade callings so Athletics, Sneaking, or Acrobatics can fill their support skills.
-- Updated armor so each armor type blocks more of the weapons it is built against.
-- Added a downed state for tamed pets. A pet that would die falls injured instead, and healing it gets it back up.
-- Fixed a hidden weapon or armor piece that stayed in your pack and could not be dropped. It is now removed.
-- Added a cheaper guard with a one-handed weapon, a two-handed weapon, or both weapons when Block is paired with that style. A shield keeps its own guard.
-- Added the rested bonus to a room marked as an inn on a parcel after you wait by the fire.
-- Removed a missing door, chest, or room from a parcel so it stops showing as unresolved.
-- Fixed an orcish sword's enchant glow so it follows the blade.
-- Fixed a dungeon chest so it holds different items after the place resets.
-- Fixed a creature in another area so it stops attacking for you.
-- Fixed filling a found enchanted weapon or a staff with a soul gem.
-- Fixed sitting and lying down so you stay in the chair or bed. (AGAIN PLZ WERKY)
-- Updated skill planning so you start with 20 memory. A character who already had a plan gains 2 once. (BECAUSE I LUV U ALL, max level 49, Legendarys give a full master level)
-- Fixed sleeping in a house bed so your energy keeps coming back until you get up.
-- Fixed a wide door so you can lock it while standing at the door.
-- Fixed a worn light that kept casting after you took the item off or stored it.
-- Fixed a worn light that cast its spell again about once a minute while you were still wearing it.
-- Fixed locking onto a bristleback so the marker sits on the animal instead of above it.
-- Improved target lock so aiming at a part slides there, and pulling the mouse back leaves it for the chest or the part you aim at next.
-- Fixed favorites so they stay on the favorites window after you assign a number key.
-- Fixed an invisible staff member showing a typing mark.
-- Improved chat so new messages sit at the bottom and older ones move up.
-- Added a fade for each chat line while the box is closed. A text from farther away starts faded based on distance, and opening chat shows the lines again.
-- Updated armor so your armor skill raises the armor on each piece. A trained heavy set still reaches about 80% protection.
-- Fixed a worn light so it is on when you log in wearing it, and other people see it.
-- Fixed putting armor on or taking it off so your menus still open afterward.
+- Fixed a dungeon door unlocked with its key staying open from outside after the dungeon reset.
+- Added injured animations while you hold a weapon. A wounded, exhausted, or concussed fighter now stands, swings, blocks, and casts like they are hurt.
+- Added an injured walk and stance when you drop to a quarter of your health or lower. Other people see it too.
+- Updated wounds so a hit leaves one about twice as often. Your slash, pierce, or blunt resistance against that weapon still lowers the chance.
+- Fixed a bound weapon or summon that could cancel or change your injured walk.
+- Updated a reinforced lock so it can be picked or opened with magic again after six hours instead of a day.
+- Added a bang on the door when you knock. People inside hear it at their side of the door.
+- Added more roleplay animations, including talking moods, fidgets, rally gestures, grief, disbelief, squatting, and a ritual cast.
+- Added 140+ unique Calian items
+- Added a Show Calian animation that holds your Calian out in your hand. It only appears while you carry one.

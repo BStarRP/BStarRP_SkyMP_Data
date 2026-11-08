@@ -1,6 +1,6 @@
 {
     "name": "Limp",
-    "description": "EVG Injured walk/run. Variable07 1 limpL / 2 limpR / 3 limpBoth. Wounds wounded-leg folders shipped empty.",
+    "description": "EVG Injured walk/run. Variable07 1 limpL / 2 limpR / 3 limpBoth / 13 low health. Wounds wounded-leg folders shipped empty.",
     "author": "Everglaid",
     "priority": 6100200,
     "interruptible": true,
@@ -67,6 +67,13 @@
                     "Value A": { "actorValue": 74, "actorValueType": "Value" },
                     "Comparison": "==",
                     "Value B": { "value": 3.0 }
+                },
+                {
+                    "condition": "CompareValues",
+                    "requiredVersion": "1.0.0.0",
+                    "Value A": { "actorValue": 74, "actorValueType": "Value" },
+                    "Comparison": "==",
+                    "Value B": { "value": 13.0 }
                 }
             ]
         }
