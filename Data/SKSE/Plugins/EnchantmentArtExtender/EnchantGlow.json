@@ -13,7 +13,7 @@
     ]
   },
   {
-    "WeaponArt": "EnchantGlow.esl|0x885",
+    "WeaponArt": "Vibrant Weapons EAE.esp|0x8FD",
     "EnchantmentKeywords": [
       "MagicDamageFire"
     ],
@@ -39,7 +39,7 @@
     ]
   },
   {
-    "WeaponArt": "EnchantGlow.esl|0x886",
+    "WeaponArt": "Vibrant Weapons EAE.esp|0x91F",
     "EnchantmentKeywords": [
       "MagicDamageFrost"
     ],
@@ -65,7 +65,7 @@
     ]
   },
   {
-    "WeaponArt": "EnchantGlow.esl|0x887",
+    "WeaponArt": "Vibrant Weapons EAE.esp|0x917",
     "EnchantmentKeywords": [
       "MagicDamageShock"
     ],
@@ -93,7 +93,7 @@
     ]
   },
   {
-    "WeaponArt": "EnchantGlow.esl|0x888",
+    "WeaponArt": "Vibrant Weapons EAE.esp|0x9C5",
     "EnchantmentKeywords": [
       "MagicDamageFire",
       "MagicDamageFrost",
@@ -122,7 +122,7 @@
     ]
   },
   {
-    "WeaponArt": "EnchantGlow.esl|0x889",
+    "WeaponArt": "Vibrant Weapons EAE.esp|0x989",
     "EnchantmentKeywords": [
       "MagicDamageFire",
       "MagicDamageShock"
@@ -150,7 +150,7 @@
     ]
   },
   {
-    "WeaponArt": "EnchantGlow.esl|0x88a",
+    "WeaponArt": "Vibrant Weapons EAE.esp|0x926",
     "EnchantmentKeywords": [
       "MagicDamageFire",
       "MagicDamageFrost"
@@ -178,7 +178,7 @@
     ]
   },
   {
-    "WeaponArt": "EnchantGlow.esl|0x88b",
+    "WeaponArt": "Vibrant Weapons EAE.esp|0x955",
     "EnchantmentKeywords": [
       "MagicDamageShock",
       "MagicDamageFrost"

@@ -1,50 +1,31 @@
 # Patch notes
 
 ## Changes
-- Fixed fear so you and other people run away instead of cowering. A creature no longer falls over when the fear ends.
-- Fixed chance weapon enchantments, such as paralysis, so they trigger as often as they should.
-- Added favorites menu keys 1 through 8. They stay with the character after you log in again.
-- Fixed a torch so it stays in the left hand. A worn light shows for other people.
-- Fixed other people swimming in place while moving, now shows proper animation
-- Fixed a creature staying on your screen after it was gone.
-- Fixed sprint turning back on while you are eating, drinking, or using a potion.
-- Fixed an invisible staff member showing a talking mark.
-- Fixed the server dropping when a script ran on something that was already gone.
-- Fixed a beastmaster command staying after the rank is gone.
-- Updated armor so it blocks less of each hit. A strong heavy set reaches about 80% protection, and armor past that adds only a little.
-- Updated agile defender perk, light armor ranks adds more armor to close the gap between light and Heavy
-- Fixed a matched set so the bonus applies to the armor pieces. Enchantments and flesh spells keep their own armor. All were over applying creating to high armor values
-- Fixed heavy armor ranks so they no longer bonus off a shield.
-- Fixed the material names with immersive creatures so set piece buff triggers with any armor in the material band
-- Fixed being disarmed so your weapon stays away until the effect ends, and other people see it when you draw it again.
-- Fixed Oakflesh and the other flesh spells so Mage Armor adds its armor once, and light or heavy armor keeps only the base, numbers where way off
-- Fixed other people so their swings and movement match their weapon speed and speed buffs. (this made combat feel desycned)
-- Removed the admin menu for Testers and Leaders. Their commands still work.
-- Fixed an emote so someone who walks in still sees the person holding it.
-- Fixed the surrender key so it ends an emote from the animation menu or a hotkey. With no emote playing, it still cowers.
-- Fixed puzzle stones so one click turns them once, and the door opens on the right face.
-- Fixed resting at the hearth in custom inns, including Reich Corigate.
-- Fixed pet commands so they close and do nothing while you are down or bleeding out.
-- Fixed a creature so it leaves someone who is bleeding out and fights the next person.
-- Updated noble trim so any tailor who has the chest can sew the pelt on.
-- Updated Nordic carved trim so it needs Expert Tailoring at 70.
-- Updated Wild Hunt armor so it needs leatherworking 99, plus dragon bone and dragon scales.
-- Fixed cutting a key or changing the lock on a wide door or chest. It works when the prompt is showing.
-- Fixed a cut key in trade showing as a blank key. It shows the name stored on that key.
-- Fixed bows, axes, staves, and other weapons all showing as a sword in trade and shops.
-- Fixed shields, armor, and clothes all showing as the same armor picture.
-- Fixed drinks, ore, ingots, gems, hides, firewood, lockpicks, spell tomes, bolts, and alchemy tools so each has its own picture in trade/shop menus
-- Updated eating, drinking, and potions so you can walk during the bar. Sprint stays off until it ends. (animation may still lock you)
-- Fixed a crash when you look at a bandit or a wolf. (found it this time!)
-- Fixed pet commands so Follow and Stay each show as their own popup.
-- Fixed drinking a potion so the bar ends with the sip.
-- Added the potion in your hand while you drink it. Other people see it too.
-- Fixed nirnroot and crimson nirnroot so they disappear for other people after someone picks them.
-- Fixed people standing in chairs and on beds. Walking in on someone already sitting or lying puts them in it, and sitting or lying down while you watch does too.
-- Added a search box at the top of the animation menu.
-- Added Alt plus a key as another way to set an animation hotkey. Shift still plays it.
-- Fixed buff icons so the circle empties as the timer runs, while effects that do not expire stay full.
-- Fixed pet commands so Follow and Stay use the same popup as when you bleed out, without a big shadow around them.
-- Fixed noble chest pieces so a smith or leatherworker repairs them the same way as the plain armor. A tailor still sews the pelt on at the loom.
-- Fixed spectating someone who is walking so you keep moving with them.
-- Fixed several enchantment glow effects + added more
+- Added favorited trinkets hanging from your belt. Other people see them too.
+- Updated Crusader Staggering Blow so it breaks the spell your target is holding and staggers them even with poise left. At Expert it also removes their spell buffs.
+- Updated trade callings so Athletics, Sneaking, or Acrobatics can fill their support skills.
+- Updated armor so each armor type blocks more of the weapons it is built against.
+- Added a downed state for tamed pets. A pet that would die falls injured instead, and healing it gets it back up.
+- Fixed a hidden weapon or armor piece that stayed in your pack and could not be dropped. It is now removed.
+- Added a cheaper guard with a one-handed weapon, a two-handed weapon, or both weapons when Block is paired with that style. A shield keeps its own guard.
+- Added the rested bonus to a room marked as an inn on a parcel after you wait by the fire.
+- Removed a missing door, chest, or room from a parcel so it stops showing as unresolved.
+- Fixed an orcish sword's enchant glow so it follows the blade.
+- Fixed a dungeon chest so it holds different items after the place resets.
+- Fixed a creature in another area so it stops attacking for you.
+- Fixed filling a found enchanted weapon or a staff with a soul gem.
+- Fixed sitting and lying down so you stay in the chair or bed. (AGAIN PLZ WERKY)
+- Updated skill planning so you start with 20 memory. A character who already had a plan gains 2 once. (BECAUSE I LUV U ALL, max level 49, Legendarys give a full master level)
+- Fixed sleeping in a house bed so your energy keeps coming back until you get up.
+- Fixed a wide door so you can lock it while standing at the door.
+- Fixed a worn light that kept casting after you took the item off or stored it.
+- Fixed a worn light that cast its spell again about once a minute while you were still wearing it.
+- Fixed locking onto a bristleback so the marker sits on the animal instead of above it.
+- Improved target lock so aiming at a part slides there, and pulling the mouse back leaves it for the chest or the part you aim at next.
+- Fixed favorites so they stay on the favorites window after you assign a number key.
+- Fixed an invisible staff member showing a typing mark.
+- Improved chat so new messages sit at the bottom and older ones move up.
+- Added a fade for each chat line while the box is closed. A text from farther away starts faded based on distance, and opening chat shows the lines again.
+- Updated armor so your armor skill raises the armor on each piece. A trained heavy set still reaches about 80% protection.
+- Fixed a worn light so it is on when you log in wearing it, and other people see it.
+- Fixed putting armor on or taking it off so your menus still open afterward.

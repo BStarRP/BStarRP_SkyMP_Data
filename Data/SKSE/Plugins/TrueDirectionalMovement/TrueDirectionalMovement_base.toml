@@ -31,6 +31,12 @@ BodyPartDataFormID = 0x1E2A3 # DLC2MountedRieklingBodyPartData
 Plugin = "Dragonborn.esm"
 BoneNames = ["Boar_Reikling_Chest", "Boar_Chest01"]
 
+# Shares DefaultBodyPartData, so the human spine list misses and the lock sits on the rider bones above the boar.
+[[TargetPoints]]
+RaceFormID = 0x24038 # DLC2BoarRace
+Plugin = "Dragonborn.esm"
+BoneNames = ["Boar_Chest01", "Boar_Head", "Boar_LFrontLeg2", "Boar_RFrontLeg_2", "Boar_LBackLeg2", "Boar_RBackLeg2"]
+
 [[TargetPoints]]
 BodyPartDataFormID = 0x28537 # BenthicLurkerBodyPartData
 Plugin = "Dragonborn.esm"
