@@ -1,0 +1,21 @@
+{
+    "name": "HorseDead",
+    "author": "Hunk92",
+    "description": "Body across the horse. Hunk92 (RSE). Shoulder and some poses edited from Elsawirr and shadowman2777.",
+    "priority": 6100300,
+    "interruptible": true,
+    "conditions": [
+        {
+            "condition": "CompareValues",
+            "requiredVersion": "1.0.0.0",
+            "Value A": {
+                "graphVariable": "SkyMPCarry",
+                "graphVariableType": "Int"
+            },
+            "Comparison": "==",
+            "Value B": {
+                "value": 7
+            }
+        }
+    ]
+}

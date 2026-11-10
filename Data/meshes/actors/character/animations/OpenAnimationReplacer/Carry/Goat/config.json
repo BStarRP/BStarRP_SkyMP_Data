@@ -1,0 +1,21 @@
+{
+    "name": "Goat",
+    "author": "ICC",
+    "description": "Immersive Hunting Animations carcass walk. Carrier only. The animal stays itself.",
+    "priority": 6100300,
+    "interruptible": true,
+    "conditions": [
+        {
+            "condition": "CompareValues",
+            "requiredVersion": "1.0.0.0",
+            "Value A": {
+                "graphVariable": "SkyMPCarry",
+                "graphVariableType": "Int"
+            },
+            "Comparison": "==",
+            "Value B": {
+                "value": 10
+            }
+        }
+    ]
+}

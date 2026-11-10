@@ -1,13 +1,72 @@
 # Patch notes
 
 ## Changes
-- Fixed a dungeon door unlocked with its key staying open from outside after the dungeon reset.
-- Added injured animations while you hold a weapon. A wounded, exhausted, or concussed fighter now stands, swings, blocks, and casts like they are hurt.
-- Added an injured walk and stance when you drop to a quarter of your health or lower. Other people see it too.
-- Updated wounds so a hit leaves one about twice as often. Your slash, pierce, or blunt resistance against that weapon still lowers the chance.
-- Fixed a bound weapon or summon that could cancel or change your injured walk.
-- Updated a reinforced lock so it can be picked or opened with magic again after six hours instead of a day.
-- Added a bang on the door when you knock. People inside hear it at their side of the door.
-- Added more roleplay animations, including talking moods, fidgets, rally gestures, grief, disbelief, squatting, and a ritual cast.
-- Added 140+ unique Calian items
-- Added a Show Calian animation that holds your Calian out in your hand. It only appears while you carry one.
+- Fixed a shop counter so it shows when you set it. Looking at it says Shop.
+- Updated a shop counter, ledger, strongbox, or treasury so it uses the object you are looking at.
+- Fixed a calling so one skill fills only one requirement.
+- Fixed Nord whiskey, Nord gin, Nord vodka, and juniper mead so they quench thirst.
+- Updated a gallop so it tires you the same way running does.
+- Fixed a picked nirnroot so it stays gone until it grows back.
+- Fixed Bosmer armor so an engraved piece uses reinforced leather and a reinforced piece uses padded leather.
+- Fixed Take All on a body so one search covers every piece. Cancelling keeps what you already took.
+- Fixed first person so you stop at walls again after you stand up.
+- Fixed a helmet so one loose piece goes on, and the pieces you took off go back on together.
+- Fixed sitting so moving no longer pulls you out of a chair or a bed.
+- Updated worn enchantments so the strongest piece counts in full and each weaker piece counts for half.
+- Fixed farm milk and a sawmill wood stack.
+- Fixed a beehive so opening it can hold honeycomb, bees, or a husk.
+- Fixed a dungeon chest and a house cupboard so taking from them is not theft.
+- Fixed a parcel link so a missed lookup does not clear the chest or the door.
+- Added Protect on a world NPC or object so a cell reset leaves them in place.
+- Fixed a lever, a gate, and a trap so they keep their state, and a trap or rune only hits once.
+- Updated a smelter so enchanted gear breaks down into the same materials, and a worn or favorited piece stays.
+- Fixed a tackle so you can turn and walk after you get up.
+- Fixed a fire at home or in a shop so it restores energy again.
+- Updated that home fire so an inn still restores energy faster.
+- Added a combat style combo on each weapon skill. A power attack, a shot, or a bolt changes the wound.
+- Updated swords, axes, maces, bows, and the other weapon skills so their speed, bleed, and armor effects come from that skill alone.
+- Fixed wearing another copy of the same clothes. The copy you choose stays on, and you do not gain an extra one.
+- Fixed a damaged item so it stays on when its condition is missing from your pack.
+- Fixed training dummies so a skill past Apprentice no longer gains experience from a weaker weapon.
+- Added butter at the cookpot from one salt pile and one jug of milk when you have started Cooking.
+- Added Skyrim Is For The Nords. A Nord in Skyrim gains ten percent more skill experience.
+- Fixed emptying a chest so other people keep moving.
+- Updated healing so a spell or potion fills your health and closes a bruise. A bleed and a deep cut stay, and it does not stand you up.
+- Updated a bandage so one wrap closes one wound. The first stops a bleed. The next closes a deep cut.
+- Updated getting up so only another person's bandage can stand you.
+- Updated a deep cut so you keep the hurt stance and keep losing health until it is bandaged.
+- Updated an axe so it opens a deep cut. Hack and Slash and Limbsplitter make that cut take more health.
+- Updated actors so they can turn invisible and travel to a saved place. Saving or removing a place still needs an admin.
+- Reworked bows so they are made at the carpentry bench from the matching wood.
+- Updated arrows so a batch uses one plank of that wood.
+- Updated An-Xileel, Bosmer, Orc, Colovian, Dariit, Nightingale, and Justiciar pieces so they need that group's writ.
+- Added Guiding Light for priests and heal-kin. The help mark stays on someone who yelled while down, and it points at the city gate when they are inside and you are still outside.
+- Added carrying a person or an animal over your shoulder or in your arms. A living person looks at you and presses E to accept.
+- Added a seat behind you on a horse, and laying a downed person or a body across the saddle.
+- Updated Cavalier so it takes Horse Riding, One-Handed or Two-Handed or Archery, and Light or Heavy Armor. Block and a shield no longer count.
+- Updated a mounted Cavalier so hits no longer stagger them.
+- Fixed Road Dust so the outdoor riding speed starts at Expert.
+- Fixed creating a new note while you already have a written or opened note so it opens blank.
+- Added Interest under your name. Repeating the same spot pays a little less, and mixing your work pays a little more.
+- Added a lesson past Expert. Working a skill beside someone a tier ahead in your group opens the next rank.
+- Added a small experience bonus when you deliver crafted goods for a town job.
+- Added your name on goods you deliver for a town job.
+- Added standing titles from Known up to Renowned, and the matching titles when your standing falls.
+- Added a town record on the notice board for jobs taken and finished.
+- Updated a real sale so you and the other person gain standing once a day.
+- Updated a broken town job so your standing falls.
+- Added a shop sign the owner can set. Customers see it while the shop is open.
+- Updated group work so music, first aid, sneaking, athletics, acrobatics, animal taming, and horse riding count.
+- Fixed a pet or summon told to stay so other people see them wait.
+- Updated wooden weapons so a hit no longer leaves a wound.
+- Updated the enchanter so a soul binds to a weapon, armor, shield, robe, circlet, ring, or amulet.
+- Updated clothes, earrings, bags, cloaks, and tools so the enchanter no longer offers them.
+- Fixed an enchant already on those pieces so the glow fades and the item stays in your pack.
+- Fixed sprinting, riding, and falling so Speed, Athletics, and Horse Riding no longer pull you back.
+- Fixed casting a spell with one hand so it no longer uses the dual-cast perk.
+- Fixed a soul gem at the enchanter so the charge stays on the weapon after you log back in.
+- Fixed repairing an item at a workbench so it no longer makes a second copy.
+- Updated bard duets so you wait until a nearby bard starts the same song. The menu shows when someone nearby is waiting.
+- Fixed claiming Well Rested at an inn fire, including when a chair is in front of it.
+- Fixed Show Calian so you hold the box out like a tray, with it sitting in your hand instead of through your wrist.
+- Fixed several new roleplay animations that did nothing when you picked them.

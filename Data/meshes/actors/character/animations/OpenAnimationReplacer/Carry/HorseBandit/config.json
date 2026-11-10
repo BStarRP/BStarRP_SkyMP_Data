@@ -1,0 +1,21 @@
+{
+    "name": "HorseBandit",
+    "author": "shadowman2777",
+    "description": "Lead Criminals to Justice horse passenger. Replaces the RSE copy.",
+    "priority": 6100300,
+    "interruptible": true,
+    "conditions": [
+        {
+            "condition": "CompareValues",
+            "requiredVersion": "1.0.0.0",
+            "Value A": {
+                "graphVariable": "SkyMPCarry",
+                "graphVariableType": "Int"
+            },
+            "Comparison": "==",
+            "Value B": {
+                "value": 8
+            }
+        }
+    ]
+}

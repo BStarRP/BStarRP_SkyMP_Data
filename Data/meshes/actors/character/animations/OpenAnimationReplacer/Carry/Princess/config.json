@@ -1,0 +1,21 @@
+{
+    "name": "Princess",
+    "author": "FfIower",
+    "description": "Carry Them princess rider. Free mod only. Poses may be edited.",
+    "priority": 6100300,
+    "interruptible": true,
+    "conditions": [
+        {
+            "condition": "CompareValues",
+            "requiredVersion": "1.0.0.0",
+            "Value A": {
+                "graphVariable": "SkyMPCarry",
+                "graphVariableType": "Int"
+            },
+            "Comparison": "==",
+            "Value B": {
+                "value": 4
+            }
+        }
+    ]
+}
