@@ -1,6 +1,5 @@
 # Patch notes
 
 ## Changes
-- Updated the blacksmith apron, chef tunic, miner clothes, and farm clothes so wearing them gives 25% more experience in that craft.
-- Added miner, farmer, and smith clothes, and more common work clothes, that you can make at the loom. Wearing the matching piece gives 25% more experience in that craft.
-- Added fur, hide, leather, iron, mail, steel, and Dwarven armor you can craft.
+- Fixed the tall wheat at Kynesgrove. Harvesting it gives wheat you can cook. Wheat you already picked from those plants becomes that wheat when you log in.
+- Fixed sun spells so they damage skeletons and other undead. Sunlight Rune does too.
