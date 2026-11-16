@@ -1,8 +1,44 @@
 # Patch notes
 
 ## Changes
-- Fixed carrying a downed person or animal. They lie over your shoulder in the same place for everyone.
-- Fixed picking up a living animal. You cannot.
-- Added a piggyback. A living player gets on your back only after they accept.
-- Added a seat behind the horse. A downed body lies there, and a living player sits there only after they accept.
-- Fixed being escorted. You run a short way behind them, facing the way you are moving, instead of standing still.
+- Added gloves and a sash for a chosen way of fighting, a harder blow or a quicker swing.
+- Updated the old unique jewelry so it restores the body, or deepens a well of magicka, instead of teaching a skill.
+- Updated ebony so it answers only a smith at the height of the craft, in the forge and in the fire.
+- Updated plated steel so it belongs with the finer heavy armor, forged and worn together.
+- Improved haste so a swifter hand draws the bow as quickly as it swings the blade.
+- Updated the depths so a deeper crypt leaves a stronger enchantment on what the dead were wearing.
+- Improved alchemy. The ranks you earn make a mix more sure, ask less of you, and can come out richer.
+- Added Known Leaf, where alchemy and herbalism meet. The work costs less, and a failed mix can give the reagents back.
+- Updated the lab so every reagent has a rank, from a common leaf to the strongest poison.
+- Reworked jewelry into a craft of its own, with tiered pieces, metals that come apart, and rare finds waiting in the world.
+- Reworked the benches so each craft keeps its own list. Learn it, and the work appears.
+- Reworked noble clothing so the gold is a flourish.
+- Reworked locks so every rank is forged from its own metal and a touch of gold.
+- Reworked alchemy into a lab of brews you discover, rising from a simple mix to a masterwork.
+- Improved interest. A long stay on one skill can cut experience to half, mixing work can raise it to one and a half, and Well Rested pushes you up a level.
+- Updated brewing so simple drinks come first and the strong ones unlock as your brewing rises.
+- Added a lasting recovery to food and drink that had none. Soup, stew, bread, and the other meals that already restore you are unchanged.
+- Fixed falling, a short lift, and a stall so they no longer count as cheating.
+- Fixed a hit from another place so it does not count. Repeated hits in the same place are shown to staff instead of an automatic ban.
+- Fixed gold taken from your house, and gold a staff member gives you, so they do not count.
+- Fixed dropping items in your house so they do not count, and you can drop more before a warning.
+- Fixed staff so the cheat checks leave them alone.
+- Updated the cheat report so it no longer posts a full address.
+- Fixed a crash when a nearby creature disappears during a fight.
+- Fixed a freeze from the game trying again and again to spawn something it cannot create.
+- Added blindfolds, the extra common clothes, Moon Monk robes, Khajiit merchant clothes, and the College arch-mage set at the loom.
+- Fixed clothes so they craft at the loom. Hide, fur, and leather stay at the leather bench.
+- Fixed light armor so it crafts at the leather bench. Elven needs Apprentice, Glass needs Expert, and Dragonscale needs Master.
+- Fixed the forge so it shows metal, heavy armor, and jewelry.
+- Fixed wooden staves, clubs, and ordinary fishing rods so they craft at the carpenter.
+- Fixed silver weapons, Falmer weapons, the Skyforge bow, and the finer jewelry so they stay hidden until you have learned the skill.
+- Fixed a group heal freezing the people it lands on.
+- Added dirt that builds up as you travel and fight, and washes off in the rain or while swimming. A new character starts clean.
+- Added blood that shows as you get hurt. A bleed and a deep cut show blood even when you are still healthy.
+- Added a bruise or a cut on the arm, leg, or chest that was hit.
+- Fixed the screen shaking when someone else blocks.
+- Fixed armour protection so each hit type is counted once, and the type a set is weak to is half.
+- Fixed knocking on a door so the sound is heard on both sides.
+- Fixed Vampire's Sight so the powers list shows it once.
+- Fixed Detect All so people and creatures nearby are outlined while the spell lasts.
+- Fixed changing a second piece of armour so the animation plays while the inventory stays open.
