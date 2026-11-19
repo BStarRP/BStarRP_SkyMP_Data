@@ -2,7 +2,7 @@
     "name": "HorseBandit",
     "author": "shadowman2777",
     "description": "Lead Criminals to Justice horse passenger. Replaces the RSE copy.",
-    "priority": 6100300,
+    "priority": 70000000,
     "interruptible": true,
     "conditions": [
         {

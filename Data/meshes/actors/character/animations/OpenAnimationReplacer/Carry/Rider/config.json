@@ -2,7 +2,7 @@
     "name": "Rider",
     "author": "FfIower",
     "description": "Carry Them rider locomotion. Free mod only. Poses may be edited.",
-    "priority": 6100300,
+    "priority": 70000000,
     "interruptible": true,
     "conditions": [
         {

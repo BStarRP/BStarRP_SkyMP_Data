@@ -2,7 +2,7 @@
     "name": "HorseAlly",
     "author": "Hunk92",
     "description": "Passenger behind the rider. Hunk92 (RSE). Shoulder and some poses edited from Elsawirr and shadowman2777.",
-    "priority": 6100300,
+    "priority": 70000000,
     "interruptible": true,
     "conditions": [
         {

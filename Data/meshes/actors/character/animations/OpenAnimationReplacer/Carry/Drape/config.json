@@ -2,7 +2,7 @@
     "name": "Drape",
     "author": "Hunk92 / ShoulderCarryState",
     "description": "Dead or downed shoulder pose. Female pose from ShoulderCarryState.",
-    "priority": 6100300,
+    "priority": 70000000,
     "interruptible": true,
     "conditions": [
         {

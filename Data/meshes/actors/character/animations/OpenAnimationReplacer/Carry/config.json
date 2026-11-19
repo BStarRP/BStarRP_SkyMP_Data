@@ -1,5 +1,5 @@
 {
     "name": "Carry",
     "author": "Hunk92, FfIower, shadowman2777, Elsawirr, ICC, ShoulderCarryState",
-    "description": "Actor value 46 (Unknown46). 1 shoulder, 2 drape, 3 arms, 4 princess, 6 horse passenger, 7 horse body, 8 escorted prisoner, 9 fox, 10 goat, 11 wolf, 12 deer, 14 body in the arms, 15 living shoulder. No mod plugin."
+    "description": "Actor value 46 (Unknown46). 1 shoulder carrier, 2 held over the shoulder, 3 arms carrier, 6 horse passenger, 7 horse body, 8 escorted prisoner, 9 fox, 10 goat, 11 wolf, 12 deer, 14 held in the arms. 4 and 15 only replace turns, so a carried person uses 2 or 14."
 }

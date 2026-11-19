@@ -1,21 +1,10 @@
 # Patch notes
 
 ## Changes
-- Updated the woods so a dirt path stays wolves and spiders, and the trees keep the bears.
-- Fixed a creature so it fades in and stays with you once it appears.
-- Fixed jewelcrafting so a piece still knows its metal.
-- Removed the meals from a dungeon chest, so a ruin keeps its treasure and supper stays at the inn.
-- Updated the gems so a fine stone is a rare find in a chest, and the mine is where you dig them up.
-- Fixed a block so the sword or the shield takes the wear, and the armor on your chest stays whole.
-- Fixed a Dwemer staff so its blast shoves you back, and you can still find your feet.
-- Fixed weapon callings so Splinter, Ground and Pound, Harvest, and Black Bolt are powers you cast with Z.
-- Fixed chairs so people sit down in them, and a drink or a book still shows once they are seated.
-- Fixed a chest, a cupboard, or a door you are already looking at so the lock is in reach.
-- Fixed Darkwater Crossing so the mine door no longer throws you back outside the moment you try it.
-- Reworked a tackle into a contest of nerve. A charge can still take someone down, and heavy plate or Indomitable makes that rare.
-- Updated the mirrors so you can redo your hair, warpaint, tattoos, scars, weight, and eyes, and the face you arrived with stays.
-- Updated the fishing clothes so time on the water teaches the craft faster.
-- Fixed a healing drink so it fills you, and the size of your health stays what it was.
-- Updated practice so a skill keeps rising on its own, and a stronger hand in the group only makes that rise faster.
-- Fixed the cooking pot so the dishes stay shut until Cooking is yours, and a finer plate waits for a higher hand.
-- Fixed the loom so the clothes of a people, a cult, or a faction stay shut until a writ opens them. The Moon Monk set opens for a master tailor.
+- Fixed a bed so you lie down in it, and someone nearby sees you there.
+- Fixed blood so a swim or the rain washes it off, and it stays off until you are hurt worse.
+- Fixed a pouch or a backpack so it stays on beside your gloves, and the carry and light on it still count.
+- Fixed carrying so the person in your arms stays held, a wound cannot stand them up, and the same key sets them down.
+- Fixed a knock so the strike sounds on the door in front of you, and on the door inside.
+- Reworked the alchemy table into a small list in the middle of the world, where a pair of ingredients you already understand becomes a potion of that strength.
+- Added the Naga-Kur, feathered armor the An-Xileel craft at the leather rack when they hold the writ, and anyone who mends leather can put it back together.

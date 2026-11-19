@@ -2,7 +2,7 @@
     "name": "Fox",
     "author": "ICC",
     "description": "Immersive Hunting Animations carcass walk. Carrier only. The animal stays itself.",
-    "priority": 6100300,
+    "priority": 70000000,
     "interruptible": true,
     "conditions": [
         {
