@@ -1,14 +1,15 @@
 # Patch notes
 
 ## Changes
-- Fixed fear so it sends you running, then lets you move again when it passes.
-- Improved a fight so each swing finishes before the next one starts.
-- Fixed a block so your shield comes back down after the blow.
-- Fixed a summoned shield so it stays on your arm.
-- Fixed a spell so everyone sees the cast, the bolt, and the rune where you aimed.
-- Improved first person so the person in front of you turns their head with your look.
-- Fixed the bag so a click waits until the clothes, the food, or the drink is done.
-- Improved a drink so the bottle stands in your fist + move while drinkin it (hopefully, may not make it live)
-- Fixed a helmet left on your hip so it still goes on your head after loggin in.
-- Fixed Detect All Creatures so the people around you light up for that moment.
-- Added a killing blow to an execution. Everyone around you sees it, and the weapon in your hands chooses the strike.
+- Improved a door knock so the bang lasts, and you can stop it.
+- Fixed the irons/cuffs so they stay on your hands, even through a door.
+- Improved picking someone up so you kneel, they rest on your shoulder, and their weight is on you.
+- Fixed a chair so once you sit, you stay in the seat. (for the x100 time)
+- Fixed a rune so it stays on the ground where it landed.
+- Fixed a vampire's rune so the health it takes stays with you.
+- Improved fire so a hit keeps burning, and sun fire does that to the undead.
+- Fixed healing so the living spells pass over the undead, and the undead cures pass over the living.
+- Fixed a bound shield so it is on your arm as soon as the spell lands.
+- Added manaburn, like stamina exhaution, allows you to over cast but pays for the cost in health, then suffer migraine and slow regen.
+- Improved an execution so it does a synchronized killmove!!!
+- Improved a fight so a heavier blade, a block, a jump, and a roll take a a short delay before another action

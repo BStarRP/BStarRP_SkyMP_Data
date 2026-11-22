@@ -1,6 +1,6 @@
 {
     "name": "Headache",
-    "description": "EVG head-hold idle when magicka is under 10%. Hardcoded %, no EVG.esp. Not Variable07.",
+    "description": "EVG head-hold idle while magicka is under 20%, the manaburn recover line. Hardcoded %, no EVG.esp. Not Variable07.",
     "author": "Everglaid",
     "priority": 6003121,
     "interruptible": true,
@@ -38,7 +38,7 @@
             "requiredVersion": "1.0.0.0",
             "Value A": { "actorValue": 25, "actorValueType": "Percentage" },
             "Comparison": "<",
-            "Value B": { "value": 0.1 }
+            "Value B": { "value": 0.2 }
         },
         {
             "condition": "CompareValues",
