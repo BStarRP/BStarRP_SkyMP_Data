@@ -1,42 +1,37 @@
 # Patch notes
 
 ## Changes
-- Added a lesson an Expert or a Master can cast for the people beside them, paid from the work they have already done.
-- Updated Winterhold, Dawnstar, and Morthal so you come back to the temple that stands in that town.
-- Fixed a rune so it settles on the ground once its body is in the world.
-- Improved interest so a new swing, a bash, or a block still brings you back, and one weapon no longer leaves you dull for good.
-- Reworked alchemy into a lab of its own, where you mix the herbs, learn what they share, and the bottle never outruns your skill.
-- Reworked added several new potions to replace ones we didnt use, XP potions and such.
-- Improved interest so a new piece, a new spell, or a different attack brings the spark back, and circling the same few pays less each time.
-- Updated a dull or bored stretch so it only trims a little of what you learn.
-- Fixed setting someone down so their belongings stay with them.
-- Fixed carrying a body through a doorway so you can still lay them down on the other side.
-- Fixed a slain beast so it stays down when you set the body on the ground.
-- Fixed a spell book so opening it keeps everyone in the world and not crashes =(
-- Removed hymn books from the chests, so a hymn is something you learn.
-- Reworked the Arcane Blacksmith's Apron into a rare loom prize that lifts weaponsmithing, armoursmithing, and smelting.
-- Added new ingots and recipes for that apron in content
-- Fixed Mage Armor so a flesh spell guards you in cloth and robes, and rests while you wear armor or a shield.
-- Updated flesh spells so the armor they weave last longer duration
-- Updated Haste so the quicker swing stays with you longer also
-- Updated the forge so a helm, a blade, and a fine coat take the ingot of their metal, and a ring shank stays with the jeweler.
-- Updated the smelter so a ring shank comes back only when you melt a piece of jewelry.
-- Added a forge recipe that turns the shells of the harder beasts into chitin plate, so that armor can be worked here.
-- Fixed enchanted gear so a worn piece still grants its magic, including the boots that carry you across the water.
-- Updated jewelcrafting so a ring shank follows the metal it is drawn from, the same way the finished ring does.
-- Improved interest so one task holds you longer, and turning to something new brings the spark back sooner.
-- Updated bonemold so a Dunmer, or a smith who carries their writ, can forge that shell armor.
-- Updated salvaged Dwarven armor so the Dwemer writ opens it with the rest of that ancient craft.
-- Updated the Imperial arms that stood outside the legion writ, so the writ of authorization opens them.
-- Fixed Dwemer cloaks so a second copy of the writ still lets you weave them.
-- Fixed the chests in a temple, a public room, and a house you own, so a take is yours again.
-- Removed the pause on a door, so it opens the moment you reach for it.
-- Fixed Kvetchi mercenary armor so the furs and steel show when you wear the set.
-- Fixed Black Bear Ancient Nord so the armor shows, and you can forge the plate or work the lighter hides.
-- Updated perk descriptions so each rank tells you the strength it really gives.
-- Updated blocking so every catch spends your stamina, and an empty bar drops the guard until you recover.
-- Rebalanced poise gains on blocks
-- Fixed healing potions so a drink fills you again.
-- Fixed blade and bow potions so the drink makes that weapon hit harder.
-- Reworked worn enchantments so combat magic bends when you stack it, and pouches and satchels still add every point of carry.
-- Fixed several recipe loops that caused infinite returns on materials
+- Updated a bleed and a deep cut so each pulse takes more of you. An axe still bites harder than a sword.
+- Fixed jewelry so a torc and an amulet share the throat, and a crown takes the head. Earrings, a bracelet, and a ring still sit beside them.
+- Fixed the forge so a ring, a circlet, or a necklace can be made there again.
+- Fixed enchanting so the clothes on your body can hold a soul.
+- Fixed invisibility, paralysis, fear, frenzy, calm, and silence so the draught takes hold of you. A silence no longer empties your magicka.
+- Fixed Muffle so the effect shows how quiet you have become.
+- Updated a poison that weakens armor so it can take at most half of what you wear, and it cannot drive the rating below nothing.
+- Updated a skill draught so the percent on the bottle is the bonus you earn while it lasts. A strong draught holds for an hour.
+- Updated herbalism so lavender and the mushrooms gathered in caves belong to that skill. Farm crops, juniper, and slaughterfish eggs stay with farming.
+- Updated the alchemy lab so common herbs stay plain, uncommon ones are green, rare herbs are blue, and the coveted few are orange. The flask you brew is the strength you picked.
+- Fixed renown so the standing you have earned can be worn in front of your name, in the same place as a patron title.
+- Added taxes and sworn towns to the village stones, so a thane can keep the coin and the hamlets that answer to them.
+- Added the Bard to every hold and town, a seat that lifts Musicianship.
+- Added a way for the jarl and the steward to open a sworn town from their own stone and tend its people, its parcels, and its taxes.
+- Fixed restorative drinks so they pour health, magicka, or stamina back for as long as the bottle lasts.
+- Fixed a healing spell or a health potion so it can lift someone who is down.
+- Fixed a sawmill cut so it still finishes, and the firewood is counted once, when the stack at the end has not appeared yet.
+- Updated a bleed and a deep cut so your health no longer knits itself shut until the wound is treated. A healing spell or a restorative drink can still bring you back.
+- Removed pickpocketing from chests and barrels, so a crate in a room or out on the street opens like any other container.
+- Fixed a crafting writ so the letter in your pack opens that people's work, and a second copy no longer shuts the bench.
+- Fixed the divine writs and Ancarion's formula so each book wears its own name.
+- Updated interest so a bored stretch is the only low mood, and it only trims a little of what you learn.
+- Improved interest so a light swing, a heavy swing, a bash, and a block each bring the spark back, and so does a new catch, a new song, or a different lock.
+- Fixed casting so a spell you are just short of still fires once, the missing magicka comes out of your health, and a burned bar will not let you cast again until you can pay.
+- Fixed the Amulets of the Divines so each god's own blessing is what you feel again.
+- Fixed flesh spells so the woven armor holds for the long while.
+- Fixed Haste so the quicker swing keeps that same long stretch.
+- Updated Candlelight so the hovering light stays with you on a long road.
+- Updated Muffle so the quiet lasts long enough to use.
+- Fixed the Riverwood and Morthal sawmills so a cut leaves the logs waiting at the end of the mill.
+- Fixed arrivals so a person fades in once they have settled, and spectating no longer shows you standing at their back.
+- Fixed a healing circle so the light leaves with the spell, and a crowd can stand in it without the world choking.
+- Fixed gathering so lavender and jazbay grapes are herbalism, clams and hanging fish are fishing, and a hanging rabbit or pheasant is hunting. Juniper berries and slaughterfish eggs stay with farming.
+- Fixed the wilds so a beast goes back to the ground it came from once the chase is over.
