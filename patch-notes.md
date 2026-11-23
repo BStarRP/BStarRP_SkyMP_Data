@@ -1,9 +1,42 @@
 # Patch notes
 
 ## Changes
-- Added 2 curves for diminihsing returns, one for combat enchants (harsher) and a lighter curve for carry weight and other types of enchants.
-- Fixed a carry so you hold one person, set them down with X, and your weapon stays sheathed until you do.
-- Fixed idle camera so it no longer enables.
-- Added progress bar to opening doors, combat can stop them.
-- Fixed a blank key so it register as a key item in your bag filter.
-- Reduced armor penetration on warhammers
+- Added a lesson an Expert or a Master can cast for the people beside them, paid from the work they have already done.
+- Updated Winterhold, Dawnstar, and Morthal so you come back to the temple that stands in that town.
+- Fixed a rune so it settles on the ground once its body is in the world.
+- Improved interest so a new swing, a bash, or a block still brings you back, and one weapon no longer leaves you dull for good.
+- Reworked alchemy into a lab of its own, where you mix the herbs, learn what they share, and the bottle never outruns your skill.
+- Reworked added several new potions to replace ones we didnt use, XP potions and such.
+- Improved interest so a new piece, a new spell, or a different attack brings the spark back, and circling the same few pays less each time.
+- Updated a dull or bored stretch so it only trims a little of what you learn.
+- Fixed setting someone down so their belongings stay with them.
+- Fixed carrying a body through a doorway so you can still lay them down on the other side.
+- Fixed a slain beast so it stays down when you set the body on the ground.
+- Fixed a spell book so opening it keeps everyone in the world and not crashes =(
+- Removed hymn books from the chests, so a hymn is something you learn.
+- Reworked the Arcane Blacksmith's Apron into a rare loom prize that lifts weaponsmithing, armoursmithing, and smelting.
+- Added new ingots and recipes for that apron in content
+- Fixed Mage Armor so a flesh spell guards you in cloth and robes, and rests while you wear armor or a shield.
+- Updated flesh spells so the armor they weave last longer duration
+- Updated Haste so the quicker swing stays with you longer also
+- Updated the forge so a helm, a blade, and a fine coat take the ingot of their metal, and a ring shank stays with the jeweler.
+- Updated the smelter so a ring shank comes back only when you melt a piece of jewelry.
+- Added a forge recipe that turns the shells of the harder beasts into chitin plate, so that armor can be worked here.
+- Fixed enchanted gear so a worn piece still grants its magic, including the boots that carry you across the water.
+- Updated jewelcrafting so a ring shank follows the metal it is drawn from, the same way the finished ring does.
+- Improved interest so one task holds you longer, and turning to something new brings the spark back sooner.
+- Updated bonemold so a Dunmer, or a smith who carries their writ, can forge that shell armor.
+- Updated salvaged Dwarven armor so the Dwemer writ opens it with the rest of that ancient craft.
+- Updated the Imperial arms that stood outside the legion writ, so the writ of authorization opens them.
+- Fixed Dwemer cloaks so a second copy of the writ still lets you weave them.
+- Fixed the chests in a temple, a public room, and a house you own, so a take is yours again.
+- Removed the pause on a door, so it opens the moment you reach for it.
+- Fixed Kvetchi mercenary armor so the furs and steel show when you wear the set.
+- Fixed Black Bear Ancient Nord so the armor shows, and you can forge the plate or work the lighter hides.
+- Updated perk descriptions so each rank tells you the strength it really gives.
+- Updated blocking so every catch spends your stamina, and an empty bar drops the guard until you recover.
+- Rebalanced poise gains on blocks
+- Fixed healing potions so a drink fills you again.
+- Fixed blade and bow potions so the drink makes that weapon hit harder.
+- Reworked worn enchantments so combat magic bends when you stack it, and pouches and satchels still add every point of carry.
+- Fixed several recipe loops that caused infinite returns on materials
