@@ -1,53 +1,5 @@
 # Patch notes
 
 ## Changes
-- Added a bounty on the town board for a capture, an injury, or a death. The gold waits until that hunter opens the town.
-- Fixed claws so they can hold a soul.
-- Fixed the Amulet of Zenithar so wearing it raises your carry weight.
-- Fixed a one-eyed blindfold so it no longer takes the pouch.
-- Updated Black Bear light armor so it belongs to expert leatherworking, made at the leather rack.
-- Fixed Argonian bloodwine so the brewer's recipe pours that drink.
-- Fixed Bosmer, Khajiit, and An-Xileel pieces so the people's craft or their writ opens the work.
-- Fixed heroic imperial armor, and the noble fur cuirass, so an armoursmith with the legion writ can make them.
-- Fixed melting an imperial knight piece so the metal that comes back is steel.
-- Fixed bow and crossbow repairs so a carpenter mends them at the grindstone.
-- Fixed cuffed boots so they can hold a soul.
-- Fixed the Sash of the Wind so it no longer takes the tail.
-- Fixed bandit jewelry so ebony stays in the deep veins.
-- Added brass and electrum at the smelter, and both statues of Dibella at the forge. Brass sits with the other mid jewelcrafting, and electrum with the step above it.
-- Fixed Kvetchi mercenary armor so beast folk can wear the helm and gloves, and the cuirass covers the gap at the legs.
-- Updated cuffs, satchels, and backpacks so they are leatherworking again.
-- Fixed the camera so looking around no longer snaps you into third person.
-- Fixed a weapon-damage draught so your blows hit harder. A poison of that name still cuts.
-- Fixed a healing spell you hold so it keeps mending you for as long as the beam is out.
-- Fixed a power attack so the blow still counts after a light swing would have faded.
-- Updated a spell you keep channeling so the magicka you are short comes off your health once each second.
-- Fixed smelting so turning ingots into bars and back teaches nothing. Melting ore still does.
-- Fixed the smelter so the last of the ore still melts.
-- Fixed dwarven and ebony armor so the forge treats the pieces as armor.
-- Updated copper ore and copper ingots so they wear the name copper.
-- Removed the smelter path that turned firewood into a pile of charcoal. The kiln still makes charcoal.
-- Removed recipes that were struck from the books, so they can no longer be made.
-- Fixed the lab so a mix that makes no bottle leaves the herbs in your pack.
-- Fixed a brew so it still finds a lesser bottle when the one you reached for is missing.
-- Fixed a login and a trade so a soul on your clothes stays where you left it.
-- Fixed a key so it opens the door or the chest, and the far side of a load door answers to the same key.
-- Fixed a carry so the wounded stay in your arms, and a body you set down stays down.
-- Fixed a meal in a chair so you finish it still seated.
-- Fixed Cry so the pose that plays is one the game actually has.
-- Fixed the wilds so a leftover body is set down before it is taken, and a rider comes off the horse first.
-- Fixed dirt so a day's work and a fight only soil you while you are outside.
-- Fixed a short family line so the person at the end of it still walks.
-- Fixed a pet or summon on Stay so an attack order calls them off their spot and into the fight.
-- Added riding for a horse you summon and a horse you have tamed.
-- Updated bows so an arrow in the leg can leave a limp, and any shot can open a bleed. A deep cut still comes from a blade.
-- Fixed a carry so the person you set down keeps the gear they were wearing.
-- Updated the open wilds so a road and the low country still hold every creature that can live there, while a pine wood still meets its minotaur and a goblin camp still meets goblins. Dungeons stay as hard as they were.
-- Fixed a potion of the mirror so a melee blow turns back on the one who struck you.
-- Fixed alteration and conjuration potions so those spells last longer. Destruction, illusion, and restoration still hit harder.
-- Fixed a command potion so a foe of the level on the bottle fights at your side until it fades.
-- Fixed sneak, lockpicking, and pickpocket potions so you are that much better at the work the bottle names.
-- Fixed poisons that cut a weapon, slow a swing, or drain magicka and stamina so they do it for as long as the bottle lasts.
-- Fixed an armor potion so your rating rises by the amount on the bottle.
-- Fixed an ice-wraith poison so it harms only an ice wraith.
-- Fixed a woman's hands so they are her own, and match the rest of her.
+- Fixed a river so wading in washes the dirt and the blood off you.
+- Fixed Amulets with wrong description (Talos/Zenithar) 
