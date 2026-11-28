@@ -1,7 +1,7 @@
 # Patch notes
 
 ## Changes
-- Fixed the hunter's spear so it shows in your hand, and in everyone else's.
-- Added Bretonic, Altmeri, Valenwood, Khajiiti, Orcish, Atmoran, and Fletcher leather at the leatherworking station, on the same craft as leather armor.
-- Added Cyrodiilic studded armor at the leatherworking station, on the same craft as scaled armor.
-- Added the colonial militia's coat at the leatherworking station, on the same craft as hide.
+- Improved interest at the bench so a few different pieces lift your focus, and making the same piece again still lets it fade.
+- Fixed & restored Winterhold map
+- Fixed Dawnstar missing benches for professions
+- Fixed the login notice so it names the mods that do not match, and it stays up until you go back.
